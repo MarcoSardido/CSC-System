@@ -27,5 +27,4 @@ app.use('/login', loginPage.routes);
 app.use('/sellercenter', sellerPage.routes);
 
 
-
 app.listen(process.env.PORT || 3000, () => console.log('Server up and running...'));
