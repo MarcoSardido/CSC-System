@@ -34,10 +34,16 @@
 
 .table-container {
     width: 80%;
-    height: 55vh;
+    height: 63vh;
+    margin-top: 25px;
     box-shadow: 0px 0px 30px -15px;
     border-radius: 5px;
     background: #fff;
+    padding: 0px 20px;
+}
+
+.table-data {
+    margin-top: -10px;
 }
 
 .btnAddProduct {
@@ -46,7 +52,7 @@
     border-radius: 50%;
     position: relative;
     transform: translateY(-50%);
-    margin-top: 40px;
+    margin-top: 35px;
     margin-left: 20px;
     cursor: pointer;
     transition: all 350ms ease;
@@ -56,7 +62,7 @@
     transform: translateY(-40%);
 }
 
-i {
+.add-icon {
     font-size: 22px;
     font-weight: 700;
     background: #fff;
@@ -70,7 +76,7 @@ i {
     justify-content: center;
 }
 
-i:active {
+.add-icon:active {
     top: 52%;
     transform: translatey(-52%);
     right: 38px;
@@ -87,11 +93,42 @@ i:active {
 }
 
 .custom-thead {
-    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    background: #B4CFEC;
     color: #fff;
 }
 
 th {
     font-weight: 500;
     font-size: 1em;
+}
+
+td {
+    font-weight: 500;
+    font-size: 1em;
+    color: #2e4a83;
+}
+
+.btnEdit, .btnDelete {
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.edit-icon, .delete-icon {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #777;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-icon:hover {
+    color: orange;
+} 
+
+.delete-icon:hover {
+    color: red;
 }

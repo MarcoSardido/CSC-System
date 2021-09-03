@@ -6,38 +6,129 @@
 <div class="lower-container">
     <div class="table-container">
         <div class="btnAddProduct">
-            <i><ion-icon name="add-outline"></ion-icon></i>
+            <i class="add-icon"><ion-icon name="add-outline"></ion-icon></i>
             <div class="btnText">Add Product</div>
         </div>
-        <table class="table table-hover">
-            <thead class="custom-thead">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="table-data">
+            <table class="table table-borderless" id="tableData">
+                <thead>
+                  <tr>
+                    <th scope="col">Product #</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>prod-48621</td>
+                    <td>Apple IPhone 7</td>
+                    <td>Electronics</td>
+                    <td>5</td>
+                    <td>20,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-13945</td>
+                    <td>Asus Vivo Book</td>
+                    <td>Electronics</td>
+                    <td>2</td>
+                    <td>39,999</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-24833</td>
+                    <td>Beats by Dr. DRE</td>
+                    <td>Electronics</td>
+                    <td>10</td>
+                    <td>5,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-58647</td>
+                    <td>Geforce GTX 3260</td>
+                    <td>Electronics</td>
+                    <td>8</td>
+                    <td>35,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-19422</td>
+                    <td>Apple Air Pods</td>
+                    <td>Electronics</td>
+                    <td>3</td>
+                    <td>23,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-32159</td>
+                    <td>Asus ZenFone 8 Flip</td>
+                    <td>Electronics</td>
+                    <td>10</td>
+                    <td>39,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>prod-43885</td>
+                    <td>Samsung Galaxy</td>
+                    <td>Electronics</td>
+                    <td>4</td>
+                    <td>28,000</td>
+                    <td>
+                        <button class="btnEdit">
+                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
+                        </button>
+                        <button class="btnDelete">
+                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
+                        </button>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
