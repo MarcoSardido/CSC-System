@@ -1,11 +1,46 @@
+<!-- 
+        @Upper Container
+    => Contains 3 div used for the product overview
+
+-->
+
 <div class="upper-container">
-    <div class="cont"></div>
-    <div class="cont"></div>
-    <div class="cont"></div>
+    <div class="cont cont-1">
+        <i class="cont1-icon"><ion-icon name="archive-outline"></ion-icon></i>
+        <div class="text-cont">
+            <p class="item-total">214</p>
+            <p class="item-desc">Quantity in Hand</p>
+        </div>
+    </div>
+    <div class="cont cont-2">
+        <i class="cont2-icon"><ion-icon name="pricetag-outline"></ion-icon></i>
+        <div class="text-cont">
+            <p class="item-total">395</p>
+            <p class="item-desc">Number of Sales</p>
+        </div>
+    </div>
+    <div class="cont cont-3">
+        <i class="cont3-icon"><ion-icon name="cash-outline"></ion-icon></i>
+        <div class="text-cont">
+            <p class="item-total">$ 2,146</p>
+            <p class="item-desc">Total Sales</p>
+        </div>
+    </div>
 </div>
+
+<!-- End of Upper Container -->
+
+
+
+<!-- 
+        @Lower Container
+    => Contains table used for the product details
+
+-->
+
 <div class="lower-container">
     <div class="table-container">
-        <div class="btnAddProduct">
+        <div class="btnAddProduct" data-toggle="modal" data-target="#addModal">
             <i class="add-icon"><ion-icon name="add-outline"></ion-icon></i>
             <div class="btnText">Add Product</div>
         </div>
@@ -29,10 +64,10 @@
                     <td>5</td>
                     <td>20,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -44,10 +79,10 @@
                     <td>2</td>
                     <td>39,999</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -59,10 +94,10 @@
                     <td>10</td>
                     <td>5,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -74,10 +109,10 @@
                     <td>8</td>
                     <td>35,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -89,10 +124,10 @@
                     <td>3</td>
                     <td>23,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -104,10 +139,10 @@
                     <td>10</td>
                     <td>39,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
@@ -119,16 +154,82 @@
                     <td>4</td>
                     <td>28,000</td>
                     <td>
-                        <button class="btnEdit">
+                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
                             <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
                         </button>
-                        <button class="btnDelete">
+                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
                             <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
                         </button>
                     </td>
                   </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- End of Lower Container -->
+
+
+
+<!-- Code below is for the Modal -->
+
+<!-- Modal Add  -->
+<div class="modal fade" id="addModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+            </div>
+            <div class="modal-body">
+                
+                <%- include('../partials/seller/_productForm') %> 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit  -->
+<div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Update Product Details</h5>
+            </div>
+            <div class="modal-body">
+            
+                <%- include('../partials/seller/_productForm') %> 
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Delete  -->
+<div class="modal fade" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">  
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Delete Product</h5>
+            </div>
+            <div class="modal-body">
+            
+                Are you sure you want to delete this (product_name) ?
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Delete</button>
+            </div>
         </div>
     </div>
 </div>

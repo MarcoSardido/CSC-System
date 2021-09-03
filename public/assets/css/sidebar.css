@@ -228,7 +228,6 @@
 .navigation.active ~ .home-content {
     width: calc(100% - 255px);
     left: 255px
-
 }
 
 .pageTitle {

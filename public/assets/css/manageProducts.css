@@ -15,21 +15,80 @@
     align-items: center;
 }
 
+.cont {
+    width: 300px;
+    height: 130px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 0px 50px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cont-1 {
+    border-left: 10px solid #4c5ee9;
+}
+
+.cont1-icon {
+    font-size: 3.5em;
+    color: #4c5ee9;
+    padding-left: 20px;
+}
+
+
+
+.cont-2 {
+    border-left: 10px solid #f67c00;
+}
+
+.cont2-icon {
+    font-size: 3.5em;
+    color: #f67c00;
+    padding-left: 20px;
+}
+
+
+
+.cont-3 {
+    border-left: 10px solid #63e185;
+}
+
+.cont3-icon {
+    font-size: 3.5em;
+    color: #63e185;
+    padding-left: 20px;
+}
+
+.text-cont {
+    padding-top: 10px;
+    padding-left: 35px;
+    display:flex;
+    flex-direction: column;
+    line-height: 10px;
+}
+
+.item-total {
+    font-size: 2.2em;
+    font-weight: 600;
+}
+
+.item-desc {
+    font-weight: 500;
+    font-size: 1em;
+    color: #777;
+}
+
+
+
 .lower-container {
     justify-content: center;
     align-items: center;
     display: flex;
     width: 100%;
     height: 70vh;
-}
-
-.cont {
-    width: 300px;
-    height: 130px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-    background: #fff;
-    border-radius: 20px;
-    margin: 0px 50px;
 }
 
 .table-container {
@@ -42,10 +101,6 @@
     padding: 0px 20px;
 }
 
-.table-data {
-    margin-top: -10px;
-}
-
 .btnAddProduct {
     width: 27vh;
     border: 2px solid rgba(#FFF, 0.6);
@@ -53,7 +108,6 @@
     position: relative;
     transform: translateY(-50%);
     margin-top: 35px;
-    margin-left: 20px;
     cursor: pointer;
     transition: all 350ms ease;
     transition-timing-function: cubic-bezier(0.05,1.8,1,1.57);
@@ -76,14 +130,6 @@
     justify-content: center;
 }
 
-.add-icon:active {
-    top: 52%;
-    transform: translatey(-52%);
-    right: 38px;
-    box-shadow: 0px 8px 30px -14px #000;
-
-}
-
 .btnText {
     position: absolute;
     margin-left: 55px;
@@ -98,8 +144,8 @@
 }
 
 th {
-    font-weight: 500;
-    font-size: 1em;
+    font-weight: 500 !important;
+    font-size: 1em !important;
 }
 
 td {
@@ -116,7 +162,7 @@ td {
 }
 
 .edit-icon, .delete-icon {
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 700;
     color: #777;
     border: none;
@@ -131,4 +177,10 @@ td {
 
 .delete-icon:hover {
     color: red;
+}
+
+.btn-primary {
+    background: #4c5ee9;
+    border: none;
+    font-weight: 500;
 }
