@@ -102,12 +102,13 @@
 }
 
 .btnAddProduct {
-    width: 27vh;
+    width: 29vh;
     border: 2px solid rgba(#FFF, 0.6);
     border-radius: 50%;
     position: relative;
     transform: translateY(-50%);
     margin-top: 35px;
+    margin-bottom: -10px;
     cursor: pointer;
     transition: all 350ms ease;
     transition-timing-function: cubic-bezier(0.05,1.8,1,1.57);
@@ -152,6 +153,18 @@ td {
     font-weight: 500;
     font-size: 1em;
     color: #2e4a83;
+}
+
+.tdProd-cont {
+    display: flex;
+    align-items: center;
+}
+
+.tdProd-img img{
+    height: 45px;
+    width: 45px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
 .btnEdit, .btnDelete {

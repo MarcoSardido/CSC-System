@@ -1,5 +1,5 @@
 .navigation {
-    position: fixed;
+    position: absolute;
     top: 0px;
     left: 0px;
     bottom: 0px;
@@ -7,8 +7,8 @@
     box-sizing: initial;
     border-left: 5px solid #7552d0;
     background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-    overflow-x: hidden;
     transition: all 0.5s ease;
+    overflow: hidden;
 }
 
 .toggle {
@@ -45,6 +45,20 @@
     width:250px;
 }
 
+.navigation hr {
+    width: 95%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(241, 241, 255, 0.50), rgba(0, 0, 0, 0));
+}
+
+.navigation.active hr {
+    width: 95%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(241,241,255 0.50), rgba(0, 0, 0, 0));
+}
+
 .navigation ul {
     position: absolute;
     top: 100;
@@ -62,6 +76,30 @@
     border-bottom-left-radius: 20px;
 
 }
+
+/* .navigation ul li .tooltip {
+    position: absolute;
+    left: 122px;
+    top: 0;
+    transform: translateY(-50%);
+    border-radius: 6px;  
+    height: 35px;
+    width: 122px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    line-height: 35px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transition: 0s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navigation ul li:hover .tooltip {
+    transition: all 0.5s ease;
+    opacity: 1;
+    top: 50%;
+} */
 
 .navigation ul li.active {
     background: #F1F1FF;
@@ -136,6 +174,7 @@
 
 .navigation ul li a .icon ion-icon {
     font-size: 1.5em;
+    pointer-events: none;
 }
 
 .navigation ul li a .title {
@@ -145,6 +184,47 @@
     height: 60px;
     line-height: 60px;
     white-space: normal;
+    
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.label {
+    width: 50px;
+    height: 26px;
+    background: #111;
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    position: relative;
+}
+
+.fa-sun {
+    color: #f39c12;
+}
+
+.fa-moon {
+    color: #f1c40f;
+}
+
+.ball {
+    width: 22px;
+    height: 22px;
+    top: 2px;
+    left: 2px;
+    border-radius:50%;
+    background: #fff;
+    position: absolute;
+    transition: transform 0.2s linear;
+}
+
+.checkbox:checked + .label .ball {
+    transform: translateX(24px);
 }
 
 .navigation .profile-container {
@@ -214,9 +294,10 @@
 .home-content {
     position: absolute;
     height: 100%;
-    width: calc(100% - 78px);
-    left: 78px;
+    width: calc(100% - 75.5px);
+    left: 75.5px;
     transition: all 0.5s ease;
+    background: #F1F1FF;
 }
 
 .home-content .text {
@@ -235,4 +316,16 @@
     font-size: 1.5em;
     font-weight: 500;
     margin: 26px 30px 25px 30px;
+}
+
+
+/* DARK MODE */
+
+.home-content.dark {
+    background: #292c35;
+}
+
+.home-content.dark pre,
+.home-content.dark .pageTitle {
+    color: #fff;
 }

@@ -59,7 +59,83 @@ $(document).ready(() => {
         };
     };
 
+    let checkbox = document.getElementById('checkbox');
+    let content = document.querySelector('.home-content')
+    checkbox.addEventListener('change', () => {
+        content.classList.toggle('dark');
+    })
+
     $('#tableData').DataTable( {
-        "lengthMenu": [[5], [5]]
+        "lengthMenu": [[4], [4]]
     } );
+
+
+    /**
+     * 
+     * 
+     * Charts
+     * 
+     * 
+     */
+
+    let transactionChart = document.getElementById("transaction-chart").getContext('2d');
+    let labels = ['07 June', '08 June', '08 June', '09 June', '10 June', '11 June', '12 June', '13 June'];
+
+    //Global Options
+
+    let chart = new Chart(transactionChart, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets:[{
+                label: 'Transaction History',
+                data: [151, 825, 625, 479, 1305, 1183, 575, 1619],
+                fill: true,
+                borderWidth: 3,
+                borderColor: 'rgb(72, 95, 237)',
+                backgroundColor: 'rgb(72, 95, 237, 0.5)',
+
+                pointBackgroundColor: 'rgb(72, 95, 237)',
+                pointBorderColor: 'rgb(255, 255, 255)',
+                pointBorderWidth: 1,
+                pointHitRadius: 3,
+
+                tension: 0.3,
+            }]
+        },
+        options: {
+            plugins: {
+                title:{
+                    display:false
+                },
+                legend:{
+                    display:false
+                },
+                tooltip:{
+                    backgroundColor:'rgb(72, 95, 237, 0.8)',
+                    displayColors: false,
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display:false
+                    }
+                },
+                y: {
+                    grid: {
+                        display:false
+                    }
+                }
+            }
+        }
+    });
+
+
+
+
+
+
+
+
 });

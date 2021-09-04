@@ -1,3 +1,135 @@
-<pre>
-    * Transactions
-</pre>
+<div class="transaction-header">
+    <h5>Here's your transaction overview by today.</h5>
+</div>
+
+<div class="transaction-container">
+
+    <div class="transaction-main">
+        
+        <div class="income-cont">
+           <div class="income-text">
+                <p>Total Income</p>
+                <i><ion-icon name="cash-outline"></ion-icon></i>
+           </div>
+            <p class="income">₱45,400</p>
+        </div>
+
+        <div class="tabs">
+            <div class="tab-link">
+                <a href="#" class="active">Analytics</a>
+            </div>
+            <div class="tab-link">
+                <a href="#">Transactions</a>
+            </div>
+            <div class="tab-link">
+                <a href="#">Finance</a>
+            </div>
+        </div>
+
+        <div class="transaction-cont">
+            Analytic Report</p>
+            <div class="transaction-chart">
+                <canvas id="transaction-chart"></canvas>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="transaction-side">
+
+        <div class="card-cont">
+            <p>Active Card</p>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="front">
+                        <img src="/public/assets/images/seller/transaction/card/map.png" class="card-map">
+                        <div class="row">
+                            <img style="width:55px" src="/public/assets/images/seller/transaction/card/visa.png">
+                        </div>
+                        <div class="row card-num">
+                            <p>5224</p>
+                            <p>2150</p>
+                            <p>8525</p>
+                            <p>6420</p>
+                        </div>
+                        <div class="row card-holder">
+                            <p>CARD HOLDER</p>
+                            <p>VALID TILL</p>
+                        </div>
+                        <div class="row card-details">
+                            <p>MARCO SARDIDO</p>
+                            <p>10 / 26</p>
+                        </div>
+                    </div>
+                    <div class="back">
+                        <img src="/public/assets/images/seller/transaction/card/map.png" class="card-map">
+                        <div class="card-bar"></div>
+                        <div class="row card-code">
+                            <div>
+                                <img src="/public/assets/images/seller/transaction/card/pattern.png">
+                            </div>
+                            <p>824</p>
+                        </div>
+                        <div class="row signature">
+                            <p>HOLDER SIGNATURE</p>
+                            <img style="width:50px" src="/public/assets/images/seller/transaction/card/visa.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-cont">
+            <div class="more-cont">
+                <div><p>Recent Transactions</p></div>
+                <div><a href="#">See All</a></div>
+            </div>
+
+            <div class="list-cont">
+
+                <div class="item-sold">
+                    <div class="item-img">
+                        <ion-icon name="bag-check-outline"></ion-icon>
+                    </div>
+                    <div class="item-detail">
+                        Randy Marsh
+                        <p>13 June, 01:40 PM</p>
+                    </div>
+                    <div class="item-amount">
+                        + ₱500
+                    </div>
+                </div>
+
+                <div class="item-sold">
+                    <div class="item-img">
+                        <ion-icon name="bag-check-outline"></ion-icon>
+                    </div>
+                    <div class="item-detail">
+                        Kyle Brovloski
+                        <p>11 June, 06:12 PM</p>
+                    </div>
+                    <div class="item-amount">
+                        + ₱900
+                    </div>
+                </div>
+
+                <div class="item-sold">
+                    <div class="item-img">
+                        <ion-icon name="checkmark-circle-outline"></ion-icon>
+                    </div>
+                    <div class="item-detail">
+                        Subscription
+                        <p>04 June, 12:00 PM</p>
+                    </div>
+                    <div class="item-amount">
+                        - ₱1,000
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
