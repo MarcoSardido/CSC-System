@@ -1,9 +1,7 @@
 'use strict';
 
 import dotenv from 'dotenv';
-if (process.env.NODE_ENV !== 'production') {
-    dotenv.config();
-}
+    dotenv.config({ silent: process.env.NODE_ENV !== 'production'});
 
 import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
