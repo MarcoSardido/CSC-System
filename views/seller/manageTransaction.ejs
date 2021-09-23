@@ -6,30 +6,208 @@
 
     <div class="transaction-main">
         
-        <div class="income-cont">
-           <div class="income-text">
-                <p>Total Income</p>
-                <i><ion-icon name="cash-outline"></ion-icon></i>
-           </div>
-            <p class="income">₱45,400</p>
+        <div class="mini-panels">
+            <div class="income-cont">
+                <div class="income-text">
+                     <p>Total Income</p>
+                     <i><ion-icon name="cash-outline"></ion-icon></i>
+                </div>
+                 <p class="income">₱2,400</p>
+             </div>
+     
+             <div class="income-cont profit">
+                 <div class="income-text">
+                      <p>This Year Profit</p>
+                      <i><ion-icon name="card-outline"></ion-icon></i>
+                 </div>
+                  <p class="income">₱8,400</p>
+              </div>
         </div>
 
         <div class="tabs">
-            <div class="tab-link">
-                <a href="#" class="active">Analytics</a>
-            </div>
-            <div class="tab-link">
-                <a href="#">Transactions</a>
-            </div>
-            <div class="tab-link">
-                <a href="#">Finance</a>
-            </div>
+            <a href="#" class="tab-link active" >Analytics</a>
+            <a href="#" class="tab-link" >Transactions</a>
+            <a href="#" class="tab-link">Finance</a>
         </div>
 
         <div class="transaction-cont">
-            Analytic Report</p>
-            <div class="transaction-chart">
-                <canvas id="transaction-chart"></canvas>
+            <div id="analytics" class="panel" style="display:block">
+               <p>Analytic Report</p>
+                <div class="transaction-chart">
+                    <canvas id="transaction-chart"></canvas>
+                </div>
+            </div>
+
+            <div id="transactions" class="panel" style="display:none">
+                <p>Transactions History</p>
+                <div class="transaction-table">
+                    <div class="table-data">
+                        <table id="tableData-transact" class="table table-borderless tbl-history">
+                            <thead>
+                              <tr>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Payment</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>05 June</td>
+                                <td>Marco Sardido</td>
+                                <td>Credit Card</td>
+                                <td>20,000</td>
+                                <td> 
+                                    <div class="status-success">
+                                        Success
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>08 June</td>
+                                <td>Randy Marsh</td>
+                                <td>COD</td>
+                                <td>10,000</td>
+                                <td> 
+                                    <div class="status-pending">
+                                        Pending
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>11 June</td>
+                                <td>Kyle Brovloski</td>
+                                <td>COD</td>
+                                <td>35,000</td>
+                                <td> 
+                                    <div class="status-pending">
+                                        Pending
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>13 June</td>
+                                <td>Eric Cartman</td>
+                                <td>Credit Card</td>
+                                <td>46,000</td>
+                                <td> 
+                                    <div class="status-success">
+                                        Success
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>02 June</td>
+                                <td>Kenny McCormic</td>
+                                <td>Credit Card</td>
+                                <td>39,000</td>
+                                <td> 
+                                    <div class="status-success">
+                                        Success
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>01 June</td>
+                                <td>Rick Sanchez</td>
+                                <td>Credit Card</td>
+                                <td>28,000</td>
+                                <td> 
+                                    <div class="status-success">
+                                        Success
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group dropright">
+                                        <button type="button" class="btn-popover" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          ...
+                                        </button>
+                                        <div class="dropdown-menu tbl-dropdown">
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#staticBackdrop">More Info</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item tblMenu-report" href="#" data-toggle="modal" data-target="#staticBackdrop">Report</a>
+                                            <a class="dropdown-item tblMenu-delete" href="#" data-toggle="modal" data-target="#staticBackdrop">Delete</a>
+                                        </div>
+                                      </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="finance" class="panel" style="display:none">
+                <p>Finance</p>
+                <div class="transaction-chart">
+                </div>
             </div>
         </div>
 
@@ -82,7 +260,7 @@
         <div class="recent-cont">
             <div class="more-cont">
                 <div><p>Recent Transactions</p></div>
-                <div><a href="#">See All</a></div>
+                <div><a href="#">Show All</a></div>
             </div>
 
             <div class="list-cont">
@@ -115,14 +293,40 @@
 
                 <div class="item-sold">
                     <div class="item-img">
+                        <ion-icon name="bag-check-outline"></ion-icon>
+                    </div>
+                    <div class="item-detail">
+                        Eric Cartman
+                        <p>08 June, 3:26 PM</p>
+                    </div>
+                    <div class="item-amount">
+                        + ₱356
+                    </div>
+                </div>
+
+                <div class="item-sold">
+                    <div class="item-img">
                         <ion-icon name="checkmark-circle-outline"></ion-icon>
                     </div>
                     <div class="item-detail">
                         Subscription
-                        <p>04 June, 12:00 PM</p>
+                        <p>06 June, 12:00 PM</p>
                     </div>
                     <div class="item-amount">
                         - ₱1,000
+                    </div>
+                </div>
+
+                <div class="item-sold">
+                    <div class="item-img">
+                        <ion-icon name="bag-check-outline"></ion-icon>
+                    </div>
+                    <div class="item-detail">
+                        Kenny McCormic
+                        <p>05 June, 10:12 PM</p>
+                    </div>
+                    <div class="item-amount">
+                        + ₱127
                     </div>
                 </div>
 
@@ -133,3 +337,114 @@
     </div>
     
 </div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Product Invoice</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body invoice-body">
+            <div class="client-info">
+                <div class="bill-info">
+                    <p class="modal-static-text">Billed To</p>
+                    <p class="modal-dynamic-text">
+                        <p class="bill-client">Marco Jorge H. Sardido</p>
+                        <p class="bill-street">Blk 11 Lot 1 Mahogany Village Phase 1</p>
+                        <p class="bill-address">Pulo, Cabuyao City, Laguna, 4025</p>
+                    </p>
+                </div>
+                <div class="invoice-info">
+                    <p class="modal-static-text">Invoice Details</p>
+                    <p class="modal-dynamic-text">
+                        <p class="invoice invoice-num">Invoice # 12345</p>
+                        <p class="invoice invoice-date">Date: June 01, 2021</p>
+                        <p class="invoice invoice-mode">Mode of Payment: Credit Card</p>
+                    </p>
+                </div>
+            </div>
+            <div class="ship-info">
+                <p class="modal-static-text">Ship To</p>
+                <p class="modal-dynamic-text">
+                    <p class="bill-client">Marco Jorge H. Sardido</p>
+                    <p class="bill-street">Blk 11 Lot 1 Mahogany Village Phase 1</p>
+                    <p class="bill-address">Pulo, Cabuyao City, Laguna, 4025</p>
+                </p>
+            </div>
+            <hr>
+            <div class="product-info-table">
+                <table class="table table-borderless tbl-modal">
+                    <thead>
+                      <tr>
+                        <th>Description</th>
+                        <th>Unit Cost</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                            <div class="tbl-product-details">
+                                <strong>Apple IPhone 7</strong>
+                                <p class="modal-static-text">Brand New Iphone 7 64 GB</p>
+                            </div>
+                        </td>
+                        <td class="strong">₱20,000.00</td>
+                        <td class="strong">1</td>
+                        <td class="strong">₱20,000.00</td>
+                      </tr>
+                      <tr>
+                        <td>
+                            <div class="tbl-product-details">
+                                <strong>Apple Airpods Pro</strong>
+                                <p class="modal-static-text">Wireless airpods PRO</p>
+                            </div>
+                        </td>
+                        <td class="strong">₱23,000.00</td>
+                        <td class="strong">2</td>
+                        <td class="strong">₱46,000.00</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <hr>
+            <div class="footer">
+                <div class="subTotal-row">
+                    <div class="static-column">
+                        <p>Subtotal</p>
+                        <p>Sales tax</p>
+                        <p>Shipping</p>
+                    </div>
+                    <div class="dynamic-column">
+                        <p>66,000.00</p>
+                        <p>0.00</p>
+                        <p>0.00</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="total-row">
+                    <div class="static-column">
+                        <p><strong>Total</strong></p>
+                    </div>
+                    <div class="dynamic-column">
+                        <p><strong>₱66,000.00</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>

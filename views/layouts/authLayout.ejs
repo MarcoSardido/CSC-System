@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%- title %>  </title>
+    <title></title>
 
     <!-- ANCHOR: General Plugins -->
 
@@ -22,68 +22,28 @@
         <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
 
-
         <!-- Bootstrap -->
         <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js' integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg==' crossorigin='anonymous'></script>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css' integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==' crossorigin='anonymous'/>
 
-        <!-- My Script -->
-
-        <!-- My Style -->
+        <!-- Global Script -->
+        
+        <!-- Global Style -->
         <link rel="stylesheet" href="/public/assets/css/normalize.css">
     
     <!-- ANCHOR: End of General Plugins -->
+    
+    <!-- Auth Style -->
+    <link rel="stylesheet" href="/public/assets/css/auth/authStyle.css">
 
-    <!-- Chars -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-
-    <!-- My Script -->
-    <script defer src="/public/script/seller.js"></script>
-
-    <!-- My Style -->
-    <link rel="stylesheet" href="/public/assets/css/seller/sidebar.css">
-    <link rel="stylesheet" href="/public/assets/css/seller/manageProducts.css">
-    <link rel="stylesheet" href="/public/assets/css/seller/manageTransactions.css">
+    <!-- Auth Script -->
+    <script defer type='module' src='/public/script/firebaseConfig.js'></script>
+    <script defer type='module' src="/public/script/auth.js"></script>
 
 </head>
-<body>
-    <%- include('../partials/seller/_sideBar') %> 
-    
-    <div class="home-content">
+    <body>
+        
+        <%- include('../authentication/auth') %> 
 
-        <div id="dashSection" style="display:block">
-
-            <div class="pageTitle"> <%- title %> | Dashboard </div>
-            <%- include('../seller/dashboard') %> 
-
-        </div> 
-
-        <div id="prodSection" style="display:none">
-
-            <div class="pageTitle"> <%- title %> | Manage Products </div>
-            <%- include('../seller/manageProduct') %> 
-
-        </div>
-
-        <div id="transactSection" style="display:none">
-
-            <%- include('../seller/manageTransaction') %> 
-
-        </div>
-
-        <div id="reportSection" style="display:none">
-
-            <%- include('../seller/manageReport') %> 
-
-        </div>
-
-        <div id="settingSection" style="display:none">
-
-            <%- include('../seller/settings') %> 
-
-        </div>
-    
-    </div>
-
-</body>
+    </body>
 </html>

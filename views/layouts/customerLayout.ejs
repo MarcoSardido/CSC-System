@@ -38,49 +38,43 @@
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
     <!-- My Script -->
-    <script defer src="/public/script/seller.js"></script>
+    <script defer src="/public/script/customer.js"></script>
 
     <!-- My Style -->
-    <link rel="stylesheet" href="/public/assets/css/seller/sidebar.css">
-    <link rel="stylesheet" href="/public/assets/css/seller/manageProducts.css">
-    <link rel="stylesheet" href="/public/assets/css/seller/manageTransactions.css">
+    <link rel="stylesheet" href="/public/assets/css/customer/sidebar.css">
+    <link rel="stylesheet" href="/public/assets/css/customer/order.css">
+    <link rel="stylesheet" href="/public/assets/css/customer/review.css">
+    <link rel="stylesheet" href="/public/assets/css/customer/settings.css">
 
 </head>
 <body>
-    <%- include('../partials/seller/_sideBar') %> 
+    <%- include('../partials/customer/_sideBar') %> 
     
     <div class="home-content">
 
         <div id="dashSection" style="display:block">
 
-            <div class="pageTitle"> <%- title %> | Dashboard </div>
-            <%- include('../seller/dashboard') %> 
+            <div class="pageTitle"> <%- title %> | Live Rooms </div>
+            <%- include('../customer/dashboard') %> 
 
         </div> 
 
         <div id="prodSection" style="display:none">
 
-            <div class="pageTitle"> <%- title %> | Manage Products </div>
-            <%- include('../seller/manageProduct') %> 
+            <%- include('../customer/order') %> 
 
         </div>
 
         <div id="transactSection" style="display:none">
 
-            <%- include('../seller/manageTransaction') %> 
-
-        </div>
-
-        <div id="reportSection" style="display:none">
-
-            <%- include('../seller/manageReport') %> 
+            <%- include('../customer/review') %> 
 
         </div>
 
         <div id="settingSection" style="display:none">
 
-            <%- include('../seller/settings') %> 
-
+            <%- include('../customer/settings') %> 
+            
         </div>
     
     </div>

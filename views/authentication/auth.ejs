@@ -1,0 +1,36 @@
+<div class="auth-cont">
+    <div class="forms-container">
+        <div class="signin-signup">
+            <form id="signinForm" class="sign-in-form">
+            
+               <%- include('_form_login') %> 
+            </form>
+    
+            <form action="/auth" method="POST" class="sign-up-form">
+                <%- include('_form_reg') %> 
+            </form>
+        </div>
+    </div>
+    <div class="panels-container">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>New here?</h3>
+                <p>Join one of the biggest Live E-Commerce Platform. Watch, Chat, Shop, and Interact with other people!</p>
+                <button class="btn transparent" id="sign-up-btn">Sign up</button>
+            </div>
+
+            <img src="/public/assets/images/auth/login.png" alt="" class="img-login">
+        </div>
+
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>One of us?</h3>
+                <p>Shop with carefree with our authentic sellers world-wide. Get your favorite items with ease.</p>
+                <button class="btn transparent" id="sign-in-btn">Sign in</button>
+            </div>
+
+            <img src="/public/assets/images/auth/register.png" alt="" class="img-reg">
+        </div>
+    </div>
+    
+</div>

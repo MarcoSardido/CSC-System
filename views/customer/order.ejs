@@ -1,0 +1,203 @@
+<div class="order-header">
+    <div class="icon">
+        <div class="notif"></div>
+        <ion-icon name="notifications"></ion-icon>
+    </div>
+</div>
+<div class="order-body">
+    <div class="order-list-cont">
+        <div class="title-cont">
+            <p>My Orders</p>
+        </div>
+        <div class="tabs-cont">
+            <a href="#" class="order-tab-link active">All</a>
+            <a href="#" class="order-tab-link">To Ship</a>
+            <a href="#" class="order-tab-link">To Receive</a>
+            <a href="#" class="order-tab-link">Delivered</a>
+        </div>
+        <div id="order-filter-all" style="display: block">
+            <div class="list-cont">
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order active">
+                        <div class="left-desc">
+                            <p class="list-item-store">Apple</p>
+                            <p class="list-item-status-ship">Shipped</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱40,042.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Shein</p>
+                            <p class="list-item-status-process">Processing</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱342.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Nike</p>
+                            <p class="list-item-status-done">Delivered</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱1,542.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Uniqlo</p>
+                            <p class="list-item-status-done">Delivered</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱1,942.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="order-filter-toShip" style="display: none">
+            <div class="list-cont">
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Shein</p>
+                            <p class="list-item-status-process">Processing</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱342.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="order-filter-toReceive" style="display: none">
+            <div class="list-cont">
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order active">
+                        <div class="left-desc">
+                            <p class="list-item-store">Apple</p>
+                            <p class="list-item-status-ship">Shipped</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱40,042.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="order-filter-delivered" style="display: none">
+            <div class="list-cont">
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Nike</p>
+                            <p class="list-item-status-done">Delivered</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱1,542.00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-dynamic-cont">
+                    <div class="list-row-order">
+                        <div class="left-desc">
+                            <p class="list-item-store">Uniqlo</p>
+                            <p class="list-item-status-done">Delivered</p>
+                        </div>
+                        <div class="right-desc">
+                            <p class="list-item-price">₱1,942.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="order-details-cont">
+        <div class="order-process">
+            <ul>
+                <li>
+                    <img src="https://img.icons8.com/external-flatart-icons-flat-flatarticons/64/000000/external-box-design-thinking-and-3d-model-printing-flatart-icons-flat-flatarticons.png"/><br>
+                    <ion-icon class="order-icon" name="checkmark-outline"></ion-icon>
+                    <p>Processing</p>
+                </li>
+                <li>
+                    <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-drone-delivery-stay-home-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png"/><br>
+                    <ion-icon class="order-icon" name="sync-outline"></ion-icon>
+                    <p>Shipping</p>
+                </li>
+                <li>
+                    <img src="https://img.icons8.com/fluency/48/000000/delivered-box.png"><br>
+                    <ion-icon class="order-icon" name="close-outline"></ion-icon>
+                    <p>Delivered</p>
+                </li>
+            </ul>
+        </div>
+        <div class="order-info-cont">
+            <p class="order-num">Order no. 12345</p>
+            <p class="order-placed-date">Placed on: 01 Jun 2021</p>
+            <p class="order-delivered-date">Delivered on:</p>
+        </div>
+        <hr>
+        <div class="order-client-detail">
+            <div class="row client-detail-name">
+                <p class="static-text">Customer Name</p>
+                <p>Marco Sardido</p>
+            </div>
+            <div class="row client-detail-address">
+                <p class="static-text">Customer Address</p>
+                <p>2168 Hilltop Haven Drive, Los Angeles, California</p>
+                <p>90017</p>
+            </div>
+            <div class="row client-detail-contact">
+                <p class="static-text">Customer Number</p>
+                <p>+1 310-776-3966</p>
+            </div>
+        </div>
+        <div class="order-client-items">
+            <div class="item-row">
+                <div class="item-img">
+                    <img src="/public/assets/images/iphone-7-black.jpg" alt="IPhone 7">
+                </div>
+                <div class="item-desc">
+                    <p class="item-title">IPhone 7 Pro Limited Black Edition</p>
+                    <p class="item-color">Color: Black</p>
+                    <p class="item-warranty">Warranty: 24 Months</p>
+                </div>
+                <p>Qty: 2</p>
+                <p>₱40,000.00</p>
+            </div>
+        </div>
+        <hr>
+        <div class="order-client-total">
+            <p class="temp">Total Summary</p>
+            <div class="total-summary">
+                <div class="static total-static">
+                    <p>Subtotal(2 Item/s)</p>
+                    <p>Shipping Fee</p>
+                </div>
+                <div class="total-dynamic">
+                    <p>₱40,000.00</p>
+                    <p>₱42.00</p>
+                </div>
+            </div>
+            <hr>
+            <div class="total">
+                <div class="static total-static">
+                    <p>Total(VAT Incl.)</p>
+                </div>
+                <div class="total-dynamic">
+                    <p>₱40,042.00</p>
+                </div>
+            </div>
+            <p class="temp">Paid by Cash on Delivery</p>
+        </div>
+    </div>
+</div>

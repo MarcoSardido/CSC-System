@@ -25,9 +25,9 @@ $(document).ready(() => {
 
             if([i] == 0) {
                 dashboard.style.display = "block";
-            product.style.display = "none";
-            transaction.style.display = "none";
-            report.style.display = "none";
+                product.style.display = "none";
+                transaction.style.display = "none";
+                report.style.display = "none";
                 settings.style.display = "none";
             } else if([i] == 1) {
                 dashboard.style.display = "none";
@@ -64,11 +64,16 @@ $(document).ready(() => {
     checkbox.addEventListener('change', () => {
         content.classList.toggle('dark');
     })
-
-    $('#tableData').DataTable( {
+    
+    $('#tableData-prod').DataTable( {
         "lengthMenu": [[4], [4]]
     } );
 
+    $(function () {
+        $('[data-toggle="popover"]').popover({
+            trigger: 'focus'
+        })
+      })
 
     /**
      * 
@@ -79,7 +84,7 @@ $(document).ready(() => {
      */
 
     let transactionChart = document.getElementById("transaction-chart").getContext('2d');
-    let labels = ['07 June', '08 June', '08 June', '09 June', '10 June', '11 June', '12 June', '13 June'];
+    let labels = ['01 June', '02 June', '05 June', '08 June', '11 June', '13 June'];
 
     //Global Options
 
@@ -88,8 +93,8 @@ $(document).ready(() => {
         data: {
             labels: labels,
             datasets:[{
-                label: 'Transaction History',
-                data: [151, 825, 625, 479, 1305, 1183, 575, 1619],
+                label: 'Transaction Chart',
+                data: [646, 564, 127, 356, 900, 500],
                 fill: true,
                 borderWidth: 3,
                 borderColor: 'rgb(72, 95, 237)',
@@ -104,6 +109,9 @@ $(document).ready(() => {
             }]
         },
         options: {
+            layout: {
+                padding: 20,
+            },
             plugins: {
                 title:{
                     display:false
@@ -114,6 +122,20 @@ $(document).ready(() => {
                 tooltip:{
                     backgroundColor:'rgb(72, 95, 237, 0.8)',
                     displayColors: false,
+
+                    bodyFont:{
+                        size: 15,
+                    },
+                    callbacks: {
+                        label: function(item) {
+                            let value = item.raw;
+
+                            value = value.toLocaleString();
+                            let label = `You've Earned $${value}`
+
+                            return label;
+                        }
+                    }
                 }
             },
             scales: {
@@ -133,9 +155,49 @@ $(document).ready(() => {
 
 
 
+    /**
+     * 
+     * 
+     * Transactions Scripts
+     * 
+     * 
+     */
+
+    
+     $('#tableData-transact').DataTable( {
+        "lengthMenu": [[5], [5]]
+    } );
+
+     let tabs = document.querySelectorAll('.tab-link');
+
+     let analyticsPanel = document.getElementById('analytics');
+     let transactionsPanel = document.getElementById('transactions');
+     let financePanel = document.getElementById('finance');
 
 
+     for (let i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = () => {
+            let j = 0;
+            while(j < tabs.length) {
+                tabs[j++].className = 'tab-link';
+            };
 
+            if([i] == 0) {
+                analyticsPanel.style.display = "block";
+                transactionsPanel.style.display = "none";
+                financePanel.style.display = "none";
+            } else if([i] == 1) {
+                analyticsPanel.style.display = "none";
+                transactionsPanel.style.display = "block";
+                financePanel.style.display = "none";
+            } else if([i] == 2) {
+                analyticsPanel.style.display = "none";
+                transactionsPanel.style.display = "none";
+                financePanel.style.display = "block";
+            }
 
+            tabs[i].className = 'list active';
+        };
+    };
 
 });

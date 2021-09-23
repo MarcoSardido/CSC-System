@@ -237,7 +237,7 @@
 
 .navigation .profile-container .profile {
     position: relative;
-    padding: 15px 10px;
+    padding: 0 10px;
 }
 
 .profile-container .profile .profile-details {
@@ -260,10 +260,6 @@
     border-radius: 12px;
 }
 
-.profile .profile-details .details {
-    margin-left: 20px;
-}
-
 .profile .profile-details .name {
     font-size: 15px;
     font-weight: 500;
@@ -276,7 +272,7 @@
 
 .profile #logout {
     position: absolute;
-    bottom: 25px;
+    bottom: 30px;
     transform: translateX(-50%);
     min-width: 50px;
     font-size: 1.8em;

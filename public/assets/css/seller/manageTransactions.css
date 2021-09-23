@@ -1,0 +1,455 @@
+/*********** Header Area ***********/
+
+.transaction-header {
+    margin: 20px 15px;
+}
+
+
+/*********** Transaction Body ***********/
+
+.transaction-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin: 20px 50px;
+}
+
+/*** Transaction Main Container ***/
+
+    .transaction-main {
+        flex-direction: column;
+        margin: 0 20px;
+        width: 100%;
+    }
+
+    .mini-panels {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .income-cont {
+        width: 300px;
+        height: 135px;
+        background: #fff;
+        border-radius: 10px;
+        padding-left: 20px;
+        line-height: 40px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+        margin: 0 45px;
+    }
+
+    .income-text {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 10px;
+    }
+
+    .income-cont p {
+        padding-top: 5px;
+    }
+
+    .income {
+        margin-top: -10px;
+    }
+
+    .income-cont i {
+        color: #63e185;
+        font-size: 2em;
+        padding: 10px 20px 0;
+    }
+
+    .profit i {
+        color: #485fed;
+        font-size: 2em;
+        padding: 10px 20px 0;
+    }
+
+    .income {
+        font-size: 3em;
+        font-weight: 600;
+    }
+
+    .tabs {
+        display: flex;
+        padding: 35px 0 20px;
+        
+    }
+
+    .tabs > a {
+        color: #777;
+        font-size: 15px;
+    }
+
+    .tabs > a:hover {
+        color: #485fed;
+        font-size: 15px;
+    }
+
+    a.active {
+        width: auto;
+        height: 35px;
+        margin-top: -5px;
+        padding-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background: #485fed;
+        color: #fff !important;
+        border-radius: 10px;
+    }
+
+    a:nth-child(1),
+    a:nth-child(2) {
+        margin-right: 20px;
+    }
+
+    .transaction-table {
+        margin-top: 30px;
+    }
+
+    .panel {
+        width: 100%;
+        height: 430px;
+        font-size: 1.em;
+        font-weight: 600;
+    }
+
+    .transaction-chart {
+        width: 110vh;
+        height: auto;
+    }
+
+    .tbl-history table, .tbl-history td{
+        text-align: center;
+        background: #f1f1ff;
+    }
+
+    .tbl-history th {
+        text-align: center;
+    }
+ 
+    .tbl-history table, .tbl-history td:nth-child(2){
+    width: 130px;
+    }
+
+    .tbl-history table, .tbl-history td:nth-child(4){
+    width: 10px;
+    }
+
+    .btn-popover {
+        border: none;
+        background: transparent;
+        font-size: 25px;
+        font-weight: 600;
+        color: #2e4a83;
+    }
+
+    .btn-popover:hover {
+        border: none;
+        background: transparent;
+        font-size: 25px;
+        font-weight: 600;
+        color: #485fed;
+    }
+
+    .dropdown-menu {
+        min-width: auto;
+    }
+
+    .tbl-dropdown a {
+        font-size: 13px;
+        font-weight: 600;
+        color: #2e4a83;
+    }
+
+    .tblMenu-report {
+        color: orange !important;
+    }
+
+    .tblMenu-delete {
+        color: red !important;
+    }
+
+    .status-success {
+        background: #0fd64f;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .status-pending {
+        background: orange;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 15px;
+    }
+
+/***  End of Transaction Main Container ***/
+
+
+/*** Transaction Side Container ***/
+
+    .transaction-side {
+        flex-direction: column;
+        margin: 0 20px;
+    }
+
+    .recent-cont {
+        padding-top: 20px;
+    }
+
+    .more-cont {
+    display: flex;
+    justify-content: space-between;
+    }
+
+    a {
+        color: #485fed;
+        text-decoration: none !important;
+    }
+
+    .recent-cont > p {
+        font-size: 15px;
+        font-weight: 600;
+        padding-left: 10px;
+    }
+
+    .list-cont {
+        height: 100%;
+    }
+
+    .item-sold {
+        display: flex;
+        flex-direction: row;
+        justify-content:space-evenly;
+    }
+
+    .item-img {
+        padding-top: 15px;
+        font-size: 1.8em;
+    }
+
+    .item-detail{
+        width: 200px;
+        text-align:start;
+        padding-top: 13px;
+        font-weight: 500;
+        line-height: 20px;
+    }
+
+    .item-detail p {
+        font-weight: 300;
+        color: #5c5c5c;
+        font-size: 11px;
+    }
+
+    .item-amount {
+        font-weight: 600;
+        padding-top: 22px;
+    }
+
+    .card {
+        width: 350px;
+        height: 200px;
+        color: #fff;
+        cursor: pointer;
+        perspective: 1000px;
+    }
+
+    .card-inner {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+    }
+
+    .front, .back{
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #6d17cb, #2876f9);
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px 40px;
+        border-radius: 15px;
+        overflow: hidden;
+        z-index: 1;
+        backface-visibility: hidden;
+    }
+
+
+    .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .card-map {
+        width: 95%;
+        left: 10px;
+        position: absolute;
+        opacity: 0.5;
+        z-index: -1;
+    }
+
+    .card-num {
+        font-size: 1.3em;
+        margin-top: 35px;
+        font-weight: 600;
+    }
+
+    .card-holder {
+        font-size: 0.5em;
+        font-weight:300;
+    }
+
+    .card-details {
+        font-size: 1em;
+        margin-top: -15px;
+        font-weight: 500;
+    }
+
+    .card-bar {
+        background: #222;
+        margin-left: -40px;
+        margin-right: -40px;
+        height: 35px;
+    }
+
+    .card-code {
+        margin-top: 15px;
+    }
+
+    .card-code div {
+        flex: 1;
+    }
+
+    .card-code img {
+        width: 100%;
+        display: block;
+        line-height:0;
+    }
+
+    .card-code p {
+        margin-top: 15px;
+        background: #fff;
+        color: #000;
+        font-size: 13px;
+        padding: 0px 5px;
+    }
+
+    .signature {
+        margin-top: 25px;
+        font-size: 12px;
+    }
+
+    .back {
+        transform: rotateY(180deg);
+    }
+
+    .card:hover .card-inner {
+        transform: rotateY(-180deg);
+    }
+
+/***  End of Transaction Side Container ***/
+
+
+/*** Transaction Modal ***/
+
+    .modal-static-text {
+        color: #5c5c5c;
+        font-weight: 300;
+    }
+
+    .product-details-inner-row p {
+        font-size: 13px;
+    }
+
+    .invoice-body {
+        display:flex;
+        flex-direction:column;
+    }
+
+    .client-info {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .bill-info {
+        padding-left: 15px;
+    }
+
+    .invoice-info {
+        padding-left: 100px;
+    }
+
+    .ship-info {
+        padding-left: 15px;
+    }
+
+    .modal-dynamic-text {
+        padding: 0px 0px;
+    }
+
+    .bill-client {
+        color: #2e4a83;
+        font-weight: 600;
+        font-size: 1.2em;
+        margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    .bill-street, .bill-address {
+        color: #5c5c5c;
+        font-size: 13px;
+    }
+
+    .bill-address {
+        margin-top: -15px;
+    }
+
+    .invoice {
+         margin-top: -10px;
+        margin-bottom: 10px;
+    }
+
+    .product-info-table {
+        margin-top: -10px;
+        max-height: 300px;
+        overflow-y: scroll;
+    }
+
+    .tbl-modal td {
+        padding-top: 10px;
+        padding-bottom: 0px;
+    }
+
+    .tbl-modal th {
+         color: #2e4a83;
+         font-size: 1.2em !important;
+    }
+
+    .tbl-modal th:nth-child(1) {
+         width: 300px;
+    }
+
+    .tbl-product-details p {
+        font-size: 13px;
+    }
+
+    .subTotal-row, .total-row {
+        display:flex;
+        flex-direction:row;
+        justify-content: end;
+    }
+
+    .static-column {
+        position: absolute;
+        left: 400px;
+    }
+
+    .dynamic-column {
+         padding-right: 50px;
+    }
+
+/***  End of Transaction Modal ***/

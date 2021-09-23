@@ -1,0 +1,310 @@
+
+/*
+    Order Header Style
+*/
+
+.review-header {
+    width: 69%;
+    height: 50px;
+    float: right;
+}
+
+.review-header .icon {
+    position: absolute;
+    font-size: 23px;
+    right: 0;
+    padding-right: 50px;
+    padding-top: 10px;
+}
+
+.review-header .icon ion-icon {
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    cursor: pointer;
+}
+
+.review-header .notif {
+    position: absolute;
+    left: 25px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    z-index: 1;
+}
+
+/*
+End of Order Header Style
+*/
+
+
+/*
+Start of Order Body Style
+*/
+
+    /*
+        Start of Order Left-Side Style 
+    */
+
+        .review-body {
+            display:flex;
+            flex-direction:row;
+            width: 100%;
+            height: auto;
+            padding: 5px 10px;
+        }
+
+        .review-list-cont {
+            width: 30%;
+            display: flex;
+            flex-direction:column;
+            margin-top: -55px;
+        }
+
+        .title-cont {
+            font-size: 35px;
+            font-weight: 600;
+            padding-left: 10px;
+        }
+
+        .tabs-cont {
+            display: flex;
+            justify-content: space-evenly;
+            padding-bottom: 20px;
+        }
+
+        .tabs-cont a {
+        text-decoration: none;
+        padding: 3px 0px;
+        color: #485fed;
+        }
+
+        .tabs-cont a:hover {
+        color: #2e4a83;
+        }
+
+        .tabs-cont a.active {
+        background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+        color: #fff;
+        padding: 3px 20px;
+        border-radius: 20px;
+        }
+
+        .list-cont {
+            height: 34.5rem;
+            overflow-y: auto;
+        }
+
+        .list-dynamic-cont {
+            padding: 8px 20px;
+        }
+
+        .review-list-cont .list-row-review {
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px;
+            background: #fff;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            cursor: pointer;
+            border-radius: 10px;
+            border-left: 0 solid #fff;
+            transition: border-left 0.5s ease-out;
+        }
+
+        .review-list-cont .list-row-review:hover {
+            border-left: 10px solid #485fed;
+        }
+
+        .review-list-cont .list-row-review.active {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 10px;
+            background: #fff;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            cursor: pointer;
+            border-radius: 10px;
+            border-left: 10px solid #485fed;
+        }
+
+        .review-list-cont .left-desc {
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .review-list-cont .left-desc img {
+            width: 80px;
+        }
+
+        .review-list-cont .left-desc .item-desc .list-item-purchase-date {
+            margin-bottom: -10px;
+            margin-top: -15px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #777;
+        }
+
+        /*
+            End of Order Left-Side Style 
+        */
+
+
+
+        /*
+            Start of Order Left-Side Style 
+        */
+
+        .review-details-cont {
+            display: flex;
+            flex-direction:column;
+            width: 70%;
+            height: 41.9rem;
+            overflow-y: auto;
+        }
+
+        .review-info-cont {
+            display: flex;
+            padding: 10px 20px 0;
+        }
+
+        .review-info-cont p {
+            margin-right: 20px;
+        }
+
+        .review-body-cont {
+            display: flex;
+            flex-direction: column;
+            margin-top: -5px;
+            padding: 0 20px;
+        }
+
+        .review-item {
+            width: 100%;
+            height: auto;
+            flex-direction: column;
+        }
+
+        .review-item .review-static-label {
+            font-size: 30px;
+            text-align: center;
+        }
+
+        .item-review-cont {
+            background: #fff;
+            box-shadow: 0px 0px 30px -15px;
+            border-radius: 5px;
+            padding: 15px 0;
+        }
+
+        .review-item .item-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .review-item .item-info img {
+            width: 120px;
+            margin-right: 10px;
+
+        }
+
+        .item-info .item-info-desc .item-info-name{
+            font-size: 2em;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+
+        .review-item .item-rate {
+            padding: 10px 0;
+            height: 15vh
+        }
+
+        .review-item .item-rate .rating{
+            text-align: center;
+            font-size: 3em;
+        }
+
+        .review-item .item-rate .rating input[type="radio"] {
+            display: none;
+        }
+
+        .review-item .item-rate .icons label {
+             font-size: 50px;
+             cursor: pointer;
+             opacity: 0.4;
+             transition: 0.2s linear;
+        }
+
+        .review-item .item-rate #Very-Unsatisfied:checked ~ .icons label:nth-child(1),
+        .review-item .item-rate #Unsatisfied:checked ~ .icons label:nth-child(2),
+        .review-item .item-rate #Neutral:checked ~ .icons label:nth-child(3),
+        .review-item .item-rate #Satisfied:checked ~ .icons label:nth-child(4),
+        .review-item .item-rate #Very-Satisfied:checked ~ .icons label:nth-child(5),
+        .review-item .item-rate .icons label:hover {
+            opacity: 1;
+            font-size: 60px;
+            transition: 0.2s linear;
+        }
+
+        .item-feedback {
+            padding: 0 225px 0;
+        }
+
+        .item-feedback .review-static-feedback {
+            font-size: 18px;
+            margin-bottom: 5px;
+            width: 30rem;
+        }
+
+        input[type=text], textarea {
+            transition: all 0.30s ease-in-out;
+            outline: none;
+            padding: 10px 10px 0; 
+            border: 1px solid #777;
+            resize: none;
+            border-radius: 5px;
+        }
+ 
+        input[type=text]:focus, textarea:focus {
+            box-shadow: 0 0 5px #485fed;
+            padding: 10px 10px 0; 
+            border: 1px solid #485fed;
+        }
+
+        .item-review-cont .btn-submit-feedback {
+            display: flex;
+            justify-content: center;
+        }
+
+        .item-review-cont .btn-submit-feedback button {
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            color: #fff;
+            font-size: 15px;
+            padding: 15px 50px;
+            border-radius: 10px;
+        }
+
+        .item-review-cont .btn-submit-feedback button:hover {
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+        }
+
+        
+    /*
+    End of Order Left-Side Style 
+    */
+
+/*
+End of Order Body Style
+*/

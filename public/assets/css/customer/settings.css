@@ -1,0 +1,392 @@
+
+/*
+    Settings Header Style
+*/
+
+.settings-header {
+    width: 69%;
+    height: 50px;
+    float: right;
+}
+
+.settings-header .icon {
+    position: absolute;
+    font-size: 23px;
+    right: 0;
+    padding-right: 50px;
+    padding-top: 10px;
+}
+
+.settings-header .icon ion-icon {
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    cursor: pointer;
+}
+
+.settings-header .notif {
+    position: absolute;
+    left: 25px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    z-index: 1;
+}
+
+/*
+End of Settings Header Style
+*/
+
+
+/*
+Start of Order Body Style
+*/
+
+    .settings-body {
+        display:flex;
+        flex-direction:row;
+        width: 100%;
+        height: auto;
+        padding: 5px 10px;
+     }
+
+     .settings-body hr {
+         width: 1px;
+         height: 85vh;
+         margin-top: 25px;
+         margin-left: 10px;
+         background: #c7c7c7;
+     }
+
+    /*
+        Start of Settings Left-Side Style 
+    */
+
+        .settings-menu-cont {
+            width: 25%;
+            display: flex;
+            flex-direction:column;
+            margin-top: -50px;
+        }
+
+        .title-cont {
+            font-size: 40px;
+            font-weight: 600;
+            padding-left: 20px;
+        }
+
+        .menu-cont {
+            display: flex;
+            flex-direction: column;
+            padding: 30px 20px;
+            font-size: 18px;
+        }
+
+        .menu-cont a {
+            text-decoration: none;
+            padding-left: 15px;
+            margin: 0 0 20px;
+            color: #777;
+        }
+
+        .menu-cont a:hover {
+            color: #485fed;
+        }
+
+        .menu-cont a.active {
+            color: #f1f1ff;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border-radius: 50px;
+            padding: 10px 15px;
+        }
+
+        /*
+            End of Settings Left-Side Style 
+        */
+
+
+
+        /*
+            Start of Settings Right-Side Style 
+        */
+
+        .settings-details-cont {
+            display: flex;
+            flex-direction:column;
+            width: 75%;
+            height: 41.9rem;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .details-inner-cont {
+            width: 90%;
+            height: 100vh;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .global-header-panel {
+            font-size: 30px;
+            font-weight: 600;
+            padding: 0 20px 20px;
+            width: 30.5vw;
+        }
+
+        .global-header-panel b.account {
+            position: absolute;
+            top: 120px;
+            height: 5px;
+            width: 130px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .global-header-panel b.address {
+            position: absolute;
+            top: 120px;
+            height: 5px;
+            width: 160px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .global-header-panel b.financial {
+            position: absolute;
+            top: 120px;
+            height: 5px;
+            width: 230px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .global-header-panel b.faq {
+            position: absolute;
+            top: 120px;
+            height: 5px;
+            width: 45px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .global-header-panel b.about {
+            position: absolute;
+            top: 120px;
+            height: 5px;
+            width: 115px;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .account .account-profile {
+            padding: 0 20px 20px;
+        }
+
+        .account .account-profile .details-static-label {
+            font-weight: 600;
+            font-size: 20px;
+            margin-left: 5px;
+            margin-bottom: -12px;
+        }
+
+        .account .account-profile .details-dynamic-cont {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .account .account-profile .details-dynamic-cont div:nth-child(1) p {
+           margin: 0 10px;
+        }
+
+        .account .account-profile .details-dynamic-cont div:nth-child(1) .details-current-name {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .account .account-profile .details-dynamic-cont div:nth-child(1) .details-current-email {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .account .account-profile .details-dynamic-cont div:nth-child(2) {
+             margin: 10px 0;
+        }
+        
+        .account .account-profile .details-dynamic-cont img{
+            width: 110px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .account .account-profile .details-dynamic-cont button {
+            border: none;
+            height: 40px;
+            border-radius: 5px;
+            background: #fff;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #485fed;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(1):hover {
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            color: #f1f1ff;
+        }
+
+        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(2) {
+            color: red;
+            transition: all .5s ease;
+        }
+
+        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(2):hover {
+            color: #f1f1ff;
+            background: red;
+        }
+
+        .account .account-details {
+            width: 95%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 0 15px;
+            padding-bottom: 30px;
+            margin: 0 auto ;
+            margin-bottom: 20px;
+            border-top: 1px solid #e1e1e1;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .account-details .account-details-upper,
+        .account-details .account-details-lower {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .account-details .account-details-upper {
+            margin: 0 0 20px;
+        }
+
+        .account-details .account-details-upper .account-row-info,
+        .account-details .account-details-lower .account-row-info {
+            flex-direction: column;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .account-details .account-details-upper .account-row-info .details-static-label,
+        .account-details .account-details-lower .account-row-info .details-static-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: -15px;
+            font-weight: 600;
+        }
+
+        .account-details .account-details-upper .account-row-info .details-static-label div:nth-child(2),
+        .account-details .account-details-lower .account-row-info .details-static-label div:nth-child(2) {
+            color: #777;
+            font-weight: 500;
+            margin-right: 25px;
+        }
+
+        .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type="text"],
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="text"],
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="email"] {
+            width: 95%;
+            transition: all 0.30s ease-in-out;
+            outline: none;
+            padding: 10px 10px; 
+            border: 1px solid #e1e1e1;
+            resize: none;
+            border-radius: 5px;
+        }
+
+        .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type=text]:focus,
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=text]:focus,
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=email]:focus {
+            box-shadow: 0 0 5px #485fed;
+            padding: 10px 10px; 
+            border: 1px solid #485fed;
+        }
+
+        .account .account-status {
+            width: 95%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0 15px;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e1e1e1;
+        }
+
+        .account .account-status .account-status-static p {
+            margin-bottom: 0;
+        }
+
+        .account .account-status .account-status-static p:nth-child(1) {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: -5px;
+        }
+
+        .account .account-status .account-status-static p:nth-child(2) {
+            color: #777;
+            font-size: 15px;
+        }
+
+        .account .account-status .account-status-detail button{
+            border: none;
+            color: red;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background: transparent;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .account .account-status .account-status-detail button:hover {
+            color: #fff;
+            background: red;
+        }
+
+        .global-footer-panel {
+            padding: 0 25vw;
+        }
+
+        .global-footer-panel button {
+            width: 10rem;
+            height: 3rem;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .global-footer-panel button:hover {
+            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+             -webkit-text-fill-color: #fff;
+            
+        }
+
+    /*
+    End of Settings Right-Side Style 
+    */
+
+/*
+End of Order Body Style
+*/
