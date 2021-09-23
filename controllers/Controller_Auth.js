@@ -201,7 +201,7 @@ function verifyCookie(req, res, next) {
         return res.status(401).render('authentication/auth', {
             layout: 'layouts/authLayout',
             messageCode: 'alert-danger',
-            infoMessage: 'Token expired or tampered'
+            infoMessage: 'Your session has expired. Please log in again.'
         });
     }
 };
