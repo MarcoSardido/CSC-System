@@ -21,102 +21,194 @@
     <div class="settings-details-cont">
         <div class="details-inner-cont">
             <div id="account-panel" class="account" style="display: block">
-                <form action="#">
-                    <div class="global-header-panel">
-                        <p>My Account</p>
-                        <b class="account"></b>
-                    </div>
-                    <div class="account-profile">
-                        <div class="details-static-label">
-                            <p>Avatar</p>
-                        </div>
-                        <div class="details-dynamic-cont">
-                            <img src="/public/assets/images/Avatar.png" alt="Profile Picture">
-                            <div class="details-current">
-                                <div>
-                                    <p class="details-current-name">Marco Sardido</p>
-                                    <p class="details-current-email">marcosardido@gmail.com</p>
+                <% displayAccountInfo.forEach(accountkey => { %>
+                    <% displayCustomerInfo.forEach(customerkey => { %>
+                        <form action="/customercenter" method="POST">
+                            <div class="global-header-panel">
+                                <p>My Account</p>
+                                <input type="text" name="user" value="<%=accountkey.id%>" style="display:none">
+                                <b class="account"></b>
+                            </div>
+                            <div class="account-profile">
+                                <div class="details-static-label">
+                                    <p>Avatar</p>
                                 </div>
+                                <div class="details-dynamic-cont">
+                                    <div class="filUpload" id="filUpload-settings-account" style="display: none">
+                                            <input type="file" name="profilePhoto" id="profilePhoto" class="filepond">
+                                    </div>
+                                    <div class="frame" id="frame-settings-account" style="display: block">
+                                        <%if(accountkey.userPhoto === ''){%> 
+                                            <img src="/public/assets/images/default/user-default-profile.png" alt="Profile Picture">
+                                        <%}else{%>
+                                            <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
+                                        <%}%> 
+                                    </div>
+                                    <div class="details-current">
+                                        <div>
+                                            <p class="details-current-name"><%=accountkey.displayName%></p>
+                                            <p class="details-current-email"><%=accountkey.email%></p>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="account-details">
+                                <div class="account-details-upper">
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Display name</p>
+                                            </div>
+                                            <div>
+                                                <p>Visible to other members</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont">
+                                            
+                                            <%if(accountkey.displayName === ''){%> 
+                                                <input type="text" name="displayName" id="displayName" value="" placeholder="e.g. John" disabled>
+                                            <% } else { %>
+                                                <input type="text" name="displayName" id="displayName" value="<%= accountkey.displayName %>" disabled>
+                                            <% } %>  
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Full name</p>
+                                            </div>
+                                            <div>
+                                                <p>How do you want to be called?</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont">
+
+                                            <%if(customerkey.fullName === ''){%> 
+                                                <input type="text" name="fullName" id="fullName" value="" placeholder="e.g. John Smith" disabled>
+                                            <% } else { %>
+                                                <input type="text" name="fullName" id="fullName" value="<%= customerkey.fullName %>" disabled>
+                                            <% } %>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="account-details-lower">
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Email address</p>
+                                            </div>
+                                            <div>
+                                                <p>For logging in</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont">
+
+                                            <%if(accountkey.email === ''){%> 
+                                                <input type="email" name="email" id="email" placeholder="e.g. john_smith@sample.com" disabled>
+                                            <% } else { %>
+                                                <input type="email" name="email" id="email" value="<%= accountkey.email %>" disabled>
+                                            <% } %>
+
+                                        </div>
+                                    </div>
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Phone number</p>
+                                            </div>
+                                            <div>
+                                                <p>For receiving notifications</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont">
+
+                                            <%if(customerkey.contactNo === ''){%> 
+                                                <input type="text" name="contactNo" id="contactNo" placeholder="e.g. +31 6 12 34 56 78" disabled>
+                                            <% } else { %>
+                                                <input type="text" name="contactNo" id="contactNo" value="<%= customerkey.contactNo %>" disabled>
+                                            <% } %>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="account-other-details">
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Birth Date</p>
+                                            </div>
+                                            <div>
+                                                <p>For payment purposes</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont">
+
+                                            <%if(customerkey.birthday === ''){%> 
+                                                <input type="date" name="birthday" id="birthday" disabled>
+                                            <% } else { %>
+                                                <input type="date" name="birthday" id="birthday" value="<%= customerkey.birthday %>" disabled>
+                                            <% } %>
+
+                                        </div>
+                                    </div>
+                                    <div class="account-row-info">
+                                        <div class="details-static-label">
+                                            <div>
+                                                <p>Gender</p>
+                                            </div>
+                                            <div>
+                                                <p>For other purposes</p>
+                                            </div>
+                                        </div>
+                                        <div class="details-dynamic-cont"> 
+
+                                            <%if(customerkey.gender === ''){%> 
+                                                <select name="gender" id="gender" disabled>
+                                                    <option value="">Select a gender...</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            <%}else{%>
+                                                <select name="gender" id="gender" disabled>
+                                                    <option value="">Select a gender...</option>
+                                                    <%if(customerkey.gender === 'Male'){%> 
+                                                        <option selected value="Male">Male</option>
+                                                    <%}else if(customerkey.gender === 'Female'){%>
+                                                        <option selected value="Female">Female</option>
+                                                    <%}else{%> 
+                                                        <option selected value="Other">Other</option>
+                                                    <%}%> 
+                                                </select>
+                                             <%}%>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="account-status">
+                                <div class="account-status-static">
+                                    <p>Delete Account</p>
+                                    <p>By deleting your account you will lose all your data</p>
+                                </div>
+                                <div class="account-status-detail">
+                                    <button>Delete account</button>
+                                </div>
+                            </div>
+                            <div class="global-footer-panel">
+                                <button id="account-btnEdit" style="display:block">Edit Profile</button>
                                 <div>
-                                    <button>Upload</button>
-                                    <button>Remove</button>
+                                    <button type="submit" id="account-btnSave" style="display:none">Save Changes</button>
+                                    <button id="account-btnCancel" style="display:none">Cancel</button>
                                 </div>
                                 
                             </div>
-                            
-                        </div>
-                    </div>
-                    <div class="account-details">
-                        <div class="account-details-upper">
-                            <div class="account-row-info">
-                                <div class="details-static-label">
-                                    <div>
-                                        <p>Display name</p>
-                                    </div>
-                                    <div>
-                                        <p>Visible to other members</p>
-                                    </div>
-                                </div>
-                                <div class="details-dynamic-cont">
-                                    <input type="text" name="" id="" required placeholder="e.g. John">
-                                </div>
-                            </div>
-                            <div class="account-row-info">
-                                <div class="details-static-label">
-                                    <div>
-                                        <p>Full name</p>
-                                    </div>
-                                    <div>
-                                        <p>How do you want to be called?</p>
-                                    </div>
-                                </div>
-                                <div class="details-dynamic-cont">
-                                    <input type="text" name="" id="" required placeholder="e.g. John Smith">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account-details-lower">
-                            <div class="account-row-info">
-                                <div class="details-static-label">
-                                    <div>
-                                        <p>Email address</p>
-                                    </div>
-                                    <div>
-                                        <p>For logging in</p>
-                                    </div>
-                                </div>
-                                <div class="details-dynamic-cont">
-                                    <input type="email" name="" id="" required placeholder="e.g. john_smith@sample.com">
-                                </div>
-                            </div>
-                            <div class="account-row-info">
-                                <div class="details-static-label">
-                                    <div>
-                                        <p>Phone number</p>
-                                    </div>
-                                    <div>
-                                        <p>For receiving notifications</p>
-                                    </div>
-                                </div>
-                                <div class="details-dynamic-cont">
-                                    <input type="text" name="" id="" required placeholder="e.g. +31 6 12 34 56 78">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="account-status">
-                        <div class="account-status-static">
-                            <p>Delete Account</p>
-                            <p>By deleting your account you will lose all your data</p>
-                        </div>
-                        <div class="account-status-detail">
-                            <button>Delete account</button>
-                        </div>
-                    </div>
-                    <div class="global-footer-panel">
-                        <button type="submit">Save Changes</button>
-                    </div>
-                </form>
+                        </form>
+                    <% }); %>
+                <% }); %>  
             </div>
             <div id="address-panel" class="address" style="display: none">
                 <div class="global-header-panel">

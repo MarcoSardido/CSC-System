@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, browserSessionPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -27,14 +27,23 @@ $(document).ready(() => {
             }
         });
     };
+
+    const auth = getAuth(firebase);
+    setPersistence(auth, inMemoryPersistence);
+
+    onAuthStateChanged(auth, (loggedUser) => {
+        if (loggedUser) {
+            console.log('getUser: ',loggedUser)
+        } else {
+            console.log('user not here')
+        }
+    });
+
     $("#signinForm").submit(e => {
         e.preventDefault();
         let email = $("#email").val();
         let password = $("#password").val();
 
-        const auth = getAuth(firebase);
-       
-        setPersistence(auth, inMemoryPersistence);
         signInWithEmailAndPassword(auth, email, password).then((user) => {
             user.user.getIdToken().then(idToken => {
                 window.location.assign('auth/sessionLogin?token='+idToken);
@@ -45,10 +54,30 @@ $(document).ready(() => {
                 console.log(error.message);
             })
         });
-
     });
 
 
+    $("#signInWithGoogle").click(() => {
+
+        const provider = new GoogleAuthProvider();
+
+        signInWithPopup(auth, provider).then((user) => {
+            const credential = GoogleAuthProvider.credentialFromResult(user);
+            const token = credential.accessToken;
+
+            user.user.getIdToken().then(idToken => {
+                window.location.assign('auth/sessionLogin?token='+idToken);
+            });
+        }).catch(error => {
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            const email = error.email;
+            const errorMessage = error.message;
+            console.log('@ErrorMessage: ',errorMessage);
+            console.log('@ErrorEmail: ',email)
+            console.log('@ErrorCredential: ',credential)
+        })
+
+    })
+
+
 });
-
-

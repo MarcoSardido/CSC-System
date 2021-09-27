@@ -51,13 +51,17 @@
     <div class="profile-container">
         <div class="profile">
             <div class="profile-details">
-                <a href="/profile">
-                    <img src="/public/assets/images/Avatar.png" alt="MarcoSardido">
-                </a>
-                <div class="details">
-                    <div class="name">Marco Sardido</div>
-                    <div class="subType">Not Verified</div>
-                </div>
+                <% displayAccountInfo.forEach(accountkey => { %>
+                    <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
+                    <div class="details">
+                        <div class="name"><%=accountkey.displayName%></div>
+                        <% if(accountkey.isVerified){ %> 
+                            <div class="subType">Verified 👍</div>
+                        <% }else{ %>
+                            <div class="subType">Not Verified 👎</div>
+                        <% } %> 
+                    </div>
+                <% }); %> 
             </div>
             <a href="auth/logout">
                 <ion-icon name="log-in-outline" id="logout"></ion-icon>

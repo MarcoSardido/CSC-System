@@ -2,11 +2,10 @@
 
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signOut} from  'firebase/auth';
-import { getFirestore, collection, doc, addDoc, setDoc, getDocs, Timestamp } from 'firebase/firestore';
 
 const adminAuth = firebaseAdmin.auth();
 const auth = getAuth(firebase);
-const db = getFirestore(firebase);
+
 
 // Route for the Sign in and Sign up
 const signInAndSignUpRoute = (req, res) => {
@@ -25,6 +24,8 @@ const signInAndSignUpRoute = (req, res) => {
         res.render('customer/dashboard', { 
             title: 'Customer Center',
             layout: 'layouts/customerLayout',
+            displayAccountInfo: [],
+            displayCustomerInfo: [],
             messageCode: 'alert-info',
             infoMessage: 'Please logout first'
         });
@@ -188,12 +189,11 @@ function verifyCookie(req, res, next) {
         const sessionCookie = req.cookies.session;
 
         adminAuth.verifySessionCookie(sessionCookie, true).then((decodedClaims) => {
-            
             req.body.uid = decodedClaims.uid;
+            req.body.user = decodedClaims.firebase;
             return next();
             
         }).catch((error) => {
-            
             console.error(error);
         });
 
@@ -205,8 +205,6 @@ function verifyCookie(req, res, next) {
         });
     }
 };
-
-
 
 export { 
     signInAndSignUpRoute,

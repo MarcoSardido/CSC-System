@@ -44,21 +44,3 @@ app.use('/sellercenter', sellerPage.routes);
 app.use('/customercenter', customerPage.routes);
 
 app.listen(process.env.PORT || 3000, () => console.log('Server up and running...'));
-
-
-
-
-
-// const express = require('express');
-// const expressLayouts = require('express-ejs-layouts');
-// const methodOverride = require('method-override');
-
-// const cookieParser = require("cookie-parser");
-// const csrf = require("csurf");
-
-// const csrfMiddleware = csrf({ cookie: true });
-
-// const landingPage = require('./routes/Router_LandingPage');
-// const loginPage = require('./routes/Router_Login');
-// const sellerPage = require('./routes/Router_Seller');
-// const customerPage = require('./routes/Router_Customer');

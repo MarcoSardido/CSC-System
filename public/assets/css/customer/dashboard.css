@@ -1,0 +1,230 @@
+/* <div class="alert <%= messageCode %> " role="alert">
+    <%= infoMessage %> 
+</div> */
+
+/*
+    Dashboard Header Style
+*/
+
+.dashboard-header {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-header .icon {
+    position: absolute;
+    font-size: 23px;
+    right: 0;
+    padding-right: 50px;
+}
+
+.dashboard-header .icon ion-icon {
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.dashboard-header .notif {
+    position: absolute;
+    left: 25px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    z-index: 1;
+}
+
+.dashboard-header .dropdown {
+    position: relative;
+}
+
+.dashboard-header .dropdown .btnLive-schedule {
+    width: 30rem;
+    height: 2.5rem;
+    font-size: 20px;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    border: none;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+.dashboard-header .dropdown .btnLive-schedule i {
+    position: relative;
+    top: 5px;
+    left: 10px;
+    font-size: 25px;
+    pointer-events: none;
+}
+
+.dashboard-header .dropdown .dropdown-list {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 0.25rem);
+    background: #fff;
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.dashboard-header .dropdown .dropdown-list-item {
+    margin: 5px 0;
+    border-bottom: 1px solid #c3c3c3;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+
+.dashboard-header .dropdown .dropdown-list-item:nth-last-child(1) {
+   border: none;
+}
+
+.dropdown > .btnLive-schedule:focus + .dropdown-list {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dashboard-header .dropdown-list .dropdown-list-item .dropdown-utils {
+   font-size: 14px;
+}
+
+.dashboard-header .dropdown-list .dropdown-list-item .dropdown-title {
+   font-weight: 600;
+}
+
+.dashboard-header .dropdown-list .dropdown-list-item .dropdown-desc {
+    font-size: 13px;
+}
+
+/*
+End of Dashboard Header Style
+*/
+
+
+/*
+Start of Dashboard Body Style
+*/
+
+    .settings-body {
+        display:flex;
+        flex-direction:row;
+        width: 100%;
+        height: auto;
+        padding: 5px 10px;
+    }
+
+    .dashboard-body .live-rooms-container {
+        height: 90vh;
+        padding: 2rem 0;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room {
+        display: flex;
+        justify-content: center;
+    }
+
+    .dashboard-body .live-rooms-container .room-row {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        margin-top: 1rem;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room {
+        height: 25.5vh;
+        width: 60vw;
+    }
+
+    .dashboard-body .live-rooms-container .room-row .live-room {
+        height: 25.5vh;
+        width: 40vw;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room, 
+    .dashboard-body .live-rooms-container .room-row .live-room {
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+        cursor: pointer;
+        padding: 15px;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .upper .fixed-logo-frame, 
+    .dashboard-body .live-rooms-container .room-row .live-room .upper .fixed-logo-frame{
+        background: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        padding: 5px 10px;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .upper .fixed-logo-frame .logo img, 
+    .dashboard-body .live-rooms-container .room-row .live-room .upper .fixed-logo-frame .logo img {
+        width: 30px;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title, 
+    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title {
+        display: flex;
+        margin-top: 50px;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title p, 
+    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title p {
+        margin: 0;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title .fixed-live-status, 
+    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title .fixed-live-status {
+        margin-right: 10px;
+        background: red;
+        border-radius: 10px;
+        width: 50px;
+        height: 25px;
+        font-size: 15px;
+        text-align: center;
+        color: #fff;
+        border: 2px solid #fff;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title .store-name, 
+    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title .store-name {
+        font-weight: 600;
+        font-size: 20px;
+        color: #fff;
+        margin-top: -2px;
+    }
+
+    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-desc p, 
+    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-desc p {
+        color: #fff;
+        margin-top: 5px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .dashboard-body .live-rooms-container .room-row .live-room:nth-child(odd) {
+        margin-right: 0.5rem;
+    }
+
+    .dashboard-body .live-rooms-container .room-row .live-room:nth-child(even) {
+        margin-left: 0.5rem;
+    }
+
+/*
+End of Dashboard Body Style
+*/

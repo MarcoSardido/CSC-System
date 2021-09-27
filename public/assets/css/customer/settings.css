@@ -113,6 +113,7 @@ Start of Order Body Style
         */
 
         .settings-details-cont {
+            position: relative;
             display: flex;
             flex-direction:column;
             width: 75%;
@@ -138,7 +139,7 @@ Start of Order Body Style
 
         .global-header-panel b.account {
             position: absolute;
-            top: 120px;
+            top: 65px;
             height: 5px;
             width: 130px;
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
@@ -148,7 +149,7 @@ Start of Order Body Style
 
         .global-header-panel b.address {
             position: absolute;
-            top: 120px;
+            top: 65px;
             height: 5px;
             width: 160px;
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
@@ -158,7 +159,7 @@ Start of Order Body Style
 
         .global-header-panel b.financial {
             position: absolute;
-            top: 120px;
+            top: 65px;
             height: 5px;
             width: 230px;
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
@@ -168,7 +169,7 @@ Start of Order Body Style
 
         .global-header-panel b.faq {
             position: absolute;
-            top: 120px;
+            top: 65px;
             height: 5px;
             width: 45px;
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
@@ -178,7 +179,7 @@ Start of Order Body Style
 
         .global-header-panel b.about {
             position: absolute;
-            top: 120px;
+            top: 65px;
             height: 5px;
             width: 115px;
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
@@ -194,13 +195,21 @@ Start of Order Body Style
             font-weight: 600;
             font-size: 20px;
             margin-left: 5px;
-            margin-bottom: -12px;
+            margin-top: -10px;
+            margin-bottom: -25px;
         }
 
         .account .account-profile .details-dynamic-cont {
             display: flex;
             flex-direction: row;
             align-items: center;
+        }
+
+        .filUpload {
+            width: 110px;
+            height: 100px;
+            margin-right: 20px;
+            margin-top: 10px;
         }
 
         .account .account-profile .details-dynamic-cont div:nth-child(1) p {
@@ -225,6 +234,7 @@ Start of Order Body Style
             width: 110px;
             border-radius: 50%;
             margin-right: 20px;
+            margin-bottom: -20px;
         }
 
         .account .account-profile .details-dynamic-cont button {
@@ -269,7 +279,8 @@ Start of Order Body Style
         }
 
         .account-details .account-details-upper,
-        .account-details .account-details-lower {
+        .account-details .account-details-lower,
+        .account-details .account-other-details {
             display: flex;
             flex-direction: row;
         }
@@ -279,14 +290,16 @@ Start of Order Body Style
         }
 
         .account-details .account-details-upper .account-row-info,
-        .account-details .account-details-lower .account-row-info {
+        .account-details .account-details-lower .account-row-info,
+        .account-details .account-other-details .account-row-info{
             flex-direction: column;
             width: 100%;
             margin-top: 15px;
         }
 
         .account-details .account-details-upper .account-row-info .details-static-label,
-        .account-details .account-details-lower .account-row-info .details-static-label {
+        .account-details .account-details-lower .account-row-info .details-static-label,
+        .account-details .account-other-details .account-row-info .details-static-label{
             display: flex;
             justify-content: space-between;
             margin-bottom: -15px;
@@ -294,19 +307,31 @@ Start of Order Body Style
         }
 
         .account-details .account-details-upper .account-row-info .details-static-label div:nth-child(2),
-        .account-details .account-details-lower .account-row-info .details-static-label div:nth-child(2) {
+        .account-details .account-details-lower .account-row-info .details-static-label div:nth-child(2),
+        .account-details .account-other-details .account-row-info .details-static-label div:nth-child(2) {
             color: #777;
             font-weight: 500;
             margin-right: 25px;
         }
 
+        .account-details .account-details-upper .account-row-info .details-dynamic-cont input:disabled,
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input:disabled,
+        .account-details .account-other-details .account-row-info .details-dynamic-cont input:disabled,
+        .account-details .account-other-details .account-row-info .details-dynamic-cont select:disabled {
+            background: #dadada;
+            color: black;
+            opacity: 0.7;
+        }
+
         .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type="text"],
         .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="text"],
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="email"] {
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="email"],
+        .account-details .account-other-details .account-row-info .details-dynamic-cont input[type="date"],
+        .account-details .account-other-details .account-row-info .details-dynamic-cont select {
             width: 95%;
             transition: all 0.30s ease-in-out;
             outline: none;
-            padding: 10px 10px; 
+            padding: 10px 10px;
             border: 1px solid #e1e1e1;
             resize: none;
             border-radius: 5px;
@@ -314,7 +339,9 @@ Start of Order Body Style
 
         .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type=text]:focus,
         .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=text]:focus,
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=email]:focus {
+        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=email]:focus,
+        .account-details .account-other-details .account-row-info .details-dynamic-cont input[type="date"]:focus,
+        .account-details .account-other-details .account-row-info .details-dynamic-cont select:focus {
             box-shadow: 0 0 5px #485fed;
             padding: 10px 10px; 
             border: 1px solid #485fed;
@@ -348,6 +375,7 @@ Start of Order Body Style
 
         .account .account-status .account-status-detail button{
             border: none;
+            height: 3rem;
             color: red;
             font-weight: 600;
             padding: 10px 20px;
@@ -375,6 +403,22 @@ Start of Order Body Style
             box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .global-footer-panel div {
+            display: flex;
+            width: 25rem;
+            margin-left: -80px;
+        }
+
+        .global-footer-panel div button:nth-child(2) {
+            -webkit-text-fill-color: red;
+            margin-left: 20px;
+        }
+
+        .global-footer-panel div button:nth-child(2):hover{
+            background: red;
+            -webkit-text-fill-color: #fff;
         }
 
         .global-footer-panel button:hover {

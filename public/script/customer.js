@@ -192,5 +192,87 @@ $(document).ready(() => {
     };
 
 
+    let btnEdit_account = document.getElementById('account-btnEdit');
+    let btnSave_account = document.getElementById('account-btnSave');
+    let btnCancel_account = document.getElementById('account-btnCancel');
+    let filUpload_account = document.getElementById('filUpload-settings-account');
+    let frame_account = document.getElementById('frame-settings-account');
+
+    const delayInMilliseconds = 500; //0.5 seconds
+
+    btnEdit_account.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchEditAndSave(true);
+    })
+
+    btnSave_account.addEventListener('click', (e) => {
+        switchEditAndSave(false);
+    })
+
+    function switchEditAndSave(editProfile) {
+
+        if (editProfile) { //TRUE In Edit Mode
+            filUpload_account.style.display = "block";
+            frame_account.style.display = "none";
+
+            //remove disabled attribute to input
+            setTimeout(function(){
+                $('#displayName').prop('disabled', false);
+                $('#fullName').prop('disabled', false);
+                $('#email').prop('disabled', false);
+                $('#contactNo').prop('disabled', false);
+                $('#birthday').prop('disabled', false);
+                $('#gender').prop('disabled', false);
+            }, delayInMilliseconds);
+    
+            btnEdit_account.style.display = "none";
+            btnSave_account.style.display = "block";
+            btnCancel_account.style.display = "block";
+
+        } else { //FALSE Not in Edit Mode
+            filUpload_account.style.display = "none";
+            frame_account.style.display = "block";
+
+            //add disabled attribute to input
+            setTimeout(function(){
+                $('#displayName').prop('disabled', true);
+                $('#fullName').prop('disabled', true);
+                $('#email').prop('disabled', true);
+                $('#contactNo').prop('disabled', true);
+                $('#birthday').prop('disabled', true);
+                $('#gender').prop('disabled', true);
+            }, delayInMilliseconds);
+            
+            btnEdit_account.style.display = "block";
+            btnSave_account.style.display = "none";
+            btnCancel_account.style.display = "none";
+        }
+    };
+
+    btnCancel_account.addEventListener('click', (e) => {
+        e.preventDefault();
+        filUpload_account.style.display = "none";
+        frame_account.style.display = "block";
+
+        //add disabled attribute to input
+        setTimeout(function(){
+            $('#displayName').prop('disabled', true);
+            $('#fullName').prop('disabled', true);
+            $('#email').prop('disabled', true);
+            $('#contactNo').prop('disabled', true);
+            $('#birthday').prop('disabled', true);
+            $('#gender').prop('disabled', true);
+        }, delayInMilliseconds);
+            
+        btnEdit_account.style.display = "block";
+        btnSave_account.style.display = "none";
+        btnCancel_account.style.display = "none";
+    })
+
+    
+
+
+    
 
 });
+
