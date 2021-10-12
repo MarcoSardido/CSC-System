@@ -13,7 +13,7 @@ import cookieParser from "cookie-parser";
 import path from 'path';
 
 import * as landingPage from './routes/Router_LandingPage.js';
-import * as authPage from './routes/Router_Auth.js';
+// import * as authPage from './routes/Router_Auth.js';
 import * as sellerPage from './routes/Router_Seller.js';
 import * as customerPage from './routes/Router_Customer.js';
 
@@ -39,7 +39,7 @@ app.use(cookieParser());
 // });
 
 app.use('/', landingPage.routes);
-app.use('/auth', authPage.routes);
+// app.use('/auth', authPage.routes);
 app.use('/sellercenter', sellerPage.routes);
 app.use('/customercenter', customerPage.routes);
 

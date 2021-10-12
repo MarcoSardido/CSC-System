@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- title  %> </title>
+
+    <!-- ANCHOR: General Plugins -->
+
+        <!-- Custom Google Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Icons -->
+        <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="https://kit.fontawesome.com/11cc391cc4.js" crossorigin="anonymous"></script>
+
+        <!-- Filepond CDN (CSS and Script)-->
+        <link rel='stylesheet' href='https://unpkg.com/filepond/dist/filepond.min.css'/>
+        <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"/>
+
+        <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js"></script>
+        <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+        <script defer src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+
+        <!-- JQuery -->
+        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
+        <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+
+        <!-- Bootstrap -->
+        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js' integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg==' crossorigin='anonymous'></script>
+        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css' integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==' crossorigin='anonymous'/>
+
+        <!-- Global Script -->
+        
+        <!-- Global Style -->
+        <link rel="stylesheet" href="/public/assets/css/normalize.css">
+    
+    <!-- ANCHOR: End of General Plugins -->
+    
+    <!-- Auth Style -->
+    <link rel="stylesheet" href="/public/assets/css/auth/sellerAuthStyle.css">
+
+    <!-- Auth Script -->
+    <script defer src="/public/script/AuthSeller.js"></script>
+    <script defer src="/public/script/fileUploadAuthSeller.js"></script>
+    <script defer type='module' src='/public/script/firebaseConfig.js'></script>
+    
+
+</head>
+    <body>
+
+        <%- body %>
+
+    </body>
+</html>

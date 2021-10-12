@@ -1,0 +1,746 @@
+.auth-header {
+    width: 100%;
+    height: 10vh;
+    padding: 10px;
+    font-size: 50px;
+    text-align: center;
+}
+
+.auth-body {
+    width: 100%;
+    height: 90vh;
+    padding: 20px;
+}
+
+.seller-signUp-cont {
+    width: 70%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 2px;
+}
+
+.signUp-guide {
+    width: 30%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+/* 1st panel */
+
+.signUp-guide .guide-start:before {
+    content: ' ';
+    position: absolute;
+    opacity: 0.8;
+    width: 314px;
+    height: 620px;
+    background-image: url('/public/assets/images/auth/seller/static-quote-image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.signUp-guide .guide-quote {
+    position: absolute;
+    width: 20.5vw;
+    height: 25vh;
+    bottom: 50px;
+    left: 300px;
+    z-index: 1;
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 10px;
+    border-bottom-right-radius: 50px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+.signUp-guide .guide-quote .body {
+    color: #777;
+    font-size: 14px;
+}
+
+.signUp-guide .guide-quote .author {
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.signUp-guide .guide-quote .authorWork {
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.signUp-guide .quote {
+    position: absolute;
+    padding: 5px;
+    width: 3.2rem;
+    height: 2.8rem;
+    bottom: 213px;
+    left: 280px;
+    background:  #485fed;
+    z-index: 2;
+    color: #fff;
+    font-size: 23px;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.signUp-guide .guide-quote .authorWork ion-icon {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    bottom: 20px;
+    right: 20px;
+    color: #37c2ff;
+}
+
+/* End of 1st panel */
+
+
+
+/* 2nd panel */
+
+.signUp-guide .guide-sellerType {
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.signUp-guide .guide-sellerType .title {
+    color: #fff;
+    font-size: 25px;
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+.signUp-guide .guide-sellerType .subText {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 0;
+}
+
+.signUp-guide .guide-sellerType img {
+    width: 15rem;
+    margin-top: 100px;
+    margin-left: 40px;
+}
+
+/* End of 2nd panel */
+
+.signUp-guide .guide-progress {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-progress .progress-header {
+    height: 15%;
+    display: flex;
+    align-items: center;
+}
+
+.guide-progress .progress-header .logo {
+    width: 5rem;
+    height: 5rem;
+}
+
+.guide-progress .progress-header .logoText,
+.guide-progress .progress-header .emph {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.guide-progress .progress-header .logoText {
+    color: #1D6B83;
+}
+
+.guide-progress .progress-header .emph {
+    padding-left: 5px;
+    color: #39B7DF;
+}
+
+.guide-progress .progress-body {
+    height: 55%;
+}
+
+.progress-body .progress-list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.progress-body .progress {
+    width: auto;
+    height: 6vh;
+    margin: 5px 10px;
+    align-items: center;
+    background: #fff;
+}
+
+.progress-body .progress .progress-title {
+    font-size: 14px;
+    padding-left: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.progress-body .progress.progress-done .progress-icon {
+    font-size: 2.8em;
+    color: #0fd64f;
+}
+
+.progress-body .progress.progress-done .progress-title {
+    color: #b6b6b6;
+}
+
+.businessInfo.progress-done,
+.personalInfo.progress-done {
+    transition: all 0.5s ease-in-out;
+}
+
+.businessInfo.current-progress,
+.personalInfo.current-progress {
+    transition: height 0.5s ease-in-out;
+}
+
+.businessInfo.current-progress .progress-title,
+.businessInfo.current-progress .progress-icon,
+.personalInfo.current-progress .progress-title,
+.personalInfo.current-progress .progress-icon {
+   transition: margin-top 0.5s ease-in-out;
+}
+
+.businessInfo.current-progress .progress-title,
+.businessInfo.current-progress .progress-icon,
+.personalInfo.current-progress .progress-title,
+.personalInfo.current-progress .progress-icon,
+.personalInfo.current-progress .progress-title,
+.personalInfo.current-progress .progress-icon  {
+   margin-top: -65px;
+}
+
+.businessInfo.current-progress .progress-icon ion-icon,
+.personalInfo.current-progress .progress-icon ion-icon,
+.personalInfo.not-progress .progress-icon ion-icon {
+    display: none;
+}
+
+.businessInfo.progress-done .progress-icon .circle,
+.personalInfo.progress-done .progress-icon .circle {
+    opacity: 0;
+}
+
+.businessInfo.current-progress,
+.personalInfo.current-progress {
+    height: 7rem;
+}
+
+.businessInfo.current-progress .progress-title .progress-drop,
+.personalInfo.current-progress .progress-title .progress-drop {
+    position: absolute;
+    top: calc(100% + 2rem);
+    pointer-events: auto;
+}
+
+.businessInfo.progress-done .progress-title .progress-drop,
+.personalInfo.progress-done .progress-title .progress-drop,
+.personalInfo.not-progress .progress-title .progress-drop {
+    margin-top: -30px;
+    opacity: 0
+}
+
+.businessInfo.current-progress .progress-title .progress-drop p:nth-child(1),
+.businessInfo.current-progress .progress-title .progress-drop p:nth-child(2),
+.personalInfo.current-progress .progress-title .progress-drop p:nth-child(1),
+.personalInfo.current-progress .progress-title .progress-drop p:nth-child(2) {
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.businessInfo.current-progress .progress-title .progress-drop p:nth-child(1),
+.personalInfo.current-progress .progress-title .progress-drop p:nth-child(1) {
+    margin-bottom: 2rem;
+}
+
+.businessInfo.current-progress .progress-title .progress-drop .subTopic.current-progress,
+.personalInfo.current-progress .progress-title .progress-drop .subTopic.current-progress {
+    color: #000;
+}
+
+.businessInfo.current-progress .progress-title .progress-drop .subTopic,
+.personalInfo.current-progress .progress-title .progress-drop .subTopic {
+     color: #777;
+}
+
+.progress-body .progress.current-progress .progress-title {
+    position: relative;
+    width: 100%;
+     color: #485def;
+}
+
+.progress-body .progress.current-progress .progress-icon {
+    margin-left: 3px;
+    border: 2px solid #485def;
+    padding: 12px 8px;
+    border-radius: 50px;
+    font-size: 13px;
+    color: #485def;
+    font-weight: 600;
+}
+
+.progress-body .progress.not-progress .progress-title {
+     color: #777;
+}
+
+.progress-body .progress.not-progress .progress-icon {
+    margin-left: 3px;
+    border: 2px solid #777;
+    padding: 12px 8px;
+    border-radius: 50px;
+    font-size: 13px;
+    color: #777;
+    font-weight: 600;
+}
+
+.guide-progress .progress-footer.businessInfo1 {
+    height: 30%;
+    background-image: url("/public/assets/images/auth/seller/about-business.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.guide-progress .progress-footer.businessInfo2 {
+    height: 30%;
+    background-image: url("/public/assets/images/auth/seller/seller-docs.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.guide-progress .progress-footer.personalInfo1 {
+    height: 30%;
+    margin-left: -35px;
+    background-image: url("/public/assets/images/auth/seller/personal-info.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.guide-progress .progress-footer.personalInfo2 {
+    height: 30%;
+    width: 90%;
+    background-image: url("/public/assets/images/auth/seller/personal-email.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.guide-progress .progress-footer.getStarted {
+    height: 30%;
+    width: 90%;
+    background-image: url("/public/assets/images/auth/seller/create.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* 3rd panel */
+
+
+
+/* End of 3rd panel */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.signUp-detail {
+    width: 70%;
+    padding: 30px 50px;
+    background: #f1f1ff;
+}
+
+/* 1st panel */
+
+.detail-panel .panel-header {
+    margin-top: -20px;
+    display: flex;
+    align-items: center;
+}
+
+.detail-panel .panel-header .logo {
+    width: 4.5rem;
+    height: 5rem;
+}
+
+.detail-panel .panel-header .logoText,
+.detail-panel .panel-header .emph {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.detail-panel .panel-header .logoText {
+    color: #1D6B83;
+}
+
+.detail-panel .panel-header .emph {
+    padding-left: 5px;
+    color: #39B7DF;
+}
+
+.start .panel-body {
+    padding: 50px 0;
+}
+
+.start .panel-body .title {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.start .panel-body .subText {
+    font-size: 15px;
+    color: #777;
+}
+
+.start .panel-body .subText:nth-child(2) {
+    margin-bottom: 3px;
+}
+
+.start .panel-body .subText:nth-child(4) {
+    padding-top: 20px;
+    margin-bottom: 2px;
+}
+
+.start .panel-body .emailStart {
+    width: 60%;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.start .panel-body .emailStart:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px; 
+    border: 1px solid #485fed;
+}
+
+.start .panel-body .btnStart {
+    margin-left: 10px;
+    height: 5vh;
+    width: 10vw;
+    border: none;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    font-size: 13px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+.start .panel-body .btnStart ion-icon {
+    position: absolute;
+    top: 443px;
+    right: 405px;
+    color: #fff;
+    font-size: 16px;
+}
+
+
+/* End of 1st panel */
+
+.panel-header a {
+    font-weight: 600;
+}
+
+.panel-header p {
+    text-align:end;
+    color: #777;
+    font-size: 15px;
+}
+
+.detail-panel {
+    padding: 30px 30px;
+}
+
+.detail-panel .panel-body {
+    height: 57vh;
+}
+
+.panel-body .static-cont .title{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.panel-body .static-cont .subText{
+    font-size: 15px;
+    color: #777;
+}
+
+.panel-body .dynamic-cont {
+    padding: 30px;
+}
+
+.panel-body .dynamic-cont .type {
+    display: flex;
+    padding: 20px;
+    background: #fff;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 2px 0.5px;
+    cursor: pointer;
+}
+
+.panel-body .dynamic-cont .type:hover {
+    border: 1px solid #485fed;
+}
+
+/* if selected */
+
+.panel-body .dynamic-cont .type.selected {
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    border-radius: 5px;
+    background: #001cf90d;
+    border: 1px solid #485fed;
+}
+
+.panel-body .dynamic-cont .type.selected .icon {
+    background: #485fed;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.panel-body .dynamic-cont .type.selected .icon ion-icon {
+    margin: 7px;
+    font-size: 25px;
+    color: #fff;
+}
+
+.panel-body .dynamic-cont .type.selected div:nth-child(3) {
+    padding-left: 230px;
+    color: #485fed;
+}
+
+.panel-body .dynamic-cont .type.selected div:nth-child(3) {
+    display: block;
+}
+
+/* END if selected */
+
+.panel-body .dynamic-cont .type div:nth-child(3) {
+    display: none;
+}
+
+.panel-body .dynamic-cont .type:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+.panel-body .dynamic-cont .type .icon {
+    border: 1px solid #485fed;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.panel-body .dynamic-cont .type .icon ion-icon {
+    margin: 7px;
+    font-size: 25px;
+    color: #485fed;
+    pointer-events: none;
+}
+
+.panel-body .dynamic-cont .type .detail {
+    font-size: 18px;
+}
+
+
+/* 2nd Panel */
+
+.panel-body .dynamic-cont .subText,
+.panel-body .dynamic-cont .subText {
+    margin-bottom: 0;
+}
+
+.panel-body .dynamic-cont input {
+    margin-bottom: 20px;
+}
+
+.panel-body .dynamic-cont input[type="text"],
+.panel-body .dynamic-cont input[type="password"],
+.panel-body .dynamic-cont input[type="date"],
+.panel-body .dynamic-cont select {
+    width: 95%;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.panel-body .dynamic-cont input[type="text"]:focus,
+.panel-body .dynamic-cont input[type="password"]:focus,
+.panel-body .dynamic-cont input[type="date"]:focus,
+.panel-body .dynamic-cont select:focus{
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px; 
+    border: 1px solid #485fed;
+}
+
+.panel-body .dynamic-cont .company-desc textarea {
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px 0; 
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.panel-body .dynamic-cont .company-desc textarea:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px 0; 
+    border: 1px solid #485fed;
+}
+
+.signUp-detail .panel-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signUp-detail .panel-footer .footer {
+    height: 5vh;
+    width: 10vw;
+    border: none;
+}
+
+.signUp-detail .panel-footer .btnPrev {
+    color: #777;
+    background: #f1f1ff;
+}            
+
+.signUp-detail .panel-footer .btnNext {
+    color: #fff;
+    background: #485fed;
+    padding-right: 10px;
+}
+
+.signUp-detail .panel-footer .btnNext ion-icon {
+    position: absolute;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.panel-body .dynamic-cont .company-name .filepond {
+    margin-bottom: 30px;
+}
+
+/* End of 2nd Panel */
+
+/* 3nd Panel */
+
+.detail-panel .panel-body .dynamic-cont .seller-name,
+.detail-panel .panel-body .dynamic-cont .seller-others,
+.detail-panel .panel-body .dynamic-cont .seller-address {
+    display: flex;
+}
+
+
+.detail-panel .panel-body .dynamic-cont .seller-name input,
+.detail-panel .panel-body .dynamic-cont .seller-address select {
+    width: 230px;
+}
+
+.detail-panel .panel-body .dynamic-cont .seller-name div:nth-child(2),
+.detail-panel .panel-body .dynamic-cont .seller-address div:nth-child(2){
+    padding-left: 25px;
+}
+
+.detail-panel .panel-body .dynamic-cont .seller-contact input {
+    width: 300px;
+}
+
+.detail-panel .panel-body .dynamic-cont .seller-contact .default-code {
+    background: #001cf90d;
+    color: #485fed;
+    font-weight: 600;
+    height: 40px;
+}
+
+.detail-panel .panel-body .dynamic-cont .seller-others .birth {
+    width: 242px;
+}
+
+.detail-panel .panel-body .dynamic-cont .seller-others .gender {
+    width: 255px;
+    padding-left: 16px;
+}
+
+.detail-panel .panel-body .dynamic-cont .street-address {
+    margin-top: 20px;
+}
+
+.detail-panel .panel-body .dynamic-cont .zip-address {
+    width: 242px;
+}
+
+
+/* End of 3nd Panel */
+
+
+
+/* 4th Panel */
+
+.detail-panel .panel-body .seller-quote .quote {
+    font-size: 15px;
+    color: #505050;
+    width: 25rem;
+    margin-top: 20px;
+}
+
+.detail-panel .panel-body .seller-quote .quote em {
+    color: #485def;
+}
+
+/* End of 4th Panel */

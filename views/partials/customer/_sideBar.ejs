@@ -52,7 +52,11 @@
         <div class="profile">
             <div class="profile-details">
                 <% displayAccountInfo.forEach(accountkey => { %>
-                    <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
+                    <% if(accountkey.userPhoto === '') { %>
+                        <img src="/public/assets/images/default/user-default-profile.png" alt="<%=accountkey.displayName%>">
+                    <% } else { %>
+                        <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
+                    <% } %>   
                     <div class="details">
                         <div class="name"><%=accountkey.displayName%></div>
                         <% if(accountkey.isVerified){ %> 
@@ -63,7 +67,7 @@
                     </div>
                 <% }); %> 
             </div>
-            <a href="auth/logout">
+            <a href="customercenter/auth/logout">
                 <ion-icon name="log-in-outline" id="logout"></ion-icon>
             </a>
         </div>

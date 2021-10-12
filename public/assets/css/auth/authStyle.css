@@ -280,3 +280,7 @@ form.sign-up-form {
         background-position: 0% 50%;
     }
 }
+
+.auth-body {
+    background: red;
+}

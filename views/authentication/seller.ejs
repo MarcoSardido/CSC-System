@@ -1,0 +1,295 @@
+<div class="auth-header">
+HEADER
+</div>
+<div class="auth-body">
+    <div class="seller-signUp-cont">
+        <div class="signUp-guide">
+
+            <!-- Start Enter Email -->
+            <div class="guide-start" id="first_leftPanel" style="display: block">
+                <div class="quote">
+                    <i class="fas fa-quote-left"></i>
+                </div>
+                <div class="guide-quote">
+                    <p class="body"><em>I could have really used the product back when i was a freelancer. I was a good designer but terrible at running a studio.</em></p>
+                    <p class="author">Biz Stone</p>
+                    <p class="authorWork">Founder Twitter <ion-icon name="logo-twitter"></ion-icon> </p>
+                </div>
+            </div>
+
+            <!-- Account Type -->
+            <div class="guide-sellerType" id="second_leftPanel" style="display: none">
+               <p class="title">A few clicks away from creating your business.</p>
+               <p class="subText">Start your business in minutes.</p>
+               <p class="subText">Save time and money.</p>
+               <img src="/public/assets/images/auth/seller/business.png" alt="">
+            </div>
+
+            <!-- Business Info -->
+            <div class="guide-progress guide-business" id="third_leftPanel" style="display: none">
+                <div class="progress-header">
+                    <img src="/public/assets/images/mainLogo.png" alt="City Sales Cloud Logo" class="logo">
+                    <p class="logoText">City Sales <p class="emph">Cloud</p></p>
+                </div>
+                <div class="progress-body">
+                    <div class="progress-list">
+                        <div class="progress accountType progress-done">
+                            <div class="progress-icon">
+                                <ion-icon name="checkmark-circle-sharp"></ion-icon>
+                            </div>
+                            <div class="progress-title">
+                                Account Type
+                            </div>
+                        </div>
+                        <div class="progress businessInfo current-progress">
+                            <div class="progress-icon">
+                                <ion-icon name="checkmark-circle-sharp"></ion-icon>
+                                <div class="circle">
+                                    2
+                                </div>
+                            </div>
+                            <div class="progress-title">
+                                Business Details
+                                <div class="progress-drop">
+                                    <p class="subTopic subBusiness1 current-progress">About business</p>
+                                    <p class="subTopic subBusiness2">Business documents</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress personalInfo not-progress">
+                            <div class="progress-icon">
+                                <ion-icon name="checkmark-circle-sharp"></ion-icon>
+                                <div class="circle">
+                                    3
+                                </div>
+                            </div>
+                            <div class="progress-title">
+                                Personal Details
+                                <div class="progress-drop">
+                                    <p class="subTopic subPersonal1">About you</p>
+                                    <p class="subTopic subPersonal2">Mailing address</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="progress createAcc not-progress">
+                            <div class="progress-icon">
+                                <div class="circle">
+                                    4
+                                </div>
+                            </div>
+                            <div class="progress-title">
+                                Create Account
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress-footer businessInfo1"></div>
+            </div>
+        </div>
+        
+
+        <div class="signUp-detail">
+           
+                <!-- Start Enter Email -->
+                <div class="detail-panel start" id="first_rightPanel" style="display: block">
+                    <div class="panel-header">
+                        <img src="/public/assets/images/mainLogo.png" alt="City Sales Cloud Logo" class="logo">
+                        <p class="logoText">City Sales <p class="emph">Cloud</p></p>
+                    </div>
+                    <div class="panel-body">
+                        <p class="title">Start your business now.</p>
+                        <p class="subText">Creating your virtual store is just a few steps away.</p>
+                        <p class="subText">Enter your email address to continue.</p>
+                        <p class="subText">Email</p>
+                        <input type="email" class="emailStart" id="emailGetStarted" placeholder="demo@sample.com">
+                        <button class="btnStart" id="btnGetStarted">Get Started <ion-icon name="chevron-forward"></ion-icon></button>
+                    </div>
+                </div>
+
+                <!-- Header for Account, Business, Personal, and Create -->
+                <div class="mid-panel" id="headers_rightPanel" style="display: none">
+                    <div class="panel-header">
+                        <p class="help">Having troubles? <a href="#" class="help-link">Get Help</a></p>
+                </div>
+
+                    <!-- Account Type -->
+                    <div class="detail-panel seller-type" id="second_rightPanel" style="display: block">
+                        <div class="panel-body">
+                            <div class="static-cont">
+                                <p class="title">What type of seller are you?</p>
+                                <p class="subText">Select a seller type.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="type individual" id="individualType">
+                                    <div class="icon">
+                                        <ion-icon name="people"></ion-icon>
+                                    </div>
+                                    <div class="detail">
+                                        Individual Seller
+                                    </div>
+                                    <div class="icon-arrow">
+                                        <ion-icon name="chevron-forward"></ion-icon>
+                                    </div>
+                                </div>
+                                <div class="type corporate" id="corporateType">
+                                    <div class="icon">
+                                        <ion-icon name="business"></ion-icon>
+                                    </div>
+                                    <div class="detail">
+                                        Corporate Seller
+                                    </div>
+                                    <div class="icon-arrow">
+                                        <ion-icon name="chevron-forward"></ion-icon>
+                                    </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+
+                    <!-- Business Info -->
+                    <div class="detail-panel business-details" id="third_rightPanel" style="display: none">
+                        <div class="panel-body businessAbout" style="display: block">
+                            <div class="static-cont">
+                                <p class="title">About your business</p>
+                                <p class="subText">Details about your business name and description.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="company-name">
+                                    <p class="subText business">Business name</p>
+                                    <input type="text" placeholder="My Dream Store">
+                                </div>
+                                <div class="company-desc">
+                                    <p class="subText business">Business description</p>
+                                    <textarea rows="5" cols="56"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body businessRequirement" style="display: none">
+                            <div class="static-cont">
+                                <p class="title">Business documents</p>
+                                <p class="subText">Submit the required documents.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="company-name">
+                                    <p class="subText business">Personal photo (ID-type)</p>
+                                    <input type="file" class="filepond">
+                                </div>
+                                <div class="company-desc">
+                                    <p class="subText business">Proof of citizenship (valid ID with Filipino citizenship)</p> 
+                                    <input type="file" class="filepond">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Info -->
+                    <div class="detail-panel personal-details" id="fourth_rightPanel" style="display: none">
+                        <div class="panel-body personal-info" style="display: block">
+                            <div class="static-cont">
+                                <p class="title">A bit about u</p>
+                                <p class="subText">Share some personal information about you.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="seller-name">
+                                    <div class="first">
+                                        <p class="subText">First name</p>
+                                        <input type="text" placeholder="John Doe">
+                                    </div>
+                                    <div class="second">
+                                        <p class="subText">Last name</p>
+                                        <input type="text" placeholder="Graze">
+                                    </div>
+                                </div>
+                                <div class="seller-contact">
+                                    <p class="subText">Phone</p>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text default-code">+63</span>
+                                        <input type="text" placeholder="9123456789">
+                                    </div>
+                                </div>
+                                <div class="seller-others">
+                                    <div class="birth">
+                                        <p class="subText">Birth date</p>
+                                        <input type="date">
+                                    </div>
+                                    <div class="gender">
+                                        <p class="subText">Gender</p>
+                                        <select name="gender" id="gender">
+                                            <option selected disabled value="">Select a gender...</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body mailing-info" style="display: none">
+                            <div class="static-cont">
+                                <p class="title">Mailing Address</p>
+                                <p class="subText">Enter your communication address.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="seller-address">
+                                    <div class="first">
+                                        <p class="subText">State</p>
+                                        <select name="state" id="state">
+                                            <option selected disabled value="">Select a state...</option>
+                                            <option value="Laguna">Laguna</option>
+                                        </select>
+                                    </div>
+                                    <div class="second">
+                                        <p class="subText">City</p>
+                                        <select name="city" id="city">
+                                            <option selected disabled value="">Select a city...</option>
+                                            <option value="Cabuyao">Cabuyao</option>
+                                            <option value="Sta Rosa">Sta Rosa</option>
+                                            <option value="Calamba">Calamba</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="street-address">
+                                    <p class="subText">Street address</p>
+                                    <input type="text">
+                                </div>
+                                <div class="zip-address">
+                                    <p class="subText">ZIP Code</p>
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final Create Account -->
+                    <div class="detail-panel create-account" id="last_rightPanel" style="display: none">
+                        <div class="panel-body">
+                            <div class="static-cont">
+                                <p class="title">Create your password</p>
+                                <p class="subText">Sign up with your email address so that your information is not lost and safe with us.</p>
+                            </div>
+                            <div class="dynamic-cont">
+                                <div class="email-cont">
+                                    <p class="subText business">Email</p>
+                                    <input type="text" placeholder="demo@sample.com" id="createSellerEmail">
+                                    <p class="subText business">Password</p>
+                                    <input type="password">
+                                </div>
+                                <div class="seller-quote">
+                                    <p class="quote">
+                                        Our greatest weakness lies in giving up. The most certain way to succeed is always to try just one more time <em>-Thomas Edison</em>
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="opacity: 0">
+                        <button class="footer btnPrev" id="btnPrevPanel">Previous Step</button>
+                        <button class="footer btnNext final" id="btnNextPanel">Next <ion-icon name="chevron-forward-outline"></ion-icon></button>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</div>

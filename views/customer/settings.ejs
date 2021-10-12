@@ -177,9 +177,15 @@
                                                     <option value="">Select a gender...</option>
                                                     <%if(customerkey.gender === 'Male'){%> 
                                                         <option selected value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Other">Other</option>
                                                     <%}else if(customerkey.gender === 'Female'){%>
+                                                        <option value="Male">Male</option>
                                                         <option selected value="Female">Female</option>
+                                                        <option value="Other">Other</option>
                                                     <%}else{%> 
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
                                                         <option selected value="Other">Other</option>
                                                     <%}%> 
                                                 </select>

@@ -116,12 +116,8 @@ End of Dashboard Header Style
 Start of Dashboard Body Style
 */
 
-    .settings-body {
-        display:flex;
-        flex-direction:row;
-        width: 100%;
-        height: auto;
-        padding: 5px 10px;
+    .dashboard-body {
+        
     }
 
     .dashboard-body .live-rooms-container {
@@ -142,12 +138,12 @@ Start of Dashboard Body Style
     }
 
     .dashboard-body .live-rooms-container .featured-room .live-room {
-        height: 25.5vh;
+        height: 25vh;
         width: 60vw;
     }
 
     .dashboard-body .live-rooms-container .room-row .live-room {
-        height: 25.5vh;
+        height: 25vh;
         width: 40vw;
     }
 

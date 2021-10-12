@@ -34,13 +34,14 @@ const customerDash = (req, res) => {
             await setDoc(doc(db, 'Accounts', userRecord.uid), {
                 accRole: "Customer",
                 accStatus: "Active",
-                createdAt: date.format(now, 'MMM DD, YYYY HH:mm:ss'),
+                createdAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
                 displayName: userRecord.displayName === undefined ? "" : userRecord.displayName,
                 email: userRecord.email,
                 imgType: '',
                 isVerified: userRecord.emailVerified,
                 profileUpdatedAt: '',
-                signedInAt: date.format(now, 'MMM DD, YYYY HH:mm:ss'),
+                signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
+                signedOutAt: '',
                 userPhoto: '',
             });
 
@@ -57,7 +58,7 @@ const customerDash = (req, res) => {
         } else { // If there is user document, then update signin time
 
             await setDoc(doc(db, 'Accounts', userRecord.uid), {
-                signedInAt: date.format(now, 'MMM DD, YYYY HH:mm:ss')
+                signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z')
             }, {merge: true});
 
             const customerArray = [];
@@ -128,8 +129,8 @@ const profileUpdate = async (req, res) => {
                 displayName: displayName,
                 email: email,
                 imgType: imgType,
-                profileUpdatedAt: date.format(now, 'MMM DD, YYYY HH:mm:ss'),
-                signedInAt: date.format(now, 'MMM DD, YYYY HH:mm:ss'),
+                profileUpdatedAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
+                signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
                 userPhoto: convertedImg
             }, {merge: true});
             
