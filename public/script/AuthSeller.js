@@ -1,126 +1,293 @@
+import { firebase } from './firebaseConfig.js';
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
 $(document).ready(() => {
-    const first_leftPanel = document.getElementById('first_leftPanel');
-    const first_rightPanel = document.getElementById('first_rightPanel');
-    const getStarted = document.getElementById('btnGetStarted');
-    const email = document.getElementById('emailGetStarted');
 
-    const headers_rightPanel = document.getElementById('headers_rightPanel');
-    const second_leftPanel = document.getElementById('second_leftPanel');
-    const second_rightPanel = document.getElementById('second_rightPanel');
-    const individualType = document.getElementById('individualType');
-    const corporateType = document.getElementById('corporateType');
+    //ANCHOR: START OF AUTHENTICATION CODE//
 
-    const third_leftPanel = document.getElementById('third_leftPanel');
-    const third_rightPanel = document.getElementById('third_rightPanel');
-    const businessAbout = document.querySelector('.businessAbout');
-    const businessRequirement = document.querySelector('.businessRequirement');
+    const auth = getAuth(firebase);
 
-    const fourth_rightPanel = document.getElementById('fourth_rightPanel');
-    const personalInfo = document.querySelector('.personal-info');
-    const mailingInfo = document.querySelector('.mailing-info');
+    setPersistence(auth, inMemoryPersistence);
 
-    const last_rightPanel = document.getElementById('last_rightPanel');
-    const createEmail = document.getElementById('createSellerEmail');
+    onAuthStateChanged(auth, (loggedUser) =>  {
 
-    let progressSwitch_Business = document.querySelector('.businessInfo');
-    let progressSwitch_Personal = document.querySelector('.personalInfo');
-    let progressSwitch_Create = document.querySelector('.createAcc');
+        if (loggedUser) {
 
-    let progressSwitch_subBusiness1 = document.querySelector('.subBusiness1');
-    let progressSwitch_subBusiness2 = document.querySelector('.subBusiness2');
-    let progressSwitch_subPersonal1 = document.querySelector('.subPersonal1');
-    let progressSwitch_subPersonal2 = document.querySelector('.subPersonal2');
+            // console.log(loggedUser.getIdTokenResult().then(idTokenResult => {
+            //     console.log(idTokenResult.claims)
+            // }))
 
-    let progressSwitch_Image = document.querySelector('.progress-footer');
+            if (loggedUser.emailVerified) {
+                console.log('Seller is already verified');
+            } else {
+                sendEmailVerification(loggedUser).then(() => {
+                    console.log('Email verification sent');
+                });
+            }
+        } else {
+            console.log('No user');
+        }
 
-    const btnPrevPanel = document.getElementById('btnPrevPanel');
-    const btnNextPanel = document.getElementById('btnNextPanel');
-    const panelButton = document.querySelector('.panel-footer');
-    
-
-    let isIndividual = false;
-    let isCorporate = false;
-    let panelCounter = 0;
-
-    getStarted.addEventListener('click', () => {
-        if(email.value === '') return alert('Enter your email address');
         
-        let getEmail = email.value;
-        createEmail.value = getEmail;
 
-        first_leftPanel.style.display="none";
-        first_rightPanel.style.display="none";
+    });
 
-        headers_rightPanel.style.display="block";
-        second_leftPanel.style.display="block";
+    $('#seller_SignInForm').submit((e) => {
+
+        e.preventDefault();
+        let signInEmail = $('#signIn-Email').val();
+        let signInPassword = $('#signIn-password').val();
+
+        signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(user => {
+            user.user.getIdToken().then(idToken => {
+                window.location.assign('auth/sessionLogin?token='+idToken);
+            });
+        }).then(() => {
+            return signOut(auth).then(() => {
+            }).catch(error => {
+                console.log(error.message);
+            })
+        });
+
     })
 
-    individualType.addEventListener('click', () => {
-        isIndividual = true;
+    //ANCHOR: END OF AUTHENTICATION CODE//
 
-        second_rightPanel.style.display="none";
-        second_leftPanel.style.display="none";
 
-        panelButton.style.opacity="1";
-        third_rightPanel.style.display="block";
-        third_leftPanel.style.display="block";
-    });
+    const sellerForm = document.getElementById("sellerRegistrationForm");
+    const checkEmail = document.getElementById('validatorText1');
+    const tab = document.getElementsByClassName("tab");
+    const stepImage = document.querySelector('.progress-footer');
 
-    corporateType.addEventListener('click', () => {
-        isCorporate = true;
+    const tabSwitcher = document.querySelectorAll('.switch');
 
-        second_rightPanel.style.display="none";
-        second_leftPanel.style.display="none";
+    let currentTab = 0;
+    showTab(currentTab);
 
-        panelButton.style.opacity="1";
-        third_rightPanel.style.display="block";
-        third_leftPanel.style.display="block";
-    });
+    function showTab(tabNum) {
 
-    btnNextPanel.addEventListener('click', () => {
+        tab[tabNum].style.display = "block";
 
-        if (panelCounter === 0) { //Business Documents
-            panelCounter++;
+        if (tabNum == 0) {
+            $('#prevBtn').hide();
+            $('#mid-header').hide();
 
-            progressSwitch_subBusiness1.className = 'subTopic subBusiness1';
-            progressSwitch_subBusiness2.className = 'subTopic subBusiness2 current-progress';
-            progressSwitch_Image.className = 'progress-footer businessInfo2';
+        } else {
+            $('#prevBtn').css('display', 'inline');
+            $('#mid-header').show();
+        }
+
+        if (tabNum == (tab.length - 1)) {
+            $('#nextBtn').text('Gets Started');
+        } else if (tabNum == 0) {
+            $('#nextBtn').text('Get Started');
+            $("#nextBtn").attr('class', 'footer btnNext getStarted');
+        } else {
+            $('#nextBtn').text('Next');
+            $("#nextBtn").attr('class', 'footer btnNext');
+        }
+
+        stepAndProgressIndicator(tabNum);
+    }
+
+    $('#prevBtn').click(() => {
+        nextPrev(-1);
+    })
+
+    $('#nextBtn').click(() => {
+        nextPrev(1);
+    })
+
+    $('#chkInputEmail').keyup(() => {
+        const checkInputEmail = document.getElementById('chkInputEmail').value;
+        const createEmail = document.getElementById('createSellerEmail');
+        const sellerForm = document.getElementById("sellerRegistrationForm");
+        const checkEmail = document.getElementById('validatorText1');
     
-            businessAbout.style.display="none";
-            businessRequirement.style.display="block";
+        const pattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        
+        if (checkInputEmail.match(pattern)) {
+            sellerForm.classList.add('valid');
+            sellerForm.classList.remove('invalid');
+            checkEmail.innerText = 'Your email address is valid.';
     
-        } else if (panelCounter === 1) { //About you
-            panelCounter++;
-            progressSwitch_subBusiness2.className = 'subTopic subBusiness2';
-            progressSwitch_subPersonal1.className = 'subTopic subPersonal1 current-progress';
-            progressSwitch_Image.className = 'progress-footer personalInfo1';
-
-            progressSwitch_Business.className = 'progress businessInfo progress-done';
-            progressSwitch_Personal.className = 'progress personalInfo current-progress';
-
-            third_rightPanel.style.display="none";
-            fourth_rightPanel.style.display="block";
+        } else if (checkInputEmail === '') {
+            sellerForm.classList.remove('valid');
+            sellerForm.classList.add('invalid');
+            checkEmail.innerText = '';
     
-        } else if (panelCounter === 2) { //Mailing address
-            panelCounter++;
-            progressSwitch_subPersonal1.className = 'subTopic subPersonal1';
-            progressSwitch_subPersonal2.className = 'subTopic subPersonal2 current-progress';
-            progressSwitch_Image.className = 'progress-footer personalInfo2';
+        } else {
+            sellerForm.classList.remove('valid');
+            sellerForm.classList.add('invalid');
+            checkEmail.innerText = 'Please enter a valid email address.';
+        }
 
-            personalInfo.style.display="none";
-            mailingInfo.style.display="block";
+        createEmail.value = checkInputEmail;
+    })
+
+    $('#inputCreatePassword').keyup(() => {
+        const checkInputPassword = document.getElementById('inputCreatePassword').value;
+        const checkPasswordLabel = document.getElementById('checkPassword');
+
+        //NOTE: To check a password between 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.
+        const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+        if (checkInputPassword.match(pattern)) {
+            checkPasswordLabel.classList.add('valid');
+            checkPasswordLabel.classList.remove('invalid');
+            checkPasswordLabel.innerText = 'Your password is strong. 🔥';
+
+        } else if (checkInputPassword === '') {
+            checkPasswordLabel.classList.remove('valid');
+            checkPasswordLabel.classList.add('invalid');
+            checkPasswordLabel.innerText = '';
+
+        } else {
+            checkPasswordLabel.classList.remove('valid');
+            checkPasswordLabel.classList.add('invalid');
+            checkPasswordLabel.innerText = 'Please enter a strong password.';
+        }
+
+    })
+
+    $('#togglePassword').click(() => {
+        const checkInputPassword = document.getElementById('inputCreatePassword');
+        const passwordIcon = document.getElementById('togglePassword');
+
+        const type = checkInputPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        checkInputPassword.setAttribute('type', type);
+
+        passwordIcon.classList.toggle('fa-eye-slash');
+    })
+
+    function nextPrev (tabNum) {
+        if (tabNum == 1 && !validateForm()) return false;
+
+        tab[currentTab].style.display = "none";
+
+        currentTab = currentTab + tabNum;
+
+        if (currentTab >= tab.length) {
+            $('.panel-footer').hide();
+            $("#nextBtn").attr('data-toggle', 'modal');
+            $("#nextBtn").attr('data-target', '#verifyEmailModal');
+
+            document.getElementById('redirectToDashboard').onclick = async () => {
+                await document.getElementById('sellerRegistrationForm').submit();
+            }
+
+            return false;
+        }
+
+        showTab(currentTab);
+    }
     
-        } else if (panelCounter === 3) {
-            panelCounter++;
+    function validateForm () {
+
+        let totalNumberOfInput, inputChecker, valid = true;
+        
+        totalNumberOfInput = tab[currentTab].getElementsByTagName("input");
+
+        for (inputChecker = 0; inputChecker < totalNumberOfInput.length; inputChecker++) {
+
+            if (sellerForm.classList.contains('invalid')) {
+
+                if (totalNumberOfInput[inputChecker].value == "") {
+                    sellerForm.classList.add('invalid');
+                    checkEmail.innerText = 'This field is required.';
+                }
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+
+    function fixStepIndicator(tabNum) {
+        // This function removes the "active" class of all steps...
+        let stepLoop, totalStep = document.getElementsByClassName("step");
+
+        for (stepLoop = 0; stepLoop < totalStep.length; stepLoop++) {
+
+            totalStep[stepLoop].className = totalStep[stepLoop].className.replace(" active", "");
+        }
+        totalStep[tabNum].className += " active";
+    }
+
+    function fixProgressIndicator(tabNum) {
+        let totalProgress = document.getElementsByClassName("progress");
+        let subProgressLoop, totalSubProgress = document.getElementsByClassName("subTopic");
+        
+
+        for (subProgressLoop = 0; subProgressLoop < totalSubProgress.length; subProgressLoop++) {
+            totalSubProgress[subProgressLoop].className = totalSubProgress[subProgressLoop].className.replace(" active", "");
+        }
+
+        switch(tabNum) {
+
+            case 3:
+                totalProgress[1].className = totalProgress[1].className.replace("finished", "active");
+                totalProgress[2].className = totalProgress[2].className.replace("active", "pending");
+            break;
             
-            progressSwitch_Image.className = 'progress-footer getStarted';
+            case 4:
+                totalProgress[1].className = totalProgress[1].className.replace("active", "finished");
+                totalProgress[2].className = totalProgress[2].className.replace("pending", "active");
+            break;
 
-            progressSwitch_Personal.className = 'progress personalInfo progress-done';
-            progressSwitch_Create.className = 'progress createAcc current-progress';
+            case 5:
+                totalProgress[3].className = totalProgress[3].className.replace("active", "pending");
+                totalProgress[2].className = totalProgress[2].className.replace("finished", "active");
+            break;
+            
+            case 6:
+                totalProgress[2].className = totalProgress[2].className.replace("active", "finished");
+                totalProgress[3].className = totalProgress[3].className.replace("pending", "active");
+                stepImage.className = `progress-footer stepImage${tabNum-1}`;
+            break;
+            
+        }
+
+        if (tabNum < 6) {
+            totalSubProgress[tabNum-2].className += " active";
+            stepImage.className = `progress-footer stepImage${tabNum-1}`;
+        }
+    }
+
+    function stepAndProgressIndicator(tabNum) {
+
+        if (tabNum < 3) {
+            fixStepIndicator(tabNum);
+        }
     
-            fourth_rightPanel.style.display="none";
-            last_rightPanel.style.display="block";
-        } 
+        if (tabNum >= 2) {
+            fixProgressIndicator(tabNum);
+        }
+    }
+
+
+    for (let i = 0; i < tabSwitcher.length; i++) {
+        tabSwitcher[i].onclick = () => {
+
+            let j = 0;
+            while(j < tabSwitcher.length) {
+                tabSwitcher[j++].className = 'nav-cont switch';
+            };
+
+            if ([i] == 0) {
+                $('#signIn').show();
+                $('#signUp').hide();
+            } else {
+                $('#signIn').hide();
+                $('#signUp').show();
+            };
+
+            tabSwitcher[i].className = 'nav-cont switch active';
+        };
+    };
+
+
     
-    });
+
+
 });

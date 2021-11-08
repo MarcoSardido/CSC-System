@@ -1,4 +1,5 @@
 $(document).ready(() => {
+
     let menuToggle = document.querySelector('.toggle');
     let navigation = document.querySelector('.navigation');
 
@@ -199,5 +200,7 @@ $(document).ready(() => {
             tabs[i].className = 'list active';
         };
     };
+
+    
 
 });

@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, browserSessionPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -15,29 +15,9 @@ $(document).ready(() => {
         auth_cont.classList.remove("sign-up-mode");
     });
 
-    const postIdTokenToSessionLogin = (url, idToken) => {
-        return $.ajax({
-            type: "POST",
-            url: url,
-            data: {
-                idToken: idToken
-            },
-            success: function (data) {
-                console.log('Success');
-            }
-        });
-    };
-
     const auth = getAuth(firebase);
     setPersistence(auth, inMemoryPersistence);
 
-    onAuthStateChanged(auth, (loggedUser) => {
-        if (loggedUser) {
-            console.log('getUser: ',loggedUser)
-        } else {
-            console.log('user not here')
-        }
-    });
 
     $("#signinForm").submit(e => {
         e.preventDefault();

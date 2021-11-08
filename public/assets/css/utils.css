@@ -1,0 +1,161 @@
+/* Start of Email Verify Style */
+
+.verifyEmail {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.verifyEmail .verify-header {
+    margin: 0 auto;
+}
+
+.verifyEmail .verify-header img {
+    width: 15rem;
+ }
+
+.verifyEmail .verify-body {
+    text-align: center;
+    padding: 0 50px;
+}
+
+.verifyEmail .verify-body .title {
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.verifyEmail .verify-body .subText {
+    font-weight: 300;
+    font-size: 1em;
+    margin-top: -20px;
+    margin-bottom: 60px;
+}
+
+.verifyEmail .verify-footer {
+    margin: 0 auto;
+}
+
+.verifyEmail .verify-footer .btnVerify {
+    border: none;
+    height: 3rem;
+    width: 15rem;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+/* End of Email Verify Style */
+
+
+/* Start of Need Verification Style */
+
+.needVerifyEmail {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.needVerifyEmail .needVerify-header {
+    margin: 0 auto;
+}
+
+.needVerifyEmail .needVerify-header .title {
+    font-weight: 600;
+    font-size: 2em;
+    text-align: center;
+}
+
+.needVerifyEmail .needVerify-header .subTitle {
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+.needVerifyEmail .needVerify-header img {
+    width: 25rem;
+    margin-bottom: 20px;
+ }
+
+.needVerifyEmail .needVerify-body {
+    text-align: center;
+    padding: 0 50px;
+    color: #505050;
+}
+
+
+/* End of Need Verification Style */
+
+
+
+
+
+/* Start of Subscription Success Modal */
+
+.modal-subSuccess {
+    padding: 20px;
+}
+
+.modal-subSuccess .modal-header{
+    padding: 0 20px;
+}
+
+.modal-subSuccess .modal-body {
+    padding: 0px 20px;
+}
+
+.modal-subSuccess .modal-footer {
+    margin: 0 auto;
+}
+
+.modal-subSuccess .modal-header img {
+    width: 5rem;
+}
+
+.modal-subSuccess .modal-header .modalTitle {
+    margin-right: 800px;
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #1D6B83;
+}
+
+.modal-subSuccess .modal-header .modalTitle span {
+    color: #39B7DF;
+}
+
+.modal-subSuccess .modal-body .body-cont {
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+}
+
+.modal-subSuccess .modal-body .body-cont .left-cont .top-cont .mainText {
+    font-weight: 700;
+    font-size: 3em;
+}
+
+.modal-subSuccess .modal-body .body-cont .left-cont .top-cont .subText {
+    font-size: 1em;
+    color: #777;
+}
+
+.modal-subSuccess .modal-body .body-cont .right-cont img {
+    width: 30rem;
+}
+
+.modal-subSuccess .modal-footer .footer-cont button{
+    height: 7vh;
+    width: 12vw;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    font-size: 18px;
+    text-transform: capitalize;
+    letter-spacing: 0.5px;
+}
+
+/* End of Subscription Success Modal */

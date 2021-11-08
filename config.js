@@ -11,7 +11,9 @@ const{
     STORAGE_BUCKET,
     MESSAGING_SENDER_ID,
     APP_ID,
-    FIREBASE_SERVICE_ACCOUNT_KEY
+    FIREBASE_SERVICE_ACCOUNT_KEY,
+    SERVER_URL,
+    STRIPE_PRIVATE_KEY
 } = process.env;
 
 const firebaseConfig = {
@@ -23,4 +25,10 @@ const firebaseConfig = {
     messagingSenderId: MESSAGING_SENDER_ID,
     appId: APP_ID
 }
-export { firebaseConfig, FIREBASE_SERVICE_ACCOUNT_KEY, DATABASE_URL };
+export { 
+    firebaseConfig,
+    FIREBASE_SERVICE_ACCOUNT_KEY,
+    DATABASE_URL,
+    SERVER_URL,
+    STRIPE_PRIVATE_KEY 
+};

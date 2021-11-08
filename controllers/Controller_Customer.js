@@ -2,7 +2,7 @@
 
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getAuth, onAuthStateChanged } from  'firebase/auth';
-import { getFirestore, collection, doc, addDoc, setDoc, getDoc, Timestamp } from 'firebase/firestore';
+import { getFirestore, collection, doc, addDoc, setDoc, getDoc } from 'firebase/firestore';
 
 import Customer from '../models/Model_Customer.js';
 import Account from '../models/Model_Account.js';
@@ -15,7 +15,7 @@ const auth = getAuth(firebase);
 const db = getFirestore(firebase);
 
 const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/PNG'];
- const now = new Date();
+const now = new Date();
 
 
 // Protected Route
@@ -31,7 +31,7 @@ const customerDash = (req, res) => {
         // If no user document, then create a new one
         if (!docSnap.exists()) {
 
-            await setDoc(doc(db, 'Accounts', userRecord.uid), {
+            await setDoc(doc(db, 'Accounts', `customer_${userRecord.uid}`), {
                 accRole: "Customer",
                 accStatus: "Active",
                 createdAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
@@ -55,7 +55,7 @@ const customerDash = (req, res) => {
                 isAnonymous: false,
             });
 
-        } else { // If there is user document, then update signin time
+        } else { // If there is user document, then update sign in time
 
             await setDoc(doc(db, 'Accounts', userRecord.uid), {
                 signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z')

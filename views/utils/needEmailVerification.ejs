@@ -1,0 +1,21 @@
+<div class="modal fade" id="<%= verification%>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="needVerifyEmail">
+
+                <div class="needVerify-header">
+                    <p class="title">Account not activated</p>
+                    <p class="subTitle">You need to verify your email to activate your account.</p>
+                    <img src="/public/assets/images/utils/need_verification.png" alt="Verify Email">
+                </div>
+
+                <div class="needVerify-body">
+                    <p class="subText">An email has been send to <%= user.email %> with a link to verify your account and to continue with your subscription payment.</p>
+                </div>
+
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
