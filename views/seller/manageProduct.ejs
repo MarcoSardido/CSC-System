@@ -1,312 +1,565 @@
-<!-- 
-        @Upper Container
-    => Contains 3 div used for the product overview
 
--->
+<div class="productMainCont">
 
-<div class="upper-container">
-    <div class="cont cont-1">
-        <i class="cont1-icon"><ion-icon name="archive-outline"></ion-icon></i>
-        <div class="text-cont">
-            <p class="item-total">214</p>
-            <p class="item-desc">Quantity in Hand</p>
+    <!-- SECTION: Display Products -->
+    <div class="displayProductSection">
+        <div class="products-header">
+            <p class="sectionTitle">Products</p>
+            <div class="prod-header-divider"></div>
+            <p class="totalProd">Total 20</p>
         </div>
-    </div>
-    <div class="cont cont-2">
-        <i class="cont2-icon"><ion-icon name="pricetag-outline"></ion-icon></i>
-        <div class="text-cont">
-            <p class="item-total">395</p>
-            <p class="item-desc">Number of Sales</p>
+        
+        <div class="sideNav">
+            <button class="btn btn-primary btn-sideNav" id="slideToAddProduct" type="button">+</button>
         </div>
-    </div>
-    <div class="cont cont-3">
-        <i class="cont3-icon"><ion-icon name="cash-outline"></ion-icon></i>
-        <div class="text-cont">
-            <p class="item-total">₱ 2,146</p>
-            <p class="item-desc">Total Sales</p>
-        </div>
-    </div>
-</div>
-
-<!-- End of Upper Container -->
-
-
-
-
-
-
-
-
-
-
-<!-- 
-        @Lower Container
-    => Contains table used for the product details
-
--->
-
-<div class="lower-container">
-    <div class="table-container">
-        <div class="btnAddProduct" data-toggle="modal" data-target="#addModal">
-            <i class="add-icon"><ion-icon name="add-outline"></ion-icon></i>
-            <div class="btnText">Add Product</div>
-        </div>
-        <div class="table-data">
-            <table class="table table-borderless" id="tableData-prod">
-                <thead>
-                  <tr>
-                    <th scope="col">Product #</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>prod-48621</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/iphone-7-black.jpg" alt="IPhone 7">
-                            </div>
-                            <div class="tdProd-name">
-                                Apple IPhone 7
-                            </div>
+        
+        <div class="products-body">
+            <div class="prod-row">
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>5</td>
-                    <td>20,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-13945</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/asus-vivo-book.png" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Asus Vivo Book
-                            </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product1.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            3 Inch Stiletto Heels
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                3 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $200
+                            </p>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>2</td>
-                    <td>39,999</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-24833</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/beats-by-dre.png" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Beats by Dr. DRE
-                            </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>10</td>
-                    <td>5,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-58647</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/geforce-gtx.jpg" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Geforce GTX 3260
-                            </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product2.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Casual Slim Women Denim Jacket
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                1 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $650
+                            </p>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>8</td>
-                    <td>35,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-19422</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/airpods-pro-1.jpg" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Apple Airpods Pro
-                            </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>3</td>
-                    <td>23,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-32159</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/asus-zenfone8-flip.png" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Asus Zenfone 8 Flip
-                            </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product3.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Womens Designer Handbag
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                5 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $400
+                            </p>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>10</td>
-                    <td>39,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>prod-43885</td>
-                    <td>
-                        <div class="tdProd-cont">
-                            <div class="tdProd-img">
-                                <img src="/public/assets/images/Samsung-Note-8.jpg" alt="Airpods Pro">
-                            </div>
-                            <div class="tdProd-name">
-                                Samsung Galaxy Note 8
-                            </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
                         </div>
-                    </td>
-                    <td>Electronics</td>
-                    <td>4</td>
-                    <td>28,000</td>
-                    <td>
-                        <button class="btnEdit" data-toggle="modal" data-target="#editModal">
-                            <i class="edit-icon"><ion-icon name="create-outline"></ion-icon></i>
-                        </button>
-                        <button class="btnDelete"  data-toggle="modal" data-target="#deleteModal">
-                            <i class="delete-icon"><ion-icon name="trash-outline"></ion-icon></i>
-                        </button>
-                    </td>
-                  </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- End of Lower Container -->
-
-
-
-
-
-
-
-
-
-
-<!-- Code below is for the Modal -->
-
-<!-- Modal Add  -->
-<div class="modal fade" id="addModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">  
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Add Product</h5>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product4.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Men Casual Streetwear Tees
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                10 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $200
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                
-                <%- include('../partials/seller/_productForm') %> 
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+            <div class="prod-row">
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product5.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Men Black Hoodie Jacket
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                3 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $500
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product6.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Pop it Toys for Kids
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                3 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $25
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product7.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            RXT EVO Helmet
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                5 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $980
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="prod-cont">
+                    <div class="img-options">
+                        <div class="icon">
+                            <ion-icon name="ellipsis-horizontal"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="prod-img">
+                        <img src="/public/assets/images/seller/product/product8.png" alt="">
+                    </div>
+                    <div class="prod-desc">
+                        <p class="itemName">
+                            Professional Makeup Set
+                        </p>
+                        <div class="desc-comb">
+                            <p class="itemVariety">
+                                2 Varieties
+                            </p>
+                            <p class="itemPrice">
+                                $1000
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal Edit  -->
-<div class="modal fade" id="editModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">  
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Update Product Details</h5>
-            </div>
-            <div class="modal-body">
+
+    <!-- SECTION: Add Product -->
+     <div class="addProductSection" id="addProduct_slider">
+        <div class="mainContainer" id="slideCont">
             
-                <%- include('../partials/seller/_productForm') %> 
+            <div class="left">
+                <div class="product-header">
+                    <button class="btnGoBack" id="closeAddProduct_slider">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+                    <p class="header-btnLabel">Back to Products</p>
+                </div>
+            
+                <div class="product-body">
+                   
+                    <div class="addProductImg">
+                        <input type="file" class="filepond" id="productsImg" name="filepondProducts" multiple data-max-file-size="3MB" data-max-files="5"/>
+                    </div>
+            
+                    <div class="displayDetails">
+                        <div class="input-field">
+                            <input type="text" name="" id="" placeholder="Product name">
+                        </div>
+                        <div class="price-field">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text defaultCurrency">₱</span>
+                            </div>
+                            <input type="text" class="" placeholder="Enter Amount...">
+                        </div>
+                        <div class="desc-field">
+                            <textarea id="w3review" name="w3review" rows="5" cols="48" placeholder="Product description"></textarea>
+                        </div>
+                        <div class="color-field">
+                            <p class="fieldLabel">Available Colors</p>
+                            <div class="color-cont">
+                                <div class="selected-color"></div>
+                                <div class="selected-color"></div>
+                                <div class="selected-color"></div>
+                                <div class="selected-color"></div>
+                                <div class="selected-color"></div>
+                            </div>
+                        </div>
+                        <div class="type-field">
+                            <p class="fieldLabel">Product Type</p>
+                            <div class="type-cont">
+                                <div class="selected-type"></div>
+                                <div class="selected-type"></div>
+                                <div class="selected-type"></div>
+                            </div>
+                        </div>
+                        <div class="size-field">
+                            <p class="fieldLabel">Available Sizes</p>
+                            <div class="size-cont">
+                                <div class="selected-size"></div>
+                                <div class="selected-size"></div>
+                                <div class="selected-size"></div>
+                                <div class="selected-size"></div>
+                                <div class="selected-size"></div>
+                                <div class="selected-size"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            
+                <div class="product-footer">
+                    <button class="btnPreviewProduct" id="productPreview" data-toggle="modal" data-target="#previewModal">Preview</button>
+                </div>
+            </div>
+        
+            <div class="right">
+                <div class="editDetails">
+                    <div class="size-qty-colors_cont">
+                        <div class="variety-header">
+                            <p class="editFieldLabel">Product Varieties</p>
+                            <button class="btnAddVariety" id="addSize">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </button>
+                            <div class="addSize-wrapper">
+                                <div class="header">
+                                    <button class="close">
+                                        &times;
+                                    </button>
+                                </div>
+                                <div class="quantity">
+                                    <span class="mainText">How many quantity?</span>
+                                    <div class="availableQty">
+                                        <div class="range">
+                                            <input id="slide-range" type="range" min="0" max="100" step="1" value="50">
+                                        </div>
+                                        <div class="qty-input">
+                                            <div class="input-group mb-3">
+                                                <input id="input-quantity" value="50">
+                                                <span class="input-group-text pieces">Pieces</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="size-field">
+                                    <span class="mainText">Select a size:</span>
+                                    <div class="availableSize-cont">
+                                        <button class="sizes" value='XS'>XS</button>
+                                        <button class="sizes" value='S'>S</button>
+                                        <button class="sizes" value='M'>M</button>
+                                        <button class="sizes" value='L'>L</button>
+                                        <button class="sizes" value='XL'>XL</button>
+                                        <button class="sizes" value='XXL'>XXL</button>
+                                    </div>
+                                </div>
+                                <div class="color-field">
+                                    <span class="mainText">Select a color:</span>
+                                    <div class="availableColors-cont">
+                                        <div class="add-color"></div>
+                                        <div class="add-color"></div>
+                                        <div class="add-color"></div>
+                                        <div class="add-color"></div>
+                                        <div class="add-color"></div>
+                                    </div>
+                                    <input type="color" id="color-picker"/>
+                                </div>
+                                <div class="footer">
+                                    <button class="submitSizesAndQty">ADD</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sizesQty-cont">
+                            <div class="sizesQty">
+                                <div class="add-size">
+                                    <span class="size"></span>
+                                </div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
+            
+                            <div class="sizesQty">
+                                <div class="add-size hasSize">
+                                    <span class="size">S</span>
+                                    <div class="badge-cont">
+                                        <span class="badge">10pcs</span>
+                                    </div>
+                                </div>
+                                <div class="add-color hasColor" style="background-color:red"></div>
+                                <div class="add-color hasColor" style="background-color:blue"></div>
+                                <div class="add-color hasColor" style="background-color:green"></div>
+                                <div class="add-color hasColor" style="background-color:pink"></div>
+                                <div class="add-color hasColor" style="background-color:yellow"></div>
+                            </div>
+                            
+                            <div class="sizesQty">
+                                <div class="add-size hasSize" >
+                                    <span class="size">64GB</span>
+                                    <div class="badge-cont">
+                                        <span class="badge">5pcs</span>
+                                    </div>
+                                </div>
+                                <!-- add the "addSize-wrapper" -->
+                                <div class="add-color hasColor" style="background-color:red"></div>
+                                <div class="add-color hasColor" style="background-color:Black"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
 
+                            <div class="sizesQty">
+                                <div class="add-size">
+                                    <span class="size"></span>
+                                </div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
+
+                            <div class="sizesQty">
+                                <div class="add-size">
+                                    <span class="size"></span>
+                                </div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
+
+                            <div class="sizesQty">
+                                <div class="add-size">
+                                    <span class="size"></span>
+                                </div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <div class="productType_cont">
+                        <p class="editFieldLabel">Product Type</p>
+                        <div class="prodType-cont">
+                            <div class="type-cont">
+                                <div class="type">
+                                    <ion-icon class="icon-trending" name="flash"></ion-icon>
+                                </div>
+                                <p class="typeLabel">Trending</p>
+                            </div>
+                            <div class="type-cont">
+                                <div class="type">
+                                    <ion-icon class="icon-arrival" name="heart"></ion-icon>
+                                </div>
+                                <p class="typeLabel">New Arrival</p>
+                            </div>
+                            <div class="type-cont">
+                                <div class="type">
+                                    <ion-icon class="icon-sale" name="analytics"></ion-icon>
+                                </div>
+                                <p class="typeLabel">On Sale</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <button class="editDone">Done</button>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+            
         </div>
-    </div>
+     </div>
+
 </div>
 
-<!-- Modal Delete  -->
-<div class="modal fade" id="deleteModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">  
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Delete Product</h5>
+<!-- SECTION: Modal for previewing products -->
+<div class="modal fade previewModal" id="previewModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Product Preview</h5>
+          <button type="button" class="btnSavePreview">Save</button>
+        </div>
+        <div class="modal-body preview-body">
+            <div class="prodImg-cont">
+                <div class="mainImg" id="mainImg_Cont"></div>
+                <div class="subImg">
+                    <div id="subImg_Cont" class="prodImages"></div>
+                    <div id="subImg_Cont" class="prodImages"></div>
+                    <div id="subImg_Cont" class="prodImages moreImg">
+                        <p class="more" id="subImg_Text"></p>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-            
-                Are you sure you want to delete this (product_name) ?
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Delete</button>
+            <div class="prodDetail-cont">
+                <div class="details">
+                    <div class="prodName-field">
+                        <p class="prodName">Apple Airpods Pro 3rd Gen</p>
+                    </div>
+                    <div class="prodPrice-field">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text defaultCurrency">₱</span>
+                        </div>
+                        <p class="prodPrice">14,999</p>
+                    </div>
+                    <div class="prodDesc-field">
+                        <p class="prodDesc">
+                            AirPods Pro are the only. in‑ear headphones with. Active Noise Cancellation that continuously adapts to the geometry of your ear and the fit of the ear tips — blocking out the world so you can focus on what you're listening to. An outward-facing microphone detects external sound.
+                        </p>
+                    </div>
+                </div>
+                <div class="varieties">
+                    <div class="prodQtyAndType-field">
+                        <div class="qty-cont">
+                            <div class="iconWithVal">
+                                <ion-icon name="checkmark-sharp"></ion-icon>
+                                <p class="qtyVal">36</p>
+                            </div>
+                            <p class="qtyTitle">Available Units</p>
+                        </div>
+                        <div class="type-cont">
+                            <div class="typeIcon trend">
+                                <ion-icon name="flash"></ion-icon>
+                            </div>
+                            <p class="typeText">Trending</p>
+                        </div>
+                        <div class="type-cont">
+                            <div class="typeIcon arrival">
+                                <ion-icon name="heart"></ion-icon>
+                            </div>
+                            <p class="typeText">New Arrival</p>
+                        </div>
+                        <div class="type-cont">
+                            <div class="typeIcon sale">
+                                <ion-icon name="analytics"></ion-icon>
+                            </div>
+                            <p class="typeText">On Sale</p>
+                        </div>
+                    </div>
+                    <div class="prodOptions-field">
+                        <div class="detailsOpt active">
+                            <p class="optionTitle">Details</p>
+                        </div>
+                        <div class="detailsOpt">
+                            <p class="optionTitle">Reviews</p>
+                        </div>
+                    </div>
+                    <div class="prodColors-field">
+                        <p class="fieldTitle">Colors</p>
+                        <div class="colors-cont">
+                            <div class="color-cont" style="background: White;"></div>
+                            <div class="color-cont" style="background: Black;"></div>
+                        </div>
+                    </div>
+                    <div class="prodSize-field">
+                        <p class="fieldTitle">
+                            Sizes
+                        </p>
+                        <div class="sizeFieldCont">
+                            <div class="sizes">
+                                <p class="sizeTitle">XS</p>
+                                <p class="sizeQty">(5)</p>
+                            </div>
+                            <div class="sizes">
+                                <p class="sizeTitle">S</p>
+                                <p class="sizeQty">(3)</p>
+                            </div>
+                            <div class="sizes">
+                                <p class="sizeTitle">M</p>
+                                <p class="sizeQty">(10)</p>
+                            </div>
+                            <div class="sizes">
+                                <p class="sizeTitle">L</p>
+                                <p class="sizeQty">(4)</p>
+                            </div>
+                            <div class="sizes">
+                                <p class="sizeTitle">XL</p>
+                                <p class="sizeQty">(6)</p>
+                            </div>
+                            <div class="sizes">
+                                <p class="sizeTitle">XXL</p>
+                                <p class="sizeQty">(9)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btnExitPreview" id="closeProductPreview" data-dismiss="modal">
+                <ion-icon name="arrow-back"></ion-icon>
+                <p class="btnName-footer">Back to Products</p>
+            </button>
+          
+        </div>
+      </div>
     </div>
 </div>

@@ -6,13 +6,11 @@ $(document).ready(() => {
     //ANCHOR: START OF AUTHENTICATION CODE//
 
     const auth = getAuth(firebase);
-
     setPersistence(auth, inMemoryPersistence);
 
     onAuthStateChanged(auth, (loggedUser) =>  {
 
         if (loggedUser) {
-
             // console.log(loggedUser.getIdTokenResult().then(idTokenResult => {
             //     console.log(idTokenResult.claims)
             // }))
@@ -27,9 +25,6 @@ $(document).ready(() => {
         } else {
             console.log('No user');
         }
-
-        
-
     });
 
     $('#seller_SignInForm').submit((e) => {
@@ -40,7 +35,7 @@ $(document).ready(() => {
 
         signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(user => {
             user.user.getIdToken().then(idToken => {
-                window.location.assign('auth/sessionLogin?token='+idToken);
+            window.location.assign('auth/sessionLogin?token='+idToken);
             });
         }).then(() => {
             return signOut(auth).then(() => {

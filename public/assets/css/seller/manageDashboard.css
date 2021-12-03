@@ -1,0 +1,240 @@
+.p-sellercenter {
+  font-weight: 900;
+  position: absolute;
+  margin-top: -50px;
+  margin-left: 120px;
+  font-size: 25px;
+  padding-top: 5px;
+}
+
+.btnNav {
+  width: 60px;
+  height: 60px;
+  color: rgba(255,255,255,0);
+  background: url("../../images/seller/dashboard/navbutton.png") center / contain no-repeat;
+  border-style: none;
+}
+
+.btnNav:hover {
+  border-style: none;
+  background: url("../../images/seller/dashboard/navbutton.png") center / contain no-repeat, rgba(255,255,255,0);
+}
+
+.btnNotif {
+  float: right;
+  background: url("../../images/seller/dashboard/bell.png") center / contain no-repeat, #c4c4c4;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border-style: none;
+  color: #fff;
+  margin-top: 15px;
+  margin-right: 30px;
+}
+
+.btnProfile {
+  float: right;
+  width: 45px;
+  height: 45px;
+  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #ffffff;
+  border-style: none;
+  border-radius: 50%;
+  margin-right: 40px;
+  margin-top: 10px;
+}
+
+.btnNotif:hover {
+  filter: invert(100%);
+  background: url("../../images/seller/dashboard/bell.png") center / contain no-repeat, #ffffff;
+}
+
+.btnProfile:hover {
+  filter: invert(100%);
+  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #ffffff;
+}
+
+.dashboard-header {
+  margin-top: 19px;
+  display: grid;
+  background: rgba(93,148,255,0);
+  margin-left: 40px;
+  height: 300px;
+  border-radius: 40px;
+  grid-auto-flow: column;
+  gap: 1em;
+  width: 1300px;
+}
+
+.recent-live-graph {
+  background: #ffffff;
+  border-radius: 30px;
+  width: 478.188px;
+  box-shadow: 3px 2px rgb(159,159,198);
+}
+
+.welcome-cont {
+  color: rgb(255,255,255);
+  border-radius: 30px;
+  padding-left: 50px;
+  padding-top: 20px;
+  width: 800px;
+  background: url("../../images/seller/dashboard/illustration.png") right / contain no-repeat, #5d94ff;
+}
+
+.p1 {
+  margin-top: 100px;
+}
+
+.p2 {
+  padding-top: 15px;
+  font-weight: bold;
+  padding-left: 40px;
+}
+
+.btnLive {
+  color: #000000;
+  background: #ffffff;
+  border-radius: 30px;
+}
+
+.dashboard-body {
+  display: grid;
+  grid-template-columns: 180px 180px 180px 50%;
+  grid-template-rows: 175px 175px;
+  padding-top: 50px;
+  margin-left: 40px;
+  gap: 1em;
+  width: 100%;
+  height: 450px;
+}
+
+.dashboard-item {
+  color: rgb(33, 37, 41);
+  background: #ffffff;
+  border-radius: 20px;
+  border-width: 1px;
+  border-style: none;
+  box-shadow: 2px 3px rgb(159,159,198);
+  text-align: center;
+}
+
+.imgIcon {
+  width: 60px;
+  margin-top: 10px;
+}
+
+.p3 {
+  font-size: 15px;
+  margin-top: 5px;
+}
+
+.heading2 {
+  font-weight: bold;
+}
+
+.heading2.dollarSign {
+  position: absolute;
+}
+
+.dashboard-item.report-history {
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 10px;
+  height: 366px;
+  position: relative;
+  width: 705px;
+}
+
+.linkViewAll {
+  float: right;
+  padding-right: 45px;
+  padding-top: 10px;
+}
+
+.p4 {
+  font-size: 20px;
+  position: absolute;
+}
+
+.userHistory {
+  background: rgba(255,255,255,0);
+  height: 303px;
+  margin-top: 40px;
+  margin-left: 10px;
+  width: 675px;
+}
+
+.btnReportHistory {
+  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #bbbbbb;
+  border-radius: 40px;
+  width: 35px;
+  height: 35px;
+  border-style: none;
+  margin-left: 6px;
+}
+
+.reportHistoryUser {
+  padding-left: 10px;
+  padding-top: 7px;
+  border-radius: 15px;
+  padding-bottom: 7px;
+  height: 50px;
+  display: flex;
+  border-width: 1px;
+  border-style: none;
+  box-shadow: 2px 3px rgba(127,146,164,0.38);
+  margin-bottom: 30px;
+  width: 655px;
+}
+
+.btnNext {
+  background: url("../../images/seller/dashboard/arrow.png") center / contain no-repeat, #ffffff;
+  width: 30px;
+  height: 30px;
+  border-style: none;
+}
+
+.p5, .p6 {
+  font-weight: bolder;
+  padding-top: 5px;
+  margin-left: 20px;
+}
+
+.p6 {
+  color: var(--red);
+}
+
+.btnNext:hover {
+  background: url("../../images/seller/dashboard/arrow.png") center / contain no-repeat, rgba(0,98,204,0);
+}
+
+.p5.historyName {
+  width: 150px;
+}
+
+.p5.historyDate {
+  width: 125px;
+}
+
+.p5.historyTime {
+  width: 100px;
+}
+
+.p6.historyType {
+  width: 110px;
+}
+
+.p-welcome {
+  font-size: 35px;
+  margin-bottom: -5px;
+}
+
+.p-userName {
+  font-size: 30px;
+  margin-top: -10px;
+  font-weight: 900;
+}
+
+.linkViewAll:hover {
+  text-decoration: none;
+}

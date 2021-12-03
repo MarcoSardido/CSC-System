@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -17,6 +17,26 @@ $(document).ready(() => {
 
     const auth = getAuth(firebase);
     setPersistence(auth, inMemoryPersistence);
+
+    onAuthStateChanged(auth, (loggedUser) =>  {
+
+        if (loggedUser) {
+            // console.log(loggedUser.getIdTokenResult().then(idTokenResult => {
+            //     console.log(idTokenResult.claims)
+            // }))
+
+            if (loggedUser.emailVerified) {
+                console.log('Customer is already verified');
+            } else {
+                sendEmailVerification(loggedUser).then(() => {
+                    console.log('Email verification sent');
+                });
+            }
+            console.log(loggedUser);
+        } else {
+            console.log('No user');
+        }
+    });
 
 
     $("#signinForm").submit(e => {

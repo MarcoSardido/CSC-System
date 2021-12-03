@@ -8,57 +8,67 @@ $(document).ready(() => {
         navigation.classList.toggle('active');
     };
 
+    const currentLocation = location.href;
+
     //Add "Active" class in the selected list item
-    let list = document.querySelectorAll('.list');
+    let list = document.querySelectorAll('a');
 
-    let dashboard = document.getElementById('dashSection');
-    let product = document.getElementById('prodSection');
-    let transaction = document.getElementById('transactSection');
-    let report = document.getElementById('reportSection');
-    let settings = document.getElementById('settingSection');
+    // let dashboard = document.getElementById('dashSection');
+    // let product = document.getElementById('prodSection');
+    // let transaction = document.getElementById('transactSection');
+    // let report = document.getElementById('reportSection');
+    // let settings = document.getElementById('settingSection');
+
+    const menuLength = list.length;
+
+    for(let i=0; i<menuLength; i++) {
+        if(list[i].href === currentLocation) {
+            list[i].closest('li').className = 'active';
+        }
+    }
             
-    for (let i = 0; i < list.length; i++) {
-        list[i].onclick = () => {
-            let j = 0;
-            while(j < list.length) {
-                list[j++].className = 'list';
-            };
+    // for (let i = 0; i < list.length; i++) {
+    //     list[i].onclick = () => {
+    //         let j = 0;
+    //         while(j < list.length) {
+    //             list[j++].className = 'list';
+    //         };
 
-            if([i] == 0) {
-                dashboard.style.display = "block";
-                product.style.display = "none";
-                transaction.style.display = "none";
-                report.style.display = "none";
-                settings.style.display = "none";
-            } else if([i] == 1) {
-                dashboard.style.display = "none";
-                product.style.display = "block";
-                transaction.style.display = "none";
-                report.style.display = "none";
-                settings.style.display = "none";
-            } else if([i] == 2) {
-                dashboard.style.display = "none";
-                product.style.display = "none";
-                transaction.style.display = "block";
-                report.style.display = "none";
-                settings.style.display = "none";
-            } else if([i] == 3) {
-                dashboard.style.display = "none";
-                product.style.display = "none";
-                transaction.style.display = "none";
-                report.style.display = "block";
-                settings.style.display = "none";
-            } else if([i] == 4) {
-                dashboard.style.display = "none";
-                product.style.display = "none";
-                transaction.style.display = "none";
-                report.style.display = "none";
-                settings.style.display = "block";
-            }
+    //         // if([i] == 0) {
+    //         //     dashboard.style.display = "block";
+    //         //     product.style.display = "none";
+    //         //     transaction.style.display = "none";
+    //         //     report.style.display = "none";
+    //         //     settings.style.display = "none";
+    //         // } else if([i] == 1) {
+    //         //     dashboard.style.display = "none";
+    //         //     product.style.display = "block";
+    //         //     transaction.style.display = "none";
+    //         //     report.style.display = "none";
+    //         //     settings.style.display = "none";
+    //         // } else if([i] == 2) {
+    //         //     dashboard.style.display = "none";
+    //         //     product.style.display = "none";
+    //         //     transaction.style.display = "block";
+    //         //     report.style.display = "none";
+    //         //     settings.style.display = "none";
+    //         // } else if([i] == 3) {
+    //         //     dashboard.style.display = "none";
+    //         //     product.style.display = "none";
+    //         //     transaction.style.display = "none";
+    //         //     report.style.display = "block";
+    //         //     settings.style.display = "none";
+    //         // } else if([i] == 4) {
+    //         //     dashboard.style.display = "none";
+    //         //     product.style.display = "none";
+    //         //     transaction.style.display = "none";
+    //         //     report.style.display = "none";
+    //         //     settings.style.display = "block";
+    //         // }
 
-            list[i].className = 'list active';
-        };
-    };
+    //         list[i].className = 'list active';
+    //     };
+    // };
 
     let checkbox = document.getElementById('checkbox');
     let content = document.querySelector('.home-content')

@@ -42,24 +42,30 @@ const sellerDash = async (req, res) => {
                     const sellerData = await getDoc(sellerRef);
 
                     if (! (stripeAccData.data().isNew)) { //Old Subscriber
+
+                        console.log('Render Dashboard (Old Subscriber)')
                         
-                        res.render('seller/dashboard', { 
-                            title: 'Seller Center',
-                            layout: 'layouts/sellerLayout', 
-                            messageCode: '',
-                            infoMessage: '',
-                            verification: '',
-                            user: '',
-                            hasSubscription: true,
-                            subSuccess: '',
-                            subUpdateSuccess: '',
-                            sellerInfo: sellerData.data()
-                        });
+                        // res.render('seller/manageDashboard', { 
+                        //     title: 'dashboard',
+                        //     layout: 'layouts/sellerLayout', 
+                        //     messageCode: '',
+                        //     infoMessage: '',
+                        //     verification: '',
+                        //     user: '',
+                        //     hasSubscription: true,
+                        //     subSuccess: '',
+                        //     subUpdateSuccess: '',
+                        //     sellerInfo: sellerData.data()
+                        // });
+
+                        res.redirect('sellercenter/dashboard')
 
                     } else if (stripeSubColData.data().subscriptionCreated == stripeSubColData.data().currentSubscriptionBill) { //New Subscription
+
+                        console.log('Render Dashboard (New Subscriber)')
                         
-                        res.render('seller/dashboard', { 
-                            title: 'Seller Center',
+                        res.render('seller/manageDashboard', { 
+                            title: 'dashboard',
                             layout: 'layouts/sellerLayout', 
                             messageCode: '',
                             infoMessage: '',
@@ -72,9 +78,11 @@ const sellerDash = async (req, res) => {
                         });
 
                     } else if (stripeSubColData.data().currentSubscriptionBill != stripeCurrentSubBill) { //Update Subscribed Usage
+                        
+                        console.log('Render Dashboard (Update Subscriber)')
 
-                        res.render('seller/dashboard', { 
-                            title: 'Seller Center',
+                        res.render('seller/manageDashboard', { 
+                            title: 'dashboard',
                             layout: 'layouts/sellerLayout', 
                             messageCode: '',
                             infoMessage: '',
@@ -89,8 +97,8 @@ const sellerDash = async (req, res) => {
 
                 } else { //Not subscribed, redirect to stripe subscription page
 
-                    res.render('seller/dashboard', { 
-                        title: 'Seller Center',
+                    res.render('seller/manageDashboard', { 
+                        title: 'dashboard',
                         layout: 'layouts/sellerLayout', 
                         messageCode: '',
                         infoMessage: '',
@@ -104,8 +112,8 @@ const sellerDash = async (req, res) => {
                 };
 
             } else { //Show need verification
-                res.render('seller/dashboard', { 
-                    title: 'Seller Center',
+                res.render('seller/manageDashboard', { 
+                    title: 'dashboard',
                     layout: 'layouts/sellerLayout',
                     messageCode: '',
                     infoMessage: '',
@@ -125,9 +133,6 @@ const sellerDash = async (req, res) => {
 };
 
 
-
-
-
-export { 
+export {
     sellerDash
 }

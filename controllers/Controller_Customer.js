@@ -25,13 +25,14 @@ const customerDash = (req, res) => {
 
     adminAuth.getUser(uid).then( async (userRecord) => {
 
-        const docRef = doc(db, 'Accounts', userRecord.uid);
+        const docRef = doc(db, 'Accounts', `customer_${userRecord.uid}`);
         const docSnap = await getDoc(docRef);
 
         // If no user document, then create a new one
         if (!docSnap.exists()) {
 
             await setDoc(doc(db, 'Accounts', `customer_${userRecord.uid}`), {
+                id: userRecord.uid,
                 accRole: "Customer",
                 accStatus: "Active",
                 createdAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
@@ -57,18 +58,18 @@ const customerDash = (req, res) => {
 
         } else { // If there is user document, then update sign in time
 
-            await setDoc(doc(db, 'Accounts', userRecord.uid), {
+            await setDoc(doc(db, 'Accounts', `customer_${userRecord.uid}`), {
                 signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z')
             }, {merge: true});
 
             const customerArray = [];
             const accountArray = [];
 
-            const accountRef = doc(db, 'Accounts', userRecord.uid);
+            const accountRef = doc(db, 'Accounts', `customer_${userRecord.uid}`);
             const accountData = await getDoc(accountRef);
 
             const account = new Account (
-                accountData.id,
+                accountData.data().id,
                 accountData.data().accRole,
                 accountData.data().accStatus,
                 accountData.data().createdAt,
@@ -116,8 +117,8 @@ const customerDash = (req, res) => {
 };
 
 const profileUpdate = async (req, res) => {
-    const {user, profilePhoto, displayName, fullName, email, contactNo, birthday, gender } = req.body;
 
+    const {user, profilePhoto, displayName, fullName, email, contactNo, birthday, gender } = req.body;
     const parsedImg = JSON.parse(profilePhoto);
 
     if(parsedImg != null && imageMimeTypes.includes(parsedImg.type)) {
@@ -125,7 +126,7 @@ const profileUpdate = async (req, res) => {
         const imgType = parsedImg.type;
 
         try {
-            await setDoc(doc(db, 'Accounts', user), {
+            await setDoc(doc(db, 'Accounts', `customer_${user}`), {
                 displayName: displayName,
                 email: email,
                 imgType: imgType,
@@ -146,11 +147,11 @@ const profileUpdate = async (req, res) => {
             const customerArray = [];
             const accountArray = [];
 
-            const accountRef = doc(db, 'Accounts', user);
+            const accountRef = doc(db, 'Accounts', `customer_${user}`);
             const accountData = await getDoc(accountRef);
 
             const account = new Account (
-                accountData.id,
+                accountData.data().id,
                 accountData.data().accRole,
                 accountData.data().accStatus,
                 accountData.data().createdAt,
@@ -179,7 +180,7 @@ const profileUpdate = async (req, res) => {
             );
             customerArray.push(customer);
 
-            console.log('Profile successfully updated!')
+            console.log(`---Profile successfully updated!---\ncustomerID: ${user}`)
 
             res.render('customer/settings', {
                 title: 'Customer Center',
@@ -193,11 +194,8 @@ const profileUpdate = async (req, res) => {
         } catch (error) {
             console.error('@AccountUpdate:', error);
         }
-    }
-
-    
-
-}
+    };
+};
 
 
 

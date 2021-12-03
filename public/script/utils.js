@@ -5,6 +5,12 @@ $(document).ready(() => {
     $('#subscriptionSuccess').modal('show');
     $('#subscriptionUpdateSuccess').modal('show');
     
+
+    $(window).on('load',() => {
+        // $('#preLoader').modal('show');
+        $('#preLoader').fadeOut(1000);
+        $(window).fadeIn(1000);
+    })
 });
 
 function createSubscription(currentSellerID) {

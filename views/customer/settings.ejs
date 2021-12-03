@@ -46,7 +46,11 @@
                                     </div>
                                     <div class="details-current">
                                         <div>
-                                            <p class="details-current-name"><%=accountkey.displayName%></p>
+                                            <% if (accountkey.displayName === '') { %>
+                                                <p class="details-current-name">Customer</p>
+                                            <% } else { %> 
+                                                <p class="details-current-name"><%=accountkey.displayName%></p>
+                                            <% } %> 
                                             <p class="details-current-email"><%=accountkey.email%></p>
                                         </div>
                                     </div>

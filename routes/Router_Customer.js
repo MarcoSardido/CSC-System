@@ -7,7 +7,7 @@ import { signInAndSignUpRoute, sessionLoginCustomer, verifyCookieCustomer, signU
 router.get('/auth', signInAndSignUpRoute);
 router.get('/auth/sessionLogin', sessionLoginCustomer);
 router.get('/', verifyCookieCustomer, customerDash);
-router.post('/', signUp);
+router.post('/auth', signUp);
 router.get('/auth/logout', customerLogout);
 
 router.post('/', profileUpdate);

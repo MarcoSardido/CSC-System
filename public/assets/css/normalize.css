@@ -20,6 +20,11 @@
     font-family: 'Poppins', sans-serif;
   }
 
+  ion-icon {
+    pointer-events: none;
+  }
+
+
   /* Scrollbars
    ========================================================================== */
   
@@ -29,12 +34,13 @@
 
   ::-webkit-scrollbar {
     width: 0.5vw;
+    height: 0.5vw;
   }
 
   ::-webkit-scrollbar-thumb {
     /* background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed; */
     background: rgb(163, 163, 163);
-    border-radius:6px
+    border-radius:6px;
   }
 
   ::-webkit-scrollbar-track {

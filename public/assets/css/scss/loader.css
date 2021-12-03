@@ -1,0 +1,99 @@
+.loader-cont .modal-dialog {
+  margin-top: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.loader-cont .modal-dialog svg {
+  overflow: visible;
+  width: 100px;
+  height: 150px;
+}
+
+.loader-cont .modal-dialog svg g {
+  -webkit-animation: slide 2s linear infinite;
+          animation: slide 2s linear infinite;
+}
+
+.loader-cont .modal-dialog svg g:nth-child(2) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.loader-cont .modal-dialog svg g:nth-child(2) path {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+  stroke-dasharray: 0px 158px;
+  stroke-dashoffset: 1px;
+}
+
+.loader-cont .modal-dialog svg path {
+  stroke: url(#gradient);
+  stroke-width: 20px;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 0 157px;
+  stroke-dashoffset: 0;
+  -webkit-animation: escalade 2s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+          animation: escalade 2s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+}
+
+@-webkit-keyframes slide {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+  }
+  100% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+}
+
+@keyframes slide {
+  0% {
+    -webkit-transform: translateY(-50px);
+            transform: translateY(-50px);
+  }
+  100% {
+    -webkit-transform: translateY(50px);
+            transform: translateY(50px);
+  }
+}
+
+@-webkit-keyframes escalade {
+  0% {
+    stroke-dasharray: 0 157px;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 156px 157px;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 156px 157px;
+    stroke-dashoffset: -156px;
+  }
+}
+
+@keyframes escalade {
+  0% {
+    stroke-dasharray: 0 157px;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 156px 157px;
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dasharray: 156px 157px;
+    stroke-dashoffset: -156px;
+  }
+}
+/*# sourceMappingURL=loader.css.map */

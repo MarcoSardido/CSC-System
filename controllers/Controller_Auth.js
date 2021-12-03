@@ -96,6 +96,8 @@ const currentLoggedInUID = [];
 
         }).then(userRecord => {
             console.log('Successfully created new user:', userRecord.uid);
+
+            // res.redirect('/customercenter')
                 
             res.render('authentication/auth', {
                 title: 'City Sales Cloud',
@@ -108,13 +110,12 @@ const currentLoggedInUID = [];
             console.error(error);
             const errorMessage = error.message;
 
-            res.render('authentication/auth', {
+            res.render('authentication/auth', { //views/authentication/auth.ejs
                 title: 'City Sales Cloud',
-                layout: 'layouts/customer_authLayout',
+                layout: 'layouts/customer_authLayout', //custom layout
                 messageCode: 'alert-danger',
                 infoMessage: errorMessage
             });
-
         });
 
     } else {
@@ -337,6 +338,7 @@ const currentLoggedInUID = [];
         adminAuth.verifySessionCookie(sessionCookie, true).then((decodedClaims) => {
             req.body.uid = decodedClaims.uid;
             req.body.user = decodedClaims.firebase;
+            console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
             return next();
 
         }).catch((error) => {
@@ -356,6 +358,7 @@ const currentLoggedInUID = [];
             currentLoggedInUID.push(decodedClaims.uid)
             req.body.uid = decodedClaims.uid;
             req.body.user = decodedClaims.firebase;
+            console.log(`Seller Successfully SignedIn: ${decodedClaims.uid}`);
             return next();
 
         }).catch((error) => {
@@ -372,7 +375,6 @@ const currentLoggedInUID = [];
 */
 
 
-
 export { 
     signInAndSignUpRoute,
     sellerSignInAndSignUpRoute,
@@ -383,5 +385,5 @@ export {
     verifyCookieCustomer,
     verifyCookieSeller,
     customerLogout,
-    sellerLogout
+    sellerLogout,
 };

@@ -1,0 +1,108 @@
+.cont404 {
+    display: flex;
+    flex-direction: row;
+    padding: 32px 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cont404 .textSide .top,
+.cont404 .textSide .bottom {
+   margin-bottom: 60px;
+   padding-left: 20px;
+   padding-right: 50px;
+}
+
+.cont404 .textSide .top .header-cont .header-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.cont404 .textSide .top .header-cont .header-logo .logo {
+    width: 6.5rem;
+    height: 7rem;
+}
+
+.cont404 .textSide .top .header-cont .header-logo .logoText,
+.cont404 .textSide .top .header-cont .header-logo .emph {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.cont404 .textSide .top .header-cont .header-logo .logoText {
+     color: #1D6B83;
+}
+
+.cont404 .textSide .top .header-cont .header-logo .emph {
+    color: #39B7DF;
+}
+
+.cont404 .textSide .top .header-cont .header-logo .path {
+    color: #000;
+}
+
+.cont404 .textSide .top .mainText {
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.cont404 .textSide .top .subText {
+    font-size: 21px;
+    font-weight: 300;
+    color: #777;
+    word-spacing: 5px;
+    margin-top: -5px;
+    margin-bottom: 25px;
+}
+
+.cont404 .textSide .top .goBack {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+    border: none;
+    padding: 8px 25px;
+    text-transform:uppercase;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.cont404 .textSide .bottom .mainText {
+   font-weight: 600;
+   font-size: 20px;
+}
+
+.cont404 .textSide .bottom .linksCont a {
+   color: #000;
+}
+
+.cont404 .textSide .bottom .linksCont a:hover,
+.cont404 .textSide .bottom .linksCont ion-icon {
+    color: #485def;
+}
+
+.cont404 .textSide .bottom .linksCont div:nth-child(1) {
+    margin-bottom: -10px;
+}
+
+.cont404 .textSide .bottom .linksCont .link {
+   display: flex;
+   align-items: center;
+   text-align: center;
+   font-size: 18px;
+}
+
+.cont404 .textSide .bottom .linksCont ion-icon {
+    padding-left: 10px;
+    padding-bottom: 12px;
+    transform:scale(1.3);
+}
+
+.cont404 .imgSide {
+    margin-right: 60px;
+    margin-left: 20px; 
+}

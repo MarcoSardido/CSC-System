@@ -46,20 +46,24 @@
                 <div class="ball"></div>
             </label>
         </div>
-
     </ul>
+
     <div class="profile-container">
         <div class="profile">
             <div class="profile-details">
-                <% displayAccountInfo.forEach(accountkey => { %>
-                    <% if(accountkey.userPhoto === '') { %>
-                        <img src="/public/assets/images/default/user-default-profile.png" alt="<%=accountkey.displayName%>">
+                <% displayAccountInfo.forEach(accountKey => { %>
+                    <% if(accountKey.userPhoto === '') { %>
+                        <img src="/public/assets/images/default/user-default-profile.png" alt="<%=accountKey.displayName%>">
                     <% } else { %>
-                        <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
+                        <img src="data:<%=accountKey.imgType%>;base64,<%=accountKey.userPhoto%>" alt="<%=accountKey.displayName%>">
                     <% } %>   
                     <div class="details">
-                        <div class="name"><%=accountkey.displayName%></div>
-                        <% if(accountkey.isVerified){ %> 
+                        <% if(accountKey.displayName === ''){ %> 
+                            <div class="name">Customer</div>
+                        <% }else{ %>
+                            <div class="name"><%=accountKey.displayName%></div>
+                        <% } %> 
+                        <% if(accountKey.isVerified){ %> 
                             <div class="subType">Verified 👍</div>
                         <% }else{ %>
                             <div class="subType">Not Verified 👎</div>
