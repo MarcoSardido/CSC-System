@@ -1,240 +1,514 @@
-.p-sellercenter {
-  font-weight: 900;
-  position: absolute;
-  margin-top: -50px;
-  margin-left: 120px;
-  font-size: 25px;
-  padding-top: 5px;
+.dashMainCont {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.btnNav {
-  width: 60px;
-  height: 60px;
-  color: rgba(255,255,255,0);
-  background: url("../../images/seller/dashboard/navbutton.png") center / contain no-repeat;
-  border-style: none;
-}
-
-.btnNav:hover {
-  border-style: none;
-  background: url("../../images/seller/dashboard/navbutton.png") center / contain no-repeat, rgba(255,255,255,0);
-}
-
-.btnNotif {
-  float: right;
-  background: url("../../images/seller/dashboard/bell.png") center / contain no-repeat, #c4c4c4;
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  border-style: none;
-  color: #fff;
-  margin-top: 15px;
-  margin-right: 30px;
-}
-
-.btnProfile {
-  float: right;
-  width: 45px;
-  height: 45px;
-  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #ffffff;
-  border-style: none;
-  border-radius: 50%;
-  margin-right: 40px;
-  margin-top: 10px;
-}
-
-.btnNotif:hover {
-  filter: invert(100%);
-  background: url("../../images/seller/dashboard/bell.png") center / contain no-repeat, #ffffff;
-}
-
-.btnProfile:hover {
-  filter: invert(100%);
-  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #ffffff;
-}
-
-.dashboard-header {
-  margin-top: 19px;
-  display: grid;
-  background: rgba(93,148,255,0);
-  margin-left: 40px;
-  height: 300px;
-  border-radius: 40px;
-  grid-auto-flow: column;
-  gap: 1em;
-  width: 1300px;
-}
-
-.recent-live-graph {
-  background: #ffffff;
-  border-radius: 30px;
-  width: 478.188px;
-  box-shadow: 3px 2px rgb(159,159,198);
-}
-
-.welcome-cont {
-  color: rgb(255,255,255);
-  border-radius: 30px;
-  padding-left: 50px;
-  padding-top: 20px;
-  width: 800px;
-  background: url("../../images/seller/dashboard/illustration.png") right / contain no-repeat, #5d94ff;
-}
-
-.p1 {
-  margin-top: 100px;
-}
-
-.p2 {
-  padding-top: 15px;
-  font-weight: bold;
-  padding-left: 40px;
-}
-
-.btnLive {
-  color: #000000;
-  background: #ffffff;
-  border-radius: 30px;
-}
-
-.dashboard-body {
-  display: grid;
-  grid-template-columns: 180px 180px 180px 50%;
-  grid-template-rows: 175px 175px;
-  padding-top: 50px;
-  margin-left: 40px;
-  gap: 1em;
+.dashMainCont .header-cont {
+  height: 10%;
   width: 100%;
-  height: 450px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
 }
 
-.dashboard-item {
-  color: rgb(33, 37, 41);
-  background: #ffffff;
-  border-radius: 20px;
-  border-width: 1px;
-  border-style: none;
-  box-shadow: 2px 3px rgb(159,159,198);
-  text-align: center;
+.dashMainCont .header-cont .sectionMainText {
+  font-size: 2.3em;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
-.imgIcon {
-  width: 60px;
-  margin-top: 10px;
+.dashMainCont .header-cont .icon {
+  font-size: 23px;
+  padding-top: 10px;
+  margin-right: 50px;
+  cursor: pointer;
 }
 
-.p3 {
+.dashMainCont .header-cont .icon ion-icon {
+    background: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.dashMainCont .header-cont .icon .notif {
+    position: absolute;
+    right: 65px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    z-index: 1;
+}
+
+.dashMainCont .body-cont {
+  height: 90%;
+  width: 100%;
+  padding: 10px 5px 10px 30px;
+  justify-content: space-between;
+  over-flow: scroll;
+}
+
+.dashMainCont .body-cont .body-row-1 {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont {
+  height: 35vh;
+  width: 60%;
+  display: flex;
+  background: #5d94ff;
+  border-radius: 30px;
+  padding: 10px 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  margin-right: 5px;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side {
+  width: 100%;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .upperTextArea .mainText {
+  font-weight: 300;
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .upperTextArea .userText {
+  font-size: 3em;
+  font-weight: 600;
+  margin-top: -10px;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .staticText {
+  font-weight: 300;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .btnStartLiveSell {
+  width: 8.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  border: none;
+  color: #485def;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  text-transform: capitalize;
   font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .btnStartLiveSell:hover {
+  background: #3478fe;
+  color: #fff;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .upperTextArea .mainText,
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .upperTextArea .userText,
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .staticText {
+  color: #fff;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .img-side img {
+  margin-top: -30px;
+  margin-left: -80px;
+  transform: scale(1.1)
+}
+
+.dashMainCont .body-cont .body-row-1 .liveStats-cont {
+  width: 30vw;
+  border-radius: 10px;
+  margin-left: 5px;
+  padding: 5px 10px;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+.dashMainCont .body-cont .body-row-1 .liveStats-cont .liveStatsLabel {
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.dashMainCont .body-cont .body-row-1 .liveStats-cont .stats-cont {
+  width: 100%;
+  height: auto;
+}
+
+.dashMainCont .body-cont .body-row-2 {
+  display: flex;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont {
+  display: flex;
+  flex-wrap: wrap;
+  width: 43%;
+  justify-content: space-evenly;
+  margin-right: 20px;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont {
+  width: 8.4rem;
+  height: 10rem;
+  margin: 10px 20px;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  background: #fff;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont .summaryImg-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont .summaryImg-cont img {
+  width: 4rem;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont .summaryText-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont .summaryText-cont .staticText {
+  font-size: 13px;
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+
+.dashMainCont .body-cont .body-row-2 .summary-cont .mini-cont .summaryText-cont .dynamicText {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont {
+  width: 57%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  background: #fff;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-header {
+  height: 3rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 10px;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-header .title {
+  font-weight: 700;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-header .viewAllReport {
+  margin-right: 0;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 20px;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont {
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  background: #fff;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont div {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .userName {
+  width: 12rem;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .reportDate {
+  width: 8rem;
+
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .reportTime {
+  width: 6rem;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .reportType {
+  width: 8rem;
+  color: red;
+  font-weight: 600;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .icon {
+  font-size: 20px;
+  color: #485def;
+}
+
+.dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .userPhoto img {
+  width: 40px;
+}
+
+
+/* Create Live Stream Modal */
+
+.createLiveCont .editCont {
+  min-height: 35vh;
+}
+
+.createLiveCont .editCont .subText {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+
+.createLiveCont .editCont .detailsCont {
+  padding: 0 20px;
+}
+
+.createLiveCont .editCont .detailsCont .storeInfo {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.createLiveCont .editCont .detailsCont .storeInfo .storeEvt {
+  margin-right: 50px;
+}
+
+.createLiveCont .editCont .detailsCont .storeSched .sched {
+  display: flex;
   margin-top: 5px;
 }
 
-.heading2 {
-  font-weight: bold;
+.createLiveCont .editCont .detailsCont .storeSched .sched div:nth-child(1) {
+  margin-right: 50px;
 }
 
-.heading2.dollarSign {
-  position: absolute;
+.createLiveCont .editCont .detailsCont .storeSched .sched p {
+  font-size: 13px;
+  color: #9d9c9b;
 }
 
-.dashboard-item.report-history {
-  text-align: left;
-  padding-left: 20px;
-  padding-top: 10px;
-  height: 366px;
-  position: relative;
-  width: 705px;
+.createLiveCont .editCont .detailsCont .storeInfo .storeDesc input[type="text"] {
+  width: 25vw;
 }
 
-.linkViewAll {
-  float: right;
-  padding-right: 45px;
-  padding-top: 10px;
+
+.createLiveCont .editCont .detailsCont .storeInfo .storeEvt input[type="text"] {
+  width: 15vw;
 }
 
-.p4 {
-  font-size: 20px;
-  position: absolute;
+.createLiveCont .editCont .detailsCont input[type="text"],
+.createLiveCont .editCont .detailsCont input[type="time"] {
+  margin-top: 3px;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
 }
 
-.userHistory {
-  background: rgba(255,255,255,0);
-  height: 303px;
-  margin-top: 40px;
-  margin-left: 10px;
-  width: 675px;
+.createLiveCont .editCont .detailsCont input[type="text"]:focus,
+.createLiveCont .editCont .detailsCont input[type="time"]:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px; 
+    border: 1px solid #485fed;
 }
 
-.btnReportHistory {
-  background: url("../../images/seller/dashboard/account.png") center / contain no-repeat, #bbbbbb;
-  border-radius: 40px;
-  width: 35px;
-  height: 35px;
-  border-style: none;
-  margin-left: 6px;
+.createLiveCont .editCont .detailsCont .storeName .mainText {
+  font-size: 26px;
+  font-weight: 600;
 }
 
-.reportHistoryUser {
-  padding-left: 10px;
-  padding-top: 7px;
-  border-radius: 15px;
-  padding-bottom: 7px;
-  height: 50px;
+.createLiveCont .editCont .imgCont {
   display: flex;
-  border-width: 1px;
-  border-style: none;
-  box-shadow: 2px 3px rgba(127,146,164,0.38);
-  margin-bottom: 30px;
-  width: 655px;
+  padding: 0 20px;
+  margin-top: 20px;
 }
 
-.btnNext {
-  background: url("../../images/seller/dashboard/arrow.png") center / contain no-repeat, #ffffff;
-  width: 30px;
-  height: 30px;
-  border-style: none;
+.createLiveCont .editCont .imgCont .fileLogo,
+.createLiveCont .editCont .imgCont .fileBanner {
+  margin-top: 5px;
 }
 
-.p5, .p6 {
-  font-weight: bolder;
+.createLiveCont .editCont .imgCont .storeLogo {
+  width: 20%;
+}
+
+.createLiveCont .editCont .imgCont .storeBanner {
+  width: 35%;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.createLiveCont .editCont .btnPrevCont {
+   display: flex;
+   justify-content: center;
+   margin-top: 20px;
+}
+
+.createLiveCont .editCont .btnPrevCont .previewButton {
+  width: 8vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.createLiveCont .prevCont {
+  height: 27vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.createLiveCont .prevCont .prevDesc {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.createLiveCont .prevCont .prevDesc .mainLabel {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.createLiveCont .prevCont .prevDesc .labelDesc {
+   font-size: 15px;
+  color: #9d9c9b;
+}
+
+.createLiveCont .prevCont .preview {
+  width: 100%;
+  height: 20vh;
   padding-top: 5px;
-  margin-left: 20px;
+  padding-left: 20px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.p6 {
-  color: var(--red);
+.createLiveCont .prevCont .preview .upperCont {
+  height: 10vh;
+  display: flex;
+  padding: 5px 0;
 }
 
-.btnNext:hover {
-  background: url("../../images/seller/dashboard/arrow.png") center / contain no-repeat, rgba(0,98,204,0);
+.createLiveCont .prevCont .preview .upperCont .logo {
+  background: #fff;
+  margin-left: 10px;
+  border-radius: 10px;
+  display: flex;
 }
 
-.p5.historyName {
-  width: 150px;
+.createLiveCont .prevCont .preview .upperCont .logo img {
+    width: 60px;
+    border-radius: 10px;
 }
 
-.p5.historyDate {
-  width: 125px;
+.createLiveCont .prevCont .preview .lowerCont {
+  padding-top: 10px;
 }
 
-.p5.historyTime {
-  width: 100px;
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont {
+  display: flex;
+  height: 30px;
+  color: #fff;
 }
 
-.p6.historyType {
-  width: 110px;
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont p.fixedLiveStatus {
+    margin-right: 10px;
+    background: red;
+    border-radius: 10px;
+    width: 50px;
+    height: 25px;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    border: 2px solid #fff;
 }
 
-.p-welcome {
-  font-size: 35px;
-  margin-bottom: -5px;
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont p.storeName {
+  font-weight: 600;
 }
 
-.p-userName {
-  font-size: 30px;
-  margin-top: -10px;
-  font-weight: 900;
+.createLiveCont .prevCont .preview .lowerCont .storeDescCont {
+  height: 30px;
 }
 
-.linkViewAll:hover {
-  text-decoration: none;
+.createLiveCont .prevCont .preview .lowerCont .storeDescCont p.storeDesc {
+  margin-top: 5px;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-footer .buttonCloseModal {
+  width: 8vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+  background: red;
+}
+
+.modal-footer .buttonCloseModal:hover {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-footer .buttonCreate {
+  width: 10vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.modal-footer .buttonCreate:hover {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.filepond--item {
+    width: 100%;
 }

@@ -1,68 +1,294 @@
-<div class="navigation-cont" style="width: 100%;height: auto;"><button class="btn btn-primary btnNav" type="button"></button>
-    <p class="p-sellercenter">Seller Center</p><button class="btn btn-primary btnProfile" type="button"></button><button class="btn btn-primary btnNotif" type="button"></button>
-</div>
-<div class="dashboard-header">
-    <div class="welcome-cont">
-        <p class="p-welcome">Welcome,</p>
-        <p class="p-userName">MarcoSardido</p>
-        <p class="p1">Are we all set to go live?</p><button class="btn btn-primary btnLive" type="button">Start Live Sell</button>
+<link rel="stylesheet" href="/public/assets/css/seller/manageDashboard.css">
+<script defer src="/public/script/seller/dashboard.js"></script>
+
+<div class="dashMainCont">
+    <div class="header-cont">
+        <p class="sectionMainText">Seller Center</p>
+        <div class="icon">
+            <div class="notif"></div>
+            <ion-icon name="notifications" role="img" class="md hydrated" aria-label="notifications"></ion-icon>
+        </div>
     </div>
-    <div class="recent-live-graph">
-        <p class="p2">Recent Live Summary</p>
-    </div>
-</div>
-<div class="dashboard-body">
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/items-to-be-sold.svg">
-        <p class="p3"><strong>Items to be Sold</strong></p>
-        <h2 class="heading2 toBeSold">7</h2>
-    </div>
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/weekly-sales.svg">
-        <p class="p3"><strong>Weekly Revenue</strong></p>
-        <h2 class="heading2 weeklyRevenue">$41.53</h2>
-    </div>
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/total-sales.svg">
-        <p class="p3"><strong>Total Revenue</strong></p>
-        <h2 class="heading2 totalRevenue">$162.12</h2>
-    </div>
-    <div class="dashboard-item report-history">
-        <p class="p4"><strong>Report History</strong></p><a class="linkViewAll" href="#">View all</a>
-        <div class="userHistory">
-            <div class="reportHistoryUser"><button class="btn btn-primary btnReportHistory" type="button"></button>
-                <p class="p5 historyName">Johnley Jara</p>
-                <p class="p5 historyDate">June 01, 2020</p>
-                <p class="p5 historyTime">09:32 AM</p>
-                <p class="p6 historyType">Product</p><button class="btn btn-primary btnNext" type="button"></button>
+    <div class="body-cont">
+        <div class="body-row-1">
+            <div class="startSelling-cont">
+                <div class="text-side">
+                    <div class="upperTextArea">
+                        <p class="mainText">Welcome,</p>
+                        <p class="userText">MarcoSardido</p>
+                    </div>
+                    <div class="lowerTextArea">
+                        <p class="staticText">Are we all set to live?</p>
+                        <button class="btnStartLiveSell" data-toggle="modal" data-target="#modalStartLiveSell">start live sell</button>
+                    </div>
+                </div>
+                <div class="img-side">
+                    <img src="/public/assets/images/seller/dashboard/illustration.png" alt="">
+                </div>
             </div>
-            <div class="reportHistoryUser"><button class="btn btn-primary btnReportHistory" type="button"></button>
-                <p class="p5 historyName">Manaloto Pepito</p>
-                <p class="p5 historyDate">June 03, 2021</p>
-                <p class="p5 historyTime">08:59 PM</p>
-                <p class="p6 historyType">Service</p><button class="btn btn-primary btnNext" type="button"></button>
+            <div class="liveStats-cont">
+                <p class="liveStatsLabel">recent live summary</p>
+                <div class="stats-cont">
+                    <canvas id="liveStream-chart"></canvas>
+                </div>
             </div>
-            <div class="reportHistoryUser"><button class="btn btn-primary btnReportHistory" type="button"></button>
-                <p class="p5 historyName">Basilio Keith</p>
-                <p class="p5 historyDate">June 05, 2020</p>
-                <p class="p5 historyTime">12:48 PM</p>
-                <p class="p6 historyType">Transaction</p><button class="btn btn-primary btnNext" type="button"></button>
+        </div>
+        <div class="body-row-2">
+            <div class="summary-cont">
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/items-to-be-sold.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">items to be sold</p>
+                        <p class="dynamicText">7</p>
+                    </div>
+                </div>
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/weekly-sales.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">weekly revenue</p>
+                        <p class="dynamicText">$41.53</p>
+                    </div>
+                </div>
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/total-sales.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">total revenue</p>
+                        <p class="dynamicText">$162.12</p>
+                    </div>
+                </div>
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/items-sold.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">items sold</p>
+                        <p class="dynamicText">56</p>
+                    </div>
+                </div>
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/total-customers.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">total customers</p>
+                        <p class="dynamicText">104</p>
+                    </div>
+                </div>
+                <div class="mini-cont">
+                    <div class="summaryImg-cont">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/star.svg" alt="">
+                    </div>
+                    <div class="summaryText-cont">
+                        <p class="staticText">customer rating</p>
+                        <p class="dynamicText">4.2/5</p>
+                    </div>
+                </div>
             </div>
-            <div class="reportHistoryUser"><button class="btn btn-primary btnReportHistory" type="button"></button>
-                <p class="p5 historyName">Brilliantes Eriel</p>
-                <p class="p5 historyDate">June 06, 2020</p>
-                <p class="p5 historyTime">03:19 PM</p>
-                <p class="p6 historyType">Service</p><button class="btn btn-primary btnNext" type="button"></button>
+            <div class="reportHistory-cont">
+                <div class="reportHist-header">
+                    <p class="title">report history</p>
+                    <a href="" class="viewAllReport">View all</a>
+                </div>
+                <div class="reportHist-body">
+                    <div class="report-cont">
+                        <div class="userPhoto">
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                        </div>
+                        <div class="userName">
+                            MarcoSardido
+                        </div>
+                        <div class="reportDate">
+                            June 04, 2021
+                        </div>
+                        <div class="reportTime">
+                            09:32 AM
+                        </div>
+                        <div class="reportType">
+                            Product
+                        </div>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="report-cont">
+                        <div class="userPhoto">
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                        </div>
+                        <div class="userName">
+                            Johnley Jara
+                        </div>
+                        <div class="reportDate">
+                            June 9, 2021
+                        </div>
+                        <div class="reportTime">
+                            03:04 PM
+                        </div>
+                        <div class="reportType">
+                            Service
+                        </div>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="report-cont">
+                        <div class="userPhoto">
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                        </div>
+                        <div class="userName">
+                            Manaloto Pepito
+                        </div>
+                        <div class="reportDate">
+                            June 10, 2021
+                        </div>
+                        <div class="reportTime">
+                            7:23 PM
+                        </div>
+                        <div class="reportType">
+                            Service
+                        </div>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="report-cont">
+                        <div class="userPhoto">
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                        </div>
+                        <div class="userName">
+                            Basilio Keith
+                        </div>
+                        <div class="reportDate">
+                            June 15, 2021
+                        </div>
+                        <div class="reportTime">
+                            12:43 PM
+                        </div>
+                        <div class="reportType">
+                            Transaction
+                        </div>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </div>
+                    </div>
+                    <div class="report-cont">
+                        <div class="userPhoto">
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                        </div>
+                        <div class="userName">
+                            Brilliantes Eriel
+                        </div>
+                        <div class="reportDate">
+                            June 19, 2021
+                        </div>
+                        <div class="reportTime">
+                            06:12 PM
+                        </div>
+                        <div class="reportType">
+                            Product
+                        </div>
+                        <div class="icon">
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/items-sold.svg">
-        <p class="p3"><strong>Items Sold</strong></p>
-        <h2 class="heading2 itemsSold">$162.12</h2>
-    </div>
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/total-customers.svg">
-        <p class="p3"><strong>Total Customers</strong></p>
-        <h2 class="heading2 itemsSold">104</h2>
-    </div>
-    <div class="dashboard-item"><img class="imgIcon" src="/public/assets/images/seller/dashboard/star.svg">
-        <p class="p3"><strong>Customer Rating</strong></p>
-        <h2 class="heading2 itemsSold">4.2/5</h2>
-    </div>
 </div>
+
+<div class="modal fade" id="modalStartLiveSell" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Create live stream | Apple Inc.</h5>
+        </div>
+        <div class="modal-body">
+            <div class="createLiveCont">
+                <div class="editCont">
+                    <div class="detailsCont">
+                        <div class="storeInfo">
+                            <div class="storeEvt">
+                                <p class="subText">Event Name (Optional)</p>
+                                <input type="text" placeholder="Opening Sale">
+                            </div>
+                            <div class="storeDesc">
+                                <p class="subText">Event Description</p>
+                                <input type="text" placeholder="Introducing the all new Apple Products!">
+                            </div>
+                        </div>
+                        <div class="storeSched">
+                            <p class="subText">Store Schedule</p>
+                            <div class="sched">
+                                <div class="schedStart">
+                                    <p class="subText">Start</p>
+                                    <input type="time">
+                                </div>
+                                <div class="schedEnd">
+                                    <p class="subText">End</p>
+                                    <input type="time">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="imgCont">
+                        <div class="storeLogo">
+                            <p class="subText">Store Logo</p>
+                            <input type="file" class="filepond fileLogo">
+                        </div>
+                        <div class="storeBanner">
+                            <p class="subText">Store Banner</p>
+                            <input type="file" class="filepond fileBanner">
+                        </div>
+                    </div>
+                    <div class="btnPrevCont">
+                        <button class="previewButton">
+                            Preview
+                        </button>
+                    </div>
+                </div>
+                <hr class="modalLine">
+                <div class="prevCont">
+                    <div class="prevDesc">
+                        <div class="mainLabel">
+                            Channel Preview
+                        </div>
+                        <div class="labelDesc">
+                            This is what the customer will see
+                        </div>
+                    </div>
+                    <div class="preview" style="background-image: url('/public/assets/images/customer/default_room_cover/default5.jpg')">
+                        <div class="upperCont">
+                            <div class="logo">
+                                <img src="/public/assets/images/mainLogo.png" alt="">
+                            </div>
+                        </div>
+                        <div class="lowerCont">
+                            <div class="storeNameCont">
+                                <p class="fixedLiveStatus">Live</p>
+                                <p class="storeName">
+                                    Apple Inc.
+                                </p>
+                            </div>
+                            <div class="storeDescCont">
+                                <p class="storeDesc">
+                                    Introducing the all new Apple Products!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="buttonCloseModal" data-dismiss="modal">Close</button>
+          <button type="button" class="buttonCreate">Create Channel</button>
+        </div>
+      </div>
+    </div>
+  </div>

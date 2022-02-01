@@ -1,0 +1,13 @@
+<svg width="354" height="719" viewBox="0 0 354 719" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0L260.026 98.0607C308.569 116.367 328.125 174.585 300.478 218.485L156.088 447.753C140.422 472.627 117.373 491.984 90.1647 503.114L0 540V0Z" fill="url(#paint0_linear_731_453)"/>
+<ellipse cx="29" cy="436.21" rx="285" ry="282.21" fill="white" fill-opacity="0.05"/>
+<path d="M229.679 436.209C229.679 545.59 140.064 634.679 29 634.679C-82.0643 634.679 -171.679 545.59 -171.679 436.209C-171.679 326.829 -82.0643 237.74 29 237.74C140.064 237.74 229.679 326.829 229.679 436.209Z" stroke="white" stroke-opacity="0.1" stroke-width="50"/>
+<path d="M165.199 436.21C165.199 510.328 104.453 570.831 29.0001 570.831C-46.4531 570.831 -107.199 510.328 -107.199 436.21C-107.199 362.093 -46.4531 301.589 29.0001 301.589C104.453 301.589 165.199 362.093 165.199 436.21Z" stroke="white" stroke-opacity="0.1" stroke-width="50"/>
+<ellipse cx="29" cy="436.21" rx="80.5995" ry="79.8105" fill="white" fill-opacity="0.05"/>
+<defs>
+<linearGradient id="paint0_linear_731_453" x1="-1.49787e-05" y1="-179.5" x2="1485" y2="992.499" gradientUnits="userSpaceOnUse">
+<stop stop-color="#495FEC"/>
+<stop offset="1" stop-color="#7552D0"/>
+</linearGradient>
+</defs>
+</svg>

@@ -424,7 +424,6 @@ Start of Order Body Style
         .global-footer-panel button:hover {
             background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
              -webkit-text-fill-color: #fff;
-            
         }
 
     /*

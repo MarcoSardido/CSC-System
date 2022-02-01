@@ -1,4 +1,4 @@
-.imgLogo {
+/* .imgLogo {
   width: 100px;
   margin-left: -100px;
 }
@@ -345,4 +345,918 @@ h4 {
 
 .link2:hover {
   text-decoration: none;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contLandingPage .section1 {
+  height: 100vh;
+}
+
+.contLandingPage .section1 .navBar {
+  background: transparent;
+  height: 12vh;
+  display: flex;
+  padding-top: 20px;
+}
+
+.contLandingPage .section1 .navBar .navLogo {
+  width: 40%;
+  padding-left: 2rem;
+  display: flex;
+  align-items: center; 
+}
+
+.contLandingPage .section1 .navBar .navLogo .logo {
+  width: 6rem;
+  height: 6rem;
+}
+
+.contLandingPage .section1 .navBar .navLogo .logoText,
+.contLandingPage .section1 .navBar .navLogo .emph {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.contLandingPage .section1 .navBar .navLogo .logoText {
+    color: #1D6B83;
+}
+
+.contLandingPage .section1 .navBar .navLogo .emph {
+    padding-left: 5px;
+    color: #39B7DF;
+}
+
+.contLandingPage .section1 .navBar .navLinks {
+  width: 60%;
+  padding-right: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.contLandingPage .section1 .navBar .navLinks .navLink {
+    font-size: 15px;
+    color: #fff;
+}
+
+.contLandingPage .section1 .navBar .navLinks .navLink:hover {
+    color: darkblue;
+}
+
+.contLandingPage .section1 .navBar .navLinks .customerLink {
+  margin-left: 150px;
+}
+
+.contLandingPage .section1 .contDivider {
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+}
+
+.contLandingPage .section1 .contDivider .appFeatures {
+  width: 58%;
+}
+
+.contLandingPage .section1 .contDivider img {
+  transform: scale(0.8);
+  margin-top: -40px;
+  margin-left: 55px;
+}
+
+.contLandingPage .section1 .contDivider .appTexts {
+  display: flex;
+  flex-direction:column;
+  padding-top: 45px;
+}
+
+.contLandingPage .section1 .contDivider .appTexts p {
+  color: #fff;
+}
+
+.contLandingPage .section1 .contDivider .appTexts .topText {
+  font-size: 18px;
+  text-transform:capitalize;
+}
+
+.contLandingPage .section1 .contDivider .appTexts .middleText {
+  font-size: 55px;
+  font-weight: 600;
+  width: 85%;
+  line-height: 75px;
+}
+
+.contLandingPage .section1 .contDivider .appTexts .bottomText {
+  font-size: 16px;
+  line-height: 30px;
+  width: 80%;
+}
+
+.contLandingPage .section1 .contDivider .appTexts .startShopping {
+  width: 25%;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #485fed;
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  text-transform: capitalize;
+  font-size: 15px;
+}
+
+.contLandingPage .section1 .contDivider .appTexts .startShopping:hover {
+  color: #fff;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.contLandingPage .section1 .shapeComponent {
+  transform:scale(0.7);
+  position: absolute;
+  left: 292px;
+  top: -195px;
+  z-index: -1;
+}
+
+.contLandingPage .section2 {
+  display: flex;
+}
+
+.contLandingPage .section2 .partnersCont {
+  margin: 100px auto;
+  height: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+.contLandingPage .section2 .partnersCont img {
+  width: 12rem;
+  margin: 0 55px;
+  filter: grayscale(100%);
+}
+
+.contLandingPage .section2 .partnersCont .partnerPaypal {
+  width: 13rem;
+  margin-top: 10px;
+}
+
+.contLandingPage .section2 .partnersCont .partnerAmazon {
+  margin-top: 15px;
+}
+
+.contLandingPage .section2 .partnersCont .partnerVisa {
+  margin-top: 1px;
+  width: 10rem;
+}
+
+.contLandingPage .section3 {
+  margin-top: -60px;
+  height: 80vh;
+  padding: 2rem 7rem;
+  display: flex;
+}
+
+.contLandingPage .section3 .detail1_Col1 {
+  width: 50%;
+}
+
+.contLandingPage .section3 .detail1_Col1 .hLine {
+  height: 5px;
+  width: 3.5rem;
+  border-radius: 2px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  margin-bottom: 20px;
+}
+
+.contLandingPage .section3 .detail1_Col1 .detailCol1MainText {
+  font-size: 2.6em;
+  font-weight: 600;
+  width: 80%;
+  line-height: 45px;
+  margin-bottom: 20px;
+}
+
+.contLandingPage .section3 .detail1_Col1 .detailCol1SubText {
+  font-size: 15px;
+  line-height: 25px;
+  color: #9b9b9b;
+  width: 60%;
+}
+
+.contLandingPage .section3 .detail1_Col2 {
+  width: 55%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol {
+  height: 50%;
+  width: 50%;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol .detailName {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol .detailText {
+  color: #9b9b9b;
+  font-size: 15px;
+  line-height: 25px;
+  width: 70%;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol div:nth-child(3) {
+  height: 3px;
+  width: 15%;
+  margin: 10px 0 15px 0;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol:nth-child(1) .detailDivider {
+  background: #2626d0;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol:nth-child(2) .detailDivider {
+  background: #00d9ea;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol:nth-child(3) .detailDivider {
+  background: #32bea6;
+}
+
+.contLandingPage .section3 .detail1_Col2 .detailSubCol:nth-child(4) .detailDivider {
+  background: #65a844;
+}
+
+.contLandingPage .section4 {
+  height: 75vh;
+}
+
+.contLandingPage .section4 .mainTextCont {
+  width: 45%;
+  float: right;
+  margin: 100px 0px;
+}
+
+.contLandingPage .section4 .mainTextCont .mainText {
+  font-size: 2.6em;
+  font-weight: 600;
+  width: 80%;
+  padding: 20px 0;
+  line-height: 45px;
+}
+
+.contLandingPage .section4 .mainTextCont .subText {
+  color: #9b9b9b;
+  font-size: 15px;
+  line-height: 25px;
+  width: 60%;
+  padding: 20px 0;
+}
+
+.contLandingPage .section4 .shapeComponent {
+  transform:scale(0.9);
+  position: absolute;
+  top: 85rem;
+  left: -45px;
+}
+
+.contLandingPage .sectionP4 {
+  height: 72vh;
+}
+
+.contLandingPage .sectionP4 .mainTextCont {
+  width: 45%;
+  margin: 180px 0px;
+  padding-left: 5rem;
+}
+
+.contLandingPage .sectionP4 .mainTextCont .mainText {
+  font-size: 2.6em;
+  font-weight: 600;
+  padding: 20px 0;
+  line-height: 45px;
+}
+
+.contLandingPage .sectionP4 .mainTextCont .subText {
+  color: #9b9b9b;
+  font-size: 15px;
+  line-height: 25px;
+  width: 60%;
+  padding: 20px 0;
+}
+
+.contLandingPage .sectionP4 .shapeComponent2 {
+  transform: scale(0.7);
+  width: 71rem;
+  position: absolute;
+  top: 133rem;
+  right: -170px;
+}
+
+.contLandingPage .section5 {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+}
+
+.contLandingPage .section5 .hLine {
+  height: 5px;
+  width: 3.5rem;
+  border-radius: 2px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  margin-bottom: 20px;
+}
+
+.contLandingPage .section5 .mainText {
+  font-size: 2.6em;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.contLandingPage .section5 .planCont {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+}
+
+.contLandingPage .section5 .plan {
+    height: 70vh;
+    width: 18vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+.contLandingPage .section5 .planCont .planLogo {
+    transform: scale(0.7);
+    height: 15rem;
+    margin-top: 20px;
+}
+
+.contLandingPage .section5 .planCont .planTitle {
+  font-weight: 600;
+  font-size: 25px;
+  height: 3rem;
+}
+
+.contLandingPage .section5 .planCont .planDesc {
+  color: #9b9b9b;
+  font-size: 15px;
+  width: 80%;
+  text-align: center;
+  height: 4rem;
+  align-content: center;
+}
+
+.contLandingPage .section5 .planCont .planPrice {
+  font-weight: 600;
+  font-size: 23px;
+  margin: 20px 0;
+}
+
+.contLandingPage .section5 .planCont .startNow {
+  padding: 10px 30px;
+  font-size: 14px;
+  border-radius: 10px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contLandingPage .section5 .planCont .startNow:hover {
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  -webkit-text-fill-color: #fff;
+}
+
+.contLandingPage .section6 {
+  height: 80vh;
+}
+
+.contLandingPage .section6 .mainTextCont {
+  width: 33vw;
+  margin-left: 23rem;
+  margin-top: 12rem;
+}
+
+.contLandingPage .section6 .mainTextCont .topLine, 
+.contLandingPage .section6 .mainTextCont .bottomLine {
+  height: 5px;
+  width: 3.5rem;
+  border-radius: 2px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.contLandingPage .section6 .mainTextCont .topLine {
+  margin-bottom: 20px;
+}
+
+.contLandingPage .section6 .mainTextCont .bottomLine {
+  margin-top: 20px;
+}
+
+.contLandingPage .section6 .mainTextCont .mainText {
+  font-weight: 600;
+  font-size: 2em;
+  width: 80%;
+  text-transform: capitalize;
+  line-height: 45px;
+}
+
+.contLandingPage .section6 .mainTextCont .subText {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 30px;
+  color: #9b9b9b;
+}
+
+.contLandingPage .section6 .mainTextCont .author {
+  margin-top: 20px;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.contLandingPage .section6 .testimonials {
+  position: absolute;
+  transform: scale(0.8);
+  width: 46rem;
+  top: 225rem;
+  right: -70px;
+}
+
+.contLandingPage .section6 .shapeComponent {
+  position: absolute;
+  top: 240rem;
+}
+
+
+.contLandingPage .section7 {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+}
+
+.contLandingPage .section7 .mainTextCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contLandingPage .section7 .mainTextCont .mainText {
+  font-weight: 600;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+.contLandingPage .section7 .mainTextCont .subText {
+  width: 80%;
+  color: #fff;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contLandingPage .section7 .mainTextCont .joinUs {
+  padding: 10px 50px;
+  font-size: 14px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  color: #485def;
+}
+
+.contLandingPage .section7 .mainTextCont .joinUs:hover {
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  -webkit-text-fill-color: #fff;
+}
+
+.contLandingPage .section7 .shapeComponent {
+  transform: scale(0.9);
+  position: absolute;
+  top: 250rem;
+  right: -4.9rem;
+  z-index: -1;
+}
+
+.contLandingPage .section8 {
+  height: 50vh;
+  padding-top: 50px;
+}
+
+.contLandingPage .section8 .footerCont {
+  height: 40vh;
+}
+
+.contLandingPage .section8 .footerCont .infoCont {
+   display: flex;
+   height: 25vh;
+   align-items: center;
+}
+ 
+
+.contLandingPage .section8 .footerCont .brandContact {
+  width: 30vw;
+  text-align: center;
+}
+
+.contLandingPage .section8 .footerCont .brandContact .logo img {
+  width: 100px;
+}
+
+.contLandingPage .section8 .footerCont .brandContact .mail {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.contLandingPage .section8 .footerCont .brandContact .tele {
+  color: #485def;
+  font-weight: 600;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks {
+  width: 70vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks .linkRow {
+  text-transform: capitalize;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks .linkRow .rowHeader {
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks .linkRow .rowBody {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks .linkRow .rowBody .fLink {
+  color: #9b9b9b;
+  margin: 2px 0;
+}
+
+.contLandingPage .section8 .footerCont .footerLinks .linkRow .rowBody .fLink:hover {
+  color: #485def;
+}
+
+.contLandingPage .section8 .footer {
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.contLandingPage .section8 .footer p {
+  margin: 0 2px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.contLandingPage .section8 .footer .brandText {
+  color: #1D6B83;
+  font-size: 16px;
+  padding-left: 5px;
+  margin-bottom: 2px;
+}
+
+.contLandingPage .section8 .footer .brandEmph {
+  color: #39B7DF;
+  font-size: 16px; 
+  padding-right: 5px;
+  margin-bottom: 2px;
+}
+
+
+
+@media (max-width: 1400px) {
+
+  .contLandingPage .section1 .navBar {
+    height: 10vh;
+    width: 111.9vw;
+    padding-top: 25px;
+  }
+
+  .contLandingPage .section1 .navBar .navLogo {
+    padding-left: 2rem;
+  }
+
+  .contLandingPage .section1 .navBar .navLogo .logo {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .contLandingPage .section1 .navBar .navLogo .logoText,
+  .contLandingPage .section1 .navBar .navLogo .emph {
+      font-size: 1.1em;
+  }
+
+  .contLandingPage .section1 .navBar .navLinks .navLink {
+      font-size: 13px;
+  }
+
+  .contLandingPage .section1 .contDivider {
+    width: 111vw;
+  }
+
+  .contLandingPage .section1 .contDivider img {
+    transform: scale(0.7);
+    width: 69rem;
+    margin-top: -50px;
+    margin-left: -6rem;
+  }
+
+  .contLandingPage .section1 .contDivider .appTexts {
+    padding-top: 100px;
+  }
+
+  .contLandingPage .section1 .contDivider .appTexts .topText {
+    font-size: 20px;
+  }
+
+  .contLandingPage .section1 .contDivider .appTexts .middleText {
+    font-size: 57px;
+  }
+
+  .contLandingPage .section1 .contDivider .appTexts .bottomText {
+    font-size: 18px;
+    width: 85%;
+  }
+
+  .contLandingPage .section1 .contDivider .appTexts .startShopping {
+    width: 28%;
+    height: 3rem;
+    font-size: 17px;
+  }
+
+  .contLandingPage .section1 .shapeComponent {
+    transform: scale(0.8);
+    width: 93rem;
+    left: 190px;
+    top: -135px;
+  }
+  
+
+  .contLandingPage .section2 .partnersCont {
+    margin: 200px auto;
+    height: 11rem;
+    padding-left: 10rem;
+    margin-bottom: 7rem;
+  }
+
+  .contLandingPage .section3 {
+    width: 111.9vw;
+  }
+
+  .contLandingPage .section3 .detail1_Col1 .hLine {
+    width: 3.8rem;
+  }
+
+  .contLandingPage .section3 .detail1_Col1 .detailCol1MainText {
+    font-size: 2.8em;
+  }
+
+  .contLandingPage .section3 .detail1_Col1 .detailCol1SubText {
+    font-size: 17px;
+    width: 68%;
+  }
+
+  .contLandingPage .section3 .detail1_Col2 .detailSubCol {
+    height: 52%;
+    width: 50%;
+  }
+
+  .contLandingPage .section3 .detail1_Col2 .detailSubCol .detailName {
+    font-size: 22px;
+  }
+
+  .contLandingPage .section3 .detail1_Col2 .detailSubCol .detailText {
+    font-size: 17px;
+    width: 80%;
+  }
+
+  .section3 .detail1_Col2 .detailSubCol .detailLogo img {
+    width: 5rem;
+  }
+
+  .contLandingPage .section3 .detail1_Col2 .detailSubCol div:nth-child(3) {
+    width: 17%;
+  }
+
+  .contLandingPage .section4 .mainTextCont {
+    margin: 235px 0px;
+    margin-right: -80px;
+  }
+
+  .contLandingPage .section4 .mainTextCont .mainText {
+    font-size: 2.8em;
+    width: 90%;
+  }
+
+  .contLandingPage .section4 .mainTextCont .subText {
+    font-size: 17px;
+    width: 75%;
+  }
+
+  .contLandingPage .section4 .shapeComponent {
+    top: 101rem;
+    width: 58rem;
+    left: -47px;
+  }
+
+  .contLandingPage .sectionP4 .mainTextCont {
+    width: 45%;
+    margin: 320px 0px;
+    padding-left: 5rem;
+  }
+
+  .contLandingPage .sectionP4 .mainTextCont .mainText {
+    font-size: 2.8em;
+  }
+
+  .contLandingPage .sectionP4 .mainTextCont .subText {
+    font-size: 17px;
+    width: 65%;
+  }
+
+  .contLandingPage .sectionP4 .shapeComponent2 {
+    width: 70rem;
+    top: 154rem;
+    right: -330px;
+  }
+
+  .contLandingPage .section5 {
+    width: 111.9vw;
+    margin-top: -40px;
+  }
+
+  .contLandingPage .section5 .hLine {
+    width: 3.8rem;
+  }
+
+  .contLandingPage .section5 .mainText {
+    font-size: 2.8em;
+  }
+
+  .contLandingPage .section5 .plan {
+      height: 78vh;
+      width: 22vw;
+  }
+
+
+  .contLandingPage .section5 .planCont .planLogo {
+      transform: scale(0.8);
+  }
+
+  .contLandingPage .section5 .planCont .planTitle {
+    font-size: 27px;
+  }
+
+  .contLandingPage .section5 .planCont .planDesc {
+    font-size: 17px;
+    width: 85%;
+  }
+
+  .contLandingPage .section5 .planCont .planPrice {
+    font-size: 25px;
+    margin: 50px 0;
+  }
+
+  .contLandingPage .section5 .planCont .startNow {
+    padding: 12px 32px;
+    font-size: 16px;
+  }
+
+  .contLandingPage .section6 .mainTextCont {
+    margin-top: 18rem;
+     width: 38vw;
+  }
+
+  .contLandingPage .section6 .mainTextCont .topLine, 
+  .contLandingPage .section6 .mainTextCont .bottomLine {
+    width: 3.8rem;
+  }
+
+  .contLandingPage .section6 .mainTextCont .mainText {
+    font-size: 2.2em;
+    width: 90%;
+  }
+
+  .contLandingPage .section6 .mainTextCont .subText {
+    font-size: 17px;
+  }
+
+  .contLandingPage .section6 .mainTextCont .author {
+    font-size: 22px;
+  }
+
+  .contLandingPage .section6 .testimonials {
+    position: absolute;
+    transform: scale(0.8);
+    width: 46rem;
+    top: 252rem;
+    right: -235px;
+  }
+
+  .contLandingPage .section6 .shapeComponent {
+    position: absolute;
+    transform: scale(1.1);
+    top: 270rem;
+  }
+
+  .contLandingPage .section7 {
+    width: 111.9vw;
+  }
+
+
+  .contLandingPage .section7 .mainTextCont .mainText {
+    font-size: 2.1em;
+  }
+
+  .contLandingPage .section7 .mainTextCont .subText {
+    font-size: 17px;
+  }
+
+  .contLandingPage .section7 .mainTextCont .joinUs {
+    padding: 12px 55px;
+    font-size: 16px;
+  }
+
+  .contLandingPage .section7 .shapeComponent {
+    transform: scale(0.9);
+    position: absolute;
+    top: 281rem;
+    right: -15.1rem;
+    z-index: -1;
+  }
+
+  .contLandingPage .section8 {
+    width: 111.9vw;
+  }
+
+  .contLandingPage .section8 .footerCont .brandContact .logo img {
+    width: 110px;
+  }
+
+  .contLandingPage .section8 .footerCont .brandContact .mail {
+    font-size: 17px;
+  }
+
+  .contLandingPage .section8 .footerCont .brandContact .tele {
+    font-size: 17px;
+  }
+
+  .contLandingPage .section8 .footerCont .footerLinks {
+    width: 80vw;
+  }
+
+  .contLandingPage .section8 .footerCont .footerLinks .linkRow .rowHeader {
+    font-size: 18px;
+  }
+
+  .contLandingPage .section8 .footerCont .footerLinks .linkRow .rowBody {
+    font-size: 14px;
+  }
+
+  .contLandingPage .section8 .footer p {
+    font-size: 17px;
+  }
+
+  .contLandingPage .section8 .footer .brandText {
+    font-size: 18px;
+  }
+
+  .contLandingPage .section8 .footer .brandEmph {
+    font-size: 18px; 
+  }
+
 }
