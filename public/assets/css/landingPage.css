@@ -958,12 +958,13 @@ h4 {
 
 
 
+
 @media (max-width: 1400px) {
 
   .contLandingPage .section1 .navBar {
     height: 10vh;
-    width: 111.9vw;
-    padding-top: 25px;
+    width: 100vw;
+    padding-top: 20px;
   }
 
   .contLandingPage .section1 .navBar .navLogo {
@@ -971,13 +972,13 @@ h4 {
   }
 
   .contLandingPage .section1 .navBar .navLogo .logo {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: 4.3rem;
+    height: 4.5rem;
   }
 
   .contLandingPage .section1 .navBar .navLogo .logoText,
   .contLandingPage .section1 .navBar .navLogo .emph {
-      font-size: 1.1em;
+      font-size: 1em;
   }
 
   .contLandingPage .section1 .navBar .navLinks .navLink {
@@ -985,69 +986,89 @@ h4 {
   }
 
   .contLandingPage .section1 .contDivider {
-    width: 111vw;
+    width: 100vw;
   }
 
   .contLandingPage .section1 .contDivider img {
     transform: scale(0.7);
-    width: 69rem;
-    margin-top: -50px;
-    margin-left: -6rem;
+    width: 69vw;
+    margin-top: -80px;
+    margin-left: -2rem;
   }
 
   .contLandingPage .section1 .contDivider .appTexts {
-    padding-top: 100px;
+    padding-top: 45px;
   }
 
   .contLandingPage .section1 .contDivider .appTexts .topText {
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .contLandingPage .section1 .contDivider .appTexts .middleText {
-    font-size: 57px;
+    font-size: 50px;
+    line-height: 65px;
   }
 
   .contLandingPage .section1 .contDivider .appTexts .bottomText {
-    font-size: 18px;
-    width: 85%;
+    font-size: 14px;
+    width: 75%;
   }
 
   .contLandingPage .section1 .contDivider .appTexts .startShopping {
-    width: 28%;
-    height: 3rem;
-    font-size: 17px;
+    width: 25%;
+    height: 2.5rem;
+    font-size: 15px;
   }
 
   .contLandingPage .section1 .shapeComponent {
-    transform: scale(0.8);
-    width: 93rem;
-    left: 190px;
-    top: -135px;
+    transform: scale(0.6);
+    width: 110vw;
+    left: 160px;
+    top: -264px;
   }
   
 
   .contLandingPage .section2 .partnersCont {
-    margin: 200px auto;
-    height: 11rem;
-    padding-left: 10rem;
-    margin-bottom: 7rem;
+    margin: 110px auto;
+    padding-left: 0px;
+    margin-bottom: 6rem;
+  }
+
+  .contLandingPage .section2 .partnersCont img {
+    width: 10rem;
+    margin: 0 55px;
+    filter: grayscale(100%);
+  }
+
+  .contLandingPage .section2 .partnersCont .partnerPaypal {
+    width: 10.5rem;
+    margin-top: 10px;
+  }
+
+  .contLandingPage .section2 .partnersCont .partnerAmazon {
+    margin-top: 18px;
+  }
+
+  .contLandingPage .section2 .partnersCont .partnerVisa {
+    margin-top: 1px;
+    width: 8.5rem;
   }
 
   .contLandingPage .section3 {
-    width: 111.9vw;
+    width: 100vw;
   }
 
   .contLandingPage .section3 .detail1_Col1 .hLine {
-    width: 3.8rem;
+    width: 3rem;
   }
 
   .contLandingPage .section3 .detail1_Col1 .detailCol1MainText {
-    font-size: 2.8em;
+    font-size: 2.3em;
   }
 
   .contLandingPage .section3 .detail1_Col1 .detailCol1SubText {
-    font-size: 17px;
-    width: 68%;
+    font-size: 14px;
+    width: 65%;
   }
 
   .contLandingPage .section3 .detail1_Col2 .detailSubCol {
@@ -1056,25 +1077,25 @@ h4 {
   }
 
   .contLandingPage .section3 .detail1_Col2 .detailSubCol .detailName {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .contLandingPage .section3 .detail1_Col2 .detailSubCol .detailText {
-    font-size: 17px;
-    width: 80%;
+    font-size: 14px;
+    width: 70%;
   }
 
   .section3 .detail1_Col2 .detailSubCol .detailLogo img {
-    width: 5rem;
+    width: 4.5rem;
   }
 
   .contLandingPage .section3 .detail1_Col2 .detailSubCol div:nth-child(3) {
-    width: 17%;
+    width: 14%;
   }
 
   .contLandingPage .section4 .mainTextCont {
     margin: 235px 0px;
-    margin-right: -80px;
+    margin-right: -2px;
   }
 
   .contLandingPage .section4 .mainTextCont .mainText {
@@ -1088,9 +1109,9 @@ h4 {
   }
 
   .contLandingPage .section4 .shapeComponent {
-    top: 101rem;
-    width: 58rem;
-    left: -47px;
+    transform:scale(0.8);
+    top: 74.5rem;
+    left: -86px;
   }
 
   .contLandingPage .sectionP4 .mainTextCont {
