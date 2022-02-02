@@ -1023,15 +1023,15 @@ h4 {
   .contLandingPage .section1 .shapeComponent {
     transform: scale(0.6);
     width: 110vw;
-    left: 160px;
+    left: 164px;
     top: -264px;
   }
   
 
   .contLandingPage .section2 .partnersCont {
-    margin: 110px auto;
+    margin: -30px auto;
     padding-left: 0px;
-    margin-bottom: 6rem;
+    margin-bottom: 8rem;
   }
 
   .contLandingPage .section2 .partnersCont img {
@@ -1094,58 +1094,59 @@ h4 {
   }
 
   .contLandingPage .section4 .mainTextCont {
-    margin: 235px 0px;
-    margin-right: -2px;
+    margin: 70px 0px;
   }
 
   .contLandingPage .section4 .mainTextCont .mainText {
-    font-size: 2.8em;
-    width: 90%;
+    font-size: 2.3em;
+    margin-bottom: -15px;
   }
 
   .contLandingPage .section4 .mainTextCont .subText {
-    font-size: 17px;
-    width: 75%;
+    font-size: 14px;
+    width: 62%;
   }
 
   .contLandingPage .section4 .shapeComponent {
     transform:scale(0.8);
-    top: 74.5rem;
+    top: 79rem;
     left: -86px;
   }
 
   .contLandingPage .sectionP4 .mainTextCont {
     width: 45%;
-    margin: 320px 0px;
+    margin: 30px 0px;
     padding-left: 5rem;
   }
 
   .contLandingPage .sectionP4 .mainTextCont .mainText {
-    font-size: 2.8em;
+    font-size: 2.3em;
+    margin-bottom: -15px;
   }
 
   .contLandingPage .sectionP4 .mainTextCont .subText {
-    font-size: 17px;
+    font-size: 15px;
     width: 65%;
   }
 
   .contLandingPage .sectionP4 .shapeComponent2 {
-    width: 70rem;
-    top: 154rem;
-    right: -330px;
+    width: 71rem;
+    top: 120rem;
+    transform: scale(0.6);
+    right: -227px;
   }
 
   .contLandingPage .section5 {
-    width: 111.9vw;
-    margin-top: -40px;
+    width: 100vw;
+    margin-top: -100px;
   }
 
   .contLandingPage .section5 .hLine {
-    width: 3.8rem;
+    width: 3.2rem;
   }
 
   .contLandingPage .section5 .mainText {
-    font-size: 2.8em;
+    font-size: 2.3em;
   }
 
   .contLandingPage .section5 .plan {
@@ -1153,32 +1154,27 @@ h4 {
       width: 22vw;
   }
 
-
-  .contLandingPage .section5 .planCont .planLogo {
-      transform: scale(0.8);
-  }
-
   .contLandingPage .section5 .planCont .planTitle {
-    font-size: 27px;
+    font-size: 25px;
   }
 
   .contLandingPage .section5 .planCont .planDesc {
-    font-size: 17px;
+    font-size: 15px;
     width: 85%;
   }
 
   .contLandingPage .section5 .planCont .planPrice {
-    font-size: 25px;
+    font-size: 23px;
     margin: 50px 0;
   }
 
   .contLandingPage .section5 .planCont .startNow {
     padding: 12px 32px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .contLandingPage .section6 .mainTextCont {
-    margin-top: 18rem;
+    margin-top: 15rem;
      width: 38vw;
   }
 
@@ -1188,96 +1184,99 @@ h4 {
   }
 
   .contLandingPage .section6 .mainTextCont .mainText {
-    font-size: 2.2em;
-    width: 90%;
+    font-size: 2em;
+    width: 70%;
   }
 
   .contLandingPage .section6 .mainTextCont .subText {
-    font-size: 17px;
+    font-size: 15px;
+    width: 90%;
   }
 
   .contLandingPage .section6 .mainTextCont .author {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .contLandingPage .section6 .testimonials {
     position: absolute;
-    transform: scale(0.8);
+    transform: scale(0.7);
     width: 46rem;
-    top: 252rem;
-    right: -235px;
+    top: 210rem;
+    right: -110px;
   }
 
   .contLandingPage .section6 .shapeComponent {
     position: absolute;
-    transform: scale(1.1);
-    top: 270rem;
+    top: 230rem;
   }
 
   .contLandingPage .section7 {
-    width: 111.9vw;
+    width: 100vw;
+    height: 45vh;
   }
 
-
   .contLandingPage .section7 .mainTextCont .mainText {
-    font-size: 2.1em;
+    font-size: 1.9em;
+    margin-top: 30px;
+    margin-bottom: 20px;
   }
 
   .contLandingPage .section7 .mainTextCont .subText {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .contLandingPage .section7 .mainTextCont .joinUs {
-    padding: 12px 55px;
-    font-size: 16px;
+    padding: 10px 45px;
+    font-size: 14px;
   }
 
   .contLandingPage .section7 .shapeComponent {
-    transform: scale(0.9);
+    transform: scale(0.8);
     position: absolute;
-    top: 281rem;
-    right: -15.1rem;
+    top: 238rem;
+    right: -157px;
     z-index: -1;
   }
 
   .contLandingPage .section8 {
-    width: 111.9vw;
+    border: 1px solid;
+    width: 100vw;
   }
 
   .contLandingPage .section8 .footerCont .brandContact .logo img {
-    width: 110px;
+    width: 100px;
   }
 
   .contLandingPage .section8 .footerCont .brandContact .mail {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .contLandingPage .section8 .footerCont .brandContact .tele {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .contLandingPage .section8 .footerCont .footerLinks {
-    width: 80vw;
+    width: 70vw;
   }
 
   .contLandingPage .section8 .footerCont .footerLinks .linkRow .rowHeader {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .contLandingPage .section8 .footerCont .footerLinks .linkRow .rowBody {
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .contLandingPage .section8 .footer p {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .contLandingPage .section8 .footer .brandText {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .contLandingPage .section8 .footer .brandEmph {
-    font-size: 18px; 
+    font-size: 16px; 
   }
 
 }
