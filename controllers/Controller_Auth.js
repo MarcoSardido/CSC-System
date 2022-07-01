@@ -258,7 +258,7 @@ const currentLoggedInUID = [];
     }).catch((error) => {
 
         // throw a error if idToken is not valid.
-        console.error(error);
+        console.error(`Firebase Auth: Error creating session cookie: ${error.message}`);
         res.status(404).send('UNAUTHORIZED REQUEST!');
     });
  };
@@ -335,7 +335,8 @@ const currentLoggedInUID = [];
     const sessionCookie = req.cookies.session;
 
     try {
-        adminAuth.verifySessionCookie(sessionCookie, true).then((decodedClaims) => {
+        adminAuth.verifySessionCookie(sessionCookie, true)
+        .then((decodedClaims) => {
             req.body.uid = decodedClaims.uid;
             req.body.user = decodedClaims.firebase;
             console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
@@ -354,11 +355,13 @@ const currentLoggedInUID = [];
     try {
         const sessionCookie = req.cookies.session;
 
-        adminAuth.verifySessionCookie(sessionCookie, true).then((decodedClaims) => {
+        adminAuth.verifySessionCookie(sessionCookie, true)
+        .then((decodedClaims) => {
             currentLoggedInUID.push(decodedClaims.uid)
             req.body.uid = decodedClaims.uid;
             req.body.user = decodedClaims.firebase;
             console.log(`Seller Successfully SignedIn: ${decodedClaims.uid}`);
+            res.locals.uid = decodedClaims.uid;
             return next();
 
         }).catch((error) => {

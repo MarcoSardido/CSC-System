@@ -16,7 +16,7 @@ const db = getFirestore(firebase);
 const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 
 
-const sellerDash = async (req, res) => {
+const dashboardPage = async (req, res) => {
     const uid = req.body.uid;
     
     try {
@@ -45,20 +45,18 @@ const sellerDash = async (req, res) => {
 
                         console.log('Render Dashboard (Old Subscriber)')
                         
-                        // res.render('seller/manageDashboard', { 
-                        //     title: 'dashboard',
-                        //     layout: 'layouts/sellerLayout', 
-                        //     messageCode: '',
-                        //     infoMessage: '',
-                        //     verification: '',
-                        //     user: '',
-                        //     hasSubscription: true,
-                        //     subSuccess: '',
-                        //     subUpdateSuccess: '',
-                        //     sellerInfo: sellerData.data()
-                        // });
-
-                        res.redirect('sellercenter/dashboard')
+                        res.render('seller/manageDashboard', { 
+                            title: 'dashboard',
+                            layout: 'layouts/sellerLayout', 
+                            messageCode: '',
+                            infoMessage: '',
+                            verification: '',
+                            user: '',
+                            hasSubscription: true,
+                            subSuccess: '',
+                            subUpdateSuccess: '',
+                            sellerInfo: sellerData.data()
+                        });
 
                     } else if (stripeSubColData.data().subscriptionCreated == stripeSubColData.data().currentSubscriptionBill) { //New Subscription
 
@@ -95,8 +93,8 @@ const sellerDash = async (req, res) => {
                         });
                     }
 
-                } else { //Not subscribed, redirect to stripe subscription page
-
+                } else {
+                    //Not subscribed, redirect to stripe subscription page -- Step: 2
                     res.render('seller/manageDashboard', { 
                         title: 'dashboard',
                         layout: 'layouts/sellerLayout', 
@@ -111,7 +109,8 @@ const sellerDash = async (req, res) => {
                     });
                 };
 
-            } else { //Show need verification
+            } else {
+                //Show need verification -- Step: 1
                 res.render('seller/manageDashboard', { 
                     title: 'dashboard',
                     layout: 'layouts/sellerLayout',
@@ -133,6 +132,80 @@ const sellerDash = async (req, res) => {
 };
 
 
+
+const productPage = (req, res) => {
+   
+    res.render('seller/manageProduct', {
+        title: 'products',
+        url: "urlPath",
+        uid: res.locals.uid,
+        layout: 'layouts/sellerLayout', 
+        verification: '',
+        user: '',
+        hasSubscription: true,
+        subSuccess: '',
+        subUpdateSuccess: '',
+        sellerInfo: ''
+    })
+}
+
+const addProduct = (req, res) => {
+    console.log(req.body)
+}
+
+
+
+ const transactionPage = (req, res) => {
+
+    res.render('seller/manageTransaction', {
+        title: 'transactions',
+        url: "urlPath",
+        layout: 'layouts/sellerLayout', 
+        verification: '',
+        user: '',
+        hasSubscription: true,
+        subSuccess: '',
+        subUpdateSuccess: '',
+        sellerInfo: ''
+    })
+}
+
+const reportPage = (req, res) => {
+
+    res.render('seller/manageReport', {
+        title: 'report',
+        url: "urlPath",
+        layout: 'layouts/sellerLayout', 
+        verification: '',
+        user: '',
+        hasSubscription: true,
+        subSuccess: '',
+        subUpdateSuccess: '',
+        sellerInfo: ''
+    })
+}
+
+ const settingsPage = (req, res) => {
+
+    res.render('seller/settings', {
+        title: 'settings',
+        url: "urlPath",
+        layout: 'layouts/sellerLayout', 
+        verification: '',
+        user: '',
+        hasSubscription: true,
+        subSuccess: '',
+        subUpdateSuccess: '',
+        sellerInfo: ''
+    })
+}
+
+
 export {
-    sellerDash
+    dashboardPage,
+    addProduct,
+    productPage,
+    transactionPage,
+    reportPage,
+    settingsPage
 }

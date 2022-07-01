@@ -76,8 +76,5 @@ $(document).ready(() => {
             console.log('@ErrorEmail: ',email)
             console.log('@ErrorCredential: ',credential)
         })
-
     })
-
-
 });

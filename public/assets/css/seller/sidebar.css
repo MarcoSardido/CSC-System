@@ -236,21 +236,25 @@
 }
 
 .navigation .profile-container .profile {
-    position: relative;
+    margin-bottom: 20px;
     padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .profile-container .profile .profile-details {
     display: flex;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
+    display: none;
     white-space: nowrap;
 }
 
 .navigation.active .profile .profile-details {
-    opacity: 1;
-    pointer-events: auto;
+    display:block;
+    display: flex;
+}
+
+.profile-container .profile .profile-details .picture {
+    padding-right: 10px;
 }
 
 .profile .profile-details img {
@@ -271,8 +275,6 @@
 }
 
 .profile #logout {
-    position: absolute;
-    bottom: 30px;
     transform: translateX(-50%);
     min-width: 50px;
     font-size: 1.8em;
@@ -283,10 +285,6 @@
     color: #fff;
 }
 
-.navigation.active .profile #logout {
-    left: 78%;
-}
-
 .home-content {
     position: absolute;
     height: 100%;
@@ -294,6 +292,7 @@
     left: 75.5px;
     transition: all 0.5s ease;
     background: #F1F1FF;
+    overflow-y: hidden;
 }
 
 .home-content .text {

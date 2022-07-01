@@ -280,9 +280,4 @@ $(document).ready(() => {
             tabSwitcher[i].className = 'nav-cont switch active';
         };
     };
-
-
-    
-
-
 });

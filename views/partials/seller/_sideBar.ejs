@@ -7,7 +7,7 @@
         <li class="list">
             <b></b>
             <b></b>
-            <a href="dashboard">
+            <a href="/sellercenter">
                 <span class='icon'><ion-icon name="grid-outline"></ion-icon></span>
                 <span class='title'>Dashboard</span>
             </a>
@@ -16,7 +16,7 @@
         <li class="list">
             <b></b>
             <b></b>
-            <a href="products">
+            <a href="/sellercenter/products">
                 <span class='icon'><ion-icon name="cube-outline"></ion-icon></span>
                 <span class='title'>Products</span>
             </a>
@@ -24,7 +24,7 @@
         <li class="list">
             <b></b>
             <b></b>
-            <a href="transactions">
+            <a href="/sellercenter/transactions">
                 <span class='icon'><ion-icon name="wallet-outline"></ion-icon></span>
                 <span class='title'>Transactions</span>
             </a>
@@ -32,7 +32,7 @@
         <li class="list">
             <b></b>
             <b></b>
-            <a href="reports">
+            <a href="/sellercenter/reports">
                 <span class='icon'><ion-icon name="clipboard-outline"></ion-icon></span>
                 <span class='title'>Reports</span>
             </a>
@@ -40,7 +40,7 @@
         <li class="list">
             <b></b>
             <b></b>
-            <a href="settings">
+            <a href="/sellercenter/settings">
                 <span class='icon'><ion-icon name="settings-outline"></ion-icon></span>
                 <span class='title'>Settings</span>
             </a>
@@ -59,17 +59,21 @@
     <div class="profile-container">
         <div class="profile">
             <div class="profile-details">
-                <a href="/profile">
-                    <img src="/public/assets/images/Avatar.png" alt="MarcoSardido">
-                </a>
+                <div class="picture">
+                    <a href="/sellercenter/settings/?tab=account">
+                        <img src="/public/assets/images/Avatar.png" alt="MarcoSardido">
+                    </a>
+                </div>
                 <div class="details">
                     <div class="name">Marco Sardido</div>
                     <div class="subType">Individual Seller</div>
                 </div>
             </div>
-            <a href="auth/logout">
-                <ion-icon name="log-in-outline" id="logout"></ion-icon>
-            </a>
+            <div class="logout">
+                <a href="/sellercenter/auth/logout">
+                    <ion-icon name="log-in-outline" id="logout"></ion-icon>
+                </a>
+            </div>
         </div>
     </div>
 </div>
