@@ -2,6 +2,7 @@
 <script src="/public/script/seller/transactions/analytics.js" type="module"></script>
 <script src="/public/script/seller/transactions/transactionTable.js" type="module"></script>
 <script src="/public/script/seller/transactions/panels.js" type="module"></script>
+<script src="/public/script/seller/transactions/recentTransactions.js" type="module"></script>
 
 <div class="transaction-header">
     <p id="uid" hidden>
@@ -32,7 +33,7 @@
                         <ion-icon name="rocket-outline"></ion-icon>
                     </i>
                 </div>
-                <p class="income">₱8,400</p>
+                <p class="income" id="lastWeek">₱0</p>
             </div>
 
             <div class="income-cont revenue">
@@ -42,7 +43,7 @@
                         <ion-icon name="stats-chart-outline"></ion-icon>
                     </i>
                 </div>
-                <p class="income">₱8,400</p>
+                <p class="income" id="totalRevenue">₱0</p>
             </div>
         </div>
 
@@ -98,76 +99,7 @@
                     <p class="show-all tab-link">Show All</p>
                 </div>
             </div>
-
-            <div class="list-cont">
-
-                <div class="item-sold">
-                    <div class="item-img">
-                        <ion-icon name="bag-check-outline"></ion-icon>
-                    </div>
-                    <div class="item-detail">
-                        Randy Marsh
-                        <p>13 June, 01:40 PM</p>
-                    </div>
-                    <div class="item-amount">
-                        + ₱500
-                    </div>
-                </div>
-
-                <div class="item-sold">
-                    <div class="item-img">
-                        <ion-icon name="bag-check-outline"></ion-icon>
-                    </div>
-                    <div class="item-detail">
-                        Kyle Brovloski
-                        <p>11 June, 06:12 PM</p>
-                    </div>
-                    <div class="item-amount">
-                        + ₱900
-                    </div>
-                </div>
-
-                <div class="item-sold">
-                    <div class="item-img">
-                        <ion-icon name="bag-check-outline"></ion-icon>
-                    </div>
-                    <div class="item-detail">
-                        Eric Cartman
-                        <p>08 June, 3:26 PM</p>
-                    </div>
-                    <div class="item-amount">
-                        + ₱356
-                    </div>
-                </div>
-
-                <div class="item-sold">
-                    <div class="item-img">
-                        <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    </div>
-                    <div class="item-detail">
-                        Subscription
-                        <p>06 June, 12:00 PM</p>
-                    </div>
-                    <div class="item-amount">
-                        - ₱1,000
-                    </div>
-                </div>
-
-                <div class="item-sold">
-                    <div class="item-img">
-                        <ion-icon name="bag-check-outline"></ion-icon>
-                    </div>
-                    <div class="item-detail">
-                        Kenny McCormic
-                        <p>05 June, 10:12 PM</p>
-                    </div>
-                    <div class="item-amount">
-                        + ₱127
-                    </div>
-                </div>
-
-            </div>
-
+            <div class="list-cont"></div>
         </div>
     </div>
 </div>
@@ -186,90 +118,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body invoice-body">
-                <div class="client-info">
-                    <div class="bill-info">
-                        <p class="modal-static-text">Billed To</p>
-                        <p class="modal-dynamic-text">
-                        <p class="bill-client">Marco Jorge H. Sardido</p>
-                        <p class="bill-street">Blk 11 Lot 1 Mahogany Village Phase 1</p>
-                        <p class="bill-address">Pulo, Cabuyao City, Laguna, 4025</p>
-                        </p>
-                    </div>
-                    <div class="invoice-info">
-                        <p class="modal-static-text">Invoice Details</p>
-                        <p class="modal-dynamic-text">
-                        <p class="invoice invoice-num">Invoice # 12345</p>
-                        <p class="invoice invoice-date">Date: June 01, 2021</p>
-                        <p class="invoice invoice-mode">Mode of Payment: Credit Card</p>
-                        </p>
-                    </div>
-                </div>
-                <hr>
-                <div class="product-info-table">
-                    <table class="table table-borderless tbl-modal">
-                        <thead>
-                            <tr>
-                                <th>Description</th>
-                                <th>Unit Cost</th>
-                                <th>Qty</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="tbl-product-details">
-                                        <strong>Apple IPhone 7</strong>
-                                        <p class="modal-static-text">Brand New Iphone 7 64 GB</p>
-                                    </div>
-                                </td>
-                                <td class="strong">₱20,000.00</td>
-                                <td class="strong">1</td>
-                                <td class="strong">₱20,000.00</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="tbl-product-details">
-                                        <strong>Apple Airpods Pro</strong>
-                                        <p class="modal-static-text">Wireless airpods PRO</p>
-                                    </div>
-                                </td>
-                                <td class="strong">₱23,000.00</td>
-                                <td class="strong">2</td>
-                                <td class="strong">₱46,000.00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <hr>
-                <div class="footer">
-                    <div class="subTotal-row">
-                        <div class="static-column">
-                            <p>Subtotal</p>
-                            <p>Sales tax</p>
-                            <p>Shipping</p>
-                        </div>
-                        <div class="dynamic-column">
-                            <p>66,000.00</p>
-                            <p>0.00</p>
-                            <p>0.00</p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="total-row">
-                        <div class="static-column">
-                            <p><strong>Total</strong></p>
-                        </div>
-                        <div class="dynamic-column">
-                            <p><strong>₱66,000.00</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="modal-body invoice-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+                <button type="button" class="btn btn-secondary btnViewItemClose" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

@@ -61,7 +61,7 @@
 }
 
 .income {
-    font-size: 3em;
+    font-size: 2.5em;
     font-weight: 600;
 }
 
@@ -167,6 +167,7 @@ table.tbl-history  {
     font-size: 13px;
     font-weight: 600;
     color: #2e4a83;
+    cursor: pointer;
 }
 
 .tblMenu-report {
@@ -198,8 +199,8 @@ table.tbl-history  {
 
 .transaction-side {
     flex-direction: column;
-    margin: 0 20px;
-    width: 500px;
+    width: 510px;
+    height: 650px;
 }
 
 .more-cont {
@@ -222,12 +223,12 @@ table.tbl-history  {
 .item-sold {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
 }
 
 .item-img {
     padding-top: 15px;
     font-size: 1.8em;
+    margin-right: 10px;
 }
 
 .item-detail {
@@ -236,12 +237,18 @@ table.tbl-history  {
     padding-top: 13px;
     font-weight: 500;
     line-height: 20px;
+    margin-right: 4px;
 }
 
 .item-detail p {
     font-weight: 300;
     color: #5c5c5c;
     font-size: 11px;
+}
+
+.item-detail span {
+    font-size: 10px;
+    color: #5c5c5c;
 }
 
 .item-amount {

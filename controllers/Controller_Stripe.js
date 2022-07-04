@@ -21,7 +21,7 @@ const stripeCheckoutSession = async (req, res)  => {
         const stripeSubColData = await getDoc(stripeSubColRef);
 
     
-        const getSellerType = (currentSellerData.data().sellerType === 'Individual') ? "sellerType_Individual" : "sellerType_Corporate";
+        const getSellerType = (currentSellerData.data().sellerType === 'Individual Seller') ? "sellerType_Individual" : "sellerType_Corporate";
     
         const individualSellerRef = doc(db, 'Stripe Price Handler', getSellerType);
         const individualSellerData = await getDoc(individualSellerRef);

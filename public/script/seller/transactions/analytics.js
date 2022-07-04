@@ -7,28 +7,36 @@ $(document).ready(() => {
     const trimmedUID = uuid.trim();
 
     dataForAnalytics(trimmedUID).then(res => {
-        const chartData = [];
+        const data = [];
+        const week = getLast7Days();
 
-        if (res.length === 0) return chartData
+        for (const iterator of res) {
 
-        for (const dateIndex of res) {
-            let amount = dateIndex.totalPrice;
-
+            let amount = iterator.totalPrice;
             amount = amount.replace(/[^\d\.]/g, "");
             amount = parseFloat(amount);
 
-            chartData.push({
-                x: convertStringDateToNumDate(dateIndex.date),
+            data.push({
+                x: convertStringDateToNumDate(iterator.date),
                 y: amount,
             })
         }
-        return chartData;
 
-    }).then((chartData) => {
-        let last7Days = getLast7Days();
-        const loadChartData = chartData.length !== 0 ? chartData : last7Days;
-        // Chart
-        loadChart(loadChartData);
+        for (let dataIndex = 0; dataIndex < data.length; dataIndex++) {
+            for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
+
+                if (data[dataIndex].x === week[weekIndex].x) {
+                    week[weekIndex] = data[dataIndex];
+                }
+            }
+        }
+
+        return { week, res };
+    }).then(({ week, res }) => {
+        if (res.length === 0) {
+            loadChart(getLast7Days())
+        }
+        loadChart(week)
     })
 
     // Get last week days
@@ -83,7 +91,6 @@ $(document).ready(() => {
         let result = `${stringDate[2]}-${stringDate[1]}-${stringDate[0]}`;
         return result;
     }
-    
 
 
     //  Chart
@@ -92,7 +99,6 @@ $(document).ready(() => {
         new Chart(transactionChart, {
             type: 'line',
             data: {
-                // labels: chartDate,
                 datasets: [{
                     label: 'Transaction Chart',
                     data: data,
@@ -158,4 +164,5 @@ $(document).ready(() => {
             }
         });
     }
+
 })
