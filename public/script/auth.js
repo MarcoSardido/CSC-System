@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -58,7 +58,6 @@ $(document).ready(() => {
 
 
     $("#signInWithGoogle").click(() => {
-
         const provider = new GoogleAuthProvider();
 
         signInWithPopup(auth, provider).then((user) => {
@@ -70,11 +69,33 @@ $(document).ready(() => {
             });
         }).catch(error => {
             const credential = GoogleAuthProvider.credentialFromError(error);
-            const email = error.email;
             const errorMessage = error.message;
-            console.log('@ErrorMessage: ',errorMessage);
-            console.log('@ErrorEmail: ',email)
-            console.log('@ErrorCredential: ',credential)
+            console.log('Error @Firebase Google Auth: ',errorMessage);
+            console.log('Error @Google Auth: ',credential)
         })
     })
+
+
+    $("#signInWithFacebook").click(() => {
+        const provider = new FacebookAuthProvider();
+
+        signInWithPopup(auth, provider).then((user) => {
+            const credential = FacebookAuthProvider.credentialFromResult(user);
+            const token = credential.accessToken;
+
+            user.user.getIdToken().then(idToken => {
+                window.location.assign('auth/sessionLogin?token='+idToken);
+            });
+        }).catch(error => {
+            const credential = FacebookAuthProvider.credentialFromError(error);
+            const errorMessage = error.message;
+            console.log('Error @Firebase Facebook Auth: ',errorMessage);
+            console.log('Error @Facebook Auth: ',credential)
+        })
+    })
+
+
+
+
+
 });
