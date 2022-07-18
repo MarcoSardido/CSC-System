@@ -4,10 +4,11 @@ const router = express.Router();
 import {
     dashboardPage,
     productPage,
-    addProduct,
     transactionPage,
     reportPage,
-    settingsPage
+    settingsPage,
+    updateProfile,
+
 } from '../controllers/Controller_Seller.js';
 
 import {
@@ -31,26 +32,33 @@ router.get('/auth', sellerSignInAndSignUpRoute);
 //? Creates a new session cookie when user sign in.
 router.get('/auth/sessionLogin', sessionLoginSeller);
 
-//? Check the user session cookie > direct to dashboard
-router.get('/', verifyCookieSeller, dashboardPage);
-
 //? Clears session cookie and logout.
 router.get('/auth/logout', sellerLogout);
+
+//? Check the user session cookie > direct to dashboard
+router.get('/', verifyCookieSeller, dashboardPage);
 
 router.get('/subscription_success/:id', subscriptionSuccess);
 
 router.get('/products', verifyCookieSeller, productPage)
-router.post('/products', addProduct)
 
 router.get('/transactions', verifyCookieSeller, transactionPage)
 router.get('/reports', verifyCookieSeller, reportPage)
 router.get('/settings', verifyCookieSeller, settingsPage)
 
-// router.get('/settings/:?tab=account', (req, res) => {
-//     console.log('nice')
-// })
 
-//SECTION: Side Nav GET Request
+
+
+
+//! ---------------------------------------------------------------- 
+//                       Live Selling
+//! ----------------------------------------------------------------
+import { liveSession } from '../controllers/Controller_SellerLive.js'
+
+router.get('/live', verifyCookieSeller, liveSession);
+
+
+
 
 
 //ANCHOR: All POST Request
@@ -58,5 +66,8 @@ router.get('/settings', verifyCookieSeller, settingsPage)
 router.post('/', sellerSignUp); //creates new account
 
 router.post('/create-checkout-session', stripeCheckoutSession);
+
+//? Settings: Update User Account 
+router.post('/settings', updateProfile)
 
 export { router as routes }

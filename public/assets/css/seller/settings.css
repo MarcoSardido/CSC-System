@@ -1,5 +1,292 @@
-.seller-container {
+.main-container {
     width: 100%;
+    height: 100%;
+}
+
+header {
+    font-size: 40px;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.settings-container {
+    display: flex;
+}
+
+aside {
+    width: 25%;
+    padding: 30px 20px;
+}
+
+.tab-links {
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    padding-right: 20px;
+}
+
+.tab-links .settings-link.active {
+    color: #f1f1ff;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    border-radius: 50px;
+    padding: 10px 15px
+}
+
+.tab-links .settings-link {
+    color: #777;
+    padding-left: 15px;
+    margin: 0 0 20px;
+}
+
+.tab-links .settings-link.active:hover {
+    color: #f1f1ff;
+}
+
+.tab-links .settings-link:hover {
+    color: #485fed;
+}
+
+.tab-container {
+    border-left: 1px solid #c7c7c7;
+    width: 75%;
+    height: 85vh;
+    padding: 10px 50px;
+}
+
+.tab-container .tab-header {
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.tab-container .header-line {
+    height: 5px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    border: none;
+    border-radius: 10px;
+    position: absolute;
+    bottom: 15px;
+    left: 0px;
+}
+
+.tab-container .account-tab,
+.tab-container .faq-tab,
+.tab-container .about-tab {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.tab-container .account-tab .header-line {
+    width: 130px;
+}
+
+.tab-container .faq-tab .header-line {
+    width: 45px;
+}
+
+.tab-container .about-tab .header-line {
+    width: 105px;
+}
+
+.account-tab .tab-body .profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.account-tab .tab-body .profile .avatar {
+    margin-right: 30px;
+    position: relative;
+}
+
+.account-tab .tab-body .profile .avatar .lblProfile {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.account-tab .tab-body .profile .avatar .btn-change {
+    width: 33px;
+    height: 33px;
+    border: none;
+    padding-top: 4px;
+    border-radius: 50%;
+    background: #777;
+    position: absolute;
+    font-size: 25px;
+    color: #fff;
+    bottom: 0px;
+    right: 0px;
+}
+
+.account-tab .tab-body .profile .avatar img {
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+}
+
+.filUpload {
+    width: 115px;
+    height: 115px;
+}
+
+.account-tab .tab-body .info .main-text {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.account-tab .tab-body .info .sub-text {
+    color: #777;
+    font-size: 15px;
+}
+
+.account-tab .tab-body .information {
+    padding: 15px 0;
+    border-top: 1px solid #e1e1e1;
+}
+
+.account-tab .tab-body .information .form-group {
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.account-tab .tab-body .information .form-group .label-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-tab .tab-body .information .form-group .col .label-container p {
+    margin-bottom: 0px;
+}
+
+.account-tab .tab-body .information .form-group .col .label-container .main-label {
+    font-weight: 600;
+}
+
+.account-tab .tab-body .information .form-group .col .label-container .sub-label {
+    color: #777;
+    font-weight: 500;
+}
+
+.account-tab .tab-body .information .form-group .col input[type="text"],
+.account-tab .tab-body .information .form-group .col input[type="date"],
+.account-tab .tab-body .information .form-group .col input[type="email"],
+.account-tab .tab-body .information .form-group .col select {
+    width: 100%;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.account-tab .tab-body .information .form-group .col input[type="text"]:focus,
+.account-tab .tab-body .information .form-group .col input[type="date"]:focus,
+.account-tab .tab-body .information .form-group .col input[type="email"]:focus,
+.account-tab .tab-body .information .form-group .col select:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px;
+    border: 1px solid #485fed;
+}
+
+.account-tab .tab-body .information .form-group .col input:disabled,
+.account-tab .tab-body .information .form-group .col select:disabled {
+    cursor: not-allowed;
+    background: #dadada;
+    color: black;
+    opacity: 0.7;
+}
+
+.account-tab .tab-body .information .form-group:nth-child(2) {
+    margin: 30px 0px;
+}
+
+.account-tab .tab-body .information .form-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.account-tab .tab-body .information .form-button .edit-div,
+.account-tab .tab-body .information .form-button .cancel-div {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-tab .tab-body .information .form-button button,
+.account-tab .tab-body .information .form-button .edit-div,
+.account-tab .tab-body .information .form-button .cancel-div {
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+    border: none;
+    color: #485def;
+    background: transparent;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    transition: all 0.3s ease-in-out;
+}
+
+.account-tab .tab-body .information .form-button button:hover,
+.account-tab .tab-body .information .form-button .edit-div:hover,
+.account-tab .tab-body .information .form-button .cancel-div:hover {
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+}
+
+.account-tab .tab-body .information .form-button .submit-form .cont {
+    display: flex;
+    gap: 20px;
+}
+
+.account-tab .tab-body .danger-zone {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 15px;
+    padding: 0 20px;
+}
+
+.account-tab .tab-body .danger-zone .delete-account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 100px;
-    background: green;
+}
+
+.account-tab .tab-body .danger-zone .delete-account p {
+    margin-bottom: 0px;
+}
+
+.account-tab .tab-body .danger-zone .delete-account .info-labels .main-text {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.account-tab .tab-body .danger-zone .delete-account .info-labels .sub-text {
+    color: #777;
+    font-size: 15px;
+}
+
+.account-tab .tab-body .danger-zone .delete-account .delete-button button {
+    border: none;
+    height: 3rem;
+    color: red;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: transparent;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    transition: all 0.3s ease-in-out;
+}
+
+.account-tab .tab-body .danger-zone .delete-account .delete-button button:hover {
+    color: #fff;
+    background: red;
 }

@@ -276,14 +276,13 @@
 .profile #logout {
     position: absolute;
     bottom: 30px;
-    transform: translateX(-50%);
     min-width: 50px;
     font-size: 1.8em;
     border-radius: 12px;
     text-align: center;
-    transform: rotate(180deg);
     text-decoration: none;
     color: #fff;
+    pointer-events: auto;
 }
 
 .navigation.active .profile #logout {

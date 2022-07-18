@@ -1,5 +1,35 @@
-<pre>
-    * Reports
-</pre>
+<link rel="stylesheet" href="/public/assets/css/seller/manageReports.css">
+<script src="/public/script/seller/records/recordsTable.js" type="module"></script>
 
+<div class="report-main-container">
+    <p id="uid" hidden>
+        <%- uid %>
+    </p>
+    <div class="report-header">
+        <h5>Today's Report</h5>
+    </div>
 
+    <div class="report-body">
+        <div class="table-data">
+            <table id="tableData-report" class="table table-borderless tbl-history">
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Customer</th>
+                        <th>Report Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="viewReportModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content report-content"></div>
+    </div>
+</div>

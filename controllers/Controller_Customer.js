@@ -1,7 +1,7 @@
 'use strict';
 
 import { firebase, firebaseAdmin } from '../firebase.js';
-import { getAuth, onAuthStateChanged } from  'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore, collection, doc, addDoc, setDoc, getDoc } from 'firebase/firestore';
 
 import Customer from '../models/Model_Customer.js';
@@ -21,9 +21,8 @@ const now = new Date();
 // Protected Route
 const customerDash = (req, res) => {
     const uid = req.body.uid;
-    //const userInfo = req.body.user;
 
-    adminAuth.getUser(uid).then( async (userRecord) => {
+    adminAuth.getUser(uid).then(async (userRecord) => {
 
         const docRef = doc(db, 'Accounts', `customer_${userRecord.uid}`);
         const docSnap = await getDoc(docRef);
@@ -51,7 +50,7 @@ const customerDash = (req, res) => {
                 contactNo: '',
                 displayName: userRecord.displayName === undefined ? "" : userRecord.displayName,
                 email: userRecord.email,
-                fullName: '',   
+                fullName: '',
                 gender: '',
                 isAnonymous: false,
             });
@@ -60,68 +59,73 @@ const customerDash = (req, res) => {
 
             await setDoc(doc(db, 'Accounts', `customer_${userRecord.uid}`), {
                 signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z')
-            }, {merge: true});
+            }, { merge: true });
 
-            const customerArray = [];
-            const accountArray = [];
-
-            const accountRef = doc(db, 'Accounts', `customer_${userRecord.uid}`);
-            const accountData = await getDoc(accountRef);
-
-            const account = new Account (
-                accountData.data().id,
-                accountData.data().accRole,
-                accountData.data().accStatus,
-                accountData.data().createdAt,
-                accountData.data().displayName,
-                accountData.data().email,
-                accountData.data().imgType,
-                accountData.data().isVerified,
-                accountData.data().profileUpdatedAt,
-                accountData.data().signedInAt,
-                accountData.data().userPhoto
-            );
-            accountArray.push(account);
-
-            const customerRef = doc(db, 'Customers', userRecord.uid);
-            const customerData = await getDoc(customerRef);
-
-            const customer = new Customer (
-                customerData.id,
-                customerData.data().birthday,
-                customerData.data().contactNo,
-                customerData.data().displayName,
-                customerData.data().email,
-                customerData.data().fullName,
-                customerData.data().gender,
-                customerData.data().isAnonymous
-            );
-            customerArray.push(customer);
-
-            console.log('User Successfully Logged in: ' + userRecord.uid);
-
-            res.render('customer/dashboard', { 
-                title: 'Customer Center',
-                layout: 'layouts/customerLayout',
-                displayAccountInfo: accountArray,
-                displayCustomerInfo: customerArray,
-                messageCode: '',
-                infoMessage: '',
-            });
+            userData(userRecord.uid).then(result => {
+                res.render('customer/dashboard', {
+                    layout: 'layouts/customerLayout',
+                    displayAccountInfo: result.accountArray,
+                    displayCustomerInfo: result.customerArray,
+                    messageCode: '',
+                    infoMessage: '',
+                });
+            })
         }
     }).catch(error => {
         console.error(`Error fetching user data: ${error}`);
     });
 
-    
+
 };
+
+const orderPage = (req, res) => {
+    const uid = req.body.uid;
+
+    userData(uid).then(result => {
+        res.render('customer/order', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            messageCode: '',
+            infoMessage: '',
+        });
+    })
+}
+
+const reviewPage = (req, res) => {
+    const uid = req.body.uid;
+
+    userData(uid).then(result => {
+        res.render('customer/review', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            messageCode: '',
+            infoMessage: '',
+        });
+    })
+}
+
+const settingsPage = (req, res) => {
+    const uid = req.body.uid;
+
+    userData(uid).then(result => {
+        res.render('customer/settings', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            messageCode: '',
+            infoMessage: '',
+        });
+    })
+}
 
 const profileUpdate = async (req, res) => {
 
-    const {user, profilePhoto, displayName, fullName, email, contactNo, birthday, gender } = req.body;
+    const { user, profilePhoto, displayName, fullName, email, contactNo, birthday, gender } = req.body;
     const parsedImg = JSON.parse(profilePhoto);
 
-    if(parsedImg != null && imageMimeTypes.includes(parsedImg.type)) {
+    if (parsedImg != null && imageMimeTypes.includes(parsedImg.type)) {
         const convertedImg = parsedImg.data;
         const imgType = parsedImg.type;
 
@@ -133,8 +137,8 @@ const profileUpdate = async (req, res) => {
                 profileUpdatedAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
                 signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
                 userPhoto: convertedImg
-            }, {merge: true});
-            
+            }, { merge: true });
+
             await setDoc(doc(db, 'Customers', user), {
                 birthday: birthday,
                 contactNo: contactNo,
@@ -142,7 +146,7 @@ const profileUpdate = async (req, res) => {
                 email: email,
                 fullName: fullName,
                 gender: gender,
-            }, {merge: true});
+            }, { merge: true });
 
             const customerArray = [];
             const accountArray = [];
@@ -150,7 +154,7 @@ const profileUpdate = async (req, res) => {
             const accountRef = doc(db, 'Accounts', `customer_${user}`);
             const accountData = await getDoc(accountRef);
 
-            const account = new Account (
+            const account = new Account(
                 accountData.data().id,
                 accountData.data().accRole,
                 accountData.data().accStatus,
@@ -168,7 +172,7 @@ const profileUpdate = async (req, res) => {
             const customerRef = doc(db, 'Customers', user);
             const customerData = await getDoc(customerRef);
 
-            const customer = new Customer (
+            const customer = new Customer(
                 customerData.id,
                 customerData.data().birthday,
                 customerData.data().contactNo,
@@ -183,7 +187,6 @@ const profileUpdate = async (req, res) => {
             console.log(`---Profile successfully updated!---\ncustomerID: ${user}`)
 
             res.render('customer/settings', {
-                title: 'Customer Center',
                 layout: 'layouts/customerLayout',
                 displayAccountInfo: accountArray,
                 displayCustomerInfo: customerArray,
@@ -199,8 +202,72 @@ const profileUpdate = async (req, res) => {
 
 
 
+const liveSession = (req, res) => {
+    const uid = req.body.uid;
 
-export { 
+    userData(uid).then(result => {
+        res.render('customer/liveSelling', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            messageCode: '',
+            infoMessage: '',
+        });
+    })
+}
+
+
+
+
+
+// Firestore Functions
+async function userData(uid) {
+
+    const accountRef = doc(db, 'Accounts', `customer_${uid}`);
+    const accountData = await getDoc(accountRef);
+
+    const accountArray = [];
+    accountArray.push({
+        id: accountData.data().id,
+        accRole: accountData.data().accRole,
+        accStatus: accountData.data().accStatus,
+        createdAt: accountData.data().createdAt,
+        displayName: accountData.data().displayName,
+        email: accountData.data().email,
+        imgType: accountData.data().imgType,
+        isVerified: accountData.data().isVerified,
+        profileUpdatedAt: accountData.data().profileUpdatedAt,
+        signedInAt: accountData.data().signedInAt,
+        userPhoto: accountData.data().userPhoto,
+    });
+
+    const customerRef = doc(db, 'Customers', uid);
+    const customerData = await getDoc(customerRef);
+
+    const customerArray = [];
+    customerArray.push({
+        id: customerData.id,
+        birthday: customerData.data().birthday,
+        contactNo: customerData.data().contactNo,
+        displayName: customerData.data().displayName,
+        email: customerData.data().email,
+        fullName: customerData.data().fullName,
+        gender: customerData.data().gender,
+        isAnonymous: customerData.data().isAnonymous
+    });
+
+    return { accountArray, customerArray }
+
+}
+
+
+export {
     customerDash,
-    profileUpdate
+    orderPage,
+    reviewPage,
+
+    settingsPage,
+    profileUpdate,
+
+    liveSession,
 }

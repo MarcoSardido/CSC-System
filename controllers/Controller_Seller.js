@@ -8,8 +8,6 @@ import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs } from '
 
 import { hasSubscription } from './Controller_Stripe.js';
 
-import * as accSubscriptionHandler from '../models/Model_AccSubscription.js';
-
 const adminAuth = firebaseAdmin.auth();
 const db = getFirestore(firebase);
 
@@ -41,6 +39,13 @@ const dashboardPage = async (req, res) => {
                     const sellerRef = doc(db, 'Sellers', uid);
                     const sellerData = await getDoc(sellerRef);
 
+                    const sellerSubRef = collection(db, `Sellers/${uid}/Business Information`)
+                    const sellerSubData = await getDocs(sellerSubRef);
+                    let storeName;
+                    sellerSubData.forEach(item => {
+                        storeName = item.id
+                    })
+
                     if (! (stripeAccData.data().isNew)) { //Old Subscriber
 
                         console.log('Render Dashboard (Old Subscriber)')
@@ -55,7 +60,8 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: '',
                             subUpdateSuccess: '',
-                            sellerInfo: sellerData.data()
+                            sellerInfo: sellerData.data(),
+                            store: storeName,
                         });
 
                     } else if (stripeSubColData.data().subscriptionCreated == stripeSubColData.data().currentSubscriptionBill) { //New Subscription
@@ -72,7 +78,8 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: 'subscriptionSuccess',
                             subUpdateSuccess: '',
-                            sellerInfo: sellerData.data()
+                            sellerInfo: sellerData.data(),
+                            store: storeName,
                         });
 
                     } else if (stripeSubColData.data().currentSubscriptionBill != stripeCurrentSubBill) { //Update Subscribed Usage
@@ -89,7 +96,8 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: '',
                             subUpdateSuccess: 'subscriptionUpdateSuccess',
-                            sellerInfo: sellerData.data()
+                            sellerInfo: sellerData.data(),
+                            store: storeName,
                         });
                     }
 
@@ -105,7 +113,8 @@ const dashboardPage = async (req, res) => {
                         hasSubscription: false,
                         subSuccess: '',
                         subUpdateSuccess: '',
-                        sellerInfo: ''
+                        sellerInfo: '',
+                        store: '',
                     });
                 };
 
@@ -120,7 +129,8 @@ const dashboardPage = async (req, res) => {
                     user: userRecord,
                     hasSubscription: '',
                     subSuccess: '',
-                    sellerInfo: ''
+                    sellerInfo: '',
+                    store: '',
                 });
             };
         });
@@ -149,10 +159,6 @@ const productPage = (req, res) => {
     })
 }
 
-const addProduct = (req, res) => {
-    console.log(req.body)
-}
-
 
 
  const transactionPage = (req, res) => {
@@ -175,6 +181,7 @@ const reportPage = (req, res) => {
     res.render('seller/manageReport', {
         title: 'report',
         url: "urlPath",
+        uid: res.locals.uid,
         layout: 'layouts/sellerLayout', 
         verification: '',
         user: '',
@@ -185,27 +192,96 @@ const reportPage = (req, res) => {
     })
 }
 
- const settingsPage = (req, res) => {
+const settingsPage = async (req, res) => {
+    const uid = req.body.uid;
+    const currentTab = req.query.tab === 'account' ? 'account' :
+                       req.query.tab === 'faq' ? 'faq' :
+                       'about' ;
 
-    res.render('seller/settings', {
-        title: 'settings',
-        url: "urlPath",
-        layout: 'layouts/sellerLayout', 
-        verification: '',
-        user: '',
-        hasSubscription: true,
-        subSuccess: '',
-        subUpdateSuccess: '',
-        sellerInfo: ''
-    })
+    // Get user data
+    if (currentTab === 'account') {
+        const userData = {};
+
+        // Accounts Collection
+        const accountRef = doc(db, `Accounts/seller_${uid}`);
+        const accountDoc = await getDoc(accountRef);
+
+        // Seller Collection
+        const sellerRef = doc(db, `Sellers/${uid}`);
+        const sellerDoc = await getDoc(sellerRef);
+
+        Object.assign(userData, {
+            
+            accountPhoto: `data:${accountDoc.data().imgType};base64,${accountDoc.data().userPhoto}`,
+            accountName: accountDoc.data().displayName,
+            accountFname: sellerDoc.data().fullName,
+            accountEmail: accountDoc.data().email,
+            accountNumber: sellerDoc.data().contactNo,
+            accountBirthday: sellerDoc.data().birthday,
+            accountGender: sellerDoc.data().gender,
+        })
+
+        res.render('seller/settings', {
+            title: 'settings',
+            url: "urlPath",
+            layout: 'layouts/sellerLayout',
+            settingsTab: currentTab,
+            settingsData: userData,
+            verification: '',
+            user: '',
+            hasSubscription: true,
+            subSuccess: '',
+            subUpdateSuccess: '',
+            sellerInfo: '',
+        })
+    } else {
+
+        res.render('seller/settings', {
+            title: 'settings',
+            url: "urlPath",
+            layout: 'layouts/sellerLayout',
+            settingsTab: currentTab,
+            verification: '',
+            user: '',
+            hasSubscription: true,
+            subSuccess: '',
+            subUpdateSuccess: '',
+            sellerInfo: '',
+        })
+    }
 }
+
+const updateProfile = async (req, res) => {
+    const { uid, accountName, accountFname, accountEmail,
+        accountNumber, accountBday, accountGender } = req.body;
+
+        // Accounts Collection
+        const accountRef = doc(db, `Accounts/seller_${uid}`);
+        await setDoc(accountRef, {
+            displayName: accountName,
+        }, {merge: true});
+
+        // Seller Collection
+        const sellerRef = doc(db, `Sellers/${uid}`);
+        await setDoc(sellerRef, {
+            birthday: accountBday,
+            contactNo: accountNumber,
+            displayName: accountName,
+            email: accountEmail,
+            fullName: accountFname,
+            gender: accountGender,
+        }, {merge: true});
+    
+    console.log('done updating')
+}
+
 
 
 export {
     dashboardPage,
-    addProduct,
     productPage,
     transactionPage,
     reportPage,
-    settingsPage
+    settingsPage,
+    updateProfile,
 }

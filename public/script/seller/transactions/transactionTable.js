@@ -83,7 +83,7 @@ $(document).ready(() => {
 
         if (modalBody.children.length !== 0) {
             modalBody.innerHTML = "";
-        } 
+        }
 
         const address = data.customer.address;
         const split = address.split(',');
@@ -152,7 +152,7 @@ $(document).ready(() => {
         `;
 
         modalBody.insertAdjacentHTML('beforeend', dataContent)
-        
+
     }
 
     const loopEachItem = (items) => {

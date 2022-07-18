@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> <%- title %>  </title>
+    <title> Customer Center </title>
     <link rel="shortcut icon" href="/public/assets/images/utils/CSCWebIcon.png" sizes="32x32" type="image/x-icon">
 
 
@@ -52,45 +52,16 @@
 
     <!-- My Script -->
     <script defer src="/public/script/customer.js"></script>
-    <script defer src="/public/script/filePond.js"></script>
 
     <!-- My Style -->
     <link rel="stylesheet" href="/public/assets/css/customer/sidebar.css">
-    <link rel="stylesheet" href="/public/assets/css/customer/dashboard.css">
-    <link rel="stylesheet" href="/public/assets/css/customer/order.css">
-    <link rel="stylesheet" href="/public/assets/css/customer/review.css">
-    <link rel="stylesheet" href="/public/assets/css/customer/settings.css">
-
+    
 </head>
 <body>
     <%- include('../partials/customer/_sideBar') %> 
     
     <div class="home-content">
-
-        <div id="dashSection" style="display:block">
-
-            <%- include('../customer/dashboard') %> 
-
-        </div> 
-
-        <div id="prodSection" style="display:none">
-
-            <%- include('../customer/order') %>
-
-        </div>
-
-        <div id="transactSection" style="display:none">
-
-            <%- include('../customer/review') %> 
-
-        </div>
-
-        <div id="settingSection" style="display:none">
-
-            <%- include('../customer/settings') %>
-            
-        </div>
-    
+        <%-body%>
     </div>
 
 </body>

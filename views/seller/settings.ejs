@@ -1,3 +1,165 @@
-<pre>
-    * Settings
-</pre>
+<link rel="stylesheet" href="/public/assets/css/seller/settings.css">
+<script defer src="/public/script/seller/filepond/fileUploadSettings.js"></script>
+<script defer src="/public/script/seller/settings/updateProfile.js" type="module"></script>
+
+<div class="main-container"> 
+    <header>
+        Settings
+        <p id="uid" hidden>
+            <%- uid %>
+        </p>
+    </header>
+    <div class="settings-container">
+        <aside>
+            <div class="tab-links">
+                <a href="?tab=account" class="settings-link active">Account</a>
+                <a href="?tab=faq" class="settings-link">FAQ</a>
+                <a href="?tab=about" class="settings-link">About Us</a>
+            </div>
+        </aside>
+        <div class="tab-container">
+            <div class="account-tab" style=<%=settingsTab==='account' ? ("display:block") : ("display:none") %>
+                >
+                <div class="tab-header">
+                    My Account
+                    <b class="header-line"></b>
+                </div>
+                <div class="tab-body">
+                    <section class="profile">
+                        <div class="avatar">
+                            <p class="lblProfile">Avatar</p>
+                            <img src="<%=settingsData.userPhoto ? settingsData.userPhoto : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'%>"
+                            atl="<%=settingsData.accountName ? settingsData.accountName : 'seller12345'%>" class="display-photo" style="display: block">
+                             <div class="filUpload" style="display: none">
+                                 <input type="file" name="profilePhoto" class="filepond">
+                            </div>
+                            <button class="btn-change" id="icon-upload" style="display: block">
+                                <ion-icon name="camera"></ion-icon>
+                            </button>
+                            <button class="btn-change" id="icon-close"  style="display: none">
+                                <ion-icon name="close-outline"></ion-icon>
+                            </button>
+                        </div>
+                        <div class="info">
+                            <p class="main-text"><%=settingsData.accountName ? settingsData.accountName : 'seller12345'%></p>
+                            <p class="sub-text"><%=settingsData.accountEmail%></p>
+                        </div>
+                    </section>
+                    <section class="information">
+                        <form action="settings?tab=account" method="POST" >
+                            <div class="form-group">
+                                <div class="col">
+                                    <input name="uid" hidden value="<%-uid%>" />
+                                    <div class="label-container">
+                                        <p class="main-label">Display name</p>
+                                        <p class="sub-label">Visible to other members</p>
+                                    </div>
+                                    <input required class="form-input" name="accountName" type="text" placeholder="e.g. John" disabled value="<%=settingsData.accountName ? settingsData.accountName : 'seller12345'%>" />
+                                </div>
+                                <div class="col">
+                                    <div class="label-container">
+                                        <p class="main-label">Full name</p>
+                                        <p class="sub-label">How do you want to be called?</p>
+                                    </div>
+                                    <input required class="form-input" name="accountFname" type="text"
+                                        placeholder="e.g. John Smith" disabled value="<%=settingsData.accountFname ? settingsData.accountFname : null%>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col">
+                                    <div class="label-container">
+                                        <p class="main-label">Email address</p>
+                                        <p class="sub-label">For logging in</p>
+                                    </div>
+                                    <input required class="form-input" name="accountEmail" type="email"
+                                        placeholder="e.g. john_smith@sample.com" disabled value="<%=settingsData.accountEmail%>">
+                                </div>
+                                <div class="col">
+                                    <div class="label-container">
+                                        <p class="main-label">Phone number</p>
+                                        <p class="sub-label">For receiving notifications</p>
+                                    </div>
+                                    <input required class="form-input" name="accountNumber" type="text"
+                                        placeholder="e.g. +31 6 12 34 56 78" disabled value="<%=settingsData.accountNumber%>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col">
+                                    <div class="label-container">
+                                        <p class="main-label">Birth Date</p>
+                                        <p class="sub-label">For payment purposes</p>
+                                    </div>
+                                    <input required class="form-input" name="accountBday" type="date" disabled value="<%=settingsData.accountBirthday%>">
+                                </div>
+                                <div class="col">
+                                    <div class="label-container">
+                                        <p class="main-label">Gender</p>
+                                        <p class="sub-label">For other purposes</p>
+                                    </div>
+                                    <select required class="form-input" name="accountGender" disabled>
+                                        <option value="">Select a gender...</option>
+                                        <%if(settingsData.accountGender === 'Male'){%> 
+                                            <option selected value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        <%}else if(settingsData.accountGender === 'Female'){%>
+                                            <option value="Male">Male</option>
+                                            <option selected value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        <%}else{%> 
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option selected value="Other">Other</option>
+                                        <%}%> 
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-button">
+                                <div class="edit-form" style="display: block">
+                                    <div class="edit-div" id="btnEditProfile">Edit Profile</div>
+                                </div>
+                                <div class="submit-form" style="display: none">
+                                    <div class="cont">
+                                        <button id="btnUpdateData" type="submit">Save Changes</button>
+                                        <div class="cancel-div" id="btnCancelUpdate">Cancel</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    <section class="danger-zone">
+                        <div class="delete-account">
+                            <div class="info-labels">
+                                <p class="main-text">Delete Account</p>
+                                <p class="sub-text">By deleting your account you will lose all your data</p>
+                            </div>
+                            <div class="delete-button">
+                                <button>Delete Account</button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="faq-tab" style=<%=settingsTab==='faq' ? ("display:block") : ("display:none") %>
+                >
+                <div class="tab-header">
+                    FAQ
+                    <b class="header-line"></b>
+                </div>
+                <div class="tab-body">
+
+                </div>
+            </div>
+            <div class="about-tab" style=<%=settingsTab==='about' ? ("display:block") : ("display:none") %>
+                >
+                <div class="tab-header">
+                    About Us
+                    <b class="header-line"></b>
+                </div>
+                <div class="tab-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

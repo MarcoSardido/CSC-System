@@ -27,22 +27,22 @@
 }
 
 .dashMainCont .header-cont .icon ion-icon {
-    background: #fff;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-    cursor: pointer;
-    pointer-events: none;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+  cursor: pointer;
+  pointer-events: none;
 }
 
 .dashMainCont .header-cont .icon .notif {
-    position: absolute;
-    right: 65px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-    z-index: 1;
+  position: absolute;
+  right: 65px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  z-index: 1;
 }
 
 .dashMainCont .body-cont {
@@ -325,19 +325,19 @@
 .createLiveCont .editCont .detailsCont input[type="text"],
 .createLiveCont .editCont .detailsCont input[type="time"] {
   margin-top: 3px;
-    transition: all 0.30s ease-in-out;
-    outline: none;
-    padding: 10px 10px;
-    border: 1px solid #e1e1e1;
-    resize: none;
-    border-radius: 5px;
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 10px 10px;
+  border: 1px solid #e1e1e1;
+  resize: none;
+  border-radius: 5px;
 }
 
 .createLiveCont .editCont .detailsCont input[type="text"]:focus,
 .createLiveCont .editCont .detailsCont input[type="time"]:focus {
-    box-shadow: 0 0 5px #485fed;
-    padding: 10px 10px; 
-    border: 1px solid #485fed;
+  box-shadow: 0 0 5px #485fed;
+  padding: 10px 10px;
+  border: 1px solid #485fed;
 }
 
 .createLiveCont .editCont .detailsCont .storeName .mainText {
@@ -367,9 +367,9 @@
 }
 
 .createLiveCont .editCont .btnPrevCont {
-   display: flex;
-   justify-content: center;
-   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 .createLiveCont .editCont .btnPrevCont .previewButton {
@@ -403,9 +403,43 @@
 }
 
 .createLiveCont .prevCont .prevDesc .labelDesc {
-   font-size: 15px;
+  font-size: 15px;
   color: #9d9c9b;
 }
+
+.createLiveCont .prevCont .preview.skeleton {
+  width: 100%;
+  height: 20vh;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .upperCont {
+  height: 10vh;
+  display: flex;
+  padding: 5px 0;
+}
+
+.createLiveCont .prevCont .preview.skeleton .upperCont .logo {
+  height: 60px;
+  width: 60px;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeNameCont .fixedLiveStatus {
+  background: none;
+  color: #777;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeNameCont .storeName,
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeDescCont .storeDesc {
+  color: #777;
+}
+
+
 
 .createLiveCont .prevCont .preview {
   width: 100%;
@@ -425,14 +459,13 @@
 
 .createLiveCont .prevCont .preview .upperCont .logo {
   background: #fff;
-  margin-left: 10px;
   border-radius: 10px;
   display: flex;
 }
 
 .createLiveCont .prevCont .preview .upperCont .logo img {
-    width: 60px;
-    border-radius: 10px;
+  width: 60px;
+  border-radius: 10px;
 }
 
 .createLiveCont .prevCont .preview .lowerCont {
@@ -445,19 +478,19 @@
   color: #fff;
 }
 
-.createLiveCont .prevCont .preview .lowerCont .storeNameCont p.fixedLiveStatus {
-    margin-right: 10px;
-    background: red;
-    border-radius: 10px;
-    width: 50px;
-    height: 25px;
-    font-size: 15px;
-    text-align: center;
-    color: #fff;
-    border: 2px solid #fff;
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont .fixedLiveStatus {
+  margin-right: 10px;
+  background: red;
+  border-radius: 10px;
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #fff;
 }
 
-.createLiveCont .prevCont .preview .lowerCont .storeNameCont p.storeName {
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont .storeName {
   font-weight: 600;
 }
 
@@ -510,5 +543,5 @@
 }
 
 .filepond--item {
-    width: 100%;
+  width: 100%;
 }

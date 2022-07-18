@@ -1,52 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
     <title>City Sales Cloud</title>
-    <link rel="shortcut icon" href="/public/assets/images/utils/CSCWebIcon.png" sizes="32x32" type="image/x-icon">
+    <!-- Meta Tags -->
+    <meta property="og:title" content="City Sales Cloud">
+    <meta property="og:description" content="Online Live Selling Platform in the Philippines">
+    <meta property="og:type" content="website">
+    <meta name="keywords" content="Online Live Selling, Live Selling Platform, Online Selling Philippines">
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="/public/assets/images/mainLogo.png" sizes="32x32" type="image/x-icon">
 
     <!-- ANCHOR: General Plugins -->
 
-        <!-- Custom Google Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
 
-        <!-- Icons -->
-        <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <script src="https://kit.fontawesome.com/11cc391cc4.js" crossorigin="anonymous"></script>
+    <!-- Vendor CSS Files -->
+    <link href="/public/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="/public/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/public/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/public/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="/public/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/public/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-        <!-- JQuery -->
-        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
-        <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+    <!-- Icons -->
+    <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/11cc391cc4.js" crossorigin="anonymous"></script>
 
-        <!-- Bootstrap -->
-        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js' integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg==' crossorigin='anonymous'></script>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css' integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==' crossorigin='anonymous'/>
+    <!-- JQuery -->
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+        integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=='
+        crossorigin='anonymous'></script>
+    <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
 
-        <!-- My Style -->
-        <link rel="stylesheet" href="/public/assets/css/normalize.css">
-    
+    <!-- Bootstrap -->
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js'
+        integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg=='
+        crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css'
+        integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=='
+        crossorigin='anonymous' />
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="/public/assets/css/normalize.css">
+
     <!-- ANCHOR: End of General Plugins -->
 
-        <!-- Pre-loader Style -->
-        <!-- <link rel="stylesheet" href="/public/assets/css/scss/loader.css"> -->
+    <!-- Pre-loader Style -->
+    <!-- <link rel="stylesheet" href="/public/assets/css/scss/loader.css"> -->
 
-        <!-- Landing Page Style -->
-        <link rel="stylesheet" href="/public/assets/css/landingPage.css">
+    <!-- Landing Page Style -->
+    <link rel="stylesheet" href="/public/assets/css/landingPage.css">
 
-        <!-- 404 Page Style -->
-        <link rel="stylesheet" href="/public/assets/css/404Page.css">
+    <!-- 404 Page Style -->
+    <link rel="stylesheet" href="/public/assets/css/404Page.css">
 
-        <!-- Utils JS -->
-        <!-- <script defer src="/public/script/utils.js"></script> -->
+    <!-- Utils JS -->
+    <!-- <script defer src="/public/script/utils.js"></script> -->
+
+    <!-- Vendor JS Files -->
+    <script defer src="/public/assets/vendor/aos/aos.js"></script>
+    <script defer src="/public/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script defer src="/public/assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script defer src="/public/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script defer src="/public/assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script defer src="/public/assets/vendor/waypoints/noframework.waypoints.js"></script>
+
+    <!-- Main JS File -->
+    <script defer src="/public/script/landingPage.js"></script>
 
 </head>
+
 <body>
     <%- body %>
 </body>
-</html>
 
+</html>

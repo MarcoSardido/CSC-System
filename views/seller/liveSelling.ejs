@@ -1,0 +1,40 @@
+<link rel="stylesheet" href="/public/assets/css/seller/liveSelling.css">
+<script defer src="/public/script/seller/live/groupChat.js" type="module"></script>
+
+<div class="main-container">
+    <div class="header-container">
+        <p class="lbl-title">Live Selling Seller</p>
+        <p id="uid" hidden><%- uid %></p>
+    </div>
+    <div class="body-container">
+        <div class="product-selection">
+            <p class="lbl-title">
+                Product Selection
+            </p>
+            <div class="product-list">
+
+            </div>
+        </div>
+        <div class="live-selling">
+            <div class="video">
+                <video src=""></video>
+            </div>
+            <div class="product">
+                <div class="current">
+
+                </div>
+            </div>
+        </div>
+        <div class="chat-box">
+            <div class="chat">
+                <div class="conversation"></div>
+                <div class="input-form">
+                    <input type="text" id="txtInputChat" placeholder="Aa">
+                    <button id="btnInputChat">
+                        <ion-icon name="paper-plane-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

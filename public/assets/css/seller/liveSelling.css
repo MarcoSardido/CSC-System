@@ -1,0 +1,146 @@
+.main-container {
+    width: 100%;
+    height: auto;
+}
+
+.header-container {
+    height: 10%;
+    padding: 0 20px;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.header-container .lbl-title {
+    font-size: 2.3em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.body-container {
+    display: flex;
+    height: 90%;
+}
+
+.product-selection {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-right: 1px solid #c7c7c7;
+}
+
+.live-selling {
+    width: 50%;
+}
+
+.video {
+    height: 60vh;
+    padding: 10px 15px;
+}
+
+.video video {
+    border: 1px solid;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.product {
+    height: 32vh;
+    padding: 10px 15px;
+}
+
+.product .current {
+    border: 1px solid;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.chat-box {
+    width: 30%;
+    padding: 10px 15px;
+    border-left: 1px solid #c7c7c7;
+}
+
+.chat-box .chat {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chat-box .chat .conversation {
+    overflow-y: auto;
+    height: 82vh;
+    border-bottom: 1px solid #c7c7c7;
+}
+
+.chat-item {
+    display: flex;
+    align-items: flex-end;
+    margin: 15px 0;
+}
+
+.chat-item.this-user {
+    justify-content: flex-end;
+}
+
+.chat-item.other-user {
+    justify-content: flex-start;
+}
+
+.chat-item .chat-head {
+    margin-right: 15px;
+}
+
+.chat-item .chat-head img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.chat-item .chat-body .name {
+    margin: 5px 0;
+    font-size: 13px;
+    color: #777;
+}
+
+.chat-item .message {
+    font-size: 15px;
+    max-width: 315px;
+    word-break: break-word;
+    padding: 10px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+}
+
+.chat-box .input-form {
+    display: flex;
+}
+
+.chat-box .input-form input {
+    width: 90%;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.chat-box .input-form input:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px;
+    border: 1px solid #485fed;
+}
+
+.chat-box .input-form button {
+    width: 10%;
+    font-size: 25px;
+    padding-top: 8px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #fff;
+    color: #485def;
+    border: none;
+}

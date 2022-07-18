@@ -76,6 +76,7 @@
     pointer-events: none;
     transform: translateY(-10px);
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    z-index: 1;
 }
 
 .dashboard-header .dropdown .dropdown-list-item {
@@ -116,41 +117,21 @@ End of Dashboard Header Style
 Start of Dashboard Body Style
 */
 
-    .dashboard-body {
-        
-    }
-
     .dashboard-body .live-rooms-container {
         height: 90vh;
-        padding: 2rem 0;
+        padding: 2rem;
     }
 
-    .dashboard-body .live-rooms-container .featured-room {
-        display: flex;
-        justify-content: center;
+    .row {
+        justify-content: space-evenly;
     }
 
-    .dashboard-body .live-rooms-container .room-row {
-        display: flex;
-        justify-content: center;
-        flex-direction: row;
+    .row2, .row3 {
         margin-top: 1rem;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room {
+    .room {
         height: 25vh;
-        width: 60vw;
-    }
-
-    .dashboard-body .live-rooms-container .room-row .live-room {
-        height: 25vh;
-        width: 40vw;
-    }
-
-    .dashboard-body .live-rooms-container .featured-room .live-room, 
-    .dashboard-body .live-rooms-container .room-row .live-room {
-        display: flex;
-        flex-direction: column;
         border-radius: 10px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
         cursor: pointer;
@@ -159,33 +140,28 @@ Start of Dashboard Body Style
         background-size: cover;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .upper .fixed-logo-frame, 
-    .dashboard-body .live-rooms-container .room-row .live-room .upper .fixed-logo-frame{
+   .upper .fixed-logo-frame {
         background: #fff;
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 5px;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .upper .fixed-logo-frame .logo img, 
-    .dashboard-body .live-rooms-container .room-row .live-room .upper .fixed-logo-frame .logo img {
-        width: 30px;
+    .upper .fixed-logo-frame img {
+        width: 100%;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title, 
-    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title {
+    .lower .room-title {
         display: flex;
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title p, 
-    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title p {
+    .lower .room-title p {
         margin: 0;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title .fixed-live-status, 
-    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title .fixed-live-status {
+    .lower .room-title .fixed-live-status {
         margin-right: 10px;
         background: red;
         border-radius: 10px;
@@ -197,30 +173,62 @@ Start of Dashboard Body Style
         border: 2px solid #fff;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-title .store-name, 
-    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-title .store-name {
+    .lower .room-title .store-name {
         font-weight: 600;
         font-size: 20px;
         color: #fff;
         margin-top: -2px;
     }
 
-    .dashboard-body .live-rooms-container .featured-room .live-room .lower .room-desc p, 
-    .dashboard-body .live-rooms-container .room-row .live-room .lower .room-desc p {
+    .lower .room-desc p {
         color: #fff;
         margin-top: 5px;
         font-size: 14px;
         font-weight: 300;
     }
 
-    .dashboard-body .live-rooms-container .room-row .live-room:nth-child(odd) {
-        margin-right: 0.5rem;
+    .no-session {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 160px;
     }
 
-    .dashboard-body .live-rooms-container .room-row .live-room:nth-child(even) {
-        margin-left: 0.5rem;
+    .main-text {
+        margin-bottom: 10px;
+        font-size: 20px;
     }
 
 /*
 End of Dashboard Body Style
+*/
+
+
+/*
+Start of Modal Style
+*/
+
+    .customer-option {
+        display: flex;
+        position: relative;
+    }
+
+    .option-tooltip {
+        position: absolute;
+        left: 225px;
+        font-size: 20px;
+        top: -5px;
+    }
+
+    .option-checkbox {
+        width: 50px;
+    }
+
+    .chkLabel {
+        margin: 0;
+    }
+
+/*
+End of Modal Style
 */
