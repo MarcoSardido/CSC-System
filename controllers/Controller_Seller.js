@@ -16,9 +16,9 @@ const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 
 const dashboardPage = async (req, res) => {
     const uid = req.body.uid;
-    
+
     try {
-        adminAuth.getUser(uid).then( async(userRecord) => {
+        adminAuth.getUser(uid).then(async (userRecord) => {
             let isVerified = userRecord.emailVerified;
 
             if (isVerified) { //Already verified
@@ -27,10 +27,10 @@ const dashboardPage = async (req, res) => {
                 const stripeAccData = await getDoc(stripeAccRef);
 
                 const alreadySubscribed = (await hasSubscription()).includes(`${stripeAccData.data().customerID}`);
-                
+
                 if (alreadySubscribed) { //Already subscribed
 
-                    const stripeRetrievedSubscription =  await stripe.subscriptions.retrieve(stripeAccData.data().subscriptionID);
+                    const stripeRetrievedSubscription = await stripe.subscriptions.retrieve(stripeAccData.data().subscriptionID);
                     const stripeCurrentSubBill = new Date(stripeRetrievedSubscription.current_period_start * 1000).toDateString();
 
                     const stripeSubColRef = doc(db, 'Stripe Accounts', `seller_${uid}`, 'Services', 'Subscription');
@@ -46,13 +46,13 @@ const dashboardPage = async (req, res) => {
                         storeName = item.id
                     })
 
-                    if (! (stripeAccData.data().isNew)) { //Old Subscriber
+                    if (!(stripeAccData.data().isNew)) { //Old Subscriber
 
                         console.log('Render Dashboard (Old Subscriber)')
-                        
-                        res.render('seller/manageDashboard', { 
+
+                        res.render('seller/manageDashboard', {
                             title: 'dashboard',
-                            layout: 'layouts/sellerLayout', 
+                            layout: 'layouts/sellerLayout',
                             messageCode: '',
                             infoMessage: '',
                             verification: '',
@@ -62,15 +62,17 @@ const dashboardPage = async (req, res) => {
                             subUpdateSuccess: '',
                             sellerInfo: sellerData.data(),
                             store: storeName,
+                            isSelling: false,
+
                         });
 
                     } else if (stripeSubColData.data().subscriptionCreated == stripeSubColData.data().currentSubscriptionBill) { //New Subscription
 
                         console.log('Render Dashboard (New Subscriber)')
-                        
-                        res.render('seller/manageDashboard', { 
+
+                        res.render('seller/manageDashboard', {
                             title: 'dashboard',
-                            layout: 'layouts/sellerLayout', 
+                            layout: 'layouts/sellerLayout',
                             messageCode: '',
                             infoMessage: '',
                             verification: '',
@@ -80,15 +82,17 @@ const dashboardPage = async (req, res) => {
                             subUpdateSuccess: '',
                             sellerInfo: sellerData.data(),
                             store: storeName,
+                            isSelling: false,
+
                         });
 
                     } else if (stripeSubColData.data().currentSubscriptionBill != stripeCurrentSubBill) { //Update Subscribed Usage
-                        
+
                         console.log('Render Dashboard (Update Subscriber)')
 
-                        res.render('seller/manageDashboard', { 
+                        res.render('seller/manageDashboard', {
                             title: 'dashboard',
-                            layout: 'layouts/sellerLayout', 
+                            layout: 'layouts/sellerLayout',
                             messageCode: '',
                             infoMessage: '',
                             verification: '',
@@ -98,14 +102,16 @@ const dashboardPage = async (req, res) => {
                             subUpdateSuccess: 'subscriptionUpdateSuccess',
                             sellerInfo: sellerData.data(),
                             store: storeName,
+                            isSelling: false,
+
                         });
                     }
 
                 } else {
                     //Not subscribed, redirect to stripe subscription page -- Step: 2
-                    res.render('seller/manageDashboard', { 
+                    res.render('seller/manageDashboard', {
                         title: 'dashboard',
-                        layout: 'layouts/sellerLayout', 
+                        layout: 'layouts/sellerLayout',
                         messageCode: '',
                         infoMessage: '',
                         verification: '',
@@ -120,7 +126,7 @@ const dashboardPage = async (req, res) => {
 
             } else {
                 //Show need verification -- Step: 1
-                res.render('seller/manageDashboard', { 
+                res.render('seller/manageDashboard', {
                     title: 'dashboard',
                     layout: 'layouts/sellerLayout',
                     messageCode: '',
@@ -134,45 +140,47 @@ const dashboardPage = async (req, res) => {
                 });
             };
         });
-        
+
     } catch (error) {
         console.error(error.message);
     }
-    
+
 };
 
 
 
 const productPage = (req, res) => {
-   
+
     res.render('seller/manageProduct', {
         title: 'products',
         url: "urlPath",
         uid: res.locals.uid,
-        layout: 'layouts/sellerLayout', 
+        layout: 'layouts/sellerLayout',
         verification: '',
         user: '',
         hasSubscription: true,
         subSuccess: '',
         subUpdateSuccess: '',
-        sellerInfo: ''
+        sellerInfo: '',
+        isSelling: false,
     })
 }
 
 
 
- const transactionPage = (req, res) => {
+const transactionPage = (req, res) => {
 
     res.render('seller/manageTransaction', {
         title: 'transactions',
         url: "urlPath",
-        layout: 'layouts/sellerLayout', 
+        layout: 'layouts/sellerLayout',
         verification: '',
         user: '',
         hasSubscription: true,
         subSuccess: '',
         subUpdateSuccess: '',
-        sellerInfo: ''
+        sellerInfo: '',
+        isSelling: false,
     })
 }
 
@@ -182,21 +190,22 @@ const reportPage = (req, res) => {
         title: 'report',
         url: "urlPath",
         uid: res.locals.uid,
-        layout: 'layouts/sellerLayout', 
+        layout: 'layouts/sellerLayout',
         verification: '',
         user: '',
         hasSubscription: true,
         subSuccess: '',
         subUpdateSuccess: '',
-        sellerInfo: ''
+        sellerInfo: '',
+        isSelling: false,
     })
 }
 
 const settingsPage = async (req, res) => {
     const uid = req.body.uid;
     const currentTab = req.query.tab === 'account' ? 'account' :
-                       req.query.tab === 'faq' ? 'faq' :
-                       'about' ;
+        req.query.tab === 'faq' ? 'faq' :
+            'about';
 
     // Get user data
     if (currentTab === 'account') {
@@ -211,7 +220,7 @@ const settingsPage = async (req, res) => {
         const sellerDoc = await getDoc(sellerRef);
 
         Object.assign(userData, {
-            
+
             accountPhoto: `data:${accountDoc.data().imgType};base64,${accountDoc.data().userPhoto}`,
             accountName: accountDoc.data().displayName,
             accountFname: sellerDoc.data().fullName,
@@ -233,6 +242,7 @@ const settingsPage = async (req, res) => {
             subSuccess: '',
             subUpdateSuccess: '',
             sellerInfo: '',
+            isSelling: false,
         })
     } else {
 
@@ -247,6 +257,7 @@ const settingsPage = async (req, res) => {
             subSuccess: '',
             subUpdateSuccess: '',
             sellerInfo: '',
+            isSelling: false,
         })
     }
 }
@@ -255,24 +266,43 @@ const updateProfile = async (req, res) => {
     const { uid, accountName, accountFname, accountEmail,
         accountNumber, accountBday, accountGender } = req.body;
 
-        // Accounts Collection
-        const accountRef = doc(db, `Accounts/seller_${uid}`);
-        await setDoc(accountRef, {
-            displayName: accountName,
-        }, {merge: true});
+    // Accounts Collection
+    const accountRef = doc(db, `Accounts/seller_${uid}`);
+    await setDoc(accountRef, {
+        displayName: accountName,
+    }, { merge: true });
 
-        // Seller Collection
-        const sellerRef = doc(db, `Sellers/${uid}`);
-        await setDoc(sellerRef, {
-            birthday: accountBday,
-            contactNo: accountNumber,
-            displayName: accountName,
-            email: accountEmail,
-            fullName: accountFname,
-            gender: accountGender,
-        }, {merge: true});
-    
+    // Seller Collection
+    const sellerRef = doc(db, `Sellers/${uid}`);
+    await setDoc(sellerRef, {
+        birthday: accountBday,
+        contactNo: accountNumber,
+        displayName: accountName,
+        email: accountEmail,
+        fullName: accountFname,
+        gender: accountGender,
+    }, { merge: true });
+
     console.log('done updating')
+}
+
+
+
+
+const liveSession = async (req, res) => {
+
+    //* TODO: Make array in db on every customer entered the live room and
+    //*       to count all customers and use that as viewers
+
+    res.render('seller/liveSelling', {
+        layout: 'layouts/sellerLayout',
+        hasSubscription: true,
+        verification: '',
+        subSuccess: '',
+        subUpdateSuccess: '',
+        sellerInfo: '',
+        isSelling: true,
+    })
 }
 
 
@@ -284,4 +314,6 @@ export {
     reportPage,
     settingsPage,
     updateProfile,
+
+    liveSession,
 }

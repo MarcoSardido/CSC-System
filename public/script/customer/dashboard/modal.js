@@ -52,7 +52,6 @@ $(document).ready(() => {
             const sessionID = btnJoinLive.dataset.liveId;
             const trimmedSessionID = sessionID.split('_')[1]
             window.location.assign(`${window.location.href}/live?session=${trimmedSessionID}`)
-            console.log()
         })
     }
 

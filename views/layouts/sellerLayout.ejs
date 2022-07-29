@@ -61,15 +61,21 @@
     <script defer src="/public/script/seller.js"></script>
     
     <!-- My Style -->
-    <link rel="stylesheet" href="/public/assets/css/seller/sidebar.css">
+    <% if (isSelling === false) { %>
+        <link rel="stylesheet" href="/public/assets/css/seller/sidebar.css">
+    <% } %>
+    
 
 </head>
 <body <% if (hasSubscription === false) { %>
             onload=createSubscription('<%=user.uid%>')
       <% } %> >
 
-    <%- include('../partials/seller/_sideBar') %> 
-    
+      <% if (isSelling === false) { %>
+        <%- include('../partials/seller/_sideBar') %> 
+      <% } %>
+
+
     <div class="home-content">
         <%-body%>
     </div>

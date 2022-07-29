@@ -54,11 +54,18 @@
     <script defer src="/public/script/customer.js"></script>
 
     <!-- My Style -->
-    <link rel="stylesheet" href="/public/assets/css/customer/sidebar.css">
+    <% if (onLive === false) { %>
+        <link rel="stylesheet" href="/public/assets/css/customer/sidebar.css">
+    <% } %>
+   
     
 </head>
 <body>
-    <%- include('../partials/customer/_sideBar') %> 
+
+    <% if (onLive === false) { %>
+        <%- include('../partials/customer/_sideBar') %> 
+    <% } %>
+    
     
     <div class="home-content">
         <%-body%>

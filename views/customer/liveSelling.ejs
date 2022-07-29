@@ -1,25 +1,39 @@
 <link rel="stylesheet" href="/public/assets/css/customer/liveSelling.css">
+<script defer src="/public/script/customer/live/general.js" type="module"></script>
+<script defer src="/public/script/customer/live/selectedProduct.js" type="module"></script>
 <script defer src="/public/script/customer/live/groupChat.js" type="module"></script>
 
 <div class="main-container">
     <div class="header-container">
-        <p class="lbl-title">Live Selling Customer</p>
-        <p id="uid" hidden><%- uid %></p>
+        <div class="left">
+            <p class="lbl-title">Live Selling Customer</p>
+            <p id="uid" hidden>
+                <%- uid %>
+            </p>
+        </div>
+        <div class="right">
+            <button class="exit-live-selling" id="btnExitLive" data-toggle="modal" data-target="#exitLiveModal">Leave Live</button>
+        </div>
     </div>
     <div class="body-container">
         <div class="product-selection">
             <p class="lbl-title">Live Cart</p>
-            <div class="product-list"></div>
+            <div class="product-list">
+                <!-- <div class="product-item" data-product-id="123">
+                    <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Forum_Low_Shoes_White_FY7756_01_standard.jpg"
+                            alt="shoes">
+                    <div class="item-detail">
+                        <p class="item-name">Casual Shoes Fashion Sneakers</p>
+                        <p class="varieties">Quantity: ${totalQty}</p>
+                    </div>
+                </div> -->
+            </div>
         </div>
         <div class="live-selling">
             <div class="video">
                 <video src=""></video>
             </div>
-            <div class="product">
-                <div class="current">
-
-                </div>
-            </div>
+            <div class="product"></div>
         </div>
         <div class="chat-box">
             <div class="chat">
@@ -30,6 +44,40 @@
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add to cart Modal -->
+<div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ion-icon name="warning"></ion-icon>
+                <p class="modal-title">Are you sure?</p>
+                <p class="modal-label">You are about to leave this live stream session.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btnExit btn-primary">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Exit Modal -->
+<div class="modal fade" id="exitLiveModal" tabindex="-1" aria-labelledby="exitLiveLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <ion-icon name="warning"></ion-icon>
+                <p class="modal-title">Are you sure?</p>
+                <p class="modal-label">You are about to leave this live stream session.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btnExit btn-primary" id="btnExit">Yes</button>
             </div>
         </div>
     </div>

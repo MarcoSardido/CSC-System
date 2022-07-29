@@ -68,6 +68,7 @@ const customerDash = (req, res) => {
                     displayCustomerInfo: result.customerArray,
                     messageCode: '',
                     infoMessage: '',
+                    onLive: false,
                 });
             })
         }
@@ -88,6 +89,7 @@ const orderPage = (req, res) => {
             displayCustomerInfo: result.customerArray,
             messageCode: '',
             infoMessage: '',
+            onLive: false,
         });
     })
 }
@@ -102,6 +104,7 @@ const reviewPage = (req, res) => {
             displayCustomerInfo: result.customerArray,
             messageCode: '',
             infoMessage: '',
+            onLive: false,
         });
     })
 }
@@ -116,6 +119,7 @@ const settingsPage = (req, res) => {
             displayCustomerInfo: result.customerArray,
             messageCode: '',
             infoMessage: '',
+            onLive: false,
         });
     })
 }
@@ -212,6 +216,7 @@ const liveSession = (req, res) => {
             displayCustomerInfo: result.customerArray,
             messageCode: '',
             infoMessage: '',
+            onLive: true,
         });
     })
 }

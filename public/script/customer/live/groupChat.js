@@ -82,10 +82,40 @@ $(document).ready(() => {
 
     const inputFunction = (data) => {
         const chatValue = data.trim();
-        addChat(trimmedUID, chatValue, liveSessionID).then(() => {
+
+        if (profanityFilter(chatValue)) {
             txtChatInput.value = null;
-            displayMessage()
-        })
+            txtChatInput.placeholder = 'Bad word detected';
+            txtChatInput.classList.add('error');
+
+            setTimeout(() => {
+                txtChatInput.classList.remove('error');
+                txtChatInput.placeholder = 'Aa';
+            }, 3000)
+            
+        } else {
+            addChat(trimmedUID, chatValue, liveSessionID).then(() => {
+                txtChatInput.value = null;
+                displayMessage()
+            })
+        }
+        
+    }
+
+    const profanityFilter = (word) => {
+        const badWords = ['die', 'fuck', 'hell', 'ass', 'asshole', 'kill'];
+        let status = false;
+
+        const format = word.toLowerCase()
+        const checkWord = format.split(' ')
+
+        for (const wordIndex of checkWord) {
+            if (badWords.includes(wordIndex)) {
+                status = true;
+                break;
+            } 
+        }
+        return status;
     }
 
 

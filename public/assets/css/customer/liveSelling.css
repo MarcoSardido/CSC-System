@@ -5,14 +5,33 @@
 
 .header-container {
     height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 0 20px;
     border-bottom: 1px solid #c7c7c7;
 }
 
-.header-container .lbl-title {
+.header-container .left .lbl-title {
     font-size: 2.3em;
     font-weight: 700;
     margin: 0;
+}
+
+.header-container .right button {
+    border: none;
+    color: red;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: transparent;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    transition: all 0.3s ease-in-out;
+}
+
+.header-container .right button:hover {
+    color: #fff;
+    background: red;
 }
 
 .body-container {
@@ -50,10 +69,135 @@
 }
 
 .product .current {
-    border: 1px solid;
+    display: flex;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+    background-color: #fff;
     height: 100%;
     border-radius: 20px;
 }
+
+.current img {
+    width: 30%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.current .item-details {
+    padding: 10px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.current .item-details .top .info .item-name {
+    margin: 0;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.current .item-details .top .info .colors {
+    display: flex;
+    align-items: center;
+}
+
+.current .item-details .top .info .colors .color {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
+
+.current .item-details .top .info .colors .color:nth-child(even) {
+    margin: 0 20px;
+}
+
+.current .item-details .top .variant {
+    margin-top: 10px;
+}
+
+.current .item-details .top .variant .title {
+    color: #584f4f;
+    margin: 0;
+    font-size: 15px;
+}
+
+.current .item-details .top .variant .data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.current .item-details .top .variant .data .size {
+    margin: 0;
+}
+
+
+.current .item-details .bottom .buy {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    color: #485fed;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+    transition: all 0.3s ease-in-out;
+}
+
+.current .item-details .bottom .buy:hover {
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #f1f1ff;
+}
+
+.current .item-details .bottom .buy .left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-right: 1px solid #acacac;
+}
+
+.current .item-details .bottom .buy .left ion-icon {
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.current .item-details .bottom .buy .left .button-label {
+    margin: 0;
+    margin-top: 3px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.current .item-details .bottom .buy .right {
+    width: 50%;
+}
+
+.current .item-details .bottom .buy .right .item-price {
+    margin: 0;
+    font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .chat-box {
     width: 30%;
@@ -128,6 +272,12 @@
     border-radius: 5px;
 }
 
+.chat-box .input-form .error {
+    box-shadow: 0 0 5px red !important;
+    padding: 10px 10px;
+    border: 1px solid red !important;
+}
+
 .chat-box .input-form input:focus {
     box-shadow: 0 0 5px #485fed;
     padding: 10px 10px;
@@ -143,4 +293,41 @@
     background: #fff;
     color: #485def;
     border: none;
+}
+
+
+/* Modal */
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modal-body ion-icon {
+    color: red;
+    font-size: 5rem;
+}
+
+.modal-body .modal-title {
+    font-size: 25px;
+    margin: 10px 0px;
+}
+
+.modal-body .modal-label {
+    margin: 0;
+}
+
+.modal-footer {
+    justify-content: space-between;
+}
+
+.modal-footer .btnExit {
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: red;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
 }

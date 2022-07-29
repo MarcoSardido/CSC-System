@@ -4,14 +4,13 @@ import { getFirestore, doc, collection, getDocs, getDoc, setDoc } from "https://
 const db = getFirestore(firebase)
 
 const startLiveSelling = async (uid, data) => {
+    const productContainer = [];
     const currentDateAndTime = new Date();
     const uniqueID = generateId();
 
     try {
 
-        //* Data for seller Collection
-
-        // Sub-collection: LiveSessions
+        //* SELLER COLLECTION: Sub-collection: LiveSessions
         const sellerSubRef = doc(db, `Sellers/${uid}/LiveSessions/sessionID_${uniqueID}`)
         await setDoc(sellerSubRef, {
             eventDescription: data.eventDesc,
@@ -22,9 +21,16 @@ const startLiveSelling = async (uid, data) => {
             sessionID: uniqueID
         })
 
-        //* Data for LiveSession Collection
+        const sellerProdRef = collection(db, `Sellers/${uid}/Products`)
+        const sellerProdData = await getDocs(sellerProdRef)
+        sellerProdData.forEach(product => productContainer.push(product.data()))
 
-        // Collection: LiveSession
+        for (const productIndex of productContainer) {
+            const liveSessionProductRef = doc(db, `LiveSession/sessionID_${uniqueID}/sessionProducts/${productIndex.prodID}`)
+            await setDoc(liveSessionProductRef, productIndex)
+        }
+
+        //* LIVE SESSION COLLECTION
         const liveSessionRef = doc(db, `LiveSession/sessionID_${uniqueID}`)
         await setDoc(liveSessionRef, {
             createdAt: currentDateAndTime,
@@ -32,6 +38,11 @@ const startLiveSelling = async (uid, data) => {
             sessionOpen: true,
             sessionStart: data.eventStart,
             sessionEnd: data.eventEnd
+        })
+
+        const sessionUsers = doc(db, `LiveSession/sessionID_${uniqueID}/sessionUsers/Default`)
+        await setDoc(sessionUsers, {
+            sample: 'sample',
         })
 
         return uniqueID;

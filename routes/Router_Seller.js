@@ -9,6 +9,8 @@ import {
     settingsPage,
     updateProfile,
 
+    liveSession,
+
 } from '../controllers/Controller_Seller.js';
 
 import {
@@ -53,7 +55,6 @@ router.get('/settings', verifyCookieSeller, settingsPage)
 //! ---------------------------------------------------------------- 
 //                       Live Selling
 //! ----------------------------------------------------------------
-import { liveSession } from '../controllers/Controller_SellerLive.js'
 
 router.get('/live', verifyCookieSeller, liveSession);
 

@@ -1,7 +1,3 @@
-//! -------------------------------------------------------------
-//                          API
-//! -------------------------------------------------------------
-
 import { firebase } from '../../firebaseConfig.js';
 import { getFirestore, doc, collection, getDoc, getDocs, setDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
@@ -16,6 +12,9 @@ $(document).ready(() => {
     const liveSessionID = urlParams.get('session')
 
 
+    //! -------------------------------------------------------------
+    //                         Start of Live Chat
+    //! -------------------------------------------------------------
     const addChat = async (uid, data, sessionID) => {
         const currentDateAndTime = new Date();
         const uniqueID = generateId();
@@ -82,16 +81,42 @@ $(document).ready(() => {
 
     const inputFunction = (data) => {
         const chatValue = data.trim();
-        addChat(trimmedUID, chatValue, liveSessionID).then(() => {
+        if (profanityFilter(chatValue)) {
             txtChatInput.value = null;
-            getRealTimeData(liveSessionID)
-        })
+            txtChatInput.placeholder = 'Bad word detected';
+            txtChatInput.classList.add('error');
+
+            setTimeout(() => {
+                txtChatInput.classList.remove('error');
+                txtChatInput.placeholder = 'Aa';
+            }, 3000)
+
+        } else {
+            addChat(trimmedUID, chatValue, liveSessionID).then(() => {
+                txtChatInput.value = null;
+                getRealTimeData(liveSessionID)
+            })
+        }
+    }
+
+    const profanityFilter = (word) => {
+        const badWords = ['die', 'fuck', 'hell', 'ass', 'asshole', 'kill'];
+        let status = false;
+
+        const format = word.toLowerCase()
+        const checkWord = format.split(' ')
+
+        for (const wordIndex of checkWord) {
+            if (badWords.includes(wordIndex)) {
+                status = true;
+                break;
+            }
+        }
+        return status;
     }
 
 
-    //! -------------------------------------------------------------
-    //                          ADDING DATA
-    //! -------------------------------------------------------------
+    // Adding Chat
     const txtChatInput = document.getElementById('txtInputChat');
     txtChatInput.addEventListener('keypress', e => {
         if (e.key !== 'Enter') return;
@@ -103,9 +128,7 @@ $(document).ready(() => {
     })
 
 
-    //! -------------------------------------------------------------
-    //                          DISPLAYING DATA
-    //! -------------------------------------------------------------
+    // Displaying Chat
     const messageListElement = document.querySelector('.conversation');
     const displayMessage = () => {
         getRealTimeData(liveSessionID)
@@ -231,7 +254,6 @@ $(document).ready(() => {
         // Show the card fading-in and scroll to view the new message.
         $(".conversation").stop().animate({ scrollTop: $(".conversation")[0].scrollHeight }, 1000);
     }
-
 
     displayMessage();
 })
