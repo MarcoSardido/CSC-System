@@ -1,7 +1,9 @@
 <link rel="stylesheet" href="/public/assets/css/customer/liveSelling.css">
 <script defer src="/public/script/customer/live/general.js" type="module"></script>
+<script defer src="/public/script/customer/live/cartModal.js" type="module"></script>
 <script defer src="/public/script/customer/live/selectedProduct.js" type="module"></script>
 <script defer src="/public/script/customer/live/groupChat.js" type="module"></script>
+<script defer src="/public/script/customer/live/liveCheckOutModal.js" type="module"></script>
 
 <div class="main-container">
     <div class="header-container">
@@ -12,21 +14,22 @@
             </p>
         </div>
         <div class="right">
-            <button class="exit-live-selling" id="btnExitLive" data-toggle="modal" data-target="#exitLiveModal">Leave Live</button>
+            <button class="exit-live-selling" id="btnExitLive" data-toggle="modal" data-target="#exitLiveModal">
+                Leave Live
+            </button>
         </div>
     </div>
     <div class="body-container">
         <div class="product-selection">
-            <p class="lbl-title">Live Cart</p>
-            <div class="product-list">
-                <!-- <div class="product-item" data-product-id="123">
-                    <img src="https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/09c5ea6df1bd4be6baaaac5e003e7047_9366/Forum_Low_Shoes_White_FY7756_01_standard.jpg"
-                            alt="shoes">
-                    <div class="item-detail">
-                        <p class="item-name">Casual Shoes Fashion Sneakers</p>
-                        <p class="varieties">Quantity: ${totalQty}</p>
-                    </div>
-                </div> -->
+            <div class="lbl-title">Live Cart</div>
+            <div class="product-list"></div>
+            <div class="live-payment">
+                <div class="total-amount">
+                    <p class="lbl-amount">Total:</p>
+                    <p class="amount">₱<span>0.00</span></p>
+                </div>
+                <button class="disabled" id="btnCheckout" disabled data-toggle="modal"
+                    data-target="#cartPaymentModal">Check out</button>
             </div>
         </div>
         <div class="live-selling">
@@ -51,17 +54,156 @@
 
 <!-- Add to cart Modal -->
 <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body cart-modal-body">
+                <div class="wrapper">
+                    <div class="img-container"></div>
+                    <div class="info-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="cartPaymentModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="cartPaymentModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body payment-modal-body">
+                <div class="header">Payment</div>
+                <div class="content">
+                    <div class="payment-method">
+                        <p class="section-label">Choose payment method below</p>
+                        <div class="method-container">
+                            <div class="method" id="STRIPE">
+                                <img class="stripe"
+                                    src="/public/assets/images/customer/live_selling/payment_method_card.png"
+                                    alt="stripe" class="brand">
+                                <p class="brand-label">pay with credit card via stripe</p>
+                            </div>
+                            <div class="method" id="COD">
+                                <img class="cod"
+                                    src="/public/assets/images/customer/live_selling/payment_method_cod.png" alt="cod"
+                                    class="brand">
+                                <p class="brand-label">pay when you got the package</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment-info">
+                        <p class="section-label">Billing Info</p>
+                        <div class="info">
+                            <div class="user-address" id="dynamicAddress"></div>
+                            <div class="user-info">
+                                <div class="row1">
+                                    <div class="form-group">
+                                        <label for="bill-name">full name</label>
+                                        <input type="text" id="inputBillerName" value="Marco Sardido"
+                                            class="form-control" id="bill-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bill-phone">phone number</label>
+                                        <input type="text" id="inputBillerPhone" value="09761591486"
+                                            class="form-control" id="bill-phone">
+                                    </div>
+                                </div>
+                                <div class="row2">
+                                    <div class="form-group">
+                                        <label for="bill-email">Email address</label>
+                                        <input type="email" id="inputBillerEmail" value="marcosardido@gmail.com"
+                                            class="form-control" id="bill-email" aria-describedby="emailHelp">
+                                        <small id="emailHelp" class="form-text text-muted">To notify you about your
+                                            order.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="cancel" data-dismiss="modal">return to live selling</button>
+                    <button class="proceed" id="btnConfirmPay">confirm my purchase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add new address Modal -->
+<div class="modal fade" id="addNewAddressModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="addNewAddressModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
-                <ion-icon name="warning"></ion-icon>
-                <p class="modal-title">Are you sure?</p>
-                <p class="modal-label">You are about to leave this live stream session.</p>
+            <div class="modal-header">
+                <h5 class="modal-title">Add new shipping address</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            <div class="modal-body address-modal-body">
+                <div class="form-wrapper">
+                    <div class="form-group">
+                        <label for="newAddressHouse">House Number, Building and Street Name</label>
+                        <input type="text" class="form-control" id="newAddressHouse">
+                    </div>
+                    <div class="form-buttons">
+                        <button class="address-type">home</button>
+                        <button class="address-type">work</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressProvince">Province</label>
+                    <select class="form-control" id="newAddressProvince">
+                        <option value="" disabled selected hidden>Please choose your province</option>
+                        <option value="Laguna">Laguna</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressCity">City</label>
+                    <select class="form-control" id="newAddressCity">
+                        <option value="" disabled selected hidden>Please choose your city</option>
+                        <option value="Cabuyao">Cabuyao</option>
+                        <option value="Sta Rosa">Sta. Rosa</option>
+                        <option value="Calamba">Calamba</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressBarangay">Barangay</label>
+                    <select class="form-control" id="newAddressBarangay">
+                        <option value="" disabled selected hidden>Please choose your barangay</option>
+                        <option value="Pulo">Pulo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressPostal">Postal Code</label>
+                    <input type="text" class="form-control" id="newAddressPostal">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button type="button" class="btn btnExit btn-primary">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btnExit btn-primary" id="btnSaveNewAddress">Save</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Item added toast -->
+<div class="position-fixed top-0 right-0 p-3" style="z-index: 99; right: 0; top: 0;">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"
+        style="width: 500px">
+        <div class="toast-header">
+            <img src="/public/assets/images/mainLogo.png" class="mr-2" style="width: 35px; height: 35px;">
+            <strong class="mr-auto">City Sales Cloud</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" style="display: flex; align-items: center; color: limegreen;">
+            <div class="tost-icon">
+                <ion-icon name="bag-check-outline" style="font-size: 25px; margin-right: 5px;"></ion-icon>
+            </div>
+            <div class="tost-message">Product successfully added!</div>
         </div>
     </div>
 </div>
@@ -70,7 +212,7 @@
 <div class="modal fade" id="exitLiveModal" tabindex="-1" aria-labelledby="exitLiveLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body exit-modal-body">
                 <ion-icon name="warning"></ion-icon>
                 <p class="modal-title">Are you sure?</p>
                 <p class="modal-label">You are about to leave this live stream session.</p>
