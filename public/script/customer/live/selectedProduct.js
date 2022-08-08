@@ -4,8 +4,7 @@ import { getFirestore, doc, collection, getDoc, getDocs, setDoc, deleteDoc, upda
 const db = getFirestore(firebase)
 
 const selectedCartItems = {
-    itemsArray: [],
-    totalAmount: 0
+    itemsArray: []
 };
 
 $(document).ready(() => {
@@ -562,7 +561,7 @@ $(document).ready(() => {
         initializeCartItemButtons(itemData)
     }
 
-    
+    let totalAmount = 0;
     const initializeCartItemButtons = (itemData) => {
         const btnCheckCartItem = document.querySelectorAll('.check-item');
         const btnRemoveCartItem = document.querySelectorAll('.remove-item');
@@ -580,12 +579,12 @@ $(document).ready(() => {
                     // find and remove
                     const findIndex = selectedCartItems.itemsArray.indexOf(itemID);
                     selectedCartItems.itemsArray.splice(findIndex, 1);
-                    selectedCartItems.totalAmount -= Number(itemPrice);
+                    totalAmount -= Number(itemPrice);
 
                 } else {
                     btnCheckCartItem[i].classList.add('checked');
                     selectedCartItems.itemsArray.push(itemID)
-                    selectedCartItems.totalAmount += Number(itemPrice);
+                    totalAmount += Number(itemPrice);
                 }
                 checkoutLiveCart()
             })
@@ -628,7 +627,7 @@ $(document).ready(() => {
         const parentEl = btnCheckout.parentElement;
 
         // Place total amount
-        parentEl.firstElementChild.lastElementChild.firstElementChild.textContent = selectedCartItems.totalAmount;
+        parentEl.firstElementChild.lastElementChild.firstElementChild.textContent = totalAmount;
 
         if (selectedCartItems.itemsArray.length === 0) {
             btnCheckout.setAttribute('disabled', '');

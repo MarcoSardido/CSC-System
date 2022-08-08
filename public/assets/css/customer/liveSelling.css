@@ -869,15 +869,28 @@
 }
 
 /* Payment Method Modal */
-.address-modal-body .form-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.address-modal-body .form-buttons button {
+    width: 100px;
+    height: 40px;
+    text-transform: capitalize;
+    border-radius: 10px;
+    border: none;
+    background: #f1f1ff;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
 }
 
-.address-modal-body input[type=text], 
-.address-modal-body input[type=select] {
-    padding: 25px 15px;
+.address-modal-body .form-buttons button.selected-type {
+    box-shadow: none;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+}
+
+.address-modal-body .form-buttons button:hover {
+    box-shadow: none;
+}
+
+.address-modal-body .form-buttons button:nth-child(2) {
+    margin: 0 15px;
 }
 
 

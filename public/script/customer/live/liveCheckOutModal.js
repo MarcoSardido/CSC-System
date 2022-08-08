@@ -1,4 +1,4 @@
-import { getAllCustomerAddress } from './Api/checkOutModalData.js'
+import { getAllCustomerAddress, addNewAddress, calcItemsPrice } from './Api/checkOutModalData.js'
 import { selectedCartItems } from './selectedProduct.js';
 
 $(document).ready(() => {
@@ -13,8 +13,6 @@ $(document).ready(() => {
 
     const loadCustomerAddress = () => {
         getAllCustomerAddress(trimmedUID).then(result => {
-            console.log(result)
-
             // -----------------------------------------------------------------------------------
             //* -------------------------------- LIST ALL ADDRESS --------------------------------
             // -----------------------------------------------------------------------------------
@@ -63,7 +61,7 @@ $(document).ready(() => {
                                 <span>Add another address</span>
                             </button>
                         </div>
-                        <div class="list">${result.length > 1 ? loopOtherAddress() : ''}</div>
+                        <div class="list" id="dynamicList">${result.length > 1 ? loopOtherAddress() : ''}</div>
                     </div>
                 </div>
             `;
@@ -99,6 +97,45 @@ $(document).ready(() => {
         });
     }
 
+    // Add new address
+    const newAddressFunc = () => {
+        const homeValue = document.getElementById('newAddressHouse');
+        const provinceValue = document.getElementById('newAddressProvince');
+        const cityValue = document.getElementById('newAddressCity');
+        const barangayValue = document.getElementById('newAddressBarangay');
+        const postalValue = document.getElementById('newAddressPostal');
+
+        const btnSaveNewAddress = document.getElementById('btnSaveNewAddress');
+        const getAllAddressType = document.querySelectorAll('.address-type');
+
+        let getAddressType;
+        for (const addressTypeIndex of getAllAddressType) {
+            addressTypeIndex.addEventListener('click', () => {
+                getAllAddressType.forEach(removeClass => removeClass.classList.remove('selected-type'))
+                addressTypeIndex.classList.add('selected-type');
+                getAddressType = addressTypeIndex.textContent;
+            })
+        }
+
+        
+        btnSaveNewAddress.addEventListener('click', () => {
+            const newAddressObj = {
+                home: homeValue.value,
+                province: provinceValue.value,
+                city: cityValue.value,
+                barangay: barangayValue.value,
+                postal: postalValue.value,
+                type: getAddressType
+            }
+
+            addNewAddress(trimmedUID, newAddressObj).then(result => {
+                $('#dynamicAddress').empty();
+                loadCustomerAddress();
+                $('#addNewAddressModal').modal('hide');
+            })
+        })
+    }
+
     const getPaymentMethod = () => {
         const methods = document.querySelectorAll('.method');
 
@@ -125,10 +162,14 @@ $(document).ready(() => {
         paymentObj.email = billerEmail;
         paymentObj.address = `${selectedAddress} ${selectedPostal}`;
 
+        calcItemsPrice(trimmedUID, liveSessionID, paymentObj.itemsArray)
+        .then(result => paymentObj.totalPrice = result)
+
         console.log(paymentObj)
     })
 
 
     getPaymentMethod();
     loadCustomerAddress();
+    newAddressFunc();
 })
