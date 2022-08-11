@@ -1,16 +1,18 @@
-'use strict'
-
 import * as config from '../config.js';
+
 import Stripe from 'stripe';
+const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs } from 'firebase/firestore';
 
-const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 const db = getFirestore(firebase);
 
+//* ===================================================================================================
+//  ============================================= Seller ==============================================
+//* ===================================================================================================
 
-const stripeCheckoutSession = async (req, res)  => {
+const stripeCheckoutSession = async (req, res) => {
     const currentUID = req.body.uid;
 
     try {
@@ -20,15 +22,15 @@ const stripeCheckoutSession = async (req, res)  => {
         const stripeSubColRef = doc(db, 'Stripe Accounts', `seller_${currentUID}`, 'Services', 'Subscription');
         const stripeSubColData = await getDoc(stripeSubColRef);
 
-    
+
         const getSellerType = (currentSellerData.data().sellerType === 'Individual Seller') ? "sellerType_Individual" : "sellerType_Corporate";
-    
+
         const individualSellerRef = doc(db, 'Stripe Price Handler', getSellerType);
         const individualSellerData = await getDoc(individualSellerRef);
 
         await setDoc(doc(db, 'Accounts', `seller_${currentUID}`), {
             isVerified: true,
-        }, {merge: true});
+        }, { merge: true });
 
         if (stripeSubColData.data().customerID === '') {
 
@@ -38,7 +40,7 @@ const stripeCheckoutSession = async (req, res)  => {
                 mode: 'subscription',
                 line_items: [{
                     price: individualSellerData.data().stripePriceID,
-                    quantity: 1 
+                    quantity: 1
                 }],
                 success_url: `${config.SERVER_URL}/sellercenter/subscription_success/{CHECKOUT_SESSION_ID}`,
                 cancel_url: `${config.SERVER_URL}`
@@ -47,14 +49,14 @@ const stripeCheckoutSession = async (req, res)  => {
             res.json({ url: session.url });
 
         } else {
-            
+
             const session = await stripe.checkout.sessions.create({
                 customer_email: currentSellerData.data().email,
                 payment_method_types: ['card'],
                 mode: 'subscription',
                 line_items: [{
                     price: individualSellerData.data().stripePriceID,
-                    quantity: 1 
+                    quantity: 1
                 }],
                 success_url: `${config.SERVER_URL}/sellercenter/subscription_success/{CHECKOUT_SESSION_ID}`,
                 cancel_url: `${config.SERVER_URL}`
@@ -62,14 +64,11 @@ const stripeCheckoutSession = async (req, res)  => {
 
             res.json({ url: session.url });
         };
-        
+
     } catch (err) {
         console.error(err)
     };
 };
-
-
-
 
 const subscriptionSuccess = async (req, res) => {
     const currentCheckoutSessionID = req.params.id;
@@ -77,17 +76,17 @@ const subscriptionSuccess = async (req, res) => {
 
     try {
         const stripeRetrievedSession = await stripe.checkout.sessions.retrieve(currentCheckoutSessionID);
-        const stripeRetrievedSubscription =  await stripe.subscriptions.retrieve(stripeRetrievedSession.subscription);
+        const stripeRetrievedSubscription = await stripe.subscriptions.retrieve(stripeRetrievedSession.subscription);
         const stripeRetrievedProduct = await stripe.products.retrieve(stripeRetrievedSubscription.plan.product);
-        
+
         const subCreated = new Date(stripeRetrievedSubscription.created * 1000).toDateString();
         const currentSubBill = new Date(stripeRetrievedSubscription.current_period_start * 1000).toDateString();
         const NextSubBill = new Date(stripeRetrievedSubscription.current_period_end * 1000).toDateString();
 
 
         if (stripeRetrievedSession.payment_status === 'paid') {
-        
-            const sellerCollection =  await getDocs(collection(db, 'Sellers'));
+
+            const sellerCollection = await getDocs(collection(db, 'Sellers'));
             sellerCollection.forEach((doc) => {
 
                 if (doc.data().email === stripeRetrievedSession.customer_email) {
@@ -100,12 +99,12 @@ const subscriptionSuccess = async (req, res) => {
                 subscriptionCreated: subCreated,
                 currentSubscriptionBill: currentSubBill,
                 nextSubscriptionBill: NextSubBill
-            }, {merge: true});
+            }, { merge: true });
 
             await setDoc(doc(db, 'Stripe Accounts', `seller_${sellerUID}`), {
                 customerID: stripeRetrievedSession.customer,
                 subscriptionID: stripeRetrievedSubscription.id
-            }, {merge: true});
+            }, { merge: true });
 
             // const sellerFName = stripeRetrievedCustomer.name.split(" ")[0];
 
@@ -129,16 +128,96 @@ const subscriptionSuccess = async (req, res) => {
 
 
     } catch (error) {
-        console.error(`ERROR:`,error)
+        console.error(`ERROR:`, error)
     }
 }
 
-
-
-async function createStripeCustomer(personalFName, personalLName, personalContact){
+async function hasSubscription() {
+    let count = 0;
+    const customersWithActiveSubscription = [];
 
     try {
+        const subscriptions = await stripe.subscriptions.list({
+            status: 'active'
+        });
+
+        while (subscriptions.data[count]) {
+            customersWithActiveSubscription.push(subscriptions.data[count].customer);
+            count++;
+        };
+
+        return customersWithActiveSubscription;
+
+    } catch (error) {
+        console.error(error.message)
+    };
+};
+
+
+
+
+//* ===================================================================================================
+//  ============================================ Customer =============================================
+//* ===================================================================================================
+
+// LiveCart Checkout
+const liveCartSession = async (itemsArr, stripeCustomer, originUrl) => {
+    try {
+        const session = await stripe.checkout.sessions.create({
+            line_items: itemsArr.map(item => {
+                return {
+                    price_data: {
+                        currency: 'php',
+                        product_data: {
+                            name: item.name,
+                            description: `Size: ${item.size}`
+                        },
+                        unit_amount: item.priceInCents
+                    },
+                    quantity: item.quantity
+                }
+            }),
+            payment_method_types: ['card'],
+            mode: 'payment',
+            currency: 'php',
+            customer: stripeCustomer,
+            success_url: `${originUrl}/success`,
+            cancel_url: originUrl
+        })
         
+        return session;
+
+    } catch (error) {
+        console.error(`STRIPE ERROR: @liveCartSession -> ${error.message}`);
+    }
+}
+
+// const getAllPaymentList = async (req, res, next) => {
+//     const stripePayments = [];
+
+//     try {
+//         const paymentIntents = await stripe.paymentIntents.list();
+
+//         for (const paymentIndex of paymentIntents.data) {
+//             stripePayments.push({
+//                 paymentID: paymentIndex.id,
+//                 paymentStatus: paymentIndex.status
+//             })
+//         }
+
+//         // Local route object
+//         req.body.user.stripePayments = stripePayments
+//         return next();
+
+//     } catch (error) {
+//         console.error(`STRIPE ERROR: @getAllPaymentList -> ${error.message}`);
+//     }
+// }
+
+
+
+async function createStripeCustomer(personalFName, personalLName, personalContact, createSellerEmail) {
+    try {
         const customer = await stripe.customers.create({
             name: `${personalFName} ${personalLName}`,
             email: createSellerEmail,
@@ -153,30 +232,12 @@ async function createStripeCustomer(personalFName, personalLName, personalContac
 
 }
 
-async function hasSubscription(){
-    let count = 0;
-    const customersWithActiveSubscription = [];
-
-    try {
-        const subscriptions = await stripe.subscriptions.list({
-            status: 'active'
-        });
-
-        while(subscriptions.data[count]) {
-            customersWithActiveSubscription.push(subscriptions.data[count].customer);
-            count++;
-        };
-
-        return customersWithActiveSubscription;
-
-    } catch (error) {
-        console.error(error.message)
-    };
-};
 
 export {
     hasSubscription,
     createStripeCustomer,
     subscriptionSuccess,
-    stripeCheckoutSession
+    stripeCheckoutSession,
+
+    liveCartSession
 }

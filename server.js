@@ -1,5 +1,3 @@
-'use strict';
-
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
@@ -11,6 +9,7 @@ import methodOverride from 'method-override';
 import cookieParser from "cookie-parser";
 // import csrf from "csurf";
 import path from 'path';
+import cors from 'cors';
 
 import landingPage from './routes/Router_LandingPage.js';
 import pageNotFound from './routes/Router_404.js';
@@ -31,6 +30,11 @@ app.use('/public', express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(cors({
+    origin: process.env.SERVER_URL,
+}))
+
 // app.use(csrfMiddleware);
 
 // app.all("*", (req, res, next) => {

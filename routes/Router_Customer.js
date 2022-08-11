@@ -9,6 +9,8 @@ import {
     profileUpdate,
 
     liveSession,
+    livePayment,
+    livePaymentSuccess
 } from '../controllers/Controller_Customer.js';
 
 import { 
@@ -41,7 +43,10 @@ router.get('/settings', verifyCookieCustomer, settingsPage);
 //! ---------------------------------------------------------------- 
 //                       Live Selling
 //! ----------------------------------------------------------------
-router.get('/live', verifyCookieCustomer, liveSession);
+router.get('/live/room/:roomId', verifyCookieCustomer, liveSession);
+router.post('/live/room/:roomId', verifyCookieCustomer, livePayment);
+router.get('/live/room/:roomId/success', verifyCookieCustomer, livePaymentSuccess);
+
 
 
 

@@ -28,10 +28,10 @@ const addNewAddress = async (uid, addressObj) => {
         const customerColRef = collection(db, `Customers/${uid}/CustomerAddressBook`);
         const customerColDoc = await getDocs(customerColRef);
 
-        const addressCounter = customerColDoc.docs.length+1;
+        const addressCounter = customerColDoc.docs.length + 1;
 
         const addressColRef = doc(db, `Customers/${uid}/CustomerAddressBook/address${addressCounter}`);
-        const newAddress = await setDoc(addressColRef, {
+        await setDoc(addressColRef, {
             Barangay: addressObj.barangay,
             City: addressObj.city,
             HouseOrUnitNo: addressObj.home,
@@ -46,25 +46,93 @@ const addNewAddress = async (uid, addressObj) => {
     }
 }
 
-const calcItemsPrice = async (uid, sid, arrayOfItems) => {
-    let totalItemsPrice = 0;
+const calcItems = async (uid, sid, arrayOfItems) => {
+    const items = [];
 
     try {
         for (const itemIndex of arrayOfItems) {
             const liveCartSubColRef = doc(db, `LiveSession/sessionID_${sid}/sessionUsers/${uid}/LiveCart/${itemIndex}`);
             const liveCartSubColDoc = await getDoc(liveCartSubColRef);
-            
-            totalItemsPrice += liveCartSubColDoc.data().itemTotal;
+
+            let convert = liveCartSubColDoc.data().itemPrice.toString();
+            const priceInCents = convert+='00';
+
+            items.push({
+                name: liveCartSubColDoc.data().itemName,
+                quantity:  liveCartSubColDoc.data().itemQty,
+                priceInCents: Number(priceInCents),
+                size: liveCartSubColDoc.data().itemSize
+
+            })
         }
-        return totalItemsPrice;
+        return items;
 
     } catch (error) {
-        console.error(`Firestore Error: @calcItemsPrice -> ${error.message}`)
+        console.error(`Firestore Error: @calcItems -> ${error.message}`)
     }
 }
+
+const addStripePaymentID = async (uid, stripePaymentID, stripePaymentStatus) => {
+
+    try {
+        const stripePaymentIntentRef = doc(db, `Stripe Accounts/customer_${uid}/Payment Intents/${stripePaymentID}`);
+        await setDoc(stripePaymentIntentRef, {
+            paymentIntentID: stripePaymentID,
+            paymentIntentStatus: stripePaymentStatus,
+        })
+
+    } catch (error) {
+        console.error(`Firestore Error: @addStripePaymentID -> ${error.message}`);
+    }
+
+}
+
+
+//* =================================================================================================== 
+// ========================================== Stripe ==================================================
+//* ===================================================================================================
+const stripePaymentHandler = async (uid, userObj, itemArr) => {
+
+    try {
+        const stripeResult = await fetch(window.location.href, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                currentUrl: window.location.href,
+                customer: userObj,
+                items: itemArr
+            })
+    
+        });
+
+        // Result Object
+        const jsonResult = await stripeResult.json();
+
+        // Stripe checkout page
+        window.location = jsonResult.paymentUrl;
+
+        // addStripePaymentID(uid, jsonResult.paymentID, jsonResult.paymentUrl)
+
+
+    } catch (error) {
+        console.error(`STRIPE ERROR: @stripePaymentHandler -> ${error.message}`)
+    }
+}
+
+
+
+
+
+
+
 
 export {
     getAllCustomerAddress,
     addNewAddress,
-    calcItemsPrice
+    calcItems,
+
+    stripePaymentHandler
 }

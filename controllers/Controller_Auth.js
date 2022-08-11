@@ -4,7 +4,6 @@ import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase
 
 import { createStripeCustomer } from './Controller_Stripe.js';
 
-
 import date from 'date-and-time';
 
 const adminAuth = firebaseAdmin.auth();
@@ -402,7 +401,6 @@ function verifyCookieSeller(req, res, next) {
                         res.redirect('/sellercenter/auth');
                     }
                 })
-
             }).catch((error) => {
                 console.error(error);
             });

@@ -1,5 +1,3 @@
-'use strict'
-
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,7 +11,8 @@ const{
     APP_ID,
     FIREBASE_SERVICE_ACCOUNT_KEY,
     SERVER_URL,
-    STRIPE_PRIVATE_KEY
+    STRIPE_PRIVATE_KEY,
+    STRIPE_PUBLIC_KEY,
 } = process.env;
 
 const firebaseConfig = {
@@ -30,5 +29,6 @@ export {
     FIREBASE_SERVICE_ACCOUNT_KEY,
     DATABASE_URL,
     SERVER_URL,
-    STRIPE_PRIVATE_KEY 
+    STRIPE_PRIVATE_KEY,
+    STRIPE_PUBLIC_KEY
 };

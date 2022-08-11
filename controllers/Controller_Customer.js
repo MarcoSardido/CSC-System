@@ -1,8 +1,8 @@
-'use strict';
-
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, doc, addDoc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs } from 'firebase/firestore';
+
+import { createStripeCustomer, liveCartSession } from '../controllers/Controller_Stripe.js'
 
 import Customer from '../models/Model_Customer.js';
 import Account from '../models/Model_Account.js';
@@ -205,21 +205,72 @@ const profileUpdate = async (req, res) => {
 };
 
 
-
 const liveSession = (req, res) => {
-    const uid = req.body.uid;
+    const { uid, user } = req.body;
 
     userData(uid).then(result => {
         res.render('customer/liveSelling', {
             layout: 'layouts/customerLayout',
             displayAccountInfo: result.accountArray,
             displayCustomerInfo: result.customerArray,
+            onLive: true,
             messageCode: '',
             infoMessage: '',
-            onLive: true,
         });
     })
 }
+
+const livePaymentSuccess = (req, res) => {
+    const { uid, user } = req.body;
+
+    userData(uid).then(result => {
+        res.render('partials/customer/stripe/success', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            onLive: true,
+            messageCode: '',
+            infoMessage: '',
+        });
+    })
+}
+
+// Stripe: Live Cart Checkout
+const livePayment = async (req, res) => {
+    const { currentUrl, customer, items } = req.body;
+    const stripeAccounts = [];
+
+    try {
+        // Stripe Account Collection
+        const checkStripeColRef = collection(db, `Stripe Accounts`);
+        const checkStripeColDoc = await getDocs(checkStripeColRef);
+        checkStripeColDoc.forEach(doc => stripeAccounts.push(doc.id))
+
+        if (!stripeAccounts.includes(`customer_${customer.uid}`)) {
+            // Create stripe customer account
+            const stripeCustomerID = await createStripeCustomer(customer.fName, customer.lName, customer.contactNo, customer.email);
+
+            const addStripeColRef = doc(db, `Stripe Accounts`, `customer_${customer.uid}`);
+            await setDoc(addStripeColRef, {
+                customerID: stripeCustomerID.id
+            });
+        }
+
+        const getStripeCustomerColRef = doc(db, `Stripe Accounts/customer_${customer.uid}`)
+        const getStripeCustomerColDoc = await getDoc(getStripeCustomerColRef);
+        const stripeCustomer = getStripeCustomerColDoc.data().customerID;
+
+        liveCartSession(items, stripeCustomer, currentUrl).then(result => {
+            res.json({ paymentUrl: result.url, paymentID: result.payment_intent });
+        });
+        
+    } catch (error) {
+        console.error(`Error stripe live payment: ${error.message}`);
+        res.status(500).json({ error: error.message })
+    }
+}
+
+
 
 
 
@@ -262,8 +313,8 @@ async function userData(uid) {
     });
 
     return { accountArray, customerArray }
-
 }
+
 
 
 export {
@@ -275,4 +326,6 @@ export {
     profileUpdate,
 
     liveSession,
+    livePayment,
+    livePaymentSuccess
 }

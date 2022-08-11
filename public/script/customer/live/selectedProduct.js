@@ -11,16 +11,16 @@ $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const liveSessionID = urlParams.get('session')
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
     //! ===========================================================================================
     // ================================ Start of Firebase Function ================================
     //! ===========================================================================================
 
     //* Realtime product display
-    const docRef = doc(db, `LiveSession/sessionID_${liveSessionID}`)
+    const docRef = doc(db, `LiveSession/sessionID_${liveRoomID}`)
     onSnapshot(docRef, doc => {
         displaySelectedProduct(doc.data().currentProductID)
     })
@@ -28,7 +28,7 @@ $(document).ready(() => {
     //* Add To Cart Modal
     const itemData = async (pid) => {
         try {
-            const subColRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionProducts/${pid}`);
+            const subColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`);
             const subColDoc = await getDoc(subColRef);
             const prodData = subColDoc.data();
 
@@ -43,7 +43,7 @@ $(document).ready(() => {
         const itemID = `itemID_${generateId()}`;
 
         try {
-            const subColRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionUsers/${trimmedUID}/LiveCart/${itemID}`)
+            const subColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart/${itemID}`)
             await setDoc(subColRef, {
                 itemID: itemID,
                 prodID: data.prodID,
@@ -62,7 +62,7 @@ $(document).ready(() => {
     }
 
     const realTimeCartDisplay = async () => {
-        const subColRef = collection(db, `LiveSession/sessionID_${liveSessionID}/sessionUsers/${trimmedUID}/LiveCart`)
+        const subColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`)
 
         onSnapshot(subColRef, (snapshot) => {
             snapshot.docChanges().forEach(change => {
@@ -76,7 +76,7 @@ $(document).ready(() => {
 
     const processItem = async (pid, selectedSize, selectedQty) => {
         try {
-            const subColRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionProducts/${pid}`)
+            const subColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`)
             const subColDoc = await getDoc(subColRef);
 
             const variantCopy = subColDoc.data().variants;
@@ -92,7 +92,7 @@ $(document).ready(() => {
             // await updateDoc(subColRef, {
             //     'variants': variantCopy
             // }, { merge: true }).then(() => {
-            //     const docRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionProducts/${pid}`)
+            //     const docRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`)
             //     onSnapshot(docRef, doc => {
             //         updateModalChanges(doc.data().variants)
             //     })
@@ -108,7 +108,7 @@ $(document).ready(() => {
     const removeItem = async (pid, itemID, cartItemQty, cartItemSize) => {
         try {
             // Updating product variety
-            const subColRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionProducts/${pid}`)
+            const subColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`)
             const subColDoc = await getDoc(subColRef);
 
             const variantCopy = subColDoc.data().variants;
@@ -128,7 +128,7 @@ $(document).ready(() => {
             console.log('Product updated successfully: Item Removed')
 
             // Updating customer live cart
-            const cartSubColRef = doc(db, `LiveSession/sessionID_${liveSessionID}/sessionUsers/${trimmedUID}/LiveCart/${itemID}`)
+            const cartSubColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart/${itemID}`)
             await deleteDoc(cartSubColRef);
 
         } catch (error) {

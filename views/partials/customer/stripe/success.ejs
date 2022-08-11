@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/public/assets/css/stripe/customerSuccess.css">
+<script>
+    let originUrl = window.location.href;
+    let lastIndex = originUrl.lastIndexOf("/");
+    originUrl = originUrl.substring(0, lastIndex);
+
+    setTimeout(() => {
+        window.location = originUrl;
+    }, 3000)
+</script>
+
+<div class="main-container">
+    <div class="main-text">Thank You! 💖</div>
+    <div class="sub-text">You will be redirected back to live selling.</div>
+</div>

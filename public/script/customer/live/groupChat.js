@@ -11,11 +11,11 @@ $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const liveSessionID = urlParams.get('session')
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
-
+    
     const addChat = async (uid, data, sessionID) => {
         const currentDateAndTime = new Date();
         const uniqueID = generateId();
@@ -94,7 +94,7 @@ $(document).ready(() => {
             }, 3000)
             
         } else {
-            addChat(trimmedUID, chatValue, liveSessionID).then(() => {
+            addChat(trimmedUID, chatValue, liveRoomID).then(() => {
                 txtChatInput.value = null;
                 displayMessage()
             })
@@ -141,7 +141,7 @@ $(document).ready(() => {
     //! -------------------------------------------------------------
     const messageListElement = document.querySelector('.conversation');
     const displayMessage = () => {
-        getRealTimeData(liveSessionID)
+        getRealTimeData(liveRoomID)
     }
 
     const MY_MESSAGE_TEMPLATE =

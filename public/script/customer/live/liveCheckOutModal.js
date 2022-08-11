@@ -1,13 +1,13 @@
-import { getAllCustomerAddress, addNewAddress, calcItemsPrice } from './Api/checkOutModalData.js'
+import { getAllCustomerAddress, addNewAddress, calcItems, stripePaymentHandler } from './Api/checkOutModalData.js'
 import { selectedCartItems } from './selectedProduct.js';
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const liveSessionID = urlParams.get('session')
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
     const paymentObj = selectedCartItems;
 
@@ -82,7 +82,7 @@ $(document).ready(() => {
 
                     address.setAttribute('id', 'addressValue')
                     postal.setAttribute('id', 'postalValue')
-                    
+
                     const convertedEl = otherAddressIndex.innerHTML;
 
                     getAllOtherAddresses.forEach(removeClass => removeClass.classList.remove('selected-address'))
@@ -117,7 +117,7 @@ $(document).ready(() => {
             })
         }
 
-        
+
         btnSaveNewAddress.addEventListener('click', () => {
             const newAddressObj = {
                 home: homeValue.value,
@@ -149,6 +149,12 @@ $(document).ready(() => {
 
     }
 
+    // const stripePaymentList = () => {
+    //     const stripePaymentIntentString = document.getElementById('spi').textContent;
+    //     const stripePaymentIntentObj = JSON.parse(stripePaymentIntentString);
+
+    //     checkIfPaymentHasMade(stripePaymentIntentObj);
+    // }
 
     document.getElementById('btnConfirmPay').addEventListener('click', () => {
         const selectedAddress = document.getElementById('addressValue').textContent;
@@ -162,8 +168,27 @@ $(document).ready(() => {
         paymentObj.email = billerEmail;
         paymentObj.address = `${selectedAddress} ${selectedPostal}`;
 
-        calcItemsPrice(trimmedUID, liveSessionID, paymentObj.itemsArray)
-        .then(result => paymentObj.totalPrice = result)
+        calcItems(trimmedUID, liveRoomID, paymentObj.itemsArray)
+            .then(result => {
+                const stripeItems = result;
+
+                if (paymentObj.paymentMethod === 'STRIPE') {
+                    const firstName = paymentObj.name.split(' ')[0];
+                    const lastName = paymentObj.name.split(' ')[paymentObj.name.split(' ').length - 1];
+
+                    const user = {
+                        uid: trimmedUID,
+                        fName: firstName,
+                        lName: lastName,
+                        email: paymentObj.email,
+                        contactNo: paymentObj.phone
+                    };
+
+                    stripePaymentHandler(trimmedUID, user, stripeItems);
+                } else {
+                    console.log('Cash on Delivery')
+                }
+            })
 
         console.log(paymentObj)
     })

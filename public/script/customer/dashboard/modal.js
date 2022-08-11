@@ -51,7 +51,7 @@ $(document).ready(() => {
         btnJoinLive.addEventListener('click', () => {
             const sessionID = btnJoinLive.dataset.liveId;
             const trimmedSessionID = sessionID.split('_')[1]
-            window.location.assign(`${window.location.href}/live?session=${trimmedSessionID}`)
+            window.location.assign(`${window.location.href}/live/room/${trimmedSessionID}`)
         })
     }
 
