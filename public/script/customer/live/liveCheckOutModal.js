@@ -149,14 +149,9 @@ $(document).ready(() => {
 
     }
 
-    // const stripePaymentList = () => {
-    //     const stripePaymentIntentString = document.getElementById('spi').textContent;
-    //     const stripePaymentIntentObj = JSON.parse(stripePaymentIntentString);
-
-    //     checkIfPaymentHasMade(stripePaymentIntentObj);
-    // }
-
     document.getElementById('btnConfirmPay').addEventListener('click', () => {
+        $('#cartPaymentModal').css('cursor', 'wait');
+        
         const selectedAddress = document.getElementById('addressValue').textContent;
         const selectedPostal = document.getElementById('postalValue').textContent;
         const billerName = document.getElementById('inputBillerName').value;
@@ -173,6 +168,7 @@ $(document).ready(() => {
                 const stripeItems = result;
 
                 if (paymentObj.paymentMethod === 'STRIPE') {
+                    const method = 'Credit Card';
                     const firstName = paymentObj.name.split(' ')[0];
                     const lastName = paymentObj.name.split(' ')[paymentObj.name.split(' ').length - 1];
 
@@ -184,7 +180,7 @@ $(document).ready(() => {
                         contactNo: paymentObj.phone
                     };
 
-                    stripePaymentHandler(trimmedUID, user, stripeItems);
+                    stripePaymentHandler(trimmedUID, user, stripeItems, method);
                 } else {
                     console.log('Cash on Delivery')
                 }

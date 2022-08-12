@@ -185,34 +185,44 @@ const liveCartSession = async (itemsArr, stripeCustomer, originUrl) => {
             cancel_url: originUrl
         })
         
-        return session;
+        return { session: session, roomUrl: originUrl };
 
     } catch (error) {
         console.error(`STRIPE ERROR: @liveCartSession -> ${error.message}`);
     }
 }
 
-// const getAllPaymentList = async (req, res, next) => {
-//     const stripePayments = [];
 
-//     try {
-//         const paymentIntents = await stripe.paymentIntents.list();
+const getAllPaymentList = async () => {
+    const stripePayments = [];
 
-//         for (const paymentIndex of paymentIntents.data) {
-//             stripePayments.push({
-//                 paymentID: paymentIndex.id,
-//                 paymentStatus: paymentIndex.status
-//             })
-//         }
+    try {
+        const paymentIntents = await stripe.paymentIntents.list();
 
-//         // Local route object
-//         req.body.user.stripePayments = stripePayments
-//         return next();
+        for (const paymentIndex of paymentIntents.data) {
+            stripePayments.push({
+                paymentID: paymentIndex.id,
+                paymentStatus: paymentIndex.status
+            })
+        }
 
-//     } catch (error) {
-//         console.error(`STRIPE ERROR: @getAllPaymentList -> ${error.message}`);
-//     }
-// }
+        return stripePayments;
+
+    } catch (error) {
+        console.error(`STRIPE ERROR: @getAllPaymentList -> ${error.message}`);
+    }
+}
+
+const cancelPaymentIntent = async (stripeCheckoutID) => {
+
+    try {
+        const cancelPayment = await stripe.checkout.sessions.expire(stripeCheckoutID);
+
+        return cancelPayment;
+    } catch (error) {
+        console.error(`STRIPE ERROR: @cancelPaymentIntent -> ${error.message}`);
+    }
+}
 
 
 
@@ -239,5 +249,7 @@ export {
     subscriptionSuccess,
     stripeCheckoutSession,
 
-    liveCartSession
+    liveCartSession,
+    getAllPaymentList,
+    cancelPaymentIntent
 }

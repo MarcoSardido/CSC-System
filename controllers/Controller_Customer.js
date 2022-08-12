@@ -1,8 +1,8 @@
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
 
-import { createStripeCustomer, liveCartSession } from '../controllers/Controller_Stripe.js'
+import { createStripeCustomer, liveCartSession, getAllPaymentList, cancelPaymentIntent } from '../controllers/Controller_Stripe.js'
 
 import Customer from '../models/Model_Customer.js';
 import Account from '../models/Model_Account.js';
@@ -205,8 +205,41 @@ const profileUpdate = async (req, res) => {
 };
 
 
-const liveSession = (req, res) => {
+const currentItemObj = {};
+const removeItems = [];
+let currentRoomUrl, isCheckoutCancelled = true;
+const liveSession = async (req, res) => {
     const { uid, user } = req.body;
+
+    // Stripe
+    const last10Payments = await getAllPaymentList();
+
+    // Firebase
+    const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
+    const stripePaymentDoc = await getDocs(stripePaymentRef);
+
+    if (currentItemObj.currentPaymentID && isCheckoutCancelled) {
+        cancelPaymentIntent(currentItemObj.currentCheckoutID).then(result => {
+
+            stripePaymentDoc.forEach(document => {
+                for (const paymentIndex of last10Payments) {
+
+                    if (document.data().paymentIntentID === result.payment_intent && paymentIndex.paymentStatus === 'canceled') {
+                        // Update firebase payment status to success
+                        const updateStripePaymentRef = doc(db, `Stripe Accounts/customer_${uid}/Payment Intents/${document.id}`);
+                        setDoc(updateStripePaymentRef, {
+                            paymentIntentStatus: paymentIndex.paymentStatus
+                        }, { merge: true });
+
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            })
+
+        })
+    }
 
     userData(uid).then(result => {
         res.render('customer/liveSelling', {
@@ -220,8 +253,67 @@ const liveSession = (req, res) => {
     })
 }
 
-const livePaymentSuccess = (req, res) => {
+const livePaymentSuccess = async (req, res) => {
     const { uid, user } = req.body;
+
+    let splitResult = currentRoomUrl.split("/");
+    let roomID = splitResult[splitResult.length - 1];
+
+    // To prevent checkout cancelation
+    isCheckoutCancelled = false;
+
+    for (const itemIndex of currentItemObj.currentCheckoutItems) {
+        removeItems.push(itemIndex.id)
+    }
+
+    // Stripe
+    const last10Payments = await getAllPaymentList();
+
+    // Firebase
+    // :: Stripe Collection
+    const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
+    const stripePaymentDoc = await getDocs(stripePaymentRef);
+
+    // :: Customer Collection
+    const uniqueID = generateId();
+    const currentDateAndTime = new Date();
+    const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${uniqueID}`);
+    await setDoc(customerOrderRef, {
+        items: currentItemObj.currentCheckoutItems,
+        modeOfPayment: currentItemObj.currentPaymentMethod,
+        placedOn: currentDateAndTime,
+        totalAmount: currentItemObj.currentPaymentAmount,
+        status: 'Processing',
+    })
+
+    // :: Live Selling -> Customer Live Cart
+    const liveCartRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart`);
+    const liveCartDoc = await getDocs(liveCartRef)
+    liveCartDoc.forEach(document => {
+        removeItems.map(item => {
+            if (document.id === item) {
+                const removeCartItem = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${document.id}`);
+                deleteDoc(removeCartItem);
+            }
+        })
+    })
+
+    stripePaymentDoc.forEach(document => {
+        for (const paymentIndex of last10Payments) {
+
+            if (document.data().paymentIntentID === currentItemObj.currentPaymentID && paymentIndex.paymentStatus === 'succeeded') {
+                // Update firebase payment status to success
+                const updateStripePaymentRef = doc(db, `Stripe Accounts/customer_${uid}/Payment Intents/${document.id}`);
+                setDoc(updateStripePaymentRef, {
+                    paymentIntentStatus: paymentIndex.paymentStatus
+                }, { merge: true });
+
+                break;
+            } else {
+                continue;
+            }
+        }
+    })
 
     userData(uid).then(result => {
         res.render('partials/customer/stripe/success', {
@@ -237,8 +329,12 @@ const livePaymentSuccess = (req, res) => {
 
 // Stripe: Live Cart Checkout
 const livePayment = async (req, res) => {
-    const { currentUrl, customer, items } = req.body;
+    const { currentUrl, customer, items, method } = req.body;
     const stripeAccounts = [];
+
+    // For later if payment has made
+    currentItemObj.currentCheckoutItems = items;
+    currentItemObj.currentPaymentMethod = method;
 
     try {
         // Stripe Account Collection
@@ -260,10 +356,16 @@ const livePayment = async (req, res) => {
         const getStripeCustomerColDoc = await getDoc(getStripeCustomerColRef);
         const stripeCustomer = getStripeCustomerColDoc.data().customerID;
 
-        liveCartSession(items, stripeCustomer, currentUrl).then(result => {
-            res.json({ paymentUrl: result.url, paymentID: result.payment_intent });
+        liveCartSession(items, stripeCustomer, currentUrl).then(({ session, roomUrl }) => {
+
+            currentRoomUrl = roomUrl;
+            currentItemObj.currentPaymentID = session.payment_intent;
+            currentItemObj.currentCheckoutID = session.id;
+            currentItemObj.currentPaymentAmount = session.amount_total;
+
+            res.json({ paymentUrl: session.url, paymentID: session.payment_intent, paymentStatus: session.status });
         });
-        
+
     } catch (error) {
         console.error(`Error stripe live payment: ${error.message}`);
         res.status(500).json({ error: error.message })
@@ -313,6 +415,21 @@ async function userData(uid) {
     });
 
     return { accountArray, customerArray }
+}
+
+
+
+
+// Partial Functions
+const generateId = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 15; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 

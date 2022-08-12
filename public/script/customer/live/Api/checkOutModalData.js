@@ -58,6 +58,7 @@ const calcItems = async (uid, sid, arrayOfItems) => {
             const priceInCents = convert+='00';
 
             items.push({
+                id: liveCartSubColDoc.id,
                 name: liveCartSubColDoc.data().itemName,
                 quantity:  liveCartSubColDoc.data().itemQty,
                 priceInCents: Number(priceInCents),
@@ -91,7 +92,7 @@ const addStripePaymentID = async (uid, stripePaymentID, stripePaymentStatus) => 
 //* =================================================================================================== 
 // ========================================== Stripe ==================================================
 //* ===================================================================================================
-const stripePaymentHandler = async (uid, userObj, itemArr) => {
+const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod) => {
 
     try {
         const stripeResult = await fetch(window.location.href, {
@@ -103,19 +104,19 @@ const stripePaymentHandler = async (uid, userObj, itemArr) => {
             body: JSON.stringify({
                 currentUrl: window.location.href,
                 customer: userObj,
-                items: itemArr
+                items: itemArr,
+                method: paymentMethod
             })
     
         });
-
         // Result Object
         const jsonResult = await stripeResult.json();
 
+        // Firebase
+        addStripePaymentID(uid, jsonResult.paymentID, jsonResult.paymentStatus);
+
         // Stripe checkout page
         window.location = jsonResult.paymentUrl;
-
-        // addStripePaymentID(uid, jsonResult.paymentID, jsonResult.paymentUrl)
-
 
     } catch (error) {
         console.error(`STRIPE ERROR: @stripePaymentHandler -> ${error.message}`)
