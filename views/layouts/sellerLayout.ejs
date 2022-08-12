@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,85 +10,105 @@
 
     <!-- ANCHOR: General Plugins -->
 
-        <!-- Custom Google Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600;700&display=swap" rel="stylesheet">
 
-        <!-- Icons -->
-        <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-        <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-        <script src="https://kit.fontawesome.com/11cc391cc4.js" crossorigin="anonymous"></script>
+    <!-- Icons -->
+    <script defer type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script defer nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://kit.fontawesome.com/11cc391cc4.js" crossorigin="anonymous"></script>
 
-        <!-- Filepond CDN (CSS and Script)-->
-        <link rel='stylesheet' href='https://unpkg.com/filepond/dist/filepond.min.css'/>
-        <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css"/>
+    <!-- Filepond CDN (CSS and Script)-->
+    <link rel='stylesheet' href='https://unpkg.com/filepond/dist/filepond.min.css' />
+    <link rel="stylesheet"
+        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css" />
 
-        <script defer src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js"></script>
-        <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
-        <script defer src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.min.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.min.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.min.js"></script>
+    <script defer src="https://unpkg.com/filepond-plugin-image-crop/dist/filepond-plugin-image-crop.min.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.min.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.min.js"></script>
+    <script defer
+        src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
 
-        <!-- JQuery -->
-        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
-        <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
+    <!-- JQuery -->
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'
+        integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=='
+        crossorigin='anonymous'></script>
+    <script defer src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css">
 
-        <!-- Bootstrap -->
-        <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js' integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg==' crossorigin='anonymous'></script>
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css' integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==' crossorigin='anonymous'/>
+    <!-- Bootstrap -->
+    <script defer src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/js/bootstrap.bundle.js'
+        integrity='sha512-zW3wEBCLSIQ6/8E5HhS2x6gq2DSMr/oNVB6O4GtdwE0Nc2/w11di3IfMilwF8OFyg12t4rJ5TegUa7k/hnrTVg=='
+        crossorigin='anonymous'></script>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.0/css/bootstrap.min.css'
+        integrity='sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA=='
+        crossorigin='anonymous' />
 
-        <!-- Color Picker -->
-        <script defer src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
-        
-        <!-- Global Style -->
-        <link rel="stylesheet" href="/public/assets/css/normalize.css">
-        <link rel="stylesheet" href="/public/assets/css/utils.css">
-    
+    <!-- Color Picker -->
+    <script defer src="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css">
+
+    <!-- Global Style -->
+    <link rel="stylesheet" href="/public/assets/css/normalize.css">
+    <link rel="stylesheet" href="/public/assets/css/utils.css">
+
     <!-- ANCHOR: End of General Plugins -->
 
     <!-- Service Scripts -->
     <script defer src="/public/script/utils.js"></script>
 
+    <!-- Live Video Session -->
+    <script defer src="https://muazkhan.com:9001/dist/RTCMultiConnection.min.js"></script>
+    <script defer src="https://muazkhan.com:9001/socket.io/socket.io.js"></script>
+
     <!-- Charts -->
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 
     <!-- My Script -->
     <script defer src="/public/script/seller.js"></script>
-    
+
     <!-- My Style -->
-    <% if (isSelling === false) { %>
+    <% if (isSelling===false) { %>
         <link rel="stylesheet" href="/public/assets/css/seller/sidebar.css">
-    <% } %>
-    
+        <% } %>
+
 
 </head>
-<body <% if (hasSubscription === false) { %>
-            onload=createSubscription('<%=user.uid%>')
-      <% } %> >
 
-      <% if (isSelling === false) { %>
-        <%- include('../partials/seller/_sideBar') %> 
-      <% } %>
+<body <% if (hasSubscription===false) { %>
+    onload=createSubscription('<%=user.uid%>')
+        <% } %> >
+
+            <% if (isSelling===false) { %>
+                <%- include('../partials/seller/_sideBar') %>
+                    <% } %>
 
 
-    <div class="home-content">
-        <%-body%>
-    </div>
-    
-    <% if (verification != '') { %>
-        <%- include('../utils/needEmailVerification') %> 
-    <% } %>  
-    
-    <% if (subSuccess != '') { %>
-        <%- include('../partials/seller/subSuccess') %> 
-    <% } %>  
-    
-    
+                        <div class="home-content">
+                            <%-body%>
+                        </div>
+
+                        <% if (verification !='' ) { %>
+                            <%- include('../utils/needEmailVerification') %>
+                                <% } %>
+
+                                    <% if (subSuccess !='' ) { %>
+                                        <%- include('../partials/seller/subSuccess') %>
+                                            <% } %>
+
+
 </body>
+
 </html>

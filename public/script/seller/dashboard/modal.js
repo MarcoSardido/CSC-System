@@ -67,7 +67,7 @@ $(document).ready(() => {
     const btnStartLive = document.querySelector('.buttonCreate');
     btnStartLive.addEventListener('click', () => {
         startLiveSelling(trimmedUID, previewObj).then(res => {
-            window.location.assign(`${window.location.href}/live?session=${res}`)
+            window.location.assign(`${window.location.href}/live/room/${res}`)
         })
         
     })

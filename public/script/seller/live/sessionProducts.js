@@ -4,13 +4,13 @@ $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const liveSessionID = urlParams.get('session')
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
     const productContainer = document.querySelector('.product-list');
     const displayProducts = () => {
-        getAllProducts(liveSessionID).then(result => {
+        getAllProducts(liveRoomID).then(result => {
             let PRODUCT_ITEM = ``;
 
             // Loop all products
@@ -51,7 +51,7 @@ $(document).ready(() => {
                 }
 
                 itemIndex.classList.add('selected')
-                getProduct(liveSessionID, itemIndex.dataset.productId).then(result => {
+                getProduct(liveRoomID, itemIndex.dataset.productId).then(result => {
 
                     const getVariants = () => {
                         let VARIANT_TEMPLATE = ``;

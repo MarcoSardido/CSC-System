@@ -1,3 +1,5 @@
+import { connection } from '../../liveConfig.js';
+
 import { firebase } from '../../firebaseConfig.js';
 import { getFirestore, doc, collection, getDoc, getDocs, setDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
@@ -7,10 +9,9 @@ $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const liveSessionID = urlParams.get('session')
-
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
     //! -------------------------------------------------------------
     //                         DB Functions
@@ -38,15 +39,47 @@ $(document).ready(() => {
         })
     }
 
+    // Live Video
+    const videoContainer = document.getElementById('video-container');
+    connection.onstream = (event) => {
+        let video = event.mediaElement;
 
+        videoContainer.appendChild(video);
+    }
+
+    connection.open(liveRoomID, (isRoomOpened, roomid, error) => {
+        if (error) return console.error(error);
+
+        if (isRoomOpened === true) {
+            alert(`Successfully created the room: ${roomid}`);
+        }
+    });
+
+
+    // Close Live Session
     const btnExit = document.getElementById('btnExit');
     btnExit.addEventListener('click', () => {
-        window.location.assign(`/sellercenter`)
+
+        // Disconnect all viewers
+        connection.getAllParticipants().forEach(participantId => {
+            connection.disconnectWith(participantId);
+        });
+
+        // Shut down live
+        connection.attachStreams.forEach(localStream => {
+            localStream.stop();
+        });
+
+        // Close socket
+        connection.closeSocket();
+
+        // Back to seller dashboard
+        window.location.assign(`/sellercenter`);
     })
 
     const displayTotalViewers = (count) => {
         document.getElementById('lblViewCount').innerHTML = count;
     }
 
-    realTimeViewerCount(liveSessionID)
+    realTimeViewerCount(liveRoomID)
 })

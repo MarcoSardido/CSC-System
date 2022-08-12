@@ -56,7 +56,7 @@ router.get('/settings', verifyCookieSeller, settingsPage)
 //                       Live Selling
 //! ----------------------------------------------------------------
 
-router.get('/live', verifyCookieSeller, liveSession);
+router.get('/live/room/:roomId', verifyCookieSeller, liveSession);
 
 
 
