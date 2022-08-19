@@ -109,7 +109,7 @@ $(document).ready(() => {
             `;
             displayContainer.insertAdjacentHTML('beforeend', content)
         } else {
-            const content = ``;
+            let content = ``;
             for (const [index, value] of data.entries()) {
 
                 if (index === 0) {
@@ -272,6 +272,7 @@ $(document).ready(() => {
                     }
                 }
             }
+            displayContainer.insertAdjacentHTML('beforeend', content)
         }
     }
 

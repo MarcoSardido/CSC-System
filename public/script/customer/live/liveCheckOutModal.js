@@ -151,7 +151,7 @@ $(document).ready(() => {
 
     document.getElementById('btnConfirmPay').addEventListener('click', () => {
         $('#cartPaymentModal').css('cursor', 'wait');
-        
+
         const selectedAddress = document.getElementById('addressValue').textContent;
         const selectedPostal = document.getElementById('postalValue').textContent;
         const billerName = document.getElementById('inputBillerName').value;
@@ -167,6 +167,7 @@ $(document).ready(() => {
             .then(result => {
                 const stripeItems = result;
 
+                // Method: Credit Card
                 if (paymentObj.paymentMethod === 'STRIPE') {
                     const method = 'Credit Card';
                     const firstName = paymentObj.name.split(' ')[0];
@@ -182,6 +183,7 @@ $(document).ready(() => {
 
                     stripePaymentHandler(trimmedUID, user, stripeItems, method);
                 } else {
+                    // Method: Cash On Delivery
                     console.log('Cash on Delivery')
                 }
             })

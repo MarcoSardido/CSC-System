@@ -6,15 +6,149 @@ $(document).ready(() => {
 
     const storeName = $('#store').text();
     const trimmedStoreName = storeName.trim();
-    
 
+    const startTime = document.getElementById('inputStartTime');
+    startTime.addEventListener('change', () => {
+        const date = new Date();
+        const hours = date.getHours();
+        const splitTimeValue = startTime.value.split(':')[0];
+
+        if (splitTimeValue > hours) {
+            startTime.value = `${splitTimeValue}:00`;
+
+        } else {
+            alert('Please select ahead of time');
+            startTime.value = `${hours}:00`;
+        }
+    })
+
+    const computeTime = (start, duration) => {
+        let getHour = start.split(':')[0];
+        let startTime = Number(getHour);
+        let endTime = Number(duration);
+        let computedTime;
+
+        if (endTime === 30) {
+            computedTime = `${startTime}:${endTime}`;
+        } else {
+            computedTime = startTime + endTime;
+            if (computedTime > 12) {
+                computedTime = computedTime - 12;
+            }
+            computedTime = `${computedTime}:00`;
+        }
+
+        return computedTime;
+    }
+
+    // const generateTime = () => {
+    //     let counter = 0, done = true;
+    //     let timeIndex = 6, timeLimit = 12, timeLabel = 'AM';
+    //     const timeContainer = [];
+
+    //     while (counter < 2) {
+    //         for (timeIndex; timeIndex <= timeLimit; timeIndex++) {
+    //             let changeAMPM = done && timeIndex === 12 ? 'PM' : 'AM';
+
+    //             if (timeIndex === 12) {
+    //                 timeContainer.push({ time: timeIndex, label: changeAMPM })
+    //             } else {
+    //                 timeContainer.push({ time: timeIndex, label: timeLabel })
+    //             }
+    //         }
+
+    //         if (done) {
+    //             timeIndex = 1;
+    //             timeLimit = 12;
+    //             timeLabel = 'PM';
+    //             done = false;
+    //         }
+    //         counter++;
+    //     }
+
+    //     return timeContainer.reverse();
+    // }
+
+    // const checkValidTime = () => {
+    //     const selectSchedule = document.querySelectorAll('select');
+    //     const selectTime = generateTime();
+
+    //     const date = new Date()
+    //     const options = {
+    //         hour: 'numeric',
+    //         minute: 'numeric',
+    //         hour12: true
+    //     };
+    //     const time = new Intl.DateTimeFormat('en-US', options).format(date)
+    //     const formatTime = time.split(':');
+    //     const checkTime = formatTime[0];
+    //     const checkTimeLabel = formatTime[1].split(' ')[1];
+
+    //     for (const selectIndex of selectTime) {
+    //         if (selectIndex.time > checkTime && selectIndex.label === checkTimeLabel) {
+    //             let option = `<option value="${selectIndex.time}">${selectIndex.time} ${selectIndex.label}</option>`;
+    //             selectSchedule[0].firstElementChild.insertAdjacentHTML('afterend', option);
+    //         }
+
+    //     }
+
+    //     // let currentHour, changeHour = true;
+    //     // setInterval(() => {
+    //     //     // Get hours, mins, secs.
+    //     //     let date = new Date();
+    //     //     let hours = date.getHours();
+    //     //     let numHours = date.getHours();
+    //     //     let mins = date.getMinutes();
+    //     //     let secs = date.getSeconds();
+
+    //     //     if (hours > 12) {
+    //     //         hours = hours - 12;
+    //     //         numHours = numHours - 12;
+    //     //     }
+
+    //     //     if (changeHour) {
+    //     //         currentHour = numHours;
+    //     //         changeHour = false;
+    //     //     }
+
+    //     //     if (numHours !== currentHour) {
+    //     //         changeHour = true;
+
+
+
+    //     //     }
+
+    //     //     // If value of hour is 0, set it to 12
+    //     //     hours = hours == 0 ? hours = 12 : hours;
+
+    //     //     // Adding "0" if hour, min, sec is < 10
+    //     //     hours = hours < 10 ? '0' + hours : hours;
+    //     //     mins = mins < 10 ? '0' + mins : mins;
+    //     //     secs = secs < 10 ? '0' + secs : secs;
+
+    //     //     // console.log(`${hours}:${mins}:${secs}`)
+
+    //     // }, 1000);
+
+
+    // }
+
+    // checkValidTime();
+
+
+
+    // Modal Slide
+
+    const firstPart = document.querySelector('.first-part');
+    const secondPart = document.querySelector('.second-part');
+    const slideButtons = document.querySelectorAll('.btnSlide');
+
+    // First Part
     const previewObj = {
         eventName: '',
         eventDesc: '',
-        eventStart: '',
-        eventEnd: '',
         eventLogo: '',
-        eventBanner: '',
+        eventBanner: ''
     };
 
     const previewContent = (data) => {
@@ -41,15 +175,14 @@ $(document).ready(() => {
         container.insertAdjacentHTML('beforeend', content)
     }
 
-
     const previewForm = document.getElementById('preview-form');
     previewForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const allInput = document.querySelectorAll('[name="formInput"]');
-        for (const [inputIndex, inputValue] of allInput.entries()) {
+        const firstPartInput = document.querySelectorAll('[name="formInput"]');
+        for (const [inputIndex, inputValue] of firstPartInput.entries()) {
             const key = Object.keys(previewObj)[inputIndex];
-            if (inputIndex > 3) {
+            if (inputIndex > 1) {
                 const imgData = JSON.parse(inputValue.value)
                 const imgFormat = `data:${imgData.type};base64,${imgData.data}`
                 previewObj[key] = imgFormat;
@@ -63,14 +196,50 @@ $(document).ready(() => {
     })
 
 
-    // Start Live Selling
-    const btnStartLive = document.querySelector('.buttonCreate');
-    btnStartLive.addEventListener('click', () => {
-        startLiveSelling(trimmedUID, previewObj).then(res => {
-            window.location.assign(`${window.location.href}/live/room/${res}`)
-        })
-        
-    })
 
-    
+    // Second Part
+    for (const [buttonIndex, buttonValue] of slideButtons.entries()) {
+        buttonValue.addEventListener('click', () => {
+
+            if (buttonIndex === 1) {
+                firstPart.style.display = 'none';
+                secondPart.style.display = 'block';
+                buttonValue.classList.add('complete');
+                buttonValue.innerText = 'Create Room';
+                slideButtons[0].removeAttribute('disabled');
+                slideButtons[0].classList.remove('disabled')
+            } else {
+                firstPart.style.display = 'block';
+                secondPart.style.display = 'none';
+                slideButtons[1].classList.remove('complete');
+                slideButtons[1].innerText = 'Next';
+                buttonValue.removeAttribute('disabled');
+                buttonValue.classList.add('disabled')
+            }
+
+            if (buttonValue.classList.contains('complete')) {
+                const secondPartInput = document.querySelectorAll('[name="formInput2"]');
+                const lblEndTime = document.getElementById('currentTime');
+
+                secondPartInput[1].addEventListener('change', () => {
+                    lblEndTime.textContent = '';
+                    lblEndTime.innerText = computeTime(secondPartInput[0].value, secondPartInput[1].value);
+                })
+
+                document.querySelector('.complete').addEventListener('click', () => {
+                    previewObj.eventStart = secondPartInput[0].value;
+                    previewObj.eventDuration = secondPartInput[1].value;
+                    previewObj.eventEnd = computeTime(secondPartInput[0].value, secondPartInput[1].value);
+                    
+                    startLiveSelling(trimmedUID, previewObj).then(res => {
+                        window.location.assign(`${window.location.href}/live/room/${res}`)
+                    })
+                })
+
+
+            }
+        })
+    }
+
+
 })

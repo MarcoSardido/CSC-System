@@ -1,6 +1,9 @@
 import { connection } from '../../liveConfig.js';
 
-import { addUserCount, removeUserCount } from './Api/live.js';
+import { firebase } from '../../firebaseConfig.js';
+import { getFirestore, doc, collection, getDoc, getDocs, setDoc, deleteDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+
+const db = getFirestore(firebase)
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -9,6 +12,44 @@ $(document).ready(() => {
     const urlOrigin = window.location.pathname;
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
+
+    //! ----------------------------------------------------------------------------------------
+    //                                     Firebase Functions
+    //! ----------------------------------------------------------------------------------------
+
+    const checkIfRoomIsAvailable = doc(db, `LiveSession/sessionID_${liveRoomID}`)
+    onSnapshot(checkIfRoomIsAvailable, doc => {
+        if (doc.data().sessionOpen === false) {
+            alert('This room has been closed by the seller. Redirecting to dashboard!');
+            window.location.assign(`/customercenter`)
+        }
+    })
+
+    const addUserCount = async (uid, roomID) => {
+
+        //* CUSTOMER COLLECTION
+        const docRef = doc(db, `Customers/${uid}`);
+        const docData = await getDoc(docRef);
+
+        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
+        const subColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}`)
+        await setDoc(subColRef, {
+            uid: docData.id,
+            displayName: docData.data().displayName,
+            fullName: docData.data().fullName
+        })
+    }
+
+    const removeUserCount = async (uid, roomID) => {
+
+        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
+        const subColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}`)
+        await deleteDoc(subColRef);
+    }
+
+    //! ----------------------------------------------------------------------------------------
+    //                                     Script Function
+    //! ----------------------------------------------------------------------------------------
 
     // Exit Live
     const btnExit = document.getElementById('btnExit');
@@ -32,7 +73,6 @@ $(document).ready(() => {
         alert(`Successfully Joined the room: ${roomid}.`)
 
     });
-
 
     addUserCount(trimmedUID, liveRoomID)
 })

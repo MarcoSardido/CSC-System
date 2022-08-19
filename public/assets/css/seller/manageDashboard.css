@@ -277,8 +277,12 @@
 
 /* Create Live Stream Modal */
 
-.createLiveCont .editCont {
-  min-height: 35vh;
+.createLiveCont {
+  min-height: 500px;
+}
+
+.createLiveCont p {
+  margin: 0;
 }
 
 .createLiveCont .editCont .subText {
@@ -299,20 +303,6 @@
   margin-right: 50px;
 }
 
-.createLiveCont .editCont .detailsCont .storeSched .sched {
-  display: flex;
-  margin-top: 5px;
-}
-
-.createLiveCont .editCont .detailsCont .storeSched .sched div:nth-child(1) {
-  margin-right: 50px;
-}
-
-.createLiveCont .editCont .detailsCont .storeSched .sched p {
-  font-size: 13px;
-  color: #9d9c9b;
-}
-
 .createLiveCont .editCont .detailsCont .storeInfo .storeDesc input[type="text"] {
   width: 25vw;
 }
@@ -323,7 +313,8 @@
 }
 
 .createLiveCont .editCont .detailsCont input[type="text"],
-.createLiveCont .editCont .detailsCont input[type="time"] {
+.createLiveCont input[type="time"],
+.createLiveCont select {
   margin-top: 3px;
   transition: all 0.30s ease-in-out;
   outline: none;
@@ -333,8 +324,14 @@
   border-radius: 5px;
 }
 
+.createLiveCont input[type="time"],
+.createLiveCont select {
+  width: 11.5vw;
+}
+
 .createLiveCont .editCont .detailsCont input[type="text"]:focus,
-.createLiveCont .editCont .detailsCont input[type="time"]:focus {
+.createLiveCont input[type="time"]:focus,
+.createLiveCont select:focus {
   box-shadow: 0 0 5px #485fed;
   padding: 10px 10px;
   border: 1px solid #485fed;
@@ -505,6 +502,36 @@
   color: #fff;
 }
 
+.createLiveCont .second-part .storeSched .alert {
+  display: flex;
+}
+
+.createLiveCont .second-part .storeSched .alert ion-icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.createLiveCont .second-part .storeSched .sched {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.createLiveCont .second-part .storeSched .sched div:nth-child(2) {
+  margin: 0px 50px;
+}
+
+.createLiveCont .second-part .storeSched .sched p {
+  font-size: 13px;
+  color: #9d9c9b;
+}
+
+.createLiveCont .second-part .storeSched .sched .time {
+  margin: 0;
+  font-size: 30px;
+  color: black;
+}
+
 .modal-footer {
   display: flex;
   justify-content: space-between;
@@ -526,7 +553,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-.modal-footer .buttonCreate {
+.modal-footer .button-controller button {
   width: 10vw;
   height: 2.5rem;
   border-radius: 5px;
@@ -534,10 +561,18 @@
   color: #fff;
   box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
   font-size: 15px;
+}
+
+.modal-footer .button-controller .disabled {
+  cursor: not-allowed;
+  background: #777;
+}
+
+.buttonCreate, .buttonBack {
   background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
 }
 
-.modal-footer .buttonCreate:hover {
+.buttonCreate:hover {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

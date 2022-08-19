@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/public/assets/css/seller/manageDashboard.css">
 <script defer src="/public/script/seller/filepond/fileUploadDashboard.js"></script>
+<script defer src="/public/script/seller/dashboard/general.js" type="module"></script>
 <script defer src="/public/script/seller/dashboard/dashboard.js"></script>
 <script defer src="/public/script/seller/dashboard/modal.js" type="module"></script>
 
@@ -17,11 +18,14 @@
                 <div class="text-side">
                     <div class="upperTextArea">
                         <p class="mainText">Welcome,</p>
-                        <p class="userText"><%=sellerInfo.displayName%> </p>
+                        <p class="userText">
+                            <%=sellerInfo.displayName%>
+                        </p>
                     </div>
                     <div class="lowerTextArea">
                         <p class="staticText">Are we all set to live?</p>
-                        <button class="btnStartLiveSell" data-toggle="modal" data-target="#modalStartLiveSell">start live sell</button>
+                        <button class="btnStartLiveSell" data-toggle="modal" data-target="#modalStartLiveSell">start
+                            live sell</button>
                     </div>
                 </div>
                 <div class="img-side">
@@ -39,7 +43,8 @@
             <div class="summary-cont">
                 <div class="mini-cont">
                     <div class="summaryImg-cont">
-                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/items-to-be-sold.svg" alt="">
+                        <img class="summaryImg" src="/public/assets/images/seller/dashboard/items-to-be-sold.svg"
+                            alt="">
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">items to be sold</p>
@@ -204,90 +209,122 @@
     </div>
 </div>
 
-<div class="modal fade" id="modalStartLiveSell" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="backdropstaticlabel" aria-hidden="true">
+<div class="modal fade" id="modalStartLiveSell" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="backdropstaticlabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="backdropstaticlabel">Create live stream | <span id="store"><%-store%></span>.</h5>
-          <p id="uid" hidden><%- uid %></p>
-        </div>
-        <div class="modal-body">
-            <div class="createLiveCont">
-                <div class="editCont">
-                    <form id="preview-form">
-                        <div class="detailsCont">
-                            <div class="storeInfo">
-                                <div class="storeEvt">
-                                    <p class="subText">Event Name (Optional)</p>
-                                    <input  name="formInput" type="text" placeholder="Opening Sale">
-                                </div>
-                                <div class="storeDesc">
-                                    <p class="subText">Event Description</p>
-                                    <input  name="formInput" type="text" placeholder="Introducing the all new Apple Products!">
-                                </div>
-                            </div>
-                            <div class="storeSched">
-                                <p class="subText">Store Schedule</p>
-                                <div class="sched">
-                                    <div class="schedStart">
-                                        <p class="subText">Start</p>
-                                        <input  name="formInput" type="time">
-                                    </div>
-                                    <div class="schedEnd">
-                                        <p class="subText">End</p>
-                                        <input  name="formInput" type="time">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="backdropstaticlabel">Create live stream | <span id="store">
+                        <%-store%>
+                    </span>.</h5>
+                <p id="uid" hidden>
+                    <%- uid %>
+                </p>
+            </div>
+            <div class="modal-body">
+                <div class="createLiveCont">
+                    <div class="first-part">
+                        <div class="editCont">
+                            <form id="preview-form">
+                                <div class="detailsCont">
+                                    <div class="storeInfo">
+                                        <div class="storeEvt">
+                                            <p class="subText">Event Name (Optional)</p>
+                                            <input name="formInput" type="text" placeholder="Opening Sale">
+                                        </div>
+                                        <div class="storeDesc">
+                                            <p class="subText">Event Description</p>
+                                            <input name="formInput" type="text"
+                                                placeholder="Introducing the all new Apple Products!">
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="imgCont">
+                                    <div class="storeLogo">
+                                        <p class="subText">Store Logo</p>
+                                        <input name="formInput" type="file" class="filepond fileLogo">
+                                    </div>
+                                    <div class="storeBanner">
+                                        <p class="subText">Store Banner</p>
+                                        <input name="formInput" type="file" class="filepond fileBanner">
+                                    </div>
+                                </div>
+                                <div class="btnPrevCont">
+                                    <button type="submit" class="previewButton">
+                                        Preview
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <hr class="modalLine">
+                        <div class="prevCont">
+                            <div class="prevDesc">
+                                <div class="mainLabel">
+                                    Channel Preview
+                                </div>
+                                <div class="labelDesc">
+                                    This is what the customer will see
+                                </div>
+                            </div>
+                            <div class="preview skeleton">
+                                <div class="upperCont">
+                                    <div class="logo"></div>
+                                </div>
+                                <div class="lowerCont">
+                                    <div class="storeNameCont">
+                                        <p class="fixedLiveStatus">Live</p>
+                                        <p class="storeName">
+                                            <%-store%> (Event Name)
+                                        </p>
+                                    </div>
+                                    <div class="storeDescCont">
+                                        <p class="storeDesc">Store Description</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="imgCont">
-                            <div class="storeLogo">
-                                <p class="subText">Store Logo</p>
-                                <input  name="formInput" type="file" class="filepond fileLogo">
+                    </div>
+                    <div class="second-part" style="display: none">
+                        <div class="storeSched">
+                            <div class="alert alert-info" role="alert">
+                                <ion-icon name="information-circle-outline"></ion-icon>
+                                <p>There are 2 / 5 slots available | 1 room will end at 10:00 AM</p>
                             </div>
-                            <div class="storeBanner">
-                                <p class="subText">Store Banner</p>
-                                <input  name="formInput" type="file" class="filepond fileBanner">
+                            <p class="subText">Store Schedule</p>
+                            <div class="sched">
+                                <div class="schedStart">
+                                    <p class="subText">Live Start Time</p>
+                                    <input type="time" name="formInput2" id="inputStartTime">
+                                </div>
+                                <div class="schedEnd">
+                                    <p class="subText">Live Duration</p>
+                                    <select name="formInput2" id="">
+                                        <option hidden selected>Session Length</option>
+                                        <option value="30">30 Minutes</option>
+                                        <option value="1">1 Hour</option>
+                                        <option value="2">2 Hours</option>
+                                        <option value="3">3 Hours</option>
+                                        <option value="4">4 Hours</option>
+                                        <option value="5">5 Hours</option>
+                                    </select>
+                                </div>
+                                <div class="currentTime">
+                                    <p class="subText">You'll end at</p>
+                                    <p class="time" id="currentTime"></p>
+                                </div>
                             </div>
                         </div>
-                        <div class="btnPrevCont">
-                            <button class="previewButton">
-                                Preview
-                            </button>
-                        </div>
-                    </form>
+                    </div>
+
                 </div>
-                <hr class="modalLine">
-                <div class="prevCont">
-                    <div class="prevDesc">
-                        <div class="mainLabel">
-                            Channel Preview
-                        </div>
-                        <div class="labelDesc">
-                            This is what the customer will see
-                        </div>
-                    </div>
-                    <div class="preview skeleton">
-                        <div class="upperCont">
-                            <div class="logo"></div>
-                        </div>
-                        <div class="lowerCont">
-                            <div class="storeNameCont">
-                                <p class="fixedLiveStatus">Live</p>
-                                <p class="storeName"><%-store%> (Event Name)</p>
-                            </div>
-                            <div class="storeDescCont">
-                                <p class="storeDesc">Store Description</p>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="buttonCloseModal" data-dismiss="modal">Close</button>
+                <div class="button-controller">
+                    <button type="button" class="btnSlide buttonBack disabled" id="btnBack" disabled>Back</button>
+                    <button type="button" class="btnSlide buttonCreate" id="btnNext">Next</button>
                 </div>
             </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="buttonCloseModal" data-dismiss="modal">Close</button>
-          <button type="button" class="buttonCreate">Create Channel</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>

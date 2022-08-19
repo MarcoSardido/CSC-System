@@ -21,10 +21,10 @@ const startLiveSelling = async (uid, data) => {
             sessionID: uniqueID
         })
 
+        //? Adding all seller products to live session 
         const sellerProdRef = collection(db, `Sellers/${uid}/Products`)
         const sellerProdData = await getDocs(sellerProdRef)
         sellerProdData.forEach(product => productContainer.push(product.data()))
-
         for (const productIndex of productContainer) {
             const liveSessionProductRef = doc(db, `LiveSession/sessionID_${uniqueID}/sessionProducts/${productIndex.prodID}`)
             await setDoc(liveSessionProductRef, productIndex)
@@ -37,14 +37,11 @@ const startLiveSelling = async (uid, data) => {
             sellerID: uid,
             sessionOpen: true,
             sessionStart: data.eventStart,
+            sessionDuration: data.eventDuration === '30' ? `${data.eventDuration} Minutes` : `${data.eventDuration} Hours`,
             sessionEnd: data.eventEnd
         })
 
-        const sessionUsers = doc(db, `LiveSession/sessionID_${uniqueID}/sessionUsers/Default`)
-        await setDoc(sessionUsers, {
-            sample: 'sample',
-        })
-
+        // Room ID
         return uniqueID;
     } catch (error) {
         console.error(`Firestore Error: @startLiveSelling -> ${error.message}`)

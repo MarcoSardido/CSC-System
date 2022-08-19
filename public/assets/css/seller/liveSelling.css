@@ -1,3 +1,7 @@
+p {
+    margin: 0;
+}
+
 .main-container {
     width: 100%;
     height: auto;
@@ -8,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 10px 20px;
     border-bottom: 1px solid #c7c7c7;
 }
 
@@ -16,6 +20,17 @@
     font-size: 2.3em;
     font-weight: 700;
     margin: 0;
+}
+
+.header-container .countdown {
+    text-align: center;
+}
+
+.countdown .sub-text {
+    font-size: 15px;
+}
+.countdown .timer {
+    font-size: 30px;
 }
 
 .header-container .right button {
