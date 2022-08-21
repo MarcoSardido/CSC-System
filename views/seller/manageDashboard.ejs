@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/public/assets/css/seller/manageDashboard.css">
 <script defer src="/public/script/seller/filepond/fileUploadDashboard.js"></script>
 <script defer src="/public/script/seller/dashboard/general.js" type="module"></script>
-<script defer src="/public/script/seller/dashboard/dashboard.js"></script>
+<script defer src="/public/script/seller/dashboard/widgets.js" type="module"></script>
 <script defer src="/public/script/seller/dashboard/modal.js" type="module"></script>
 
 <div class="dashMainCont">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">items to be sold</p>
-                        <p class="dynamicText">7</p>
+                        <p class="dynamicText" id="lblItemsToBeSold">-</p>
                     </div>
                 </div>
                 <div class="mini-cont">
@@ -57,7 +57,7 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">weekly revenue</p>
-                        <p class="dynamicText">$41.53</p>
+                        <p class="dynamicText" id="lblWeeklyRevenue">-</p>
                     </div>
                 </div>
                 <div class="mini-cont">
@@ -66,7 +66,7 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">total revenue</p>
-                        <p class="dynamicText">$162.12</p>
+                        <p class="dynamicText" id="lblTotalRevenue">-</p>
                     </div>
                 </div>
                 <div class="mini-cont">
@@ -75,7 +75,7 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">items sold</p>
-                        <p class="dynamicText">56</p>
+                        <p class="dynamicText" id="lblItemsSold">-</p>
                     </div>
                 </div>
                 <div class="mini-cont">
@@ -84,7 +84,7 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">total customers</p>
-                        <p class="dynamicText">104</p>
+                        <p class="dynamicText" id="lblTotalCustomers">-</p>
                     </div>
                 </div>
                 <div class="mini-cont">
@@ -93,116 +93,30 @@
                     </div>
                     <div class="summaryText-cont">
                         <p class="staticText">customer rating</p>
-                        <p class="dynamicText">4.2/5</p>
+                        <p class="dynamicText" id="lblCustomerRating">-</p>
                     </div>
                 </div>
             </div>
             <div class="reportHistory-cont">
                 <div class="reportHist-header">
-                    <p class="title">report history</p>
-                    <a href="" class="viewAllReport">View all</a>
+                    <p class="title">recent reports</p>
+                    <a href="sellercenter/reports" class="viewAllReport">View all</a>
                 </div>
-                <div class="reportHist-body">
-                    <div class="report-cont">
-                        <div class="userPhoto">
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
-                        </div>
-                        <div class="userName">
-                            MarcoSardido
-                        </div>
-                        <div class="reportDate">
-                            June 04, 2021
-                        </div>
-                        <div class="reportTime">
-                            09:32 AM
-                        </div>
-                        <div class="reportType">
-                            Product
-                        </div>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
+                <div class="reportHist-body" id="reportContainer">
+                    <!-- If no reports -->
+                    <div class="default">
+                        You have no reports 🎉
                     </div>
-                    <div class="report-cont">
+
+                    <!-- has report -->
+                    <!-- <div class="report-cont">
                         <div class="userPhoto">
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
+                            <img src="" alt="" class="user">
                         </div>
-                        <div class="userName">
-                            Johnley Jara
-                        </div>
-                        <div class="reportDate">
-                            June 9, 2021
-                        </div>
-                        <div class="reportTime">
-                            03:04 PM
-                        </div>
-                        <div class="reportType">
-                            Service
-                        </div>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="report-cont">
-                        <div class="userPhoto">
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
-                        </div>
-                        <div class="userName">
-                            Manaloto Pepito
-                        </div>
-                        <div class="reportDate">
-                            June 10, 2021
-                        </div>
-                        <div class="reportTime">
-                            7:23 PM
-                        </div>
-                        <div class="reportType">
-                            Service
-                        </div>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="report-cont">
-                        <div class="userPhoto">
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
-                        </div>
-                        <div class="userName">
-                            Basilio Keith
-                        </div>
-                        <div class="reportDate">
-                            June 15, 2021
-                        </div>
-                        <div class="reportTime">
-                            12:43 PM
-                        </div>
-                        <div class="reportType">
-                            Transaction
-                        </div>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                    <div class="report-cont">
-                        <div class="userPhoto">
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="" class="user">
-                        </div>
-                        <div class="userName">
-                            Brilliantes Eriel
-                        </div>
-                        <div class="reportDate">
-                            June 19, 2021
-                        </div>
-                        <div class="reportTime">
-                            06:12 PM
-                        </div>
-                        <div class="reportType">
-                            Product
-                        </div>
-                        <div class="icon">
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
+                        <div class="userName"></div>
+                        <div class="reportDate"></div>
+                        <div class="reportType"></div>
+                    </div> -->
                 </div>
             </div>
         </div>

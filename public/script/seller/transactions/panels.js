@@ -124,14 +124,4 @@ $(document).ready(() => {
         return result;
     }
 
-    // const getLastWeek = () => {
-    //     let result = [];
-    //     for (let i = 13; 6 < i; i--) {
-    //         let d = new Date();
-    //         d.setDate(d.getDate() - i);
-    //         result.push(formatDate(d))
-    //     }
-    //    return result;
-    // }
-
 })

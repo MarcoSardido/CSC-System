@@ -16,6 +16,8 @@ $(document).ready(() => {
     //! ----------------------------------------------------------------------------------------
     //                                     Firebase Functions
     //! ----------------------------------------------------------------------------------------
+    let totalViewers = 0;
+    
     const realTimeViewerCount = async (roomID) => {
         let viewers = 0;
 
@@ -28,6 +30,7 @@ $(document).ready(() => {
                     if (!change.doc.data().hasOwnProperty('sample')) {
                         if (change.type === "added") {
                             viewers++;
+                            totalViewers++;
                             displayTotalViewers(viewers)
                         }
 
@@ -44,12 +47,18 @@ $(document).ready(() => {
         }
     }
 
-    const endLiveSession = async (roomID) => {
+    const endLiveSession = async (uid, roomID) => {
         const removeViewers = [];
 
         try {
-            //* LIVE SESSION COLLECTION
+            //* SELLERS COLLECTION -> SUB-COLLECTION: LiveSessions
+            const sellerLiveSessionColRef = doc(db, `Sellers/${uid}/LiveSessions/sessionID_${roomID}`);
+            await setDoc(sellerLiveSessionColRef, {
+                totalViewCount: totalViewers
+            }, { merge: true})
 
+
+            //* LIVE SESSION COLLECTION
             // Check if there are viewers left
             const liveSessionUsersColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers`);
             const liveSessionUsersCollection = await getDocs(liveSessionUsersColRef);
@@ -175,7 +184,7 @@ $(document).ready(() => {
         connection.closeSocket();
 
         // Remove room in customer dashboard
-        endLiveSession(liveRoomID);
+        endLiveSession(trimmedUID, liveRoomID);
 
         // Back to seller dashboard
         window.location.assign(`/sellercenter`);

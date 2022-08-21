@@ -11,7 +11,6 @@ $(document).ready(() => {
         const week = getLast7Days();
 
         for (const iterator of res) {
-
             let amount = iterator.totalPrice;
             amount = amount.replace(/[^\d\.]/g, "");
             amount = parseFloat(amount);
@@ -22,6 +21,8 @@ $(document).ready(() => {
             })
         }
 
+       
+
         for (let dataIndex = 0; dataIndex < data.length; dataIndex++) {
             for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
 
@@ -30,6 +31,9 @@ $(document).ready(() => {
                 }
             }
         }
+
+        console.log(week)
+        console.log(res)
 
         return { week, res };
     }).then(({ week, res }) => {
@@ -73,7 +77,7 @@ $(document).ready(() => {
         return formattedDate;
     }
 
-    // Result: 01 Jul 2022 -> 222-07-01
+    // Result: 01 Jul 2022 -> 2022-07-01
     const convertStringDateToNumDate = (strDate) => {
         let stringDate = strDate.split(" ");
         let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

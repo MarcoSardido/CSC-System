@@ -12,7 +12,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0 20px;
     border-bottom: 1px solid #c7c7c7;
 }
 
@@ -158,8 +158,8 @@ p {
 }
 
 .product {
-    height: 32vh;
-    padding: 10px 15px;
+    height: 29vh;
+    padding: 0 15px;
 }
 
 .product .current {

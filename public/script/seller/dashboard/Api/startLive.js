@@ -6,6 +6,7 @@ const db = getFirestore(firebase)
 const startLiveSelling = async (uid, data) => {
     const productContainer = [];
     const currentDateAndTime = new Date();
+    const formattedDate = stringDateFormat();
     const uniqueID = generateId();
 
     try {
@@ -18,7 +19,8 @@ const startLiveSelling = async (uid, data) => {
             bannerImg: data.eventBanner,
             logoImg: data.eventLogo,
             roomName: data.storeName,
-            sessionID: uniqueID
+            sessionID: uniqueID,
+            createdAt: formattedDate,
         })
 
         //? Adding all seller products to live session 
@@ -59,6 +61,15 @@ const generateId = () => {
             charactersLength));
     }
     return result;
+}
+
+// Result: 01 Jul 2022
+const stringDateFormat = () => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ');
+    return formattedDate;
 }
 
 export {
