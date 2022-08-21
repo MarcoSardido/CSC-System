@@ -204,8 +204,8 @@ const reportPage = (req, res) => {
 const settingsPage = async (req, res) => {
     const uid = req.body.uid;
     const currentTab = req.query.tab === 'account' ? 'account' :
-        req.query.tab === 'faq' ? 'faq' :
-            'about';
+                       req.query.tab === 'faq' ? 'faq' :
+                       'about';
 
     // Get user data
     if (currentTab === 'account') {
@@ -220,8 +220,7 @@ const settingsPage = async (req, res) => {
         const sellerDoc = await getDoc(sellerRef);
 
         Object.assign(userData, {
-
-            accountPhoto: `data:${accountDoc.data().imgType};base64,${accountDoc.data().userPhoto}`,
+            accountPhoto: accountDoc.data().userPhoto,
             accountName: accountDoc.data().displayName,
             accountFname: sellerDoc.data().fullName,
             accountEmail: accountDoc.data().email,
@@ -251,6 +250,7 @@ const settingsPage = async (req, res) => {
             url: "urlPath",
             layout: 'layouts/sellerLayout',
             settingsTab: currentTab,
+            settingsData: '',
             verification: '',
             user: '',
             hasSubscription: true,
@@ -282,8 +282,6 @@ const updateProfile = async (req, res) => {
         fullName: accountFname,
         gender: accountGender,
     }, { merge: true });
-
-    console.log('done updating')
 }
 
 

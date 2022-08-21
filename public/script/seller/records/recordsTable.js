@@ -7,7 +7,6 @@ $(document).ready(() => {
     const trimmedUID = uuid.trim();
 
     getAllReportId(trimmedUID).then(res => {
-        console.log(res)
         loadTableData(res)
         tableDataOptions(res);
         modalData(res);

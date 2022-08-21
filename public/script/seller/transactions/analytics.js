@@ -32,9 +32,6 @@ $(document).ready(() => {
             }
         }
 
-        console.log(week)
-        console.log(res)
-
         return { week, res };
     }).then(({ week, res }) => {
         if (res.length === 0) {

@@ -143,6 +143,19 @@ aside {
     font-size: 15px;
 }
 
+.account-tab .tab-body .info .btn-changePhoto {
+    width: 8rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 13px;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+}
+
+
+
 .account-tab .tab-body .information {
     padding: 15px 0;
     border-top: 1px solid #e1e1e1;

@@ -100,7 +100,6 @@ $(document).ready(() => {
         }
         $('.noItems').remove();
         $('#loading-container').remove();
-        console.log('DONE DISPLAYING')
     }
 
     displayAllProducts(trimmedUID).then(res => {
@@ -150,7 +149,6 @@ $(document).ready(() => {
                     const displayAlert = document.querySelector('.alert');
                     confirmDelete.addEventListener('click', () => {
                         deleteSingleProduct(trimmedUID, itemID).then(() => {
-                            console.log('Item Deleted Successfully')
                             displayAlert.style.display = 'block';
                             
                             setTimeout(() => {

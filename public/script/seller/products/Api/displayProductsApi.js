@@ -42,7 +42,7 @@ const displayAllProducts = async (uuid) => {
                 itemVariant: productDoc.data().variants
             })
         })
-        return(itemContainer)
+        return itemContainer;
 
     } catch (err) {
         console.error(`Firestore Error: @Display all products -> ${err.message}`)

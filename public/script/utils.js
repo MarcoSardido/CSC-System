@@ -1,5 +1,3 @@
-'use-strict'
-
 $(document).ready(() => {
     $('#needEmailVerification').modal('show');
     $('#subscriptionSuccess').modal('show');

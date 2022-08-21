@@ -96,14 +96,14 @@ $(document).ready(() => {
         Object.assign(variantObj,
             { 'selectedColors': colors },
             { 'selectedQty': qtyVal },
-            { 'selectedSize': getSelectedSize }
+            { 'selectedSize': getSelectedSize ? getSelectedSize : 'N/A' }
         )
 
         allVariants.push(variantObj)
 
         let variantContents = `
             <div class="add-size">
-                <span class="size">${variantObj.selectedSize ? variantObj.selectedSize : 'N/A'}</span>
+                <span class="size">${variantObj.selectedSize}</span>
                 <div class="badge-cont">
                     <span class="badge">${variantObj.selectedQty}pcs</span>
                 </div>
@@ -233,10 +233,6 @@ $(document).ready(() => {
         const checkColors = Object.keys(displayObject[0].itemColors[0]);
         const displayColors = checkColors.length === 5 || checkColors.length < 5 ? checkColors : displayObject[0].itemColors;
 
-        console.log('items: ', displayItems)
-        console.log('colors: ', displayColors)
-        console.log('trends: ', displayTrends)
-
         //* --------------------------------Displaying Colors-----------------------------------------
         const parentComponentColors = document.querySelector('.color-field').children[1];
         const displayColorsContainer = parentComponentColors.children;
@@ -336,10 +332,6 @@ $(document).ready(() => {
         const imgContainer = document.querySelector('.prodImg-cont');
 
         if (acceptedImg.length > 1) {
-            // Many
-
-            console.log(acceptedImg[1] ? acceptedImg[1].name : 'none')
-
             const container = document.createElement('div');
             imgContainer.appendChild(container);
 
@@ -379,11 +371,7 @@ $(document).ready(() => {
             container.insertAdjacentHTML('beforeend', imageContent)
         }
 
-        console.log('accepted images', acceptedImg)
-
     };
-
-
 
 
     //! ---------------------------------------------------------------------------------
@@ -437,8 +425,6 @@ $(document).ready(() => {
         detailObject(data)
 
         //* ---------------------Variants----------------------
-        console.log(displayVariantObj)
-
         let allQty = 0;
         let allSizes = [];
         for (const mainVariant of displayVariantObj) {
@@ -539,7 +525,6 @@ $(document).ready(() => {
         clearPreviewImages(parsedImg, acceptedImg)
 
         clearDetailData();
-
     });
 
 
@@ -597,8 +582,6 @@ $(document).ready(() => {
     }
 
 
-
-
     //! ---------------------------------------------------------------------------------
     //                                          API
     //! ---------------------------------------------------------------------------------
@@ -636,10 +619,9 @@ $(document).ready(() => {
                 productImages: imgData,
             }, { merge: true })
 
-            console.log('Product successfully added');
             location.reload();
 
-        } catch (err) {
+        } catch (error) {
             console.log(`Firestore Error: Adding Product -> ${error.message}`)
         }
     }

@@ -3,9 +3,9 @@ $(document).ready(() => {
     //! ---------------------------------------------------------------------------------
     //                          Seller Navigation Functions
     //! ---------------------------------------------------------------------------------
-
     let menuToggle = document.querySelector('.toggle');
     let navigation = document.querySelector('.navigation');
+    let settingsTab = document.getElementById('listSettings');
 
     menuToggle.onclick = () => {
         menuToggle.classList.toggle('active');
@@ -19,8 +19,23 @@ $(document).ready(() => {
     const menuLength = list.length;
 
     for (let i = 0; i < menuLength; i++) {
+
         if (list[i].href === currentLocation) {
-            list[i].closest('li').className = 'active';
+            const getPath = list[i].href.split('/')[4];
+            const checkTab = getPath.split('?');
+
+            if (checkTab[0] === 'settings') {
+                if (!settingsTab.classList.contains('active')) {
+                    settingsTab.classList.add('active')
+                }
+                
+                list[i].classList.add('active')
+                list[i].closest('li').className = 'active';
+            } else {
+                list[i].closest('li').className = 'active';
+            }
+
+            
         }
     }
 
@@ -39,7 +54,6 @@ $(document).ready(() => {
     //! ---------------------------------------------------------------------------------
     //                             Transaction Functions
     //! ---------------------------------------------------------------------------------
-
     const tabs = document.querySelectorAll('.tab-link');
 
     const analyticsPanel = document.getElementById('analytics');
@@ -60,7 +74,7 @@ $(document).ready(() => {
                 tabs[2].className = 'show-all tab-link';
                 analyticsPanel.style.display = "none";
                 transactionsPanel.style.display = "block";
-            } 
+            }
             tabs[i].className = 'list active';
 
             if ([i] == 2) {
@@ -72,5 +86,16 @@ $(document).ready(() => {
         };
     };
 
-    
+
+    //! ---------------------------------------------------------------------------------
+    //                             Settings Functions
+    //! ---------------------------------------------------------------------------------
+    const settingsMenu = document.querySelectorAll('.settings-link');
+    for (const menuIndex of settingsMenu) {
+        menuIndex.addEventListener('click', () => {
+            console.log(menuIndex)
+        })
+    }
+
+
 });
