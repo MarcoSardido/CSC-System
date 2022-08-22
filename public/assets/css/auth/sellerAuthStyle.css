@@ -1,11 +1,3 @@
-/* .auth-header {
-    width: 100%;
-    height: 10vh;
-    padding: 10px;
-    font-size: 50px;
-    text-align: center;
-} */
-
 body {
     padding: 30px 0;
 }
@@ -52,7 +44,7 @@ ion-icon {
 
 .seller-auth-nav .nav-cont:nth-child(2) {
     border-top: 1px solid #77777730;
-    border-bottom:  1px solid #77777730;
+    border-bottom: 1px solid #77777730;
 }
 
 .seller-auth-nav .nav-cont img {
@@ -64,7 +56,7 @@ ion-icon {
     width: 30px;
     height: 25px;
     color: #485fed;
-    transform:scale(1.2);
+    transform: scale(1.2);
     padding-bottom: 5px;
 }
 
@@ -148,7 +140,7 @@ ion-icon {
     height: 2.8rem;
     bottom: 248px;
     left: 280px;
-    background:  #485fed;
+    background: #485fed;
     z-index: 2;
     color: #fff;
     font-size: 23px;
@@ -299,7 +291,7 @@ ion-icon {
 .businessInfo.active .progress-icon,
 .personalInfo.active .progress-title,
 .personalInfo.active .progress-icon {
-   transition: margin-top 0.5s ease-in-out;
+    transition: margin-top 0.5s ease-in-out;
 }
 
 .businessInfo.active .progress-title,
@@ -307,8 +299,8 @@ ion-icon {
 .personalInfo.active .progress-title,
 .personalInfo.active .progress-icon,
 .personalInfo.active .progress-title,
-.personalInfo.active .progress-icon  {
-   margin-top: -65px;
+.personalInfo.active .progress-icon {
+    margin-top: -65px;
 }
 
 .businessInfo.active .progress-icon ion-icon,
@@ -352,7 +344,7 @@ ion-icon {
 
 .businessInfo.active .progress-title .progress-drop .subTopic,
 .personalInfo.active .progress-title .progress-drop .subTopic {
-     color: #777;
+    color: #777;
 }
 
 .progress-body .progress.active .progress-title {
@@ -372,7 +364,7 @@ ion-icon {
 }
 
 .progress-body .progress.pending .progress-title {
-     color: #777;
+    color: #777;
 }
 
 .progress-body .progress.pending .progress-icon {
@@ -431,7 +423,7 @@ ion-icon {
 .step {
     display: none !important;
 }
-  
+
 .tab {
     display: none;
 }
@@ -516,7 +508,7 @@ ion-icon {
 
 .start .panel-body .emailStart:focus {
     box-shadow: 0 0 5px #485fed;
-    padding: 10px 10px; 
+    padding: 10px 10px;
     border: 1px solid #485fed;
 }
 
@@ -527,7 +519,7 @@ ion-icon {
 }
 
 .panel-header p {
-    text-align:end;
+    text-align: end;
     color: #777;
     font-size: 15px;
 }
@@ -540,13 +532,13 @@ ion-icon {
     height: 57vh;
 }
 
-.panel-body .static-cont .title{
+.panel-body .static-cont .title {
     font-size: 20px;
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.panel-body .static-cont .subText{
+.panel-body .static-cont .subText {
     font-size: 15px;
     color: #777;
 }
@@ -560,12 +552,12 @@ ion-icon {
 }
 
 .panel-body .dynamic-cont .form_radio_item input[type="radio"] {
-   position: absolute;
-   left: -9999px;
-   width: 1px;
-   height: 1px;
-   opacity: 0;
-   visibility: hidden;
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    visibility: hidden;
 }
 
 .form_radio_item .form_radio_item_label {
@@ -599,20 +591,20 @@ ion-icon {
     border-color: #485fed;
 }
 
-.form_radio_item input[type="radio"]:checked ~ .form_radio_item_label {
+.form_radio_item input[type="radio"]:checked~.form_radio_item_label {
     background: #001cf90d;
     border-color: #485fed;
 }
 
-.form_radio_item input[type="radio"]:checked ~ .form_radio_item_label:before {
+.form_radio_item input[type="radio"]:checked~.form_radio_item_label:before {
     border-color: #485fed;
 }
 
-.form_radio_item input[type="radio"]:checked ~ .form_radio_item_label .form_radio_item_icon {
+.form_radio_item input[type="radio"]:checked~.form_radio_item_label .form_radio_item_icon {
     background: #485fed;
 }
 
-.form_radio_item input[type="radio"]:checked ~ .form_radio_item_label .form_radio_item_icon ion-icon {
+.form_radio_item input[type="radio"]:checked~.form_radio_item_label .form_radio_item_icon ion-icon {
     color: #fff;
 }
 
@@ -662,16 +654,16 @@ ion-icon {
 .panel-body .dynamic-cont input[type="text"]:focus,
 .panel-body .dynamic-cont input[type="password"]:focus,
 .panel-body .dynamic-cont input[type="date"]:focus,
-.panel-body .dynamic-cont select:focus{
+.panel-body .dynamic-cont select:focus {
     box-shadow: 0 0 5px #485fed;
-    padding: 10px 10px; 
+    padding: 10px 10px;
     border: 1px solid #485fed;
 }
 
 .panel-body .dynamic-cont .company-desc textarea {
     transition: all 0.30s ease-in-out;
     outline: none;
-    padding: 10px 10px 0; 
+    padding: 10px 10px 0;
     border: 1px solid #e1e1e1;
     resize: none;
     border-radius: 5px;
@@ -679,7 +671,7 @@ ion-icon {
 
 .panel-body .dynamic-cont .company-desc textarea:focus {
     box-shadow: 0 0 5px #485fed;
-    padding: 10px 10px 0; 
+    padding: 10px 10px 0;
     border: 1px solid #485fed;
 }
 
@@ -697,7 +689,7 @@ ion-icon {
 .signUp-detail .panel-footer .btnPrev {
     color: #777;
     background: #f1f1ff;
-}            
+}
 
 .signUp-detail .panel-footer .btnNext {
     color: #fff;
@@ -746,7 +738,7 @@ ion-icon {
 }
 
 .detail-panel .panel-body .dynamic-cont .seller-name div:nth-child(2),
-.detail-panel .panel-body .dynamic-cont .seller-address div:nth-child(2){
+.detail-panel .panel-body .dynamic-cont .seller-address div:nth-child(2) {
     padding-left: 25px;
 }
 
@@ -785,7 +777,7 @@ ion-icon {
 
 /* 4th Panel */
 
-.dynamic-cont  .email-cont i {
+.dynamic-cont .email-cont i {
     position: absolute;
     right: 400px;
     bottom: 287px;
@@ -810,209 +802,279 @@ ion-icon {
 
 /* Start of Seller SignIn Style */
 
-    .seller-signIn-cont .static-cont {
-        width: 40%;
-        background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        padding: 70px 50px
-    }
+.seller-signIn-cont .static-cont {
+    width: 40%;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 70px 50px
+}
 
-    .seller-signIn-cont .static-cont .vertical-line {
-        position: absolute;
-        top: 190px;
-        left: 305px;
-        background: #ffffff4f;
-        width: 1px;
-        height: 380px;
-    }
+.seller-signIn-cont .static-cont .vertical-line {
+    position: absolute;
+    top: 190px;
+    left: 305px;
+    background: #ffffff4f;
+    width: 1px;
+    height: 380px;
+}
 
-    .seller-signIn-cont .static-cont .horizontal-line {
-        position: absolute;
-        bottom: 326px;
-        left: 306px;
-        background: #ffffff4f;
-        width: 45px;
-        height: 1px;
-    }
+.seller-signIn-cont .static-cont .horizontal-line {
+    position: absolute;
+    bottom: 326px;
+    left: 306px;
+    background: #ffffff4f;
+    width: 45px;
+    height: 1px;
+}
 
-    .seller-signIn-cont .static-cont .quote-logo {
-        position: absolute;
-        left: 277px;
-        width: 3.5rem;
-        height: 3.5rem;
-        background: #a1d4ed;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.seller-signIn-cont .static-cont .quote-logo {
+    position: absolute;
+    left: 277px;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #a1d4ed;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .seller-signIn-cont .static-cont .quote-logo i {
-        color: #485fed;
-    }
+.seller-signIn-cont .static-cont .quote-logo i {
+    color: #485fed;
+}
 
-    .seller-signIn-cont .static-cont .quote-title {
-        margin-top: 80px;
-        margin-bottom: 20px;
-        font-size: 4.5em;
-        color: #fff;
-        font-weight: 600;
-        line-height: 120%;
-    }
+.seller-signIn-cont .static-cont .quote-title {
+    margin-top: 80px;
+    margin-bottom: 20px;
+    font-size: 4.5em;
+    color: #fff;
+    font-weight: 600;
+    line-height: 120%;
+}
 
-    .seller-signIn-cont .static-cont .quote-detail {
-        margin-bottom: 50px;
-        margin-left: 70px;
-        color: #ffffffc4;
-        font-size: 15px;
-        font-weight: 300;
-    }
+.seller-signIn-cont .static-cont .quote-detail {
+    margin-bottom: 50px;
+    margin-left: 70px;
+    color: #ffffffc4;
+    font-size: 15px;
+    font-weight: 300;
+}
 
-    .seller-signIn-cont .static-cont .quote-author {
-        display: flex;
-        align-items: center;
-        margin-left: 70px;
-    }
+.seller-signIn-cont .static-cont .quote-author {
+    display: flex;
+    align-items: center;
+    margin-left: 70px;
+}
 
-    .seller-signIn-cont .static-cont .quote-author img {
-        width: 3rem;
-        border-radius: 50%;
-    }
+.seller-signIn-cont .static-cont .quote-author img {
+    width: 3rem;
+    border-radius: 50%;
+}
 
-     .seller-signIn-cont .static-cont .quote-author .author-detail p {
-         margin-bottom: 0;
-         padding-left: 10px;
-     }
+.seller-signIn-cont .static-cont .quote-author .author-detail p {
+    margin-bottom: 0;
+    padding-left: 10px;
+}
 
-     .seller-signIn-cont .static-cont .quote-author .author-detail .author-name {
-        color: #fff;
-        font-size: 1em;
-     }
+.seller-signIn-cont .static-cont .quote-author .author-detail .author-name {
+    color: #fff;
+    font-size: 1em;
+}
 
-     .seller-signIn-cont .static-cont .quote-author .author-detail .author-job {
-         color: #ffffffc4;
-         font-size: 14px;
-         font-weight: 300;
-     }
+.seller-signIn-cont .static-cont .quote-author .author-detail .author-job {
+    color: #ffffffc4;
+    font-size: 14px;
+    font-weight: 300;
+}
 
-    .seller-signIn-cont .dynamic-cont {
-        padding: 50px;
-        width: 60%;
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-    }
+.seller-signIn-cont .dynamic-cont {
+    padding: 50px;
+    width: 60%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+}
 
-    .header-cont .header-logo {
-        margin-bottom: 20px;
-    }
+.header-cont .header-logo {
+    margin-bottom: 20px;
+}
 
-    .header-cont .header-text .mainText {
-        font-size: 2em;
-        text-align: center;
-        margin-bottom: 5px;
-    }
+.header-cont .header-text .mainText {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 5px;
+}
 
-    .dynamic-cont .header-cont .header-text,
-    .dynamic-cont .body-cont,
-    .dynamic-cont .footer-cont {
-         padding: 0 35px;
-     }
+.dynamic-cont .header-cont .header-text,
+.dynamic-cont .body-cont,
+.dynamic-cont .footer-cont {
+    padding: 0 35px;
+}
 
-    .header-cont .header-text .subText {
-        text-align: center;
-        font-size: 16px;
-        color: #505050;
-        margin-bottom: 30px;
-    }
+.header-cont .header-text .subText {
+    text-align: center;
+    font-size: 16px;
+    color: #505050;
+    margin-bottom: 30px;
+}
 
-    .body-cont .form-cont {
-        margin-bottom: 10px;
-    }
+.body-cont .form-cont {
+    margin-bottom: 10px;
+}
 
-    .body-cont .form-cont:nth-child(2) {
-        margin-bottom: 0;
-    }
+.body-cont .form-cont:nth-child(2) {
+    margin-bottom: 0;
+}
 
-    .body-cont .form-cont label {
-        margin-bottom: 0;
-    }
+.body-cont .form-cont label {
+    margin-bottom: 0;
+}
 
-    .body-cont button {
-        border: none;
-        width: 95%;
-        height: 2.5rem;
-        background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-        color: #fff;
-        font-size: 15px;
-        margin-top: 20px;
-        border-radius: 5px;
-        transition: all 0.6s;
-        background-size: 200%;
-    }
+.body-cont button {
+    border: none;
+    width: 95%;
+    height: 2.5rem;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    font-size: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: all 0.6s;
+    background-size: 200%;
+}
 
-    .body-cont button:hover {
-        background-position: right;
-    }
+.body-cont button:hover {
+    background-position: right;
+}
 
-    .body-cont a {
-        margin-left: 315px;
-        font-size: 13px;
-    }
+.body-cont a {
+    margin-left: 315px;
+    font-size: 13px;
+}
 
 /* End of Seller SignIn Style */
 
 
 
+
+/* Password Reset Modal Style */
+
+.reset-password-modal p {
+    margin: 0;
+}
+
+.password-reset-modal .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.password-reset-modal .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.password-reset-modal .content img {
+    width: 60%;
+    margin: 20px 0;
+}
+
+.password-reset-modal .content .main-text {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.password-reset-modal .content .sub-text {
+    color: #777;
+    font-size: 15px;
+}
+
+.password-reset-modal .content .long-text {
+    width: 80%;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.password-reset-modal .content .input-reset {
+    width: 90%;
+}
+
+
+.password-reset-modal .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.password-reset-modal .footer button {
+    border: none;
+    width: 95%;
+    height: 2.5rem;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    font-size: 15px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+/* End of Password Reset Modal Style */
+
+
+
+
 /* Input Validation Style */
 
-    .alert {
-        display: flex;
-        align-items: center;
-        font-size: 13px;
-        padding: 1px 10px;
-        margin-bottom: -15px;
-        pointer-events: none;
-    }
+.alert {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 1px 10px;
+    margin-bottom: -15px;
+    pointer-events: none;
+}
 
-    .alert .alert-icon {
-        font-size: 25px;
-        padding-right: 10px;
-        margin-top: 5px;
-    }
+.alert .alert-icon {
+    font-size: 25px;
+    padding-right: 10px;
+    margin-top: 5px;
+}
 
-    .validatorTextStyle {
-        pointer-events: none;
-        font-weight: 600;
-        font-style: italic;
-        font-size: 14px;
-    }
+.validatorTextStyle {
+    pointer-events: none;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 14px;
+}
 
-    .passwordValidation {
-        position: absolute;
-        pointer-events: none;
-        font-weight: 600;
-        font-size: 14px;
-        font-style: italic;
-        bottom: 255px;
-    }
+.passwordValidation {
+    position: absolute;
+    pointer-events: none;
+    font-weight: 600;
+    font-size: 14px;
+    font-style: italic;
+    bottom: 255px;
+}
 
-    .passwordValidation.valid {
-        color: #00ff00;
-    }
+.passwordValidation.valid {
+    color: #00ff00;
+}
 
-    .passwordValidation.invalid {
-        color: #ff0000;
-    }
+.passwordValidation.invalid {
+    color: #ff0000;
+}
 
-    .valid .validatorTextStyle{
-        color: #00ff00;
-    }
+.valid .validatorTextStyle {
+    color: #00ff00;
+}
 
-    .invalid .validatorTextStyle{
-        color: #ff0000;
-    }
+.invalid .validatorTextStyle {
+    color: #ff0000;
+}
 
 /* End of Input Validation Style */
-
-
-

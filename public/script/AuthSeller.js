@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -27,9 +27,10 @@ $(document).ready(() => {
         }
     });
 
+    // Login
     $('#seller_SignInForm').submit((e) => {
-
         e.preventDefault();
+
         let signInEmail = $('#signIn-Email').val();
         let signInPassword = $('#signIn-password').val();
 
@@ -43,7 +44,19 @@ $(document).ready(() => {
                 console.log(error.message);
             })
         });
+    })
 
+    // Reset Password
+    const inputResetPassword = document.getElementById('inputResetPassword');
+    $('#btnResetPassword').click(() => {
+        if (!inputResetPassword.value) return alert('Please enter email address');
+        sendPasswordResetEmail(auth, inputResetPassword.value).then(() => {
+            alert('Password Reset Link Sent Successfully.');
+            inputResetPassword.value = null;
+            $('#resetPasswordModal').modal('hide');
+        }).catch(error => {
+            console.error(`Firebase Auth Error: @ResetPassword: ${error.message}`)
+        })
     })
 
     //ANCHOR: END OF AUTHENTICATION CODE//
