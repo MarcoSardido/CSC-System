@@ -11,13 +11,13 @@ $(document).ready(() => {
         const week = getLast7Days();
 
         for (const iterator of res) {
-            let amount = iterator.totalPrice;
-            amount = amount.replace(/[^\d\.]/g, "");
-            amount = parseFloat(amount);
+            // let amount = iterator.totalPrice;
+            // amount = amount.replace(/[^\d\.]/g, "");
+            // amount = parseFloat(amount);
 
             data.push({
                 x: convertStringDateToNumDate(iterator.date),
-                y: amount,
+                y: iterator.totalPrice,
             })
         }
 

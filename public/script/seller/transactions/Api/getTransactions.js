@@ -10,7 +10,18 @@ const getAllTransactionRecords = async (uuid) => {
         const filter = query(collectionRef, orderBy('date'));
         const transactionCollection = await getDocs(filter);
 
-        transactionCollection.forEach(record => transactionContainer.push(record.data()));
+        transactionCollection.forEach(record => {
+            transactionContainer.push({
+                customer: record.data().customer,
+                date: record.data().date,
+                id: record.data().id,
+                items: record.data().items,
+                orderID: record.data().orderID,
+                payment: record.data().payment,
+                status: record.data().status,
+                totalPrice: formatThousands(record.data().totalPrice / 100)
+            })
+        });
 
         return transactionContainer;
     } catch (err) {
@@ -26,11 +37,12 @@ const dataForAnalytics = async (uuid) => {
         const filter = query(collectionRef, orderBy('date'));
         const transactionCollection = await getDocs(filter);
 
-        transactionCollection.forEach(record => analyticsContainer.push({
-            date: record.data().date,
-            totalPrice: record.data().totalPrice,
-        }));
-
+        transactionCollection.forEach(record => {
+            analyticsContainer.push({
+                date: record.data().date,
+                totalPrice: formatThousands(record.data().totalPrice / 100)
+            })
+        });
 
         return analyticsContainer;
     } catch (err) {
@@ -51,7 +63,7 @@ const dataForRecentTransactions = async (uuid) => {
 
         transactionCollection.forEach(record => recentTransContainer.push({
             date: record.data().date,
-            totalPrice: record.data().totalPrice,
+            totalPrice: formatThousands(record.data().totalPrice / 100),
             customerName: record.data().customer.displayName,
         }));
         recentTransContainer.reverse();
@@ -77,8 +89,10 @@ const dataForRecentTransactions = async (uuid) => {
     } catch (err) {
         console.error(`Firestore Error: @Get data for recent transaction -> ${err.message}`)
     }
+}
 
-
+const formatThousands = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 

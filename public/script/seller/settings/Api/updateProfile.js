@@ -8,7 +8,8 @@ const changeProfilePhoto = async (uid, data) => {
         //* ACCOUNTS COLLECTION
         const accountsColRef = doc(db, `Accounts/seller_${uid}`);
         await updateDoc(accountsColRef, {
-            userPhoto: `data:${data.type};base64,${data.data}`
+            imgType: data.type,
+            userPhoto: data.data
         })
 
     } catch (error) {
@@ -16,11 +17,6 @@ const changeProfilePhoto = async (uid, data) => {
     }
 }
 
-const updateProfileInfo = async (uid, data) => {
-
-}
-
 export {
-    changeProfilePhoto,
-    updateProfileInfo
+    changeProfilePhoto
 }

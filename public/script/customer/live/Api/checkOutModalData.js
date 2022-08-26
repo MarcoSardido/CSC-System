@@ -8,7 +8,7 @@ const getAllCustomerAddress = async (uid) => {
 
     try {
         // Customer collection
-        const customerColRef = collection(db, `Customers/${uid}/CustomerAddressBook`);
+        const customerColRef = collection(db, `Customers/${uid}/AddressBook`);
         const customerColDoc = await getDocs(customerColRef);
 
         customerColDoc.forEach(doc => {
@@ -25,12 +25,12 @@ const getAllCustomerAddress = async (uid) => {
 const addNewAddress = async (uid, addressObj) => {
     try {
         // Customer collection
-        const customerColRef = collection(db, `Customers/${uid}/CustomerAddressBook`);
+        const customerColRef = collection(db, `Customers/${uid}/AddressBook`);
         const customerColDoc = await getDocs(customerColRef);
 
         const addressCounter = customerColDoc.docs.length + 1;
 
-        const addressColRef = doc(db, `Customers/${uid}/CustomerAddressBook/address${addressCounter}`);
+        const addressColRef = doc(db, `Customers/${uid}/AddressBook/address${addressCounter}`);
         await setDoc(addressColRef, {
             Barangay: addressObj.barangay,
             City: addressObj.city,
@@ -55,15 +55,17 @@ const calcItems = async (uid, sid, arrayOfItems) => {
             const liveCartSubColDoc = await getDoc(liveCartSubColRef);
 
             let convert = liveCartSubColDoc.data().itemPrice.toString();
-            const priceInCents = convert+='00';
+            const priceInCents = convert += '00';
 
             items.push({
                 id: liveCartSubColDoc.id,
+                productID: liveCartSubColDoc.data().prodID,
                 name: liveCartSubColDoc.data().itemName,
-                quantity:  liveCartSubColDoc.data().itemQty,
+                description: liveCartSubColDoc.data().itemDesc,
+                quantity: liveCartSubColDoc.data().itemQty,
                 priceInCents: Number(priceInCents),
+                subTotal: (Number(priceInCents) * liveCartSubColDoc.data().itemQty),
                 size: liveCartSubColDoc.data().itemSize
-
             })
         }
         return items;
@@ -89,6 +91,81 @@ const addStripePaymentID = async (uid, stripePaymentID, stripePaymentStatus) => 
 }
 
 
+const codPaymentHandler = async (uid, roomID, data, items) => {
+    const orderUniqueID = generateId(), transUniqueID = generateId();
+    let totalPrice = 0, roomHost;
+
+    //? To remove items later...
+    const removeItemsArray = []
+    for (const itemIndex of items) {
+        removeItemsArray.push(itemIndex.id)
+
+        delete itemIndex.id;
+        delete itemIndex.productID;
+
+        totalPrice += itemIndex.subTotal;
+    }
+
+    try {
+        // :: Live Selling -> Customer Live Cart
+        const liveCartRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart`);
+        const liveCartDoc = await getDocs(liveCartRef);
+        liveCartDoc.forEach(document => {
+            removeItemsArray.map(item => {
+                if (document.id === item) {
+
+                    //Remove items in live 
+                    const removeCartItem = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${document.id}`);
+                    deleteDoc(removeCartItem);
+                }
+            })
+        })
+
+        // :: Customer Collection -> Orders
+        const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${orderUniqueID}`);
+        await setDoc(customerOrderRef, {
+            id: orderUniqueID,
+            transactionID: transUniqueID,
+            items: items,
+            modeOfPayment: data.modeOfPayment,
+            placedOn: stringDateFormat(),
+            totalAmount: totalPrice,
+            orderAddress: data.orderAddress,
+            status: 'Processing',
+        })
+
+        // :: Live Selling => Get sellerUID
+        const liveSessionRef = doc(db, `LiveSession/sessionID_${roomID}`);
+        const liveSessionDoc = await getDoc(liveSessionRef);
+        roomHost = liveSessionDoc.data().sellerID;
+
+        // :: Customer Collection
+        const customerRef = doc(db, `Customers/${uid}`);
+        const customerDoc = await getDoc(customerRef);
+
+        // :: Seller Collection -> Transaction
+        const sellerTransactionRef = doc(db, `Sellers/${roomHost}/Transactions/transactionID_${transUniqueID}`);
+        await setDoc(sellerTransactionRef, {
+            id: transUniqueID,
+            orderID: orderUniqueID,
+            customer: {
+                uid: customerDoc.id,
+                address: data.orderAddress,
+                displayName: customerDoc.data().displayName
+            },
+            items: items,
+            date: stringDateFormat(),
+            payment: data.modeOfPayment,
+            status: 'Pending',
+            totalPrice: totalPrice
+        })
+
+    } catch (error) {
+        console.error(`Firestore Error: @codPaymentHandler -> ${error.message}`);
+    }
+}
+
+
 //* =================================================================================================== 
 // ========================================== Stripe ==================================================
 //* ===================================================================================================
@@ -107,7 +184,7 @@ const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod) => {
                 items: itemArr,
                 method: paymentMethod
             })
-    
+
         });
         // Result Object
         const jsonResult = await stripeResult.json();
@@ -123,9 +200,24 @@ const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod) => {
     }
 }
 
+const generateId = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 15; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
 
-
-
+const stringDateFormat = () => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ');
+    return formattedDate;
+}
 
 
 
@@ -135,5 +227,6 @@ export {
     addNewAddress,
     calcItems,
 
-    stripePaymentHandler
+    stripePaymentHandler,
+    codPaymentHandler
 }

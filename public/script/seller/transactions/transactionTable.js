@@ -47,7 +47,7 @@ $(document).ready(() => {
                     ...
                 </button>
                 <div class="dropdown-menu tbl-dropdown">
-                    <a class="dropdown-item viewRecordModal" data-toggle="modal" data-target="#staticBackdrop" data-trans-id="${data[index].transactionID}">More Info</a>
+                    <a class="dropdown-item viewRecordModal" data-toggle="modal" data-target="#staticBackdrop" data-trans-id="${data[index].id}">More Info</a>
                 </div>
             `;
 
@@ -70,7 +70,7 @@ $(document).ready(() => {
             modalIndex.addEventListener('click', () => {
                 const transID = modalIndex.dataset.transId;
                 for (const recordIndex of data) {
-                    if (recordIndex.transactionID === transID) {
+                    if (recordIndex.id === transID) {
                         displayModalData(recordIndex)
                     }
                 }
@@ -95,7 +95,7 @@ $(document).ready(() => {
                 <div class="bill-info">
                     <p class="modal-static-text">Billed To</p>
                     <p class="modal-dynamic-text">
-                        <p class="bill-client">${data.customer.fullName}</p>
+                        <p class="bill-client">${data.customer.displayName}</p>
                         <p class="bill-street">${firstAddress}</p>
                         <p class="bill-address">${secondAddress}</p>
                     </p>
@@ -103,7 +103,7 @@ $(document).ready(() => {
                 <div class="invoice-info">
                     <p class="modal-static-text">Invoice Details</p>
                     <p class="modal-dynamic-text">
-                    <p class="invoice invoice-num"># ${data.transactionID}</p>
+                    <p class="invoice invoice-num"># ${data.id}</p>
                     <p class="invoice invoice-date">Date: ${data.date}</p>
                     <p class="invoice invoice-mode">Mode of Payment: ${data.payment}</p>
                     </p>
@@ -157,7 +157,7 @@ $(document).ready(() => {
 
     const loopEachItem = (items) => {
         let itemContent = ``;
-
+console.log(items)
         for (const itemIndex in items) {
 
             itemContent += `
@@ -168,14 +168,18 @@ $(document).ready(() => {
                                 <p class="modal-static-text">${items[itemIndex].description}</p>
                             </div>
                     </td>
-                    <td class="strong">₱${items[itemIndex].price}</td>
+                    <td class="strong">₱${formatThousands(items[itemIndex].priceInCents / 100)}</td>
                     <td class="strong">${items[itemIndex].quantity}</td>
-                    <td class="strong">₱${items[itemIndex].subTotal}</td>
+                    <td class="strong">₱${formatThousands(items[itemIndex].subTotal / 100)}</td>
                 </tr> 
             `;
         }
         return itemContent;
 
+    }
+
+    const formatThousands = (price) => {
+        return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     const clearUpModal = () => {

@@ -19,7 +19,7 @@ $(document).ready(() => {
 
     const checkIfRoomIsAvailable = doc(db, `LiveSession/sessionID_${liveRoomID}`)
     onSnapshot(checkIfRoomIsAvailable, doc => {
-        if (doc.data().sessionOpen === false) {
+        if (doc.data().sessionStatus === 'Closed') {
             alert('This room has been closed by the seller. Redirecting to dashboard!');
             window.location.assign(`/customercenter`)
         }
@@ -60,19 +60,16 @@ $(document).ready(() => {
     })
 
     // Live Video
-    const videoContainer = document.getElementById('video-container');
-    connection.onstream = (event) => {
-        let video = event.mediaElement;
-        videoContainer.appendChild(video);
-    }
+    // const videoContainer = document.getElementById('video-container');
+    // connection.onstream = (event) => {
+    //     let video = event.mediaElement;
+    //     videoContainer.appendChild(video);
+    // }
 
-    connection.checkPresence(liveRoomID, (isRoomExist, roomid) => {
-        if (!(isRoomExist === true)) return alert(`There is no room with ID: ${roomid} or Name: ${liveRoomID}`)
-
-        connection.join(roomid);
-        alert(`Successfully Joined the room: ${roomid}.`)
-
-    });
+    // connection.checkPresence(liveRoomID, (isRoomExist, roomid) => {
+    //     if (!(isRoomExist === true)) return alert(`There is no room with ID: ${roomid} or Name: ${liveRoomID}`)
+    //     connection.join(roomid);
+    // });
 
     addUserCount(trimmedUID, liveRoomID)
 })

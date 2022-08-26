@@ -28,7 +28,7 @@
                     <section class="profile">
                         <div class="avatar">
                             <p class="lblProfile">Avatar</p>
-                            <img src="<%=settingsData.accountPhoto ? settingsData.accountPhoto : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'%>"
+                            <img src="<%=settingsData.accountPhoto ? `data:${settingsData.photoType};base64,${settingsData.accountPhoto}` : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'%>"
                                 atl="<%=settingsData.accountName ? settingsData.accountName : 'default seller'%>"
                                 class="display-photo" style="display: block">
                             <div class="filUpload" style="display: none">

@@ -17,7 +17,7 @@ $(document).ready(() => {
     //                                     Firebase Functions
     //! ----------------------------------------------------------------------------------------
     let totalViewers = 0;
-    
+
     const realTimeViewerCount = async (roomID) => {
         let viewers = 0;
 
@@ -55,7 +55,7 @@ $(document).ready(() => {
             const sellerLiveSessionColRef = doc(db, `Sellers/${uid}/LiveSessions/sessionID_${roomID}`);
             await setDoc(sellerLiveSessionColRef, {
                 totalViewCount: totalViewers
-            }, { merge: true})
+            }, { merge: true })
 
 
             //* LIVE SESSION COLLECTION
@@ -73,7 +73,7 @@ $(document).ready(() => {
             // Close Live
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
             await updateDoc(liveSessionColRef, {
-                sessionOpen: false
+                sessionStatus: 'Closed'
             })
 
         } catch (error) {
@@ -82,16 +82,34 @@ $(document).ready(() => {
     }
 
     const liveSessionDuration = async (roomID) => {
-
+        let sessionTime;
         try {
             //* LIVE SESSION COLLECTION
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
             const liveSessionColDoc = await getDoc(liveSessionColRef);
-            const durationData = liveSessionColDoc.data().sessionDuration;
 
-            return durationData;
+            if (liveSessionColDoc.data().timeLeft !== 0) {
+                sessionTime = liveSessionColDoc.data().timeLeft;
+            } else {
+                sessionTime = liveSessionColDoc.data().sessionDuration;
+            }
+            return sessionTime;
         } catch (error) {
             console.error(`Firestore Error: @liveSessionDuration -> ${error.message}`)
+        }
+    }
+
+    const updateTimeLeft = async (roomID, data) => {
+        try {
+            //* LIVE SESSION COLLECTION
+            const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
+            await updateDoc(liveSessionColRef, {
+                timeLeft: data
+            });
+
+        } catch (error) {
+            console.error(`Firestore Error: @updateTimeLeft -> ${error.message}`)
+
         }
     }
 
@@ -104,19 +122,24 @@ $(document).ready(() => {
 
     // Live Countdown
     const timerLabel = document.getElementById('lblTimer');
-
     let interval = null, totalSeconds;
-    liveSessionDuration(liveRoomID).then(result => {
-        let time = result.split(' ')[0];
-        let label = result.split(' ')[1];
 
-        if (label === 'Minutes') {
-            const sec = 60;
-            totalSeconds = Number(time) * sec;
+    liveSessionDuration(liveRoomID).then(result => {
+        if (typeof result === 'string') {
+            let time = result.split(' ')[0];
+            let label = result.split(' ')[1];
+
+            if (label === 'Minutes') {
+                const sec = 60;
+                totalSeconds = Number(time) * sec;
+            } else {
+                const sec = 3600;
+                totalSeconds = Number(time) * sec;
+            }
         } else {
-            const sec = 3600;
-            totalSeconds = Number(time) + sec;
+            totalSeconds = result;
         }
+
     })
 
     const countdownTimer = () => {
@@ -189,6 +212,12 @@ $(document).ready(() => {
         // Back to seller dashboard
         window.location.assign(`/sellercenter`);
     })
+
+    window.onbeforeunload = event => {
+        updateTimeLeft(liveRoomID, totalSeconds)
+        event.returnValue = "Write something clever here..";
+    };
+
 
     // Viewer count
     const displayTotalViewers = (count) => {

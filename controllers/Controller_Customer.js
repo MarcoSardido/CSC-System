@@ -1,6 +1,6 @@
 import { firebase, firebaseAdmin } from '../firebase.js';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
+import { getFirestore, collection, doc, addDoc, setDoc, updateDoc, getDoc, getDocs, deleteDoc } from 'firebase/firestore';
 
 import { createStripeCustomer, liveCartSession, getAllPaymentList, cancelPaymentIntent } from '../controllers/Controller_Stripe.js'
 
@@ -83,7 +83,7 @@ const orderPage = (req, res) => {
     const uid = req.body.uid;
 
     userData(uid).then(result => {
-        res.render('customer/order', {
+        res.render('customer/orderStatus', {
             layout: 'layouts/customerLayout',
             displayAccountInfo: result.accountArray,
             displayCustomerInfo: result.customerArray,
@@ -258,32 +258,67 @@ const livePaymentSuccess = async (req, res) => {
 
     let splitResult = currentRoomUrl.split("/");
     let roomID = splitResult[splitResult.length - 1];
-
+    
     // To prevent checkout cancelation
     isCheckoutCancelled = false;
 
+    //? To remove items later...
     for (const itemIndex of currentItemObj.currentCheckoutItems) {
         removeItems.push(itemIndex.id)
     }
 
-    // Stripe
-    const last10Payments = await getAllPaymentList();
+    //* =================================================================================================== 
+    // ========================================== Firebase ================================================
+    //* ===================================================================================================
+    // Seller UID
+    let roomHost;
 
-    // Firebase
-    // :: Stripe Collection
-    const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
-    const stripePaymentDoc = await getDocs(stripePaymentRef);
+    // orderID && transactionID
+    const orderUniqueID = generateId(), transUniqueID = generateId();
 
-    // :: Customer Collection
-    const uniqueID = generateId();
-    const currentDateAndTime = new Date();
-    const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${uniqueID}`);
+    for (const itemIndex of currentItemObj.currentCheckoutItems) {
+        delete itemIndex.id;
+        delete itemIndex.productID;
+    }
+
+    // :: Customer Collection -> Orders
+    const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${orderUniqueID}`);
     await setDoc(customerOrderRef, {
+        id: orderUniqueID,
+        transactionID: transUniqueID,
         items: currentItemObj.currentCheckoutItems,
         modeOfPayment: currentItemObj.currentPaymentMethod,
-        placedOn: currentDateAndTime,
+        placedOn: stringDateFormat(),
         totalAmount: currentItemObj.currentPaymentAmount,
+        orderAddress: currentItemObj.orderAddress,
         status: 'Processing',
+    })
+
+    // :: Live Selling => Get sellerUID
+    const liveSessionRef = doc(db, `LiveSession/sessionID_${roomID}`);
+    const liveSessionDoc = await getDoc(liveSessionRef);
+    roomHost = liveSessionDoc.data().sellerID;
+
+    // :: Customer Collection
+    const customerRef = doc(db, `Customers/${uid}`);
+    const customerDoc = await getDoc(customerRef);
+
+
+    // :: Seller Collection -> Transaction
+    const sellerTransactionRef = doc(db, `Sellers/${roomHost}/Transactions/transactionID_${transUniqueID}`);
+    await setDoc(sellerTransactionRef, {
+        id: transUniqueID,
+        orderID: orderUniqueID,
+        customer: {
+            uid: customerDoc.id,
+            address: currentItemObj.orderAddress,
+            displayName: customerDoc.data().displayName
+        },
+        items: currentItemObj.currentCheckoutItems,
+        date: stringDateFormat(),
+        payment: currentItemObj.currentPaymentMethod,
+        status: 'Success',
+        totalPrice: currentItemObj.currentPaymentAmount
     })
 
     // :: Live Selling -> Customer Live Cart
@@ -292,11 +327,22 @@ const livePaymentSuccess = async (req, res) => {
     liveCartDoc.forEach(document => {
         removeItems.map(item => {
             if (document.id === item) {
+
+                //Remove items in live 
                 const removeCartItem = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${document.id}`);
                 deleteDoc(removeCartItem);
             }
         })
     })
+
+    //* =================================================================================================== 
+    // ========================================== Stripe ==================================================
+    //* ===================================================================================================
+    const last10Payments = await getAllPaymentList();
+    
+    // :: Stripe Collection
+    const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
+    const stripePaymentDoc = await getDocs(stripePaymentRef);
 
     stripePaymentDoc.forEach(document => {
         for (const paymentIndex of last10Payments) {
@@ -304,9 +350,9 @@ const livePaymentSuccess = async (req, res) => {
             if (document.data().paymentIntentID === currentItemObj.currentPaymentID && paymentIndex.paymentStatus === 'succeeded') {
                 // Update firebase payment status to success
                 const updateStripePaymentRef = doc(db, `Stripe Accounts/customer_${uid}/Payment Intents/${document.id}`);
-                setDoc(updateStripePaymentRef, {
+                updateDoc(updateStripePaymentRef, {
                     paymentIntentStatus: paymentIndex.paymentStatus
-                }, { merge: true });
+                });
 
                 break;
             } else {
@@ -335,6 +381,7 @@ const livePayment = async (req, res) => {
     // For later if payment has made
     currentItemObj.currentCheckoutItems = items;
     currentItemObj.currentPaymentMethod = method;
+    currentItemObj.orderAddress = customer.address;
 
     try {
         // Stripe Account Collection
@@ -371,9 +418,6 @@ const livePayment = async (req, res) => {
         res.status(500).json({ error: error.message })
     }
 }
-
-
-
 
 
 
@@ -430,6 +474,14 @@ const generateId = () => {
             charactersLength));
     }
     return result;
+}
+
+const stringDateFormat = () => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ');
+    return formattedDate;
 }
 
 

@@ -1,265 +1,930 @@
 <link rel="stylesheet" href="/public/assets/css/customer/settings.css">
-<script defer src="/public/script/customer/filepond/fileUploadSettings.js"></script>
+<script defer src="/public/script/customer/settings/functions.js" type="text/javascript"></script>
+<!-- <script defer src="/public/script/customer/filepond/fileUploadSettings.js"></script> -->
 
+<main class="main">
+    <h1>Settings</h1>
 
-<div class="settings-header">
-    <div class="icon">
-        <div class="notif"></div>
-        <ion-icon name="notifications"></ion-icon>
-    </div>
-</div>
-<div class="settings-body">
-    <div class="settings-menu-cont">
-        <div class="title-cont">
-            <p>Settings</p>
+    <div class="settings">
+        <!-- Navigation -->
+        <ul class="nav-settings">
+            <li class="nav-item active">
+                <a href="#">Account</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Addresses</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Finance</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Feedback</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">Help</a>
+            </li>
+            <li class="nav-item">
+                <a href="#">CSC Policies</a>
+            </li>
+        </ul>
+        <!-- Navigation -->
+
+        <!-- ======================== TABS ========================== -->
+        <!-- ACCOUNT SETTINGS -->
+        <div id="account-tab" style="display: block">
+            <!-- ACCOUNT -->
+            <div class="content">
+
+                <div class="top">
+                    <h2>My Profile</h2>
+                    <p class="text-muted">Manage and protect your account</p>
+                </div>
+
+                <div class="middle">
+                    <form action="#" class="account-settings-form">
+                        <!-- INPUTS -->
+                        <table class="components">
+                            <tr>
+                                <th class="text-muted">Username</th>
+                                <td><input type="text" name="userName" id="username" value="marco1234" disabled></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Name</th>
+                                <td><input type="text" name="fullName" id="fullName" value="Marco Sardido"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Email</th>
+                                <td><input type="email" name="email" id="email" value="marcoSardido@gmail.com" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Phone Number</th>
+                                <td><input type="text" name="contactNum" id="contactNum" value="09950885038"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Gender</th>
+                                <td>
+                                    <label class="radio">
+                                        <input type="radio" name="gender" id="male" value="Male" checked>
+                                        <span>Male</span>
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="gender" id="female" value="Female">
+                                        <span>Female</span>
+                                    </label>
+                                    <label class="radio">
+                                        <input type="radio" name="gender" id="other" value="Other">
+                                        <span>Other</span>
+                                    </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Date Of Birth</th>
+                                <td>
+                                    <select id="day">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                    <select id="month">
+                                        <option value="January">January</option>
+                                        <option value="February">February</option>
+                                        <option value="March">March</option>
+                                        <option value="April">April</option>
+                                        <option value="May">May</option>
+                                        <option value="June">June</option>
+                                        <option value="July">July</option>
+                                        <option value="August">August</option>
+                                        <option value="September">September</option>
+                                        <option value="October">October</option>
+                                        <option value="November">November</option>
+                                        <option value="December">December</option>
+                                    </select>
+                                    <select id="year">
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1995">1995</option>
+                                        <option value="1994">1994</option>
+                                        <option value="1993">1993</option>
+                                        <option value="1992">1992</option>
+                                        <option value="1991">1991</option>
+                                        <option value="1990">1990</option>
+                                        <option value="1989">1989</option>
+                                        <option value="1988">1988</option>
+                                        <option value="1987">1987</option>
+                                        <option value="1986">1986</option>
+                                        <option value="1985">1985</option>
+                                        <option value="1984">1984</option>
+                                        <option value="1983">1983</option>
+                                        <option value="1982">1982</option>
+                                        <option value="1981">1981</option>
+                                        <option value="1980">1980</option>
+                                        <option value="1979">1979</option>
+                                        <option value="1978">1978</option>
+                                        <option value="1977">1977</option>
+                                        <option value="1976">1976</option>
+                                        <option value="1975">1975</option>
+                                        <option value="1974">1974</option>
+                                        <option value="1973">1973</option>
+                                        <option value="1972">1972</option>
+                                        <option value="1971">1971</option>
+                                        <option value="1970">1986</option>
+                                        <option value="1969">1969</option>
+                                        <option value="1968">1968</option>
+                                        <option value="1967">1967</option>
+                                        <option value="1966">1966</option>
+                                        <option value="1965">1965</option>
+                                        <option value="1964">1964</option>
+                                        <option value="1963">1963</option>
+                                        <option value="1962">1962</option>
+                                        <option value="1961">1961</option>
+                                        <option value="1960">1960</option>
+                                        <option value="1959">1959</option>
+                                        <option value="1958">1958</option>
+                                        <option value="1957">1957</option>
+                                        <option value="1956">1956</option>
+                                        <option value="1955">1955</option>
+                                        <option value="1954">1954</option>
+                                        <option value="1953">1953</option>
+                                        <option value="1952">1952</option>
+                                        <option value="1951">1951</option>
+                                        <option value="1950">1950</option>
+                                        <option value="1949">1949</option>
+                                        <option value="1948">1948</option>
+                                        <option value="1947">1947</option>
+                                        <option value="1946">1946</option>
+                                        <option value="1945">1945</option>
+                                        <option value="1944">1944</option>
+                                        <option value="1943">1943</option>
+                                        <option value="1942">1942</option>
+                                        <option value="1941">1941</option>
+                                        <option value="1940">1940</option>
+                                        <option value="1939">1939</option>
+                                        <option value="1938">1938</option>
+                                        <option value="1937">1937</option>
+                                        <option value="1936">1936</option>
+                                        <option value="1935">1935</option>
+                                        <option value="1934">1934</option>
+                                        <option value="1933">1933</option>
+                                        <option value="1932">1932</option>
+                                        <option value="1931">1931</option>
+                                        <option value="1930">1930</option>
+                                        <option value="1929">1929</option>
+                                        <option value="1928">1928</option>
+                                        <option value="1927">1927</option>
+                                        <option value="1926">1926</option>
+                                        <option value="1925">1925</option>
+                                        <option value="1924">1924</option>
+                                        <option value="1923">1923</option>
+                                        <option value="1922">1922</option>
+                                        <option value="1921">1921</option>
+                                        <option value="1920">1920</option>
+                                        <option value="1919">1919</option>
+                                        <option value="1918">1918</option>
+                                        <option value="1917">1917</option>
+                                        <option value="1916">1916</option>
+                                        <option value="1915">1915</option>
+                                        <option value="1914">1914</option>
+                                        <option value="1913">1913</option>
+                                        <option value="1912">1912</option>
+                                        <option value="1911">1911</option>
+                                        <option value="1910">1910</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td><input type="submit" value="Save" class="save-btn"></td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+                    <div class="uploadPhoto">
+                        <div class="profile-photo">
+                            <img src="/public/assets/images/roomCover/default10.jpg" id="uploadedImg">
+                        </div>
+                        <div class="input-file">
+                            <input type='file' onchange="readURL(this);"><br><br>
+                            <small class="text-muted">File size: maximum 1 MB</small><br>
+                            <small class="text-muted">File extension: .JPEG, .PNG</small>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- CHANGE PASSWORD -->
+            <div class="content">
+
+                <div class="top">
+                    <h2>Change Password</h2>
+                    <p class="text-muted">For your account's security, do not share your password with anyone else</p>
+                </div>
+
+                <div class="middle">
+                    <form action="#">
+                        <!-- INPUTS -->
+                        <table class="components">
+                            <tr>
+                                <th class="text-muted">New Password</th>
+                                <td><input type="password" name="password" id="newPass"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Confirm Password</th>
+                                <td><input type="password" name="password" id="confirmPass"></td>
+                            </tr>
+                            <tr>
+                                <th class="text-muted">Verification Code</th>
+                                <td class="verify">
+                                    <input type="text" name="verificationCode" id="verificationCode">
+                                    <button>Send Verification</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th></th>
+                                <td><input type="submit" value="Confirm" class="save-btn"></td>
+                            </tr>
+                        </table>
+
+                    </form>
+
+                </div>
+
+            </div>
         </div>
-        <div class="menu-cont">
-            <a href="#" class="settings-menu-link active">Account</a>
-            <a href="#" class="settings-menu-link">Address Book</a>
-            <a href="#" class="settings-menu-link">Finance</a>
-            <a href="#" class="settings-menu-link">FAQ</a>
-            <a href="#" class="settings-menu-link">About Us</a>
+
+        <!-- ADDRESSES SETTINGS -->
+        <div id="addresses-tab" style="display: none">
+            <div class="content">
+                <div class="top-address">
+                    <div class="title">
+                        <h2>My Addresses</h2>
+                    </div>
+                    <div class="btn-address">
+                        <button class="active modal-btn">+ Add New Address</button>
+                    </div>
+                </div>
+                <!-- LOCATION 1 -->
+                <div class="middle">
+                    <div class="location">
+                        <div class="customerDetails">
+                            <h2 id="customerName">Marco Sardido</h2>
+                            <p id="customerContact" class="text-muted">09952776753</p>
+                        </div>
+                        <div class="detailed-address">
+                            <p id="address" class="text-muted">Calabarzon, Laguna, Cabuyao City, Banay banay, Blk 1 -
+                                Lot 1 Gumamela St., Katapatan Homes 4025</p>
+                        </div>
+                        <div class="labels">
+                            <label id="label-type" class="default-type">Default</label>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="edit">
+                            <button class="edit-btn">
+                                <ion-icon name="create-outline"></ion-icon> Edit
+                            </button>
+                        </div>
+                        <div class="delete">
+                            <button class="delete-btn">
+                                <ion-icon name="trash-outline"></ion-icon> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr size="3" style="width: 95%; margin: auto; background-color: var(--color-info-light);">
+
+                <!-- LOCATION 2 -->
+                <div class="middle">
+                    <div class="location">
+                        <div class="customerDetails">
+                            <h2 id="customerName">Marco Sardido</h2>
+                            <p id="customerContact" class="text-muted">420-6969</p>
+                        </div>
+                        <div class="detailed-address">
+                            <p id="address" class="text-muted">LISP I Locators' Association, Inc. Administration
+                                Building, LISP I, Barangay Diezmo, Cabuyao, Laguna</p>
+                        </div>
+                        <div class="labels">
+                            <label id="label-type" class="work-type">Work</label>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <div class="edit">
+                            <button class="edit-btn">
+                                <ion-icon name="create-outline"></ion-icon> Edit
+                            </button>
+                        </div>
+                        <div class="delete">
+                            <button class="delete-btn">
+                                <ion-icon name="trash-outline"></ion-icon> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="settings-details-cont">
-        <div class="details-inner-cont">
-            <div id="account-panel" class="account" style="display: block">
-                <% displayAccountInfo.forEach(accountkey => { %>
-                    <% displayCustomerInfo.forEach(customerkey => { %>
-                        <form action="/customercenter" method="POST">
-                            <div class="global-header-panel">
-                                <p>My Account</p>
-                                <input type="text" name="user" value="<%=accountkey.id%>" style="display:none">
-                                <b class="account"></b>
-                            </div>
-                            <div class="account-profile">
-                                <div class="details-static-label">
-                                    <p>Avatar</p>
-                                </div>
-                                <div class="details-dynamic-cont">
-                                    <div class="filUpload" id="filUpload-settings-account" style="display: none">
-                                            <input type="file" name="profilePhoto" id="profilePhoto" class="filepond">
-                                    </div>
-                                    <div class="frame" id="frame-settings-account" style="display: block">
-                                        <%if(accountkey.userPhoto === ''){%> 
-                                            <img src="/public/assets/images/default/user-default-profile.png" alt="Profile Picture">
-                                        <%}else{%>
-                                            <img src="data:<%=accountkey.imgType%>;base64,<%=accountkey.userPhoto%>" alt="<%=accountkey.displayName%>">
-                                        <%}%> 
-                                    </div>
-                                    <div class="details-current">
-                                        <div>
-                                            <% if (accountkey.displayName === '') { %>
-                                                <p class="details-current-name">Customer</p>
-                                            <% } else { %> 
-                                                <p class="details-current-name"><%=accountkey.displayName%></p>
-                                            <% } %> 
-                                            <p class="details-current-email"><%=accountkey.email%></p>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="account-details">
-                                <div class="account-details-upper">
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Display name</p>
-                                            </div>
-                                            <div>
-                                                <p>Visible to other members</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont">
-                                            
-                                            <%if(accountkey.displayName === ''){%> 
-                                                <input type="text" name="displayName" id="displayName" value="" placeholder="e.g. John" disabled>
-                                            <% } else { %>
-                                                <input type="text" name="displayName" id="displayName" value="<%= accountkey.displayName %>" disabled>
-                                            <% } %>  
-                                        
-                                        </div>
-                                    </div>
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Full name</p>
-                                            </div>
-                                            <div>
-                                                <p>How do you want to be called?</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont">
 
-                                            <%if(customerkey.fullName === ''){%> 
-                                                <input type="text" name="fullName" id="fullName" value="" placeholder="e.g. John Smith" disabled>
-                                            <% } else { %>
-                                                <input type="text" name="fullName" id="fullName" value="<%= customerkey.fullName %>" disabled>
-                                            <% } %>
+        <!-- BANKS & CARDS SETTINGS -->
+        <div id="finance-tab" style="display: none">
+            <div class="content">
+                <div class="top-finance">
+                    <div class="title">
+                        <h2>Credit / Debit Card</h2>
+                    </div>
+                    <div class="btn-finance">
+                        <button class="active modal-btn-card">+ Add New Card</button>
+                    </div>
+                </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-details-lower">
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Email address</p>
-                                            </div>
-                                            <div>
-                                                <p>For logging in</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont">
+                <!-- CARDS -->
 
-                                            <%if(accountkey.email === ''){%> 
-                                                <input type="email" name="email" id="email" placeholder="e.g. john_smith@sample.com" disabled>
-                                            <% } else { %>
-                                                <input type="email" name="email" id="email" value="<%= accountkey.email %>" disabled>
-                                            <% } %>
+                <!-- CARD 1 -->
+                <div class="middle">
+                    <div class="card">
+                        <div class="cardDetails">
+                            <i class="fab fa-cc-mastercard" style="color: var(--color-danger); font-size: 1.9rem"></i>
+                            <h2 id="cardName">Mastercard Account</h2>
+                            <p id="cardNumber" class="text-muted">**********5105100</p>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <div class="edit">
+                            <button class="edit-card-btn">
+                                <ion-icon name="create-outline"></ion-icon> Edit
+                            </button>
+                        </div>
+                        <div class="delete">
+                            <button class="delete-card-btn">
+                                <ion-icon name="trash-outline"></ion-icon> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Phone number</p>
-                                            </div>
-                                            <div>
-                                                <p>For receiving notifications</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont">
+                <hr size="3" style="width: 95%; margin: auto; background-color: var(--color-info-light);">
 
-                                            <%if(customerkey.contactNo === ''){%> 
-                                                <input type="text" name="contactNo" id="contactNo" placeholder="e.g. +31 6 12 34 56 78" disabled>
-                                            <% } else { %>
-                                                <input type="text" name="contactNo" id="contactNo" value="<%= customerkey.contactNo %>" disabled>
-                                            <% } %>
+                <!-- CARD 2 -->
+                <div class="middle">
+                    <div class="card">
+                        <div class="cardDetails">
+                            <i class="fab fa-cc-visa" style="color: var(--color-warning); font-size: 1.9rem"></i>
+                            <h2 id="cardName">Visa Account</h2>
+                            <p id="cardNumber" class="text-muted">**********4241342</p>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <div class="edit">
+                            <button class="edit-card-btn">
+                                <ion-icon name="create-outline"></ion-icon> Edit
+                            </button>
+                        </div>
+                        <div class="delete">
+                            <button class="delete-card-btn">
+                                <ion-icon name="trash-outline"></ion-icon> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="account-other-details">
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Birth Date</p>
-                                            </div>
-                                            <div>
-                                                <p>For payment purposes</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont">
+            </div>
+        </div>
 
-                                            <%if(customerkey.birthday === ''){%> 
-                                                <input type="date" name="birthday" id="birthday" disabled>
-                                            <% } else { %>
-                                                <input type="date" name="birthday" id="birthday" value="<%= customerkey.birthday %>" disabled>
-                                            <% } %>
+        <!-- FEEDBACK SETTINGS -->
+        <div id="feedback-tab" style="display: none">
+            <div class="content">
 
-                                        </div>
-                                    </div>
-                                    <div class="account-row-info">
-                                        <div class="details-static-label">
-                                            <div>
-                                                <p>Gender</p>
-                                            </div>
-                                            <div>
-                                                <p>For other purposes</p>
-                                            </div>
-                                        </div>
-                                        <div class="details-dynamic-cont"> 
+                <div class="top">
+                    <h2>Feedback</h2>
+                    <p class="text-muted">Your feedbacks is important for us to have improvement</p>
+                </div>
 
-                                            <%if(customerkey.gender === ''){%> 
-                                                <select name="gender" id="gender" disabled>
-                                                    <option value="">Select a gender...</option>
-                                                    <option value="Male">Male</option>
-                                                    <option value="Female">Female</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            <%}else{%>
-                                                <select name="gender" id="gender" disabled>
-                                                    <option value="">Select a gender...</option>
-                                                    <%if(customerkey.gender === 'Male'){%> 
-                                                        <option selected value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    <%}else if(customerkey.gender === 'Female'){%>
-                                                        <option value="Male">Male</option>
-                                                        <option selected value="Female">Female</option>
-                                                        <option value="Other">Other</option>
-                                                    <%}else{%> 
-                                                        <option value="Male">Male</option>
-                                                        <option value="Female">Female</option>
-                                                        <option selected value="Other">Other</option>
-                                                    <%}%> 
-                                                </select>
-                                             <%}%>
+                <!-- Customer Support -->
+                <div class="middle-content">
+                    <div class="feedback-content-details">
+                        <ion-icon name="chatbubble-ellipses"></ion-icon>
+                        <div class="feedback-details">
+                            <h2>Customer Support</h2>
+                            <p class="text-muted">Connect with customer support to solve your issues with payments,
+                                returns and refunds.</p>
+                        </div>
+                    </div>
+                    <div class="btn-goTo">
+                        <a href="#" style="cursor: pointer;">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
 
-                                        </div>
-                                    </div>
+                <hr size="3" style="width: 100%; margin: auto; background-color: var(--color-info-light);">
+
+                <!-- Report error -->
+                <div class="middle-content">
+                    <div class="feedback-content-details">
+                        <ion-icon name="bug"></ion-icon>
+                        <div class="feedback-details">
+                            <h2>Report a page error</h2>
+                            <p class="text-muted">Alert us of bugs to help us improve our website.</p>
+                        </div>
+                    </div>
+                    <div class="btn-goTo">
+                        <a href="#" style="cursor: pointer;">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <hr size="3" style="width: 100%; margin: auto; background-color: var(--color-info-light);">
+
+                <!-- Report Scammers -->
+                <div class="middle-content">
+                    <div class="feedback-content-details">
+                        <ion-icon name="alert-circle"></ion-icon>
+                        <div class="feedback-details">
+                            <h2>Report Products and Potential Scammers</h2>
+                            <p class="text-muted">Alert us of unprohibited products and suspicious sellers.</p>
+                        </div>
+                    </div>
+                    <div class="btn-goTo">
+                        <a href="#" style="cursor: pointer;">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+
+                <hr size="3" style="width: 100%; margin: auto; background-color: var(--color-info-light);">
+
+                <!-- Report Scammers -->
+                <div class="middle-content">
+                    <div class="feedback-content-details">
+                        <ion-icon name="bulb"></ion-icon>
+                        <div class="feedback-details">
+                            <h2>Give Suggestions</h2>
+                            <p class="text-muted">Help us serve you better.</p>
+                        </div>
+                    </div>
+                    <div class="btn-goTo">
+                        <a href="#" style="cursor: pointer;">
+                            <ion-icon name="chevron-forward-outline"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- HELP SETTINGS -->
+        <div id="help-tab" style="display: none">
+            <div class="content">
+
+                <div class="top">
+                    <h2>FAQ</h2>
+                    <p class="text-muted">Frequently Asked Questions</p>
+                </div>
+
+                <!-- ACCORDION -->
+                <div class="row">
+                    <div class="col">
+                        <div class="tabs">
+
+                            <div class="tab">
+                                <input type="radio" id="rd1" name="rd">
+                                <label class="tab-label" for="rd1">City Sales Cloud New Buyer's Guide</label>
+                                <div class="tab-content">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Temporibus laudantium
+                                    numquam eum magnam, molestias, quod ex deleniti deserunt necessitatibus consectetur
+                                    ullam harum cumque dicta eius earum, sunt pariatur beatae ducimus. Aspernatur non
+                                    aliquam recusandae facere in animi maiores dolorem magnam.
                                 </div>
                             </div>
-                            <div class="account-status">
-                                <div class="account-status-static">
-                                    <p>Delete Account</p>
-                                    <p>By deleting your account you will lose all your data</p>
-                                </div>
-                                <div class="account-status-detail">
-                                    <button>Delete account</button>
+
+                            <div class="tab">
+                                <input type="radio" id="rd2" name="rd">
+                                <label class="tab-label" for="rd2">City Sales Cloud Refund Policy</label>
+                                <div class="tab-content">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Temporibus laudantium
+                                    numquam eum magnam, molestias, quod ex deleniti deserunt necessitatibus consectetur
+                                    ullam harum cumque dicta eius earum, sunt pariatur beatae ducimus. Aspernatur non
+                                    aliquam recusandae facere in animi maiores dolorem magnam.
                                 </div>
                             </div>
-                            <div class="global-footer-panel">
-                                <button id="account-btnEdit" style="display:block">Edit Profile</button>
-                                <div>
-                                    <button type="submit" id="account-btnSave" style="display:none">Save Changes</button>
-                                    <button id="account-btnCancel" style="display:none">Cancel</button>
+
+                            <div class="tab">
+                                <input type="radio" id="rd3" name="rd">
+                                <label class="tab-label" for="rd3">How can I return an item?</label>
+                                <div class="tab-content">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Temporibus laudantium
+                                    numquam eum magnam, molestias, quod ex deleniti deserunt necessitatibus consectetur
+                                    ullam harum cumque dicta eius earum, sunt pariatur beatae ducimus. Aspernatur non
+                                    aliquam recusandae facere in animi maiores dolorem magnam.
                                 </div>
-                                
+                            </div>
+
+                            <div class="tab">
+                                <input type="radio" id="rd4" name="rd">
+                                <label class="tab-label" for="rd4">How do I track my order?</label>
+                                <div class="tab-content">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Temporibus laudantium
+                                    numquam eum magnam, molestias, quod ex deleniti deserunt necessitatibus consectetur
+                                    ullam harum cumque dicta eius earum, sunt pariatur beatae ducimus. Aspernatur non
+                                    aliquam recusandae facere in animi maiores dolorem magnam.
+                                </div>
+                            </div>
+
+                            <div class="tab">
+                                <input type="radio" id="rd5" name="rd">
+                                <label class="tab-label" for="rd5">How do I avail my voucher?</label>
+                                <div class="tab-content">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing, elit. Temporibus laudantium
+                                    numquam eum magnam, molestias, quod ex deleniti deserunt necessitatibus consectetur
+                                    ullam harum cumque dicta eius earum, sunt pariatur beatae ducimus. Aspernatur non
+                                    aliquam recusandae facere in animi maiores dolorem magnam.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END OF ACCORDION -->
+
+            </div>
+        </div>
+
+        <!-- CSC POLICIES SETTINGS -->
+        <div id="policy-tab" style="display: none">
+            <div class="content">
+                <div class="top">
+                    <h2>Terms and Condition Policy</h2>
+                    <p class="text-muted">City Sales Cloud Policies</p>
+                </div>
+                <div class="middle-policy">
+                    <img src="/public/assets/images/mainLogo.png">
+                    <p>Welcome to City Sales Cloud These terms and conditions outline the rules and regulations for the
+                        use of City Sales Cloud’s Website. City Sales Cloud is located at <b>Pamantasan ng Cabuyao,
+                            Katapatan Homes, Banaybanay, Cabuyao, Laguna</b>.</p><br>
+                    <p>By accessing this website <b>we assume you accept these terms and conditions in full</b>. Do not
+                        continue to use City Sales Cloud's website if you do not accept all of the terms and conditions
+                        stated on this page.</p><br>
+                    <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer
+                        Notice and any or all Agreements: <b>Client, You and Your refers to you, the person accessing
+                            this website and accepting the Company’s terms and conditions</b>. <b>The Company,
+                            Ourselves, We, Our and Us, refers to our Company</b>. <b>Party, Parties, or Us, refers to
+                            both the Client and ourselves, or either the Client or ourselves</b>.</p><br>
+                    <p>All terms refer to the offer, acceptance and consideration of payment necessary to undertake the
+                        process of our assistance to the Client in the <b>most appropriate manner</b>, whether by formal
+                        meetings of a fixed duration, or any other means, for the express purpose of meeting the
+                        Client’s needs in respect of provision of the Company’s stated services/products, in accordance
+                        with and subject to, <b>prevailing law of Pamantasan ng Cabuyao, Katapatan Homes, Banaybanay,
+                            Cabuyao, Laguna</b>.</p><br>
+                    <p><b>Any use of the above terminology or other words in the singular, plural, capitalisation and/or
+                            he/she or they, are taken as interchangeable and therefore as referring to same</b>.</p>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- END OF SETTINGS CONTAINER -->
+    <br><br>
+
+    <!-- ================== M   O   D   A   L   S ==================== -->
+
+
+    <!-- ================== ADD NEW ADDRESS MODAL ==================== -->
+    <div class="modal-wrap">
+        <div class="shadow close-btn"></div>
+        <div class="modal">
+
+            <div class="header">
+                <div class="title">New Address</div>
+                <span class="icon close-btn">
+                    <ion-icon class="i" name="close-outline"></ion-icon>
+                </span>
+            </div>
+
+            <div class="modal-container">
+                <div class="modal-body">
+
+                    <div class="modal-address-wrap">
+                        <form action="#" class="form-address">
+                            <div class="field-flex">
+                                <label class="custom-field">
+                                    <input type="text" name="address-fullName" id="addFullName" required>
+                                    <span class="placeholder">Full Name</span>
+                                </label>
+
+                                <label class="custom-field">
+                                    <input type="text" name="address-phoneNum" id="addPhoneNum" required>
+                                    <span class="placeholder">Phone Number</span>
+                                </label>
+                            </div>
+
+                            <div class="field-grid">
+                                <label class="custom-field">
+                                    <input type="text" name="address-location" id="addLocation" required>
+                                    <span class="placeholder">Region, Province, City, Barangay</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="address-postal" id="addPostal" required>
+                                    <span class="placeholder">Postal Code</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="address-street" id="addStreet" required>
+                                    <span class="placeholder">Street Name, Building, House No.</span>
+                                </label>
+                            </div>
+                            <div class="field-label">
+                                <p>Label As:</p>
+                                <div id="label-types">
+                                    <label id="label-home" class="label-type label-active">Home</label>
+                                    <label id="label-work" class="label-type">Work</label>
+                                </div>
+                                <div class="set-default">
+                                    <input type="checkbox" class="chb setDefault" id="setDefault">
+                                    <label for="setDefault">Set as Default Address</label>
+                                </div>
                             </div>
                         </form>
-                    <% }); %>
-                <% }); %>  
-            </div>
-            <div id="address-panel" class="address" style="display: none">
-                <div class="global-header-panel">
-                    <p>Address Book</p>
-                    <b class="address"></b>
+                    </div>
+
                 </div>
-                <div class="global-footer-panel">
-                    <button type="submit">Save Changes</button>
-                </div>
-            </div>
-            <div id="payment-panel" class="payment" style="display: none">
-                <div class="global-header-panel">
-                    <p>Financial Accounts</p>
-                    <b class="financial"></b>
-                </div>
-                <div class="global-footer-panel">
-                    <button type="submit">Save Changes</button>
-                </div>
-            </div>
-            <div id="faq-panel" class="faq" style="display: none">
-                <div class="global-header-panel">
-                    <p>FAQ</p>
-                    <b class="faq"></b>
-                </div>
-                <div class="global-footer-panel">
-                    <button type="submit">Save Changes</button>
-                </div>
-            </div>
-            <div id="contact-panel" class="contact" style="display: none">
-                <div class="global-header-panel">
-                    <p>About Us</p>
-                    <b class="about"></b>
-                </div>
-                <div class="global-footer-panel">
-                    <button type="submit">Save Changes</button>
+
+                <div class="footer">
+                    <div class="footer-btn">
+                        <button class="close-btn">CANCEL</a>
+                            <button class="submit-btn active">SUBMIT</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    <!-- ================== END OF ADD NEW ADDRESS MODAL ==================== -->
+
+    <!-- ================== EDIT ADDRESS MODAL ==================== -->
+    <div class="modal-wrap-edit">
+        <div class="shadow close-btn"></div>
+        <div class="modal">
+
+            <div class="header">
+                <div class="title">Edit Address</div>
+                <span class="icon close-btn">
+                    <ion-icon class="i" name="close-outline"></ion-icon>
+                </span>
+            </div>
+
+            <div class="modal-container">
+                <div class="modal-body">
+                    <div class="modal-address-wrap">
+                        <form action="#" class="form-address">
+                            <div class="field-flex">
+                                <label class="custom-field">
+                                    <input type="text" name="address-fullName" id="addFullName" value="Marco Sardido"
+                                        required>
+                                    <span class="placeholder">Full Name</span>
+                                </label>
+
+                                <label class="custom-field">
+                                    <input type="text" name="address-phoneNum" id="addPhoneNum" value="09952776753"
+                                        required>
+                                    <span class="placeholder">Phone Number</span>
+                                </label>
+                            </div>
+
+                            <div class="field-grid">
+                                <label class="custom-field">
+                                    <input type="text" name="address-location" id="addLocation"
+                                        value="Calabarzon, Laguna, Cabuyao City, Banay-banay" required>
+                                    <span class="placeholder">Region, Province, City, Barangay</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="address-postal" id="addPostal" value="4025" required>
+                                    <span class="placeholder">Postal Code</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="address-street" id="addStreet"
+                                        value="Blk 1 - Lot 1 Gumamela St., Katapatan Homes" required>
+                                    <span class="placeholder">Street Name, Building, House No.</span>
+                                </label>
+                            </div>
+                            <div class="field-label">
+                                <p>Label As:</p>
+                                <div id="label-types">
+                                    <label id="label-home" class="label-type label-active">Home</label>
+                                    <label id="label-work" class="label-type">Work</label>
+                                </div>
+                                <div class="set-default">
+                                    <input type="checkbox" class="chb setDefault" id="setDefault" checked>
+                                    <label for="setDefault">Set as Default Address</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="footer-btn">
+                        <button class="close-btn">CANCEL</a>
+                            <button class="update-btn active">UPDATE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ================== END OF EDIT ADDRESS MODAL ==================== -->
+
+    <!-- ================== ADD NEW DEBIT/CREDIT CARD MODAL ==================== -->
+    <div class="modal-wrap-card">
+        <div class="shadow close-btn"></div>
+
+        <div class="modal">
+
+            <div class="header">
+                <div class="title">Add Card</div>
+                <span class="icon close-btn">
+                    <ion-icon class="i" name="close-outline"></ion-icon>
+                </span>
+            </div>
+
+            <div class="modal-container">
+                <div class="modal-body">
+                    <div class="modal-card-wrap">
+
+                        <div class="card-title-brand">
+                            <p>Card Details</p>
+                            <div class="card-variations">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-jcb"></i>
+                                <i class="fab fa-cc-amex"></i>
+                            </div>
+                        </div>
+
+                        <form action="#" class="form-card">
+                            <div class="field-grid">
+                                <label class="custom-field">
+                                    <input type="text" name="card-number" id="cardNumber" required>
+                                    <span class="placeholder">Card Number</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="card-owner-name" id="cardOwnerName" required>
+                                    <span class="placeholder">Name on Card</span>
+                                </label>
+                            </div>
+                            <div class="field-flex">
+                                <label class="custom-field">
+                                    <input type="text" name="card-expiry-date" id="cardExpiryDate" required>
+                                    <span class="placeholder">Expiry Date (MM/YY)</span>
+                                </label>
+
+                                <label class="custom-field">
+                                    <input type="text" name="card-cvv" id="cardCVV"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                        required>
+                                    <span class="placeholder">CVV</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="footer-btn">
+                        <button class="close-btn">CANCEL</a>
+                            <button class="submit-card-btn active">SUBMIT</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ================== END OF ADD NEW DEBIT/CREDIT CARD MODAL ==================== -->
+
+    <!-- ================== EDIT DEBIT/CREDIT CARD MODAL ==================== -->
+    <div class="modal-wrap-card-edit">
+        <div class="shadow close-btn"></div>
+
+        <div class="modal">
+
+            <div class="header">
+                <div class="title">Add Card</div>
+                <span class="icon close-btn">
+                    <ion-icon class="i" name="close-outline"></ion-icon>
+                </span>
+            </div>
+
+            <div class="modal-container">
+                <div class="modal-body">
+                    <div class="modal-card-wrap">
+
+                        <div class="card-title-brand">
+                            <p>Card Details</p>
+                            <div class="card-variations">
+                                <i class="fab fa-cc-visa"></i>
+                                <i class="fab fa-cc-mastercard"></i>
+                                <i class="fab fa-cc-jcb"></i>
+                                <i class="fab fa-cc-amex"></i>
+                            </div>
+                        </div>
+
+                        <form action="#" class="form-card">
+                            <div class="field-grid">
+                                <label class="custom-field">
+                                    <input type="text" name="card-number" id="cardNumber" value="2134 3222 5105 5100"
+                                        required>
+                                    <span class="placeholder">Card Number</span>
+                                </label>
+                                <label class="custom-field">
+                                    <input type="text" name="card-owner-name" id="cardOwnerName" value="Marco Sardido"
+                                        required>
+                                    <span class="placeholder">Name on Card</span>
+                                </label>
+                            </div>
+                            <div class="field-flex">
+                                <label class="custom-field">
+                                    <input type="text" name="card-expiry-date" id="cardExpiryDate" value="02/24"
+                                        required>
+                                    <span class="placeholder">Expiry Date (MM/YY)</span>
+                                </label>
+
+                                <label class="custom-field">
+                                    <input type="text" name="card-cvv" id="cardCVV"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                        value="388" required>
+                                    <span class="placeholder">CVV</span>
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="footer-btn">
+                        <button class="close-btn">CANCEL</a>
+                            <button class="update-card-btn active">UPDATE</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- ================== END OF EDIT NEW DEBIT/CREDIT CARD MODAL ==================== -->
+
+
+</main>

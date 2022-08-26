@@ -121,6 +121,7 @@ const dashboardPage = async (req, res) => {
                         subUpdateSuccess: '',
                         sellerInfo: '',
                         store: '',
+                        isSelling: false,
                     });
                 };
 
@@ -137,6 +138,7 @@ const dashboardPage = async (req, res) => {
                     subSuccess: '',
                     sellerInfo: '',
                     store: '',
+                    isSelling: false,
                 });
             };
         });
@@ -221,6 +223,7 @@ const settingsPage = async (req, res) => {
 
         Object.assign(userData, {
             accountPhoto: accountDoc.data().userPhoto,
+            photoType: accountDoc.data().imgType,
             accountName: accountDoc.data().displayName,
             accountFname: sellerDoc.data().fullName,
             accountEmail: accountDoc.data().email,

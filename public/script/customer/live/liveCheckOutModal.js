@@ -1,4 +1,4 @@
-import { getAllCustomerAddress, addNewAddress, calcItems, stripePaymentHandler } from './Api/checkOutModalData.js'
+import { getAllCustomerAddress, addNewAddress, calcItems, stripePaymentHandler, codPaymentHandler } from './Api/checkOutModalData.js'
 import { selectedCartItems } from './selectedProduct.js';
 
 $(document).ready(() => {
@@ -165,7 +165,7 @@ $(document).ready(() => {
 
         calcItems(trimmedUID, liveRoomID, paymentObj.itemsArray)
             .then(result => {
-                const stripeItems = result;
+                const cartItems = result;
 
                 // Method: Credit Card
                 if (paymentObj.paymentMethod === 'STRIPE') {
@@ -178,17 +178,25 @@ $(document).ready(() => {
                         fName: firstName,
                         lName: lastName,
                         email: paymentObj.email,
-                        contactNo: paymentObj.phone
+                        contactNo: paymentObj.phone,
+                        address: paymentObj.address
                     };
 
-                    stripePaymentHandler(trimmedUID, user, stripeItems, method);
+                    stripePaymentHandler(trimmedUID, user, cartItems, method);
                 } else {
                     // Method: Cash On Delivery
-                    console.log('Cash on Delivery')
+                    const codObjData = {
+                        modeOfPayment: paymentObj.paymentMethod,
+                        orderAddress: paymentObj.address,
+                        
+                    }
+                    codPaymentHandler(trimmedUID, liveRoomID, codObjData, cartItems).then(() => {
+                        window.location.reload();
+                        // $('#cartPaymentModal').modal('hide');
+                        // $('#cartPaymentModal').css('cursor', 'auto');
+                    });
                 }
             })
-
-        console.log(paymentObj)
     })
 
 

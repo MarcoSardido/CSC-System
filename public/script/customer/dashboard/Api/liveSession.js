@@ -12,7 +12,7 @@ const getLiveRooms = async () => {
         const sellerSessionCol = await getDocs(sellerSessionsRef);
         sellerSessionCol.forEach(session => {
 
-            if (session.data().sessionOpen) {
+            if (session.data().sessionStatus === 'Open') {
                 openLiveSession.push({
                     sellerID: session.data().sellerID,
                     sessionID: session.id,

@@ -1,381 +1,445 @@
-
-/*
-    Order Header Style
- */
-
- .order-header {
-    width: 69%;
-    height: 50px;
-    float: right;
+/*MAIN*/
+main{
+	margin-top: 1.4rem;
+}
+main .orders{
+	margin-top: 1.2rem;
+}
+main .nav-orders{
+	position: sticky;
+	top: 0;
+	z-index: 233;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: row;
+	margin: auto;
+	transition: all 300ms ease;
+	background: var(--color-white);
+	box-shadow: var(--box-shadow);
+}
+main .nav-orders .back{
+	padding: 0.7rem;
+}
+main .nav-orders .orderInfo{
+	display: flex;
+	gap: 0.55rem;
+	padding: 1rem;
+}
+main .nav-orders a{
+	font-size: 1rem;
+}
+main .nav-orders .nav-item{
+	cursor: pointer;
+	transition: all 300ms ease;
+}
+main .nav-orders li{
+	text-align: center;
+	padding: 1rem;
+	width: 100%;
+}
+main .nav-orders li a:hover{
+	color: #6875e3;
+}
+main .nav-orders li.active{
+	border-bottom: 2px solid #6875e3;
+}
+main .nav-orders li.active a{
+	color: #6875e3;
+	font-weight: 500;
+}
+/*======== STEPPER PROGRESS BAR ==========*/
+main .order .orderProgress{
+	background: var(--color-white);
+	padding: var(--card-padding);
+}
+main .order .orderProgress ul{
+	display: flex;
+	justify-content: center;
+}
+main .order .orderProgress ul li{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+main .order .orderProgress ul li .icon{
+	font-size: 35px;
+	color: var(--color-primary);
+	margin: 0 60px;
+}
+main .order .orderProgress ul li .order-progress{
+	margin: 13px 0;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: rgba(68, 68, 68, 0.781);
+	display: grid;
+	place-items: center;
+	position: relative;
+}
+main .order .orderProgress ul li .active{
+	background: var(--color-primary);
+}
+main .order .orderProgress ul li .active::after{
+	background: var(--color-primary);
+}
+/*========= ACTIVE PROGRESS BAR CLASS ===========*/
+/*Hides the step numbers if it is in active state (1,2,3,4)*/
+main .order .orderProgress ul li .active p{
+	display: none;
+}
+main .orders .order .orderProgress ul li .active ion-icon{
+	color: #fff;
+	font-size: 18px;
+	display: flex;
+}
+/*PROGRESS line*/
+.order-progress::after{
+	content: " ";
+	position: absolute;
+	width: 125px;
+	height: 5px;
+	background: rgba(68, 68, 68, 0.781);
+	right: 30px;
+}
+.one::after{
+	width: 0;
+	height: 0;
+}
+main .order .orderProgress ul li .order-progress p{
+	color: #fff;
+	font-size: 14px;
+}
+main .order .orderProgress ul li .order-progress ion-icon{
+	display: none;
+}
+main .order .orderProgress ul li h2{
+	font-weight: 600; 
+	font-size: 0.88rem;
+}
+main #all, main #toShip, main #toReceive, main #delivered{
+	transition: all 300ms ease;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.7rem;
+}
+main .order table{
+	width: 100%;
+	border-collapse: collapse;
+}
+main .order table, td, th{
+	border: 1px solid #b1bcbe;
+	padding: 0.78rem;
+}
+main .order .customerInfo .delivAdd{
+	display: flex;
+	gap: 0.48rem;
+}
+main .order .customerInfo .delivAdd ion-icon{
+	font-size: 2rem;
+}
+main .order table td{
+	padding: 1rem;
+	width: 25%;
+	text-align: right;
+}
+main .order table #orderTotal{
+	font-size: 1.3rem;
+	font-weight: 500;
+	color: var(--color-primary);
+}
+main .order table tr th{
+	text-align: right;
+	font-weight: 400;
+}
+main .order .customerInfo{
+	padding: 2rem;
+	background: var(--color-white);
+}
+main .order .customerInfo .customerDetails{
+	padding: 1.1rem;
+}
+main .order{
+	background: var(--color-white);
+	margin-top: 1.5rem;
+	transition: all 300ms ease;
+	box-shadow: var(--box-shadow);
+}
+main .order .top{
+	padding: var(--card-padding);
+	display: flex;
+	justify-content: space-between;
+}
+main .order .top .shop{
+	width: 50%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: flex-start;
+	gap: 1.5%;
+}
+main .order .top .status{
+	width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	flex-wrap: wrap;
+	gap: 1%;
+}
+main .order .top .status ion-icon, main .order .top .shop ion-icon{
+	font-size: 1.2rem;
+}
+main .order .middle{
+	margin-top: 1.4rem;
+	margin-bottom: 1.8rem;
+}
+main .order .middle .item-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+main .order .middle .item-content .item{
+	display: flex;
+	gap: 3%;
+}
+main .order .middle .item-content img{
+	border: 1px solid var(--color-info-dark);
+	width: 100px;
+}
+main .order .middle .item-content .item-price{
+	color: #6875e3;
+}
+main .order .btn-group{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: end;
+	gap: 2%;
+	padding: var(--card-padding);
+}
+main .order .btn-group a{
+	cursor: pointer;
+	padding: 1rem;
+	background: transparent;
+	border: 1px solid var(--color-info-light);
+	font-size: 0.98rem;
+	border-radius: var(--border-radius-1);
+	width: 20%;
+	text-align: center;
+}
+main .order .btn-group a.active{
+	border: 0;
+	background: var(--color-primary);
+	color: #fff;
 }
 
-.order-header .icon {
-    position: absolute;
-    font-size: 23px;
-    right: 0;
-    padding-right: 50px;
-    padding-top: 10px;
+/*MEDIA QUERIES*/
+/*BIG TABLETS AND SMALL LAPTOPS*/
+@media screen and (max-width: 1200px){ 
+	.customer-container{
+		width: 94%;
+		grid-template-columns: 7rem auto 23rem;
+	}
+	aside .logo img{
+		margin-left: 1.3rem;
+		width: 3rem;
+		height: 3rem;
+	}
+	aside .logo h2{
+		display: none;
+	}
+	aside .sidebar h3{
+		display: none;
+	}
+	aside .sidebar a{
+		width: 5.6rem;
+	}
+	aside .sidebar a:last-child{
+		position: relative;
+		top: 0.4rem;
+	}
+	main .order .btn-group a{
+		padding: 0.80rem 0.5rem;
+		font-size: 0.78rem;
+		width: 19%;
+	}
+	main .order .middle .item-content img{
+		width: 70px;
+		height: 70px;
+	}
+	main .order .middle .item-content .item .item-name h2,
+	main .order .middle .item-content .item-qty h2,
+	main .order .middle .item-content .item-price h2{
+		font-size: 1.1rem;
+	}
+	
+	main .order .orderProgress ul{
+		flex-direction: column;
+		padding: 0 6rem;
+	}
+	main .order .orderProgress ul li{
+		flex-direction: row;
+	}
+	main .order .orderProgress ul li .order-progress{
+		margin: 0 20px;
+	}
+	.order-progress::after{
+		width: 5px;
+		height: 50px;
+		bottom: 30px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.one::after{
+		height: 0;
+	}
+	main .order .orderProgress ul li small{
+		margin-left: 10px;
+	}
+	main .order .orderProgress ul li .icon{
+		margin: 24px 0;
+	}
+	main .order .orderProgress ul li h2{
+		font-size: 0.78rem;
+	}
 }
 
-.order-header .icon ion-icon {
-    background: #fff;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-    cursor: pointer;
-    pointer-events: none;
+/*SMALLER TABLETS AND MOBILE*/
+@media screen and (max-width: 768px){
+	.customer-container{
+		width: 100%;
+		grid-template-columns: 1fr;
+	}
+	aside{
+		position: fixed;
+		left: -100%;
+		background: var(--color-white);
+		width: 18rem;
+		z-index: 3;
+		box-shadow: 1rem 3rem 4rem var(--color-light);
+		height: 100vh;
+		padding-right: var(--card-padding);
+		display: none;
+		animation: showMenu 400ms ease forwards;
+	}
+
+	@keyframes showMenu{
+		to{
+			left: 0;
+		}
+	}
+
+	aside .logo img{
+		margin-left: 1;
+		width: 2rem;
+		height: 2rem;
+	}
+	aside .logo h2{
+		display: inline;
+	}
+	aside .sidebar h3{
+		display: inline;
+	}
+	aside .sidebar a{
+		width: 18rem;
+		height: 3.4rem;
+	}
+	aside .sidebar a:last-child{
+		position: absolute;
+		top: 18rem;
+	}
+	aside .close{
+		display: inline-block;
+		cursor: pointer;
+	}
+	main{
+		margin-top: 7rem;
+		padding: 2rem 1rem;
+	}
+	main .orders{
+		width: 92vw;
+	}
+	main .nav-orders{
+		position: relative;
+		z-index: 0;
+	}
+	main .nav-orders li{
+		padding: 0.7rem;
+	}
+	main .nav-orders a{
+		font-size: 0.734rem;
+	}
+	main .orders .order .top .status,
+	main .orders .order .top .shop{
+		font-size: 0.73rem;
+	}
+	main .orders .order .top ion-icon{
+		font-size: 1rem;
+	}
+	main .order .middle .item-content .item .item-name h2,
+	main .order .middle .item-content .item-qty h2,
+	main .order .middle .item-content .item-price h2{
+		font-size: 0.85rem;
+	}
+	main .order .middle .item-content .item .item-name p{
+		font-size: 0.76rem;
+	}
+	main .order .middle .item-content img{
+		width: 50px;
+		height: 50px;
+	}
+
+	main .order .btn-group a{
+		padding: 0.6rem 0.3rem;
+		font-size: 0.68rem;
+		width: 23%;
+	}
+	main .order table th{
+		font-size: 0.68rem;
+		padding: 0.45rem;
+	}
+	main .order table td{
+		padding: 0.67rem;
+	}
+	main .order table #orderTotal{
+		font-size: 1rem;
+	}
+	main .order table #modeOfPayment{
+		font-size: 0.65rem;
+	}
+	.right{
+		width: 94%;
+		margin: 0 auto 4rem;
+	}
+	.right .top{
+		position: fixed;
+		top: 0;
+		left: 0;
+		align-items: center;
+		padding: 0 0.8rem;
+		height: 4.6rem;
+		background-color: var(--color-white);
+		width: 100%;
+		margin: 0;
+		z-index: 2;
+		box-shadow: 0 1rem 1rem var(--color-light);
+	}
+
+	.right .top .theme-toggler{
+		width: 4.4rem;
+		position: absolute;
+		left: 65%;
+	}
+	.right .profile .info{
+		display: none;
+	}
+	.right .top button{
+		display: inline-block;
+		background: transparent;
+		cursor: pointer;
+		color: var(--color-dark);
+		position: absolute;
+		left: 1rem;
+	}
 }
-
-.order-header .notif {
-    position: absolute;
-    left: 25px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-    z-index: 1;
-}
-
-/*
-End of Order Header Style
-*/
-
-
-/*
-Start of Order Body Style
-*/
-
-    /*
-        Start of Order Left-Side Style 
-    */
-
-        .order-body {
-            display:flex;
-            flex-direction:row;
-            width: 100%;
-            height: auto;
-            padding: 5px 10px;
-        }
-
-        .order-list-cont {
-            width: 30%;
-            display: flex;
-            flex-direction:column;
-            margin-top: -55px;
-        }
-
-        .title-cont {
-            font-size: 35px;
-            font-weight: 600;
-            padding-left: 10px;
-        }
-
-        .tabs-cont {
-            display: flex;
-            justify-content: space-evenly;
-            padding-bottom: 20px;
-        }
-
-        .tabs-cont .order-tab-link {
-        text-decoration: none;
-        padding: 3px 0px;
-        }
-
-        .tabs-cont .order-tab-link:hover {
-        color: #2e4a83;
-        }
-
-        .tabs-cont .order-tab-link.active {
-        background: #485fed;
-        color: #fff;
-        padding: 3px 20px;
-        border-radius: 20px;
-        }
-
-        .list-cont {
-            height: 34.5rem;
-            overflow-y: auto;
-        }
-
-        .list-dynamic-cont {
-            padding: 8px 20px;
-        }
-
-        .list-row-order {
-            width: 100%;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 20px 0;
-            background: #fff;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-            cursor: pointer;
-            border-radius: 10px;
-            border-left: 0 solid #fff;
-            transition: border-left 0.5s ease-out;
-        }
-
-        
-
-         .list-row-order:hover {
-            border-left: 10px solid #485fed;
-        }
-
-        .list-row-order.active {
-            width: 100%;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 20px 0;
-            background: #fff;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-            cursor: pointer;
-            border-radius: 10px;
-            border-left: 10px solid #485fed;
-        }
-
-        .left-desc .list-item-store {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .left-desc .list-item-status-process {
-            font-size: 15px;
-            color: #fff;
-            background: orange;
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .left-desc .list-item-status-done {
-            font-size: 15px;
-            color: #fff;
-            background: #0fd64f;
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .left-desc .list-item-status-ship {
-            font-size: 15px;
-            color: #fff;
-            background: #17a2b8;
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .right-desc .list-item-price {
-            font-weight: 700;
-            font-size: 20px;
-        }
-
-        /*
-            End of Order Left-Side Style 
-        */
-
-
-
-        /*
-            Start of Order Left-Side Style 
-        */
-
-        .order-details-cont {
-            display: flex;
-            flex-direction:column;
-            width: 70%;
-            height: 41.9rem;
-            overflow-y: auto;
-        }
-
-        .order-process {
-            width: 100%;
-            height: auto;
-            padding: 10px 0 0;
-        }
-
-        .order-process img{
-            width: 40px;
-            height: 40px;
-            margin-bottom: 15px;
-        }
-
-        .order-process ul {
-            text-align: center;
-        }
-
-        .order-process ul li {
-            display: inline-block;
-            width: 200px;
-            position: relative;
-        }
-
-        .order-process ul li .order-icon {
-            background: #ccc;
-            color: #fff;
-            border-radius: 50%;
-            padding: 5px;
-            pointer-events: none;
-        }
-
-        .order-process ul li::before {
-            content: '';
-            background: #ccc;
-            height: 5px;
-            width: 205px;
-            display: block;
-            position: absolute;
-            top: 65px;
-        }
-
-        .order-process ul li:nth-child(2) .order-icon {
-            background: #0fd64f;
-        }
-
-        .order-process ul li:nth-child(2)::before {
-            background: #0fd64f;
-        }
-
-        .order-process ul li:nth-child(1) .order-icon {
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-
-        }
-
-        .order-process ul li:nth-child(1)::before {
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-
-        }
-
-        .order-process ul li:first-child::before {
-            width: 105px;
-            left: 100px;
-        }
-
-        .order-process ul li:last-child::before {
-            width: 105px;
-        }
-
-        .order-info-cont {
-            display: flex;
-            padding: 0px 20px 0;
-        }
-
-        .order-info-cont p {
-            margin: 0 10px;
-        }
-
-        .order-client-detail {
-            display: flex;
-            justify-content: space-evenly
-        }
-
-        .order-client-detail .row {
-            width: 30%;
-            height: auto;
-            display: flex;
-            flex-direction: column;
-            padding:10px 15px 0px;
-            border-radius: 10px;
-            background: #fff;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-        }
-
-        .row .static-text {
-            color: #777;
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 1px;
-        }
-
-        .order-client-detail .client-detail-name {
-            font-size: 30px;
-            font-weight: 600;
-        }
-
-        .order-client-detail .client-detail-address {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        .order-client-detail .client-detail-address p:nth-child(3){
-            margin-top: -15px;
-        }
-
-        .order-client-detail .client-detail-contact {
-            font-size: 30px;
-            font-weight: 600;
-        }
-
-        .order-client-items {
-            display: flex;
-            flex-direction: column;
-            margin: 20px;
-        }
-
-        .order-client-items .item-row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 10px 20px ;
-            align-items: center;
-        }
-
-        .order-client-items .item-row img {
-            width: 100px;
-            height: 100px;
-        }
-
-        .order-client-items .item-desc {
-            margin-left: -110px;
-        }
-
-        .order-client-items .item-desc .item-title{
-            font-size: 20px;
-            margin-bottom: 0;
-        }
-
-        .order-client-items .item-desc .item-color {
-            font-size: 15px;
-            color: #777;
-            margin-bottom: 0;
-        }
-
-        .order-client-items .item-desc .item-warranty {
-            font-size: 15px;
-            color: #777;
-            margin-bottom: 0;
-        }
-
-        .order-client-total {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 0 20px;
-        }
-
-        .order-client-total .total-summary,
-        .order-client-total .total {
-            display: flex;
-        }
-
-        .order-client-total .total-dynamic {
-            margin-left: auto;
-            margin-right: 10px;
-        }
-
-        .order-client-total .total .total-static p {
-            padding-right: 30px;
-        }
-
-        .order-client-total .temp {
-            font-size: 20px;
-        }
-
-    /*
-    End of Order Left-Side Style 
-    */
-
-/*
-End of Order Body Style
-*/

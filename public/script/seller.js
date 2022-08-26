@@ -19,21 +19,29 @@ $(document).ready(() => {
     const menuLength = list.length;
 
     for (let i = 0; i < menuLength; i++) {
-
+        
         if (list[i].href === currentLocation) {
             const getPath = list[i].href.split('/')[4];
-            const checkTab = getPath.split('?');
 
-            if (checkTab[0] === 'settings') {
-                if (!settingsTab.classList.contains('active')) {
-                    settingsTab.classList.add('active')
+            if (getPath) {
+                const checkTab = getPath.split('?');
+                if (checkTab[0] === 'settings') {
+                    if (!settingsTab.classList.contains('active')) {
+                        settingsTab.classList.add('active')
+                    }
+                    
+                    list[i].classList.add('active')
+                    list[i].closest('li').className = 'active';
+                } else {
+                    list[i].closest('li').className = 'active';
                 }
-                
-                list[i].classList.add('active')
-                list[i].closest('li').className = 'active';
             } else {
                 list[i].closest('li').className = 'active';
             }
+            
+            
+
+            
 
             
         }

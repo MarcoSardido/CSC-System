@@ -62,20 +62,17 @@ const getTransactions = async (uid) => {
         //? Get total items sold & total revenue & weekly revenue
         transactionsCollection.forEach(itemSold => {
             if (itemSold.data().status === 'Success') {
-                //? Remove "," in Thousands
-                const format = itemSold.data().totalPrice.replace(/\,/g, '');
-                const itemPrice = Number(format);
-
+                
                 itemSoldArray.push(itemSold.data().transactionID);
                 weeklyRevenueArray.push({
                     date: itemSold.data().date,
-                    price: itemSold.data().totalPrice
+                    price: formatThousands(itemSold.data().totalPrice / 100)
                 });
-                totalRevenue += Number(itemPrice);
+                totalRevenue += itemSold.data().totalPrice;
             }
         })
 
-        return { totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: totalRevenue };
+        return { totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: formatThousands(totalRevenue / 100) };
 
     } catch (error) {
         console.error(`Firestore Error: @getTransactions -> ${error.message}`)
@@ -176,6 +173,10 @@ const getLiveSummary = async (uid) => {
     } catch (error) {
         console.error(`Firestore Error: @getLiveSummary -> ${error.message}`);
     }
+}
+
+const formatThousands = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 export {

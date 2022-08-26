@@ -43,7 +43,7 @@ const stripeCheckoutSession = async (req, res) => {
                     quantity: 1
                 }],
                 success_url: `${config.SERVER_URL}/sellercenter/subscription_success/{CHECKOUT_SESSION_ID}`,
-                cancel_url: `${config.SERVER_URL}`
+                cancel_url: `${config.SERVER_URL}/sellercenter`
             });
 
             res.json({ url: session.url });

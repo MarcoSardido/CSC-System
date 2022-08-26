@@ -39,6 +39,7 @@ $(document).ready(() => {
                 </div>
             `;
         }
+        if (modalContent.hasChildNodes) $('.modal-content').empty();
 
         modalContent.insertAdjacentHTML('beforeend', content);
         $('#joinRoomModal').modal('show');

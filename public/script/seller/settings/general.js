@@ -1,4 +1,4 @@
-import { changeProfilePhoto, updateProfileInfo } from './Api/updateProfile.js';
+import { changeProfilePhoto } from './Api/updateProfile.js';
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -26,9 +26,6 @@ $(document).ready(() => {
             for (const inputIndex of enableInput) {
                 inputIndex.setAttribute('disabled', '');
             }
-            // updateProfileInfo(trimmedUID).then(() => {
-            //     window.location.reload();
-            // })
             window.location.reload();
             
         }, 2000)

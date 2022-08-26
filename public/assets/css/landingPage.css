@@ -387,7 +387,7 @@ h1,h2,h3,h4,h5,h6 {
   height: 100vh;
   background-image: url('../images/landingPage/section1/Shape Component.svg');
   background-position: right;
-  background-size: cover 8rem;
+  background-size: 72rem;
   background-repeat: no-repeat;
 }
 

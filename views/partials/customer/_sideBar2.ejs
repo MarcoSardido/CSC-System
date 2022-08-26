@@ -1,0 +1,64 @@
+<div class="right">
+    <div class="top">
+        <button id="menu-btn">
+            <ion-icon name="menu-sharp" style="font-size: 2rem;"></ion-icon>
+        </button>
+        <div class="theme-toggler">
+            <span class="active">
+                <ion-icon name="sunny-sharp"></ion-icon>
+            </span>
+            <span>
+                <ion-icon name="moon-sharp"></ion-icon>
+            </span>
+        </div>
+        
+        <% displayAccountInfo.forEach(accountKey=> { %>
+            <div class="profile">
+                <div class="info">
+                    <% if(accountKey.displayName !=='' && accountKey.isVerified){ %>
+                        <p>Hey, <b><%=accountKey.displayName%></b></p>
+                        <small class="text-muted">Verified 👍</small>
+                        <% }else{ %>
+                            <p>Hey, <b>Customer123</b></p>
+                            <small class="text-muted">Not Verified 👎</small>
+                    <% } %>
+                </div>
+                <div class="profile-photo">
+                    <% if(accountKey.userPhoto==='' ) { %>
+                        <img src="/public/assets/images/default/user-default-profile.png" alt="<%=accountKey.displayName%>">
+                        <% } else { %>
+                            <img src="data:<%=accountKey.imgType%>;base64,<%=accountKey.userPhoto%>"alt="<%=accountKey.displayName%>">
+                    <% } %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    <!-- END OF TOP -->
+
+    <!-- LIVE SCHEDULES -->
+    <div class="live-schedules">
+        <h2>Live Schedules</h2>
+        <div class="schedules">
+            <div class="schedule">
+                <div class="message">
+                    <p><b>Coco's Surplus Shop</b></p>
+                    <small class="text-muted">05:00 PM - 08:00 PM | Coco's Opening Sale</small>
+                </div>
+            </div>
+            <div class="schedule">
+                <div class="message">
+                    <p><b>Pet Supply and Accessories</b></p>
+                    <small class="text-muted">08:00 PM - 11:00 PM | 11:11 Sale</small>
+                </div>
+            </div>
+            <div class="schedule">
+                <div class="message">
+                    <p><b>Sample Sample Shop</b></p>
+                    <small class="text-muted">09:00 AM - 01:00 PM | Sample Sale</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END OF LIVE SCHEDULES -->
+
+</div>

@@ -37,7 +37,7 @@ const startLiveSelling = async (uid, data) => {
         await setDoc(liveSessionRef, {
             createdAt: currentDateAndTime,
             sellerID: uid,
-            sessionOpen: true,
+            sessionStatus: 'Open',
             sessionStart: data.eventStart,
             sessionDuration: data.eventDuration === '30' ? `${data.eventDuration} Minutes` : `${data.eventDuration} Hours`,
             sessionEnd: data.eventEnd
@@ -49,6 +49,30 @@ const startLiveSelling = async (uid, data) => {
         console.error(`Firestore Error: @startLiveSelling -> ${error.message}`)
     }
 
+}
+
+const checkLiveSessions = async () => {
+    const numActiveRooms = [], numWaitingRooms = [];
+
+    try {
+        //* LIVE SESSION COLLECTION
+        const liveSessionColRef = collection(db, `LiveSession`);
+        const liveSessionCollection = await getDocs(liveSessionColRef);
+
+        liveSessionCollection.forEach(session => {
+            if (session.data().sessionStatus === 'Open') {
+                numActiveRooms.push(session.data().sessionEnd)
+            } else if (session.data().sessionStatus === 'Waiting') {
+                numWaitingRooms.push(session.data().sessionStart)
+            }
+        })
+        
+        return { activeRooms: numActiveRooms, waitingRooms: numWaitingRooms}
+
+
+    } catch (error) {
+        console.error(`Firestore Error: @checkLiveSessions -> ${error.message}`)
+    }
 }
 
 
@@ -74,4 +98,5 @@ const stringDateFormat = () => {
 
 export {
     startLiveSelling,
+    checkLiveSessions,
 }

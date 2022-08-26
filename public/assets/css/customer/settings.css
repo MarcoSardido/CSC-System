@@ -1,435 +1,1285 @@
-
-/*
-    Settings Header Style
-*/
-
-.settings-header {
-    width: 69%;
-    height: 50px;
-    float: right;
+/*MAIN*/
+main {
+    margin-top: 1.4rem;
 }
 
-.settings-header .icon {
-    position: absolute;
-    font-size: 23px;
-    right: 0;
-    padding-right: 50px;
-    padding-top: 10px;
+main .settings {
+    margin-top: 1.2rem;
 }
 
-.settings-header .icon ion-icon {
-    background: #fff;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
+main .nav-settings {
+    position: sticky;
+    top: 0;
+    z-index: 233;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    margin: auto;
+    transition: all 300ms ease;
+    background: var(--color-white);
+    box-shadow: var(--box-shadow);
+}
+
+main .nav-settings a {
+    font-size: 0.88rem;
+}
+
+main .nav-settings .nav-item {
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+
+main .nav-settings li {
+    text-align: center;
+    padding: 1rem;
+    width: 100%;
+}
+
+main .nav-settings li a:hover {
+    color: #6875e3;
+}
+
+main .nav-settings li.active {
+    border-bottom: 2px solid #6875e3;
+}
+
+main .nav-settings li.active a {
+    color: #6875e3;
+    font-weight: 500;
+}
+
+main .content {
+    background: var(--color-white);
+    margin-top: 1.5rem;
+    transition: all 300ms ease;
+    box-shadow: var(--box-shadow);
+}
+
+main .content .top {
+    padding: 1.4rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+main .content .row {
+    display: flex;
+}
+
+main .content .row .col {
+    flex: 1;
+}
+
+main .content .row .tabs {
+    overflow: hidden;
+    box-shadow: 0 4px 4px -2px rgba(0, 0, 0, 0.5);
+}
+
+main .content .row .tabs .tab {
+    width: 100%;
+    color: var(--color-dark);
+    overflow: hidden;
+}
+
+main .content .row .tabs .tab .tab-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.2rem;
+    padding-top: 0;
+    font-size: 1.2rem;
+    background: var(--color-white);
+    font-weight: bold;
     cursor: pointer;
 }
 
-.settings-header .notif {
-    position: absolute;
-    left: 25px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-    z-index: 1;
+main .content .row .tabs .tab .tab-label::after {
+    content: "❯";
+    width: 1.2em;
+    height: 1.2em;
+    text-align: center;
+    transition: all 300ms ease;
 }
 
-/*
-End of Settings Header Style
-*/
+main .content .row .tabs .tab .tab-content {
+    max-height: 0;
+    padding: 0 1.2rem;
+    color: var(--color-dark);
+    font-size: 1.2rem;
+    background: var(--color-white);
+    transition: all 300ms ease;
+}
 
+main .content .row .tabs .tab input:checked+.tab-label::after {
+    transform: rotate(90deg);
+}
 
-/*
-Start of Order Body Style
-*/
+main .content .row .tabs .tab input:checked~.tab-content {
+    max-height: 100vh;
+    padding: 1.2rem;
+}
 
-    .settings-body {
-        display:flex;
-        flex-direction:row;
+main .content .top-address,
+main .content .top-finance {
+    padding: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+main .content .top-address .btn-address button,
+main .content .top-finance .btn-finance button {
+    cursor: pointer;
+    padding: 0.77rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: 0;
+    border-radius: var(--border-radius-1);
+    text-align: center;
+    box-shadow: 0 10px 25px -8px var(--color-primary);
+    transition: all 300ms ease;
+}
+
+main .content .top-address .btn-address button:hover,
+main .content .top-finance .btn-finance button:hover {
+    box-shadow: none;
+}
+
+main .content .top button {
+    padding: 1rem;
+    background: transparent;
+    color: var(--color-primary);
+    cursor: pointer;
+}
+
+main .content .middle {
+    display: grid;
+    grid-template-columns: auto 20rem;
+    padding: 1.6rem;
+}
+
+main .content .middle-policy {
+    display: grid;
+    grid-template-columns: auto;
+    padding: 1.6rem;
+    justify-content: center;
+    place-items: center;
+}
+
+main .content .middle-policy p {
+    font-size: 1rem;
+}
+
+main .content .middle-policy img {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 1rem;
+}
+
+main .content .middle-content {
+    display: grid;
+    grid-template-columns: auto 5rem;
+    padding: 1.6rem;
+}
+
+main .content .middle .content-details,
+main .content .middle-content .feedback-content-details {
+    display: flex;
+    gap: 4%;
+}
+
+main .content .middle-content .feedback-content-details {
+    padding: 1.5rem;
+    width: 100%;
+}
+
+main .content .middle-content .btn-goTo {
+    margin: auto;
+}
+
+main .content .middle-content .btn-goTo a {
+    font-size: 3rem;
+    padding: 0.88rem;
+    transition: all 300ms ease;
+    color: var(--color-primary-variant);
+}
+
+main .content .middle-content .btn-goTo a:hover {
+    margin-left: 12px;
+}
+
+main .content .middle-content .feedback-content-details ion-icon {
+    font-size: 4rem;
+    color: var(--color-primary-variant);
+}
+
+main .content .middle .content-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    height: 50%;
+}
+
+main .content .middle .content-btn a {
+    border: 1px solid var(--color-info-dark);
+    margin: 0.33rem 0;
+    padding: 0.88rem;
+}
+
+main .content .middle .content-details img {
+    width: 70px;
+    height: 70px;
+}
+
+main .content .middle .content-details ion-icon {
+    font-size: 1.6rem;
+}
+
+main .content .btn-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: end;
+    gap: 2%;
+    padding: 1rem;
+}
+
+main .content .btn-group button {
+    cursor: pointer;
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--color-info-light);
+    font-size: 0.98rem;
+    border-radius: var(--border-radius-1);
+    width: 19%;
+    text-align: center;
+}
+
+main .content .btn-group button.active {
+    border: 0;
+    background: var(--color-primary);
+    color: #fff;
+}
+
+main .content .middle {
+    padding: 1.2rem;
+}
+
+main .settings .content .middle form table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+main .settings .content .middle form.account-settings-form {
+    border-right: 1px solid var(--color-info-light);
+}
+
+main .settings .content .middle form table,
+th,
+td {
+    /*	border: 1px solid #b1bcbe;*/
+    padding: 1.2rem;
+}
+
+main .settings .content .middle form table,
+th {
+    text-align: right;
+    font-weight: 400;
+    font-size: 0.90rem;
+    width: 25%;
+    padding-right: 0;
+}
+
+main .settings .content .middle form table,
+td {
+    text-align: left;
+    width: 100%;
+}
+
+main .settings .content .middle form table td #username {
+    background: transparent;
+    font-size: 1rem;
+    color: var(--color-dark);
+}
+
+main .settings .content .middle form table td #fullName,
+#contactNum,
+#newPass,
+#confirmPass {
+    background: var(--color-white);
+    border: 1px solid var(--color-info-light);
+    box-shadow: inset 0 -1.3rem 1rem 0 rgba(0, 0, 0, 0.02);
+    padding: 9px;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--color-dark);
+    border-radius: var(--border-radius-1);
+}
+
+main .settings .content .middle form table td #verificationCode {
+    background: var(--color-white);
+    border: 1px solid var(--color-info-light);
+    box-shadow: inset 0 -1.3rem 1rem 0 rgba(0, 0, 0, 0.02);
+    padding: 9px;
+    width: 100%;
+    font-size: 1rem;
+    color: var(--color-dark);
+}
+
+main .settings .content .middle form table td.verify {
+    display: flex;
+}
+
+main .settings .content .middle form table td.verify button {
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    font-size: 0.88rem;
+    font-family: "Poppins";
+    width: 100%;
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+main .settings .content .middle form table td #email {
+    background: var(--color-background);
+    font-size: 1rem;
+    border: 1px solid var(--color-info-light);
+    padding: 9px;
+    width: 100%;
+    color: var(--color-info-dark);
+}
+
+main .settings .content .middle form table td .radio {
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-align: left;
+}
+
+main .settings .content .middle form table td .radio input {
+    display: none;
+}
+
+.radio input+span {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    font-size: 1rem;
+}
+
+.radio input+span:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 50%;
+    margin-right: 5px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.radio input+span:after {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    position: absolute;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    opacity: 0;
+    transform: scale(0, 0);
+    transition: all 0.2s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+}
+
+.radio input:checked+span:after {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+main .settings .content .middle form table td select {
+    cursor: pointer;
+    font-family: "Poppins";
+    background: var(--color-white);
+    font-size: 1rem;
+    border: 1px solid var(--color-info-light);
+    padding: 9px;
+    border-radius: var(--border-radius-1);
+    color: var(--color-dark);
+    width: 32.32%;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAHCAYAAAD9NeaIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDE1LTA0LTE3VDE3OjEyOjQyKzAyOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNS0wNC0yMFQxNzoxNjoyNCswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAxNS0wNC0yMFQxNzoxNjoyNCswMjowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTU4MjBDRURERjVCMTFFNEEzN0FCODBEM0I5MTExMjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTU4MjBDRUVERjVCMTFFNEEzN0FCODBEM0I5MTExMjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RUVFRDJCNkREQzMxMUU0QTM3QUI4MEQzQjkxMTEyOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNTgyMENFQ0RGNUIxMUU0QTM3QUI4MEQzQjkxMTEyOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuShL/sAAABeSURBVHjaYszOzjZnYGDYCcT8DMSBv0AcP2XKlKVEqmdgAuKTQOwOxB+JtQCIibYAZgkDkRaRZQGyJYQsItsCdEtwWUSRBdgsQbeIYgtAgAWHOMwiJSBezkAhAAgwAJSTG/DI0S9VAAAAAElFTkSuQmCC");
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    transition: 0.4s ease;
+    background-size: auto 15%;
+    box-shadow: inset 0 -1.3rem 1rem 0 rgba(0, 0, 0, 0.02);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+main .settings .content .middle form table td select:hover {
+    border: 1px solid var(--color-primary);
+}
+
+main .settings .content .middle form table td .save-btn {
+    cursor: pointer;
+    padding: 1rem;
+    background: var(--color-primary);
+    font-size: 0.98rem;
+    border-radius: var(--border-radius-1);
+    width: 30%;
+    color: var(--color-white);
+    text-align: center;
+}
+
+main .settings .content .middle .uploadPhoto {
+    display: grid;
+    grid-template-columns: auto;
+    place-items: center;
+    position: relative;
+}
+
+main .settings .content .middle .uploadPhoto .profile-photo {
+    height: 120px;
+    width: 120px;
+    margin-top: 5rem;
+}
+
+main .settings .content .middle .uploadPhoto .profile-photo img {
+    height: 120px;
+    width: 120px;
+}
+
+main .settings .content .middle .uploadPhoto .input-file {
+    margin-bottom: 12rem;
+    text-align: center;
+}
+
+main .settings .content .middle .uploadPhoto .input-file input[type=file] {
+    font-family: "Poppins";
+    width: 80%;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+main .content .middle .location,
+.action,
+main .content .middle .card {
+    padding: var(--card-padding);
+}
+
+.card-action {
+    padding: 1.2rem;
+}
+
+main .content .middle .location .customerDetails,
+main .content .middle .card .cardDetails {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 1%;
+}
+
+main .content .middle .location .customerDetails h2,
+main .content .middle .card .cardDetails h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-right: 1px solid var(--color-info-light);
+    padding-right: 0.48rem;
+}
+
+main .content .middle .location .customerDetails p,
+main .content .middle .card .cardDetails p {
+    font-size: 1.1rem;
+}
+
+main .content .middle .location .detailed-address,
+.labels {
+    margin-top: 0.66rem;
+}
+
+main .content .middle .location .labels>label {
+    font-weight: 500;
+    padding: 0.20rem;
+}
+
+main .content .middle .location .labels label.default-type {
+    border: 1px solid var(--color-danger);
+    color: var(--color-danger);
+}
+
+main .content .middle .location .labels label.work-type {
+    border: 1px solid var(--color-warning);
+    color: var(--color-warning);
+}
+
+main .content .middle .action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    padding: 4rem 1rem;
+}
+
+main .content .middle .card-action {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+main .content .middle .card-action button {
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 0.88rem;
+    font-family: "Poppins";
+    transition: all 300ms ease;
+}
+
+main .content .middle .card-action button ion-icon {
+    font-size: 0.88rem;
+}
+
+main .content .middle .action button {
+    cursor: pointer;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: "Poppins";
+    transition: all 300ms ease;
+}
+
+main .content .middle .action button ion-icon {
+    font-size: 0.95rem;
+}
+
+main .content .middle .action .edit-btn,
+main .content .middle .card-action .edit-card-btn {
+    color: var(--color-white);
+    background: var(--color-success);
+    border-top-left-radius: var(--border-radius-2);
+    border-bottom-left-radius: var(--border-radius-2);
+    box-shadow: 0 10px 25px -8px var(--color-success);
+}
+
+main .content .middle .action .delete-btn,
+main .content .middle .card-action .delete-card-btn {
+    color: var(--color-white);
+    background: var(--color-danger);
+    border-top-right-radius: var(--border-radius-2);
+    border-bottom-right-radius: var(--border-radius-2);
+    box-shadow: 0 10px 25px -8px var(--color-danger);
+}
+
+main .content .middle .action button:hover,
+main .content .middle .card-action button:hover {
+    box-shadow: none;
+}
+
+/*MODAL*/
+.modal-wrap,
+.modal-wrap-edit,
+.modal-wrap-card,
+.modal-wrap-card-edit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    z-index: 500;
+}
+
+.modal-wrap .shadow,
+.modal-wrap-edit .shadow,
+.modal-wrap-card .shadow,
+.modal-wrap-card-edit .shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.modal-wrap .modal,
+.modal-wrap-edit .modal,
+.modal-wrap-card .modal,
+.modal-wrap-card-edit .modal {
+    width: 450px;
+    max-width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-white);
+    border-radius: 3px;
+}
+
+i {
+    font-size: 2rem;
+}
+
+i:hover {
+    transform: scale(1.1) rotate(5deg);
+    cursor: pointer;
+}
+
+.modal-wrap button.submit-btn,
+.modal-wrap-edit button.update-btn,
+.modal-wrap-card button.submit-card-btn,
+.modal-wrap-card-edit button.update-card-btn {
+    border: 1px solid var(--color-primary);
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.main.active .modal-wrap,
+.main.active-edit .modal-wrap-edit,
+.main.active-card .modal-wrap-card,
+.main.active-edit-card .modal-wrap-card-edit {
+    visibility: visible;
+    transition: all 0.5s ease;
+}
+
+.main.active .modal-wrap .shadow,
+.main.active-edit .modal-wrap-edit .shadow,
+.main.active-card .modal-wrap-card .shadow,
+.main.active-edit-card .modal-wrap-card-edit .shadow {
+    opacity: 1;
+    transition: all 0.5s ease;
+}
+
+.modal-wrap .modal .header,
+.modal-wrap-edit .modal .header,
+.modal-wrap-card .modal .header,
+.modal-wrap-card-edit .modal .header {
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    position: relative;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-info-light);
+}
+
+.modal-wrap .modal .header .title,
+.modal-wrap-edit .modal .header .title,
+.modal-wrap-card .modal .header .title,
+.modal-wrap-card-edit .modal .header .title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.modal-wrap .modal .header .icon,
+.modal-wrap-edit .modal .header .icon,
+.modal-wrap-card .modal .header .icon,
+.modal-wrap-card-edit .modal .header .icon {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal-wrap .modal .header .icon:hover,
+.modal-wrap-edit .modal .header .icon:hover,
+.modal-wrap-card .modal .header .icon:hover,
+.modal-wrap-card-edit .modal .header .icon:hover {
+    color: var(--color-info-light);
+}
+
+.modal-wrap .modal .modal-container,
+.modal-wrap-edit .modal .modal-container,
+.modal-wrap-card .modal .modal-container,
+.modal-wrap-card-edit .modal .modal-container {
+    padding: 0.44rem 2rem;
+}
+
+.modal-wrap .modal .modal-container .modal-body,
+.modal-wrap-edit .modal .modal-container .modal-body,
+.modal-wrap-card .modal .modal-container .modal-body,
+.modal-wrap-card-edit .modal .modal-container .modal-body {
+    margin-bottom: 20px;
+}
+
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab {
+    cursor: none;
+    pointer-events: none;
+    font-size: 1.5rem;
+    color: var(--color-info-dark);
+}
+
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand p,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand p {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-flex,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-flex,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-flex,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-flex {
+    display: flex;
+    gap: 3%;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-grid,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-grid,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-grid,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-grid {
+    display: grid;
+    grid-template-columns: auto;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-label,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-label {
+    margin: 1rem;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label p,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label p {
+    font-size: 1.1rem;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types {
+    display: flex;
+    gap: 2%;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label {
+    font-size: 0.99rem;
+    margin-top: 12px;
+    cursor: pointer;
+    border: 1px solid var(--color-info-light);
+    padding: 0.77rem;
+    border-radius: 10px;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover {
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active {
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field {
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    padding-top: 20px;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default {
+    padding: 1.2rem;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb {
+    visibility: hidden;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label {
+    position: relative;
+    padding-left: 7px;
+    font-size: 1rem;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before {
+    position: absolute;
+    left: -20px;
+    top: 1px;
+    /*   text-align: center; */
+    border: 2px solid var(--color-primary);
+    content: " ";
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    transition: all 0.1s ease-in, border-color 0.05s ease-in;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before {
+    transform: rotate(40deg);
+    border-top-color: transparent;
+    border-left-color: transparent;
+    top: 0;
+    left: -15px;
+    width: 7px;
+    height: 14px;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input {
+    border: 1px solid var(--color-light);
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+    color: var(--color-dark);
+    padding: 10px;
+    border-radius: 3px;
+    background: var(--color-white);
+    box-shadow: inset 0 -1.3rem 1rem 0 rgba(0, 0, 0, 0.02);
+    width: 100%;
+    font-size: 14px;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus {
+    border: 1px solid var(--color-primary);
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder {
+    position: absolute;
+    left: 12px;
+    top: calc(50% + 10px);
+    transform: translateY(-50%);
+    color: #aaa;
+    transition:
+        top 0.3s ease-in-out,
+        font-size 0.3s ease-in-out,
+        color 0.3s ease-in-out;
+}
+
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder {
+    top: 22px;
+    font-size: 12px;
+    background: var(--color-white);
+    color: #aaa;
+    padding: 0 0.22rem;
+}
+
+.modal-wrap .modal .footer,
+.modal-wrap-edit .modal .footer,
+.modal-wrap-card .modal .footer,
+.modal-wrap-card-edit .modal .footer {
+    margin-bottom: 1rem;
+}
+
+.modal-wrap .modal .footer .footer-btn,
+.modal-wrap-edit .modal .footer .footer-btn,
+.modal-wrap-card .modal .footer .footer-btn,
+.modal-wrap-card-edit .modal .footer .footer-btn {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 3%;
+    justify-content: flex-end;
+}
+
+.modal-wrap .modal .footer .footer-btn button,
+.modal-wrap-edit .modal .footer .footer-btn button,
+.modal-wrap-card .modal .footer .footer-btn button,
+.modal-wrap-card-edit .modal .footer .footer-btn button {
+    font-family: Poppins;
+    padding: 0.88rem;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    width: 25%;
+    border-radius: 5px;
+}
+
+.modal-wrap .modal .footer .footer-btn button.close-btn,
+.modal-wrap-edit .modal .footer .footer-btn button.close-btn,
+.modal-wrap-card .modal .footer .footer-btn button.close-btn,
+.modal-wrap-card-edit .modal .footer .footer-btn button.close-btn {
+    background: var(--color-info-light);
+    color: #363949;
+}
+
+.modal-wrap .modal .footer .footer-btn button.active:hover,
+.modal-wrap-edit .modal .footer .footer-btn button.active:hover,
+.modal-wrap-card .modal .footer .footer-btn button.active:hover,
+.modal-wrap-card-edit .modal .footer .footer-btn button.active:hover {
+    box-shadow: 0 1rem 2.4rem var(--color-primary);
+    padding-top: 10px;
+}
+
+/*MEDIA QUERIES*/
+/*BIG TABLETS AND SMALL LAPTOPS*/
+@media screen and (max-width: 1200px) {
+    .customer-container {
+        width: 94%;
+        grid-template-columns: 7rem auto 18rem;
+    }
+
+    aside .logo img {
+        margin-left: 1.3rem;
+        width: 3rem;
+        height: 3rem;
+    }
+
+    aside .logo h2 {
+        display: none;
+    }
+
+    aside .sidebar h3 {
+        display: none;
+    }
+
+    aside .sidebar a {
+        width: 5.6rem;
+    }
+
+    aside .sidebar a:last-child {
+        position: relative;
+        top: 0.4rem;
+    }
+
+    main .nav-settings a {
+        font-size: 0.77rem;
+    }
+
+    main .settings .content .middle form table,
+    th,
+    td {
+        padding: 0.77rem;
+    }
+
+    main .settings .content .middle form table,
+    th {
+        font-size: 0.70rem;
+    }
+
+    main .settings .content .middle form table td #username {
+        font-size: 0.88rem;
+    }
+
+    main .settings .content .middle form table td #fullName,
+    #contactNum,
+    #newPass,
+    #confirmPass {
+        padding: 8px;
+        font-size: 0.77rem;
+    }
+
+    main .settings .content .middle form table td #email {
+        font-size: 0.77rem;
+        padding: 8px;
+    }
+
+    .radio input+span {
+        padding-left: 20px;
+        font-size: 0.88rem;
+    }
+
+    .radio input+span:before {
+        width: 14px;
+        height: 14px;
+    }
+
+    .radio input+span:after {
+        width: 10px;
+        height: 10px;
+    }
+
+    main .settings .content .middle form table td select {
+        font-size: 0.88rem;
+        padding: 8px;
+        width: 32.32%;
+    }
+
+    main .settings .content .middle form table td .save-btn {
+        padding: 0.88rem;
+        font-size: 0.78rem;
+        width: 25%;
+    }
+
+    main .settings .content .middle .uploadPhoto .profile-photo {
+        height: 100px;
+        width: 100px;
+        margin-top: 3rem;
+    }
+
+    main .settings .content .middle .uploadPhoto .profile-photo img {
+        height: 100px;
+        width: 100px;
+    }
+
+    main .settings .content .middle .uploadPhoto .input-file {
+        margin-bottom: 8rem;
+    }
+
+    main .settings .content .middle form table td #verificationCode {
+        padding: 8px;
+        font-size: 0.77rem;
+    }
+
+}
+
+/*SMALLER TABLETS AND MOBILE*/
+@media screen and (max-width: 768px) {
+    .customer-container {
         width: 100%;
-        height: auto;
-        padding: 5px 10px;
-     }
+        grid-template-columns: 1fr;
+    }
 
-     .settings-body hr {
-         width: 1px;
-         height: 85vh;
-         margin-top: 25px;
-         margin-left: 10px;
-         background: #c7c7c7;
-     }
+    aside {
+        position: fixed;
+        left: -100%;
+        background: var(--color-white);
+        width: 18rem;
+        z-index: 3;
+        box-shadow: 1rem 3rem 4rem var(--color-light);
+        height: 100vh;
+        padding-right: var(--card-padding);
+        display: none;
+        animation: showMenu 400ms ease forwards;
+    }
 
-    /*
-        Start of Settings Left-Side Style 
-    */
-
-        .settings-menu-cont {
-            width: 25%;
-            display: flex;
-            flex-direction:column;
-            margin-top: -50px;
+    @keyframes showMenu {
+        to {
+            left: 0;
         }
+    }
 
-        .title-cont {
-            font-size: 40px;
-            font-weight: 600;
-            padding-left: 20px;
-        }
+    aside .logo img {
+        margin-left: 1;
+        width: 2rem;
+        height: 2rem;
+    }
 
-        .menu-cont {
-            display: flex;
-            flex-direction: column;
-            padding: 30px 20px;
-            font-size: 18px;
-        }
+    aside .logo h2 {
+        display: inline;
+    }
 
-        .menu-cont a {
-            text-decoration: none;
-            padding-left: 15px;
-            margin: 0 0 20px;
-            color: #777;
-        }
+    aside .sidebar h3 {
+        display: inline;
+    }
 
-        .menu-cont a:hover {
-            color: #485fed;
-        }
+    aside .sidebar a {
+        width: 18rem;
+        height: 3.4rem;
+    }
 
-        .menu-cont a.active {
-            color: #f1f1ff;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border-radius: 50px;
-            padding: 10px 15px;
-        }
+    aside .sidebar a:last-child {
+        position: absolute;
+        top: 18rem;
+    }
 
-        /*
-            End of Settings Left-Side Style 
-        */
+    aside .close {
+        display: inline-block;
+        cursor: pointer;
+    }
 
+    main {
+        margin-top: 7rem;
+        padding: 2rem 1rem;
+    }
 
+    main .settings {
+        width: 92vw;
+    }
 
-        /*
-            Start of Settings Right-Side Style 
-        */
+    main .nav-settings {
+        position: relative;
+        z-index: 0;
+    }
 
-        .settings-details-cont {
-            position: relative;
-            display: flex;
-            flex-direction:column;
-            width: 75%;
-            height: 41.9rem;
-            overflow-y: auto;
-            padding: 20px 0;
-        }
+    main .nav-settings li {
+        padding: 0.7rem;
+    }
 
-        .details-inner-cont {
-            width: 90%;
-            height: 100vh;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-        }
+    main .nav-settings a {
+        font-size: 0.55rem;
+    }
 
-        .global-header-panel {
-            font-size: 30px;
-            font-weight: 600;
-            padding: 0 20px 20px;
-            width: 30.5vw;
-        }
+    main .content .middle {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
 
-        .global-header-panel b.account {
-            position: absolute;
-            top: 65px;
-            height: 5px;
-            width: 130px;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border: none;
-            border-radius: 10px;
-        }
+    main .settings .content .middle form.account-settings-form {
+        padding-top: 1rem;
+        order: 2;
+        border-right: 0;
+        border-top: 1px solid var(--color-info-light);
+    }
 
-        .global-header-panel b.address {
-            position: absolute;
-            top: 65px;
-            height: 5px;
-            width: 160px;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border: none;
-            border-radius: 10px;
-        }
+    main .settings .content .middle .uploadPhoto {
+        order: 1;
+    }
 
-        .global-header-panel b.financial {
-            position: absolute;
-            top: 65px;
-            height: 5px;
-            width: 230px;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border: none;
-            border-radius: 10px;
-        }
+    main .settings .content .middle .uploadPhoto .profile-photo {
+        height: 110px;
+        width: 110px;
+        margin-top: 1rem;
+    }
 
-        .global-header-panel b.faq {
-            position: absolute;
-            top: 65px;
-            height: 5px;
-            width: 45px;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border: none;
-            border-radius: 10px;
-        }
+    main .settings .content .middle .uploadPhoto .profile-photo img {
+        height: 110px;
+        width: 110px;
+    }
 
-        .global-header-panel b.about {
-            position: absolute;
-            top: 65px;
-            height: 5px;
-            width: 115px;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            border: none;
-            border-radius: 10px;
-        }
+    main .settings .content .middle .uploadPhoto .input-file {
+        margin-bottom: 3rem;
+    }
 
-        .account .account-profile {
-            padding: 0 20px 20px;
-        }
+    main .settings .content .middle form table,
+    th,
+    td {
+        padding: 0.88rem;
+    }
 
-        .account .account-profile .details-static-label {
-            font-weight: 600;
-            font-size: 20px;
-            margin-left: 5px;
-            margin-top: -10px;
-            margin-bottom: -25px;
-        }
+    main .settings .content .middle form table,
+    th {
+        font-size: 0.88rem;
+    }
 
-        .account .account-profile .details-dynamic-cont {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
+    main .settings .content .middle form table td #username {
+        font-size: 0.88rem;
+    }
 
-        .filUpload {
-            width: 110px;
-            height: 100px;
-            margin-right: 20px;
-            margin-top: 10px;
-        }
+    main .settings .content .middle form table td #fullName,
+    #contactNum,
+    #newPass,
+    #confirmPass {
+        padding: 9px;
+        font-size: 0.88rem;
+    }
 
-        .account .account-profile .details-dynamic-cont div:nth-child(1) p {
-           margin: 0 10px;
-        }
+    main .settings .content .middle form table td #email {
+        font-size: 0.88rem;
+        padding: 9px;
+    }
 
-        .account .account-profile .details-dynamic-cont div:nth-child(1) .details-current-name {
-            font-size: 20px;
-            font-weight: 600;
-        }
+    .radio input+span {
+        font-size: 0.88rem;
+    }
 
-        .account .account-profile .details-dynamic-cont div:nth-child(1) .details-current-email {
-            color: #777;
-            font-size: 15px;
-        }
+    main .settings .content .middle form table td select {
+        font-size: 0.99rem;
+        padding: 9px;
+        width: 32.32%;
+    }
 
-        .account .account-profile .details-dynamic-cont div:nth-child(2) {
-             margin: 10px 0;
-        }
-        
-        .account .account-profile .details-dynamic-cont img{
-            width: 110px;
-            border-radius: 50%;
-            margin-right: 20px;
-            margin-bottom: -20px;
-        }
+    main .settings .content .middle form table td .save-btn {
+        padding: 0.99rem;
+        font-size: 0.88rem;
+        width: 30%;
+    }
 
-        .account .account-profile .details-dynamic-cont button {
-            border: none;
-            height: 40px;
-            border-radius: 5px;
-            background: #fff;
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 15px;
-            font-weight: 600;
-            color: #485fed;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-            transition: all 0.3s ease-in-out;
-        }
+    main .settings .content .middle form table td #verificationCode {
+        padding: 9px;
+        font-size: 1rem;
+        width: 100%;
+    }
 
-        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(1):hover {
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            color: #f1f1ff;
-        }
+    .right {
+        width: 94%;
+        margin: 0 auto 4rem;
+    }
 
-        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(2) {
-            color: red;
-            transition: all .5s ease;
-        }
+    .right .top {
+        position: fixed;
+        top: 0;
+        left: 0;
+        align-items: center;
+        padding: 0 0.8rem;
+        height: 4.6rem;
+        background-color: var(--color-white);
+        width: 100%;
+        margin: 0;
+        z-index: 2;
+        box-shadow: 0 1rem 1rem var(--color-light);
+    }
 
-        .account .account-profile .details-dynamic-cont .details-current div:nth-child(2)  button:nth-child(2):hover {
-            color: #f1f1ff;
-            background: red;
-        }
+    .right .top .theme-toggler {
+        width: 4.4rem;
+        position: absolute;
+        left: 65%;
+    }
 
-        .account .account-details {
-            width: 95%;
-            display: flex;
-            flex-direction: column;
-            padding: 0 0 15px;
-            padding-bottom: 30px;
-            margin: 0 auto ;
-            margin-bottom: 20px;
-            border-top: 1px solid #e1e1e1;
-            border-bottom: 1px solid #e1e1e1;
-        }
+    .right .profile .info {
+        display: none;
+    }
 
-        .account-details .account-details-upper,
-        .account-details .account-details-lower,
-        .account-details .account-other-details {
-            display: flex;
-            flex-direction: row;
-        }
+    .right .top button {
+        display: inline-block;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-dark);
+        position: absolute;
+        left: 1rem;
+    }
+}
 
-        .account-details .account-details-upper {
-            margin: 0 0 20px;
-        }
+@media screen and (max-width: 425px) {
+    .modal-wrap .modal {
+        width: 300px;
+    }
 
-        .account-details .account-details-upper .account-row-info,
-        .account-details .account-details-lower .account-row-info,
-        .account-details .account-other-details .account-row-info{
-            flex-direction: column;
-            width: 100%;
-            margin-top: 15px;
-        }
+    .modal-wrap .modal .header {
+        padding: 1rem;
+    }
 
-        .account-details .account-details-upper .account-row-info .details-static-label,
-        .account-details .account-details-lower .account-row-info .details-static-label,
-        .account-details .account-other-details .account-row-info .details-static-label{
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: -15px;
-            font-weight: 600;
-        }
+    .modal-wrap .modal .header .title {
+        font-size: 1.2rem;
+    }
 
-        .account-details .account-details-upper .account-row-info .details-static-label div:nth-child(2),
-        .account-details .account-details-lower .account-row-info .details-static-label div:nth-child(2),
-        .account-details .account-other-details .account-row-info .details-static-label div:nth-child(2) {
-            color: #777;
-            font-weight: 500;
-            margin-right: 25px;
-        }
+    .modal-wrap .modal .header .icon {
+        top: 10px;
+        font-size: 23px;
+    }
 
-        .account-details .account-details-upper .account-row-info .details-dynamic-cont input:disabled,
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input:disabled,
-        .account-details .account-other-details .account-row-info .details-dynamic-cont input:disabled,
-        .account-details .account-other-details .account-row-info .details-dynamic-cont select:disabled {
-            background: #dadada;
-            color: black;
-            opacity: 0.7;
-        }
+    .modal-wrap .modal .footer .footer-btn {
+        gap: 5%;
+    }
 
-        .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type="text"],
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="text"],
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type="email"],
-        .account-details .account-other-details .account-row-info .details-dynamic-cont input[type="date"],
-        .account-details .account-other-details .account-row-info .details-dynamic-cont select {
-            width: 95%;
-            transition: all 0.30s ease-in-out;
-            outline: none;
-            padding: 10px 10px;
-            border: 1px solid #e1e1e1;
-            resize: none;
-            border-radius: 5px;
-        }
-
-        .account-details .account-details-upper .account-row-info .details-dynamic-cont input[type=text]:focus,
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=text]:focus,
-        .account-details .account-details-lower .account-row-info .details-dynamic-cont input[type=email]:focus,
-        .account-details .account-other-details .account-row-info .details-dynamic-cont input[type="date"]:focus,
-        .account-details .account-other-details .account-row-info .details-dynamic-cont select:focus {
-            box-shadow: 0 0 5px #485fed;
-            padding: 10px 10px; 
-            border: 1px solid #485fed;
-        }
-
-        .account .account-status {
-            width: 95%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 0 15px;
-            margin: 0 auto;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #e1e1e1;
-        }
-
-        .account .account-status .account-status-static p {
-            margin-bottom: 0;
-        }
-
-        .account .account-status .account-status-static p:nth-child(1) {
-            font-weight: 700;
-            font-size: 18px;
-            margin-bottom: -5px;
-        }
-
-        .account .account-status .account-status-static p:nth-child(2) {
-            color: #777;
-            font-size: 15px;
-        }
-
-        .account .account-status .account-status-detail button{
-            border: none;
-            height: 3rem;
-            color: red;
-            font-weight: 600;
-            padding: 10px 20px;
-            border-radius: 5px;
-            background: transparent;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .account .account-status .account-status-detail button:hover {
-            color: #fff;
-            background: red;
-        }
-
-        .global-footer-panel {
-            padding: 0 25vw;
-        }
-
-        .global-footer-panel button {
-            width: 10rem;
-            height: 3rem;
-            border-radius: 5px;
-            border: none;
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-            box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 5px 0px;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .global-footer-panel div {
-            display: flex;
-            width: 25rem;
-            margin-left: -80px;
-        }
-
-        .global-footer-panel div button:nth-child(2) {
-            -webkit-text-fill-color: red;
-            margin-left: 20px;
-        }
-
-        .global-footer-panel div button:nth-child(2):hover{
-            background: red;
-            -webkit-text-fill-color: #fff;
-        }
-
-        .global-footer-panel button:hover {
-            background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
-             -webkit-text-fill-color: #fff;
-        }
-
-    /*
-    End of Settings Right-Side Style 
-    */
-
-/*
-End of Order Body Style
-*/
+    .modal-wrap .modal .footer .footer-btn button {
+        font-size: 0.88rem;
+        padding: 1.1rem;
+        width: 30%;
+    }
+}

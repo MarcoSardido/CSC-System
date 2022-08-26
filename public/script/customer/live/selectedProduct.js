@@ -48,6 +48,7 @@ $(document).ready(() => {
                 itemID: itemID,
                 prodID: data.prodID,
                 itemName: data.itemName,
+                itemDesc: data.itemDesc,
                 itemImg: data.itemImg,
                 itemSize: data.itemSize,
                 itemQty: data.itemQty,
@@ -464,6 +465,7 @@ $(document).ready(() => {
         const item = {
             prodID: product.prodID,
             itemName: product.prodName,
+            itemDesc: product.prodDesc,
             itemImg: `data:${product.productImages[0].type};base64,${product.productImages[0].data}`,
             itemSize: size,
             itemQty: qty,
