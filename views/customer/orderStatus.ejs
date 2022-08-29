@@ -7,15 +7,15 @@
         <div class="nav-orders">
 
             <div class="back">
-                <a href="orders.html" style="font-size: 1.06rem">
+                <a href="/customercenter/orders" style="font-size: 1.06rem">
                     <ion-icon name="chevron-back-outline"></ion-icon> Back
                 </a>
             </div>
 
             <div class="orderInfo">
                 <div>ORDER ID: </div>
-                <div id="orderID" style="font-weight: 600"> 220725CCA4KN38</div> |
-                <b style="color: #ff7782">Shipped</b>
+                <div id="orderID" style="font-weight: 600"><%= displayOrderInfo.id %></div> |
+                <b style="color: #ff7782"><%= displayOrderInfo.status %></b>
             </div>
 
         </div><!-- END OF NAVIGATION and ORDER INFO -->
@@ -35,29 +35,27 @@
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
                             <h2>Placed</h2>
-                            <small id="orderDate" class="text-muted" style="display: block;">07/25/2022</small>
+                            <small id="orderDate" class="text-muted" style="display: block;"><%= displayOrderInfo.placedOn %></small>
                         </li>
 
                         <!-- PAYMENT INFO CONFIRMED -->
                         <li>
                             <ion-icon name="cash-outline" class="icon"></ion-icon>
-                            <div class="active order-progress two">
+                            <div class="order-progress two">
                                 <p>2</p>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
                             <h2>Confirmed</h2>
-                            <small id="orderDate" class="text-muted" style="display: block;">07/25/2022</small>
                         </li>
 
                         <!-- ORDER SHIPPED OUT-->
                         <li>
                             <ion-icon name="rocket-outline" class="icon"></ion-icon>
-                            <div class="active order-progress three">
+                            <div class="order-progress three">
                                 <p>3</p>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
                             <h2>Shipping</h2>
-                            <small id="orderDate" class="text-muted" style="display: block;">07/27/2022</small>
                         </li>
 
                         <!-- DELIVERED-->
@@ -68,7 +66,6 @@
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
                             <h2>Delivered</h2>
-                            <small id="orderDate" class="text-muted" style="display: none;">07/30/2022</small>
                         </li>
 
                     </ul>
@@ -83,9 +80,9 @@
                     </div>
                     
                     <div class="customerDetails">
-                        <p id="customerName" style="font-weight: 500; font-size: 1rem">Marco Sardido</p><br>
-                        <p id="customerNumber">(+63)9219564201</p>
-                        <p id="customerAddress">2168 Hilltop Haven Drive, Los Angeles, California 90017</p>
+                        <p id="customerName" style="font-weight: 500; font-size: 1rem"><%= displayOrderInfo.customer.name %></p><br>
+                        <p id="customerNumber"><%= displayOrderInfo.customer.contactNo %></p>
+                        <p id="customerAddress"><%= displayOrderInfo.orderAddress %></p>
                     </div>
                 </div>
 
@@ -94,41 +91,43 @@
 
                 <!-- ITEM ORDERED -->
                 <div class="middle">
-                    <div class="item-content">
-                        <div class="item">
-                            <img src="public/assets/images/sampleItems/iphone-7-black.jpg">
-                            <div class="item-name">
-                                <h2 style="font-weight: 400">Iphone 7 Pro Limited Black Edition</h2>
-                                <p class="text-muted">Color: Black</p>
-                                <p class="text-muted">Warranty: 24 months</p>
+                    <% displayOrderInfo.items.forEach(item => { %>
+                        <div class="item-content">
+                            <div class="item">
+                                <img src="<%= item.image %>">
+                                <div class="item-name">
+                                    <h2 style="font-weight: 400"><%= item.name %></h2>
+                                    <p class="text-muted"><%= item.description %></p>
+                                    <p class="text-muted">Color: <%= item.colorName %> | Size: <%= item.size %></p>
+                                </div>
+                            </div>
+                            <div class="item-qty">
+                                <h2 style="font-weight: 400">Qty: <%= item.quantity %></h2>
+                            </div>
+                            <div class="item-price">
+                                <h2>₱<%= item.subTotal %></h2>
                             </div>
                         </div>
-                        <div class="item-qty">
-                            <h2 style="font-weight: 400">Qty: 2</h2>
-                        </div>
-                        <div class="item-price">
-                            <h2>₱40,042.00</h2>
-                        </div>
-                    </div>
+                    <% }) %>
                 </div>
 
 
                 <table class="totalSummary">
                     <tr>
                         <th class="text-muted">Merchandise Subtotal</th>
-                        <td id="merchTotal">₱40,000</td>
+                        <td id="merchTotal">₱<%= displayOrderInfo.totalAmount %></td>
                     </tr>
                     <tr>
                         <th class="text-muted">Shipping</th>
-                        <td id="shippingFee">₱42</td>
+                        <td id="shippingFee">-</td>
                     </tr>
                     <tr>
                         <th class="text-muted">Order Total</th>
-                        <td id="orderTotal">₱40,042</td>
+                        <td id="orderTotal">₱<%= displayOrderInfo.totalAmount %></td>
                     </tr>
                     <tr>
                         <th class="text-muted">Payment Method</th>
-                        <td id="modeOfPayment">Cash On Delivery</td>
+                        <td id="modeOfPayment"><%= displayOrderInfo.modeOfPayment %></td>
                     </tr>
                 </table>
             </div><!-- End of List of Orders -->

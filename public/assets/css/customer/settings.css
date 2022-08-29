@@ -285,7 +285,6 @@ td {
 
 main .settings .content .middle form table,
 th {
-    text-align: right;
     font-weight: 400;
     font-size: 0.90rem;
     width: 25%;
@@ -304,8 +303,10 @@ main .settings .content .middle form table td #username {
     color: var(--color-dark);
 }
 
-main .settings .content .middle form table td #fullName,
+main .settings .content .middle form table td #username, 
+#fullName,
 #contactNum,
+#birthdate,
 #newPass,
 #confirmPass {
     background: var(--color-white);
@@ -360,6 +361,7 @@ main .settings .content .middle form table td .radio {
     -ms-user-select: none;
     user-select: none;
     text-align: left;
+    margin: 0 10px;
 }
 
 main .settings .content .middle form table td .radio input {
@@ -405,31 +407,6 @@ main .settings .content .middle form table td .radio input {
 .radio input:checked+span:after {
     opacity: 1;
     transform: scale(1, 1);
-}
-
-main .settings .content .middle form table td select {
-    cursor: pointer;
-    font-family: "Poppins";
-    background: var(--color-white);
-    font-size: 1rem;
-    border: 1px solid var(--color-info-light);
-    padding: 9px;
-    border-radius: var(--border-radius-1);
-    color: var(--color-dark);
-    width: 32.32%;
-    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAHCAYAAAD9NeaIAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA+hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDIxIDc5LjE1NDkxMSwgMjAxMy8xMC8yOS0xMTo0NzoxNiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKE1hY2ludG9zaCkiIHhtcDpDcmVhdGVEYXRlPSIyMDE1LTA0LTE3VDE3OjEyOjQyKzAyOjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAxNS0wNC0yMFQxNzoxNjoyNCswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAxNS0wNC0yMFQxNzoxNjoyNCswMjowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RTU4MjBDRURERjVCMTFFNEEzN0FCODBEM0I5MTExMjkiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RTU4MjBDRUVERjVCMTFFNEEzN0FCODBEM0I5MTExMjkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo2RUVFRDJCNkREQzMxMUU0QTM3QUI4MEQzQjkxMTEyOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpFNTgyMENFQ0RGNUIxMUU0QTM3QUI4MEQzQjkxMTEyOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuShL/sAAABeSURBVHjaYszOzjZnYGDYCcT8DMSBv0AcP2XKlKVEqmdgAuKTQOwOxB+JtQCIibYAZgkDkRaRZQGyJYQsItsCdEtwWUSRBdgsQbeIYgtAgAWHOMwiJSBezkAhAAgwAJSTG/DI0S9VAAAAAElFTkSuQmCC");
-    background-position: 100% 50%;
-    background-repeat: no-repeat;
-    transition: 0.4s ease;
-    background-size: auto 15%;
-    box-shadow: inset 0 -1.3rem 1rem 0 rgba(0, 0, 0, 0.02);
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-main .settings .content .middle form table td select:hover {
-    border: 1px solid var(--color-primary);
 }
 
 main .settings .content .middle form table td .save-btn {
@@ -613,10 +590,10 @@ main .content .middle .card-action button:hover {
     transition: all 0.5s ease;
 }
 
-.modal-wrap .modal,
-.modal-wrap-edit .modal,
-.modal-wrap-card .modal,
-.modal-wrap-card-edit .modal {
+.modal-wrap .modal-address,
+.modal-wrap-edit .modal-address,
+.modal-wrap-card .modal-card,
+.modal-wrap-card-edit .modal-card {
     width: 450px;
     max-width: 100%;
     position: absolute;
@@ -661,10 +638,10 @@ i:hover {
     transition: all 0.5s ease;
 }
 
-.modal-wrap .modal .header,
-.modal-wrap-edit .modal .header,
-.modal-wrap-card .modal .header,
-.modal-wrap-card-edit .modal .header {
+.modal-wrap .modal-address .header,
+.modal-wrap-edit .modal-address .header,
+.modal-wrap-card .modal-card .header,
+.modal-wrap-card-edit .modal-card .header {
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
     position: relative;
@@ -672,19 +649,19 @@ i:hover {
     border-bottom: 1px solid var(--color-info-light);
 }
 
-.modal-wrap .modal .header .title,
-.modal-wrap-edit .modal .header .title,
-.modal-wrap-card .modal .header .title,
-.modal-wrap-card-edit .modal .header .title {
+.modal-wrap .modal-address .header .title,
+.modal-wrap-edit .modal-address .header .title,
+.modal-wrap-card .modal-card .header .title,
+.modal-wrap-card-edit .modal-card .header .title {
     font-size: 1.4rem;
     font-weight: 600;
     text-align: left;
 }
 
-.modal-wrap .modal .header .icon,
-.modal-wrap-edit .modal .header .icon,
-.modal-wrap-card .modal .header .icon,
-.modal-wrap-card-edit .modal .header .icon {
+.modal-wrap .modal-address .header .icon,
+.modal-wrap-edit .modal-address .header .icon,
+.modal-wrap-card .modal-card .header .icon,
+.modal-wrap-card-edit .modal-card .header .icon {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -692,85 +669,85 @@ i:hover {
     font-size: 20px;
 }
 
-.modal-wrap .modal .header .icon:hover,
-.modal-wrap-edit .modal .header .icon:hover,
-.modal-wrap-card .modal .header .icon:hover,
-.modal-wrap-card-edit .modal .header .icon:hover {
+.modal-wrap .modal-address .header .icon:hover,
+.modal-wrap-edit .modal-address .header .icon:hover,
+.modal-wrap-card .modal-card .header .icon:hover,
+.modal-wrap-card-edit .modal-card .header .icon:hover {
     color: var(--color-info-light);
 }
 
-.modal-wrap .modal .modal-container,
-.modal-wrap-edit .modal .modal-container,
-.modal-wrap-card .modal .modal-container,
-.modal-wrap-card-edit .modal .modal-container {
+.modal-wrap .modal-address .modal-container,
+.modal-wrap-edit .modal-address .modal-container,
+.modal-wrap-card .modal-card .modal-container,
+.modal-wrap-card-edit .modal-card .modal-container {
     padding: 0.44rem 2rem;
 }
 
-.modal-wrap .modal .modal-container .modal-body,
-.modal-wrap-edit .modal .modal-container .modal-body,
-.modal-wrap-card .modal .modal-container .modal-body,
-.modal-wrap-card-edit .modal .modal-container .modal-body {
+.modal-wrap .modal-address .modal-container .modal-body,
+.modal-wrap-edit .modal-address .modal-container .modal-body,
+.modal-wrap-card .modal-card .modal-container .modal-body,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body {
     margin-bottom: 20px;
 }
 
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab {
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand .card-variations .fab {
     cursor: none;
     pointer-events: none;
     font-size: 1.5rem;
     color: var(--color-info-dark);
 }
 
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand p,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand p {
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand p,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand p {
     font-size: 1rem;
     font-weight: 500;
 }
 
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap .card-title-brand,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap .card-title-brand {
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap .card-title-brand {
     display: flex;
     margin-top: 1rem;
     justify-content: space-between;
     align-items: center;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-flex,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-flex,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-flex,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-flex {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-flex,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-flex,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-flex,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-flex {
     display: flex;
     gap: 3%;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-grid,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-grid,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-grid,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-grid {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-grid,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-grid,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-grid,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-grid {
     display: grid;
     grid-template-columns: auto;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .field-label,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .field-label {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-label,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-label {
     margin: 1rem;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label p,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label p {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label p,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label p {
     font-size: 1.1rem;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types {
     display: flex;
     gap: 2%;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label {
     font-size: 0.99rem;
     margin-top: 12px;
     cursor: pointer;
@@ -779,47 +756,47 @@ i:hover {
     border-radius: 10px;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover {
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active {
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field {
     position: relative;
     width: 100%;
     font-size: 14px;
     padding-top: 20px;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default {
     padding: 1.2rem;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb {
     visibility: hidden;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label {
     position: relative;
     padding-left: 7px;
     font-size: 1rem;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before {
     position: absolute;
     left: -20px;
     top: 1px;
@@ -832,8 +809,8 @@ i:hover {
     transition: all 0.1s ease-in, border-color 0.05s ease-in;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before {
     transform: rotate(40deg);
     border-top-color: transparent;
     border-left-color: transparent;
@@ -843,10 +820,10 @@ i:hover {
     height: 14px;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input {
     border: 1px solid var(--color-light);
     -webkit-appearance: none;
     -ms-appearance: none;
@@ -862,17 +839,17 @@ i:hover {
     font-size: 14px;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus {
     border: 1px solid var(--color-primary);
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder {
     position: absolute;
     left: 12px;
     top: calc(50% + 10px);
@@ -884,14 +861,14 @@ i:hover {
         color 0.3s ease-in-out;
 }
 
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap-edit .modal .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap-card .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap-card-edit .modal .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
+.modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder {
     top: 22px;
     font-size: 12px;
     background: var(--color-white);
@@ -899,17 +876,17 @@ i:hover {
     padding: 0 0.22rem;
 }
 
-.modal-wrap .modal .footer,
-.modal-wrap-edit .modal .footer,
-.modal-wrap-card .modal .footer,
-.modal-wrap-card-edit .modal .footer {
+.modal-wrap .modal-address .footer,
+.modal-wrap-edit .modal-address .footer,
+.modal-wrap-card .modal-card .footer,
+.modal-wrap-card-edit .modal-card .footer {
     margin-bottom: 1rem;
 }
 
-.modal-wrap .modal .footer .footer-btn,
-.modal-wrap-edit .modal .footer .footer-btn,
-.modal-wrap-card .modal .footer .footer-btn,
-.modal-wrap-card-edit .modal .footer .footer-btn {
+.modal-wrap .modal-address .footer .footer-btn,
+.modal-wrap-edit .modal-address .footer .footer-btn,
+.modal-wrap-card .modal-card .footer .footer-btn,
+.modal-wrap-card-edit .modal-card .footer .footer-btn {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -917,10 +894,10 @@ i:hover {
     justify-content: flex-end;
 }
 
-.modal-wrap .modal .footer .footer-btn button,
-.modal-wrap-edit .modal .footer .footer-btn button,
-.modal-wrap-card .modal .footer .footer-btn button,
-.modal-wrap-card-edit .modal .footer .footer-btn button {
+.modal-wrap .modal-address .footer .footer-btn button,
+.modal-wrap-edit .modal-address .footer .footer-btn button,
+.modal-wrap-card .modal-card .footer .footer-btn button,
+.modal-wrap-card-edit .modal-card .footer .footer-btn button {
     font-family: Poppins;
     padding: 0.88rem;
     cursor: pointer;
@@ -930,18 +907,18 @@ i:hover {
     border-radius: 5px;
 }
 
-.modal-wrap .modal .footer .footer-btn button.close-btn,
-.modal-wrap-edit .modal .footer .footer-btn button.close-btn,
-.modal-wrap-card .modal .footer .footer-btn button.close-btn,
-.modal-wrap-card-edit .modal .footer .footer-btn button.close-btn {
+.modal-wrap .modal-address .footer .footer-btn button.close-btn,
+.modal-wrap-edit .modal-address .footer .footer-btn button.close-btn,
+.modal-wrap-card .modal-card .footer .footer-btn button.close-btn,
+.modal-wrap-card-edit .modal-card .footer .footer-btn button.close-btn {
     background: var(--color-info-light);
     color: #363949;
 }
 
-.modal-wrap .modal .footer .footer-btn button.active:hover,
-.modal-wrap-edit .modal .footer .footer-btn button.active:hover,
-.modal-wrap-card .modal .footer .footer-btn button.active:hover,
-.modal-wrap-card-edit .modal .footer .footer-btn button.active:hover {
+.modal-wrap .modal-address .footer .footer-btn button.active:hover,
+.modal-wrap-edit .modal-address .footer .footer-btn button.active:hover,
+.modal-wrap-card .modal-card .footer .footer-btn button.active:hover,
+.modal-wrap-card-edit .modal-card .footer .footer-btn button.active:hover {
     box-shadow: 0 1rem 2.4rem var(--color-primary);
     padding-top: 10px;
 }
@@ -1256,28 +1233,28 @@ i:hover {
 }
 
 @media screen and (max-width: 425px) {
-    .modal-wrap .modal {
+    .modal-wrap .modal-address {
         width: 300px;
     }
 
-    .modal-wrap .modal .header {
+    .modal-wrap .modal-address .header {
         padding: 1rem;
     }
 
-    .modal-wrap .modal .header .title {
+    .modal-wrap .modal-address .header .title {
         font-size: 1.2rem;
     }
 
-    .modal-wrap .modal .header .icon {
+    .modal-wrap .modal-address .header .icon {
         top: 10px;
         font-size: 23px;
     }
 
-    .modal-wrap .modal .footer .footer-btn {
+    .modal-wrap .modal-address .footer .footer-btn {
         gap: 5%;
     }
 
-    .modal-wrap .modal .footer .footer-btn button {
+    .modal-wrap .modal-address .footer .footer-btn button {
         font-size: 0.88rem;
         padding: 1.1rem;
         width: 30%;

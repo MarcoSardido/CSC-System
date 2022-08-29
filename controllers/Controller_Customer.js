@@ -4,11 +4,9 @@ import { getFirestore, collection, doc, addDoc, setDoc, updateDoc, getDoc, getDo
 
 import { createStripeCustomer, liveCartSession, getAllPaymentList, cancelPaymentIntent } from '../controllers/Controller_Stripe.js'
 
-import Customer from '../models/Model_Customer.js';
-import Account from '../models/Model_Account.js';
-// import Order from '../models/Model_Order';
-
 import date from 'date-and-time';
+
+import ntc from '@yatiac/name-that-color';
 
 const adminAuth = firebaseAdmin.auth();
 const auth = getAuth(firebase);
@@ -79,12 +77,17 @@ const customerDash = (req, res) => {
 
 };
 
+
+
+
+
 const orderPage = (req, res) => {
     const uid = req.body.uid;
 
     userData(uid).then(result => {
-        res.render('customer/orderStatus', {
+        res.render('customer/order', {
             layout: 'layouts/customerLayout',
+            uid: res.locals.uid,
             displayAccountInfo: result.accountArray,
             displayCustomerInfo: result.customerArray,
             messageCode: '',
@@ -93,35 +96,115 @@ const orderPage = (req, res) => {
         });
     })
 }
+
+const orderStatusPage = async (req, res) => {
+    const { uid } = req.body;
+    const { id } = req.query;
+
+    try {
+        //* CUSTOMER COLLECTION
+        const customerColRef = doc(db, `Customers/${uid}`);
+        const customerDocument = await getDoc(customerColRef);
+
+        //* CUSTOMER COLLECTION: Sub-collection: Orders
+        const orderColRef = doc(db, `Customers/${uid}/Orders/orderID_${id}`);
+        const orderDocument = await getDoc(orderColRef);
+
+        const orderItems = orderDocument.data().items;
+
+        for (const [itemIndex, itemValue] of orderItems.entries()) {
+            let getComponent = itemValue.color.substring(4, itemValue.color.length - 1).replace(/ /g, '').split(',');
+            let hexValue = rgbToHex(getComponent[0], getComponent[1], getComponent[2]);
+            let colorName = ntc(`#${hexValue}`).colorName;
+
+            orderItems[itemIndex].subTotal = formatThousands(orderItems[itemIndex].subTotal / 100) + '.00';
+            orderItems[itemIndex].colorName = colorName;
+        }
+
+        let orderItem = {
+            id: orderDocument.data().id,
+            placedOn: convertStringDateToNumDate(orderDocument.data().placedOn),
+            status: orderDocument.data().status,
+            customer: {
+                name: customerDocument.data().displayName,
+                contactNo: customerDocument.data().contactNo
+            },
+            orderAddress: orderDocument.data().orderAddress,
+            items: orderItems,
+            totalAmount: formatThousands(orderDocument.data().totalAmount / 100) + '.00',
+            modeOfPayment: orderDocument.data().modeOfPayment === 'COD' ? 'Cash On Delivery' : 'Credit Card'
+        }
+
+        userData(uid).then(result => {
+            res.render('customer/orderStatus', {
+                layout: 'layouts/customerLayout',
+                uid: res.locals.uid,
+                displayAccountInfo: result.accountArray,
+                displayCustomerInfo: result.customerArray,
+                displayOrderInfo: orderItem,
+                messageCode: '',
+                infoMessage: '',
+                onLive: false,
+            });
+        })
+
+    } catch (error) {
+        console.error(`Customer Controller Error -> @orderStatusPage: ${error.message}`)
+    }
+}
+
+
+
+
+
+
 
 const reviewPage = (req, res) => {
     const uid = req.body.uid;
 
-    userData(uid).then(result => {
-        res.render('customer/review', {
-            layout: 'layouts/customerLayout',
-            displayAccountInfo: result.accountArray,
-            displayCustomerInfo: result.customerArray,
-            messageCode: '',
-            infoMessage: '',
-            onLive: false,
-        });
-    })
+    try {
+        userData(uid).then(result => {
+            res.render('customer/review', {
+                layout: 'layouts/customerLayout',
+                displayAccountInfo: result.accountArray,
+                displayCustomerInfo: result.customerArray,
+                messageCode: '',
+                infoMessage: '',
+                onLive: false,
+            });
+        })
+
+    } catch (error) {
+        console.error(`Customer Controller Error -> @reviewPage: ${error.message}`)
+    }
 }
+
+
+
+
+
+
+
 
 const settingsPage = (req, res) => {
     const uid = req.body.uid;
 
-    userData(uid).then(result => {
-        res.render('customer/settings', {
-            layout: 'layouts/customerLayout',
-            displayAccountInfo: result.accountArray,
-            displayCustomerInfo: result.customerArray,
-            messageCode: '',
-            infoMessage: '',
-            onLive: false,
-        });
-    })
+    try {
+        userData(uid).then(result => {
+            res.render('customer/settings', {
+                layout: 'layouts/customerLayout',
+                displayAccountInfo: result.accountArray,
+                displayCustomerInfo: result.customerArray,
+                messageCode: '',
+                infoMessage: '',
+                onLive: false,
+            });
+        })
+
+
+    } catch (error) {
+        console.error(`Customer Controller Error -> @settingsPage: ${error.message}`)
+    }
 }
 
 const profileUpdate = async (req, res) => {
@@ -205,6 +288,10 @@ const profileUpdate = async (req, res) => {
 };
 
 
+
+
+
+
 const currentItemObj = {};
 const removeItems = [];
 let currentRoomUrl, isCheckoutCancelled = true;
@@ -258,7 +345,7 @@ const livePaymentSuccess = async (req, res) => {
 
     let splitResult = currentRoomUrl.split("/");
     let roomID = splitResult[splitResult.length - 1];
-    
+
     // To prevent checkout cancelation
     isCheckoutCancelled = false;
 
@@ -276,16 +363,41 @@ const livePaymentSuccess = async (req, res) => {
     // orderID && transactionID
     const orderUniqueID = generateId(), transUniqueID = generateId();
 
-    for (const itemIndex of currentItemObj.currentCheckoutItems) {
-        delete itemIndex.id;
-        delete itemIndex.productID;
+    const orderItems = currentItemObj.currentCheckoutItems;
+
+    // :: Live Selling => Get sellerUID
+    const liveSessionRef = doc(db, `LiveSession/sessionID_${roomID}`);
+    const liveSessionDoc = await getDoc(liveSessionRef);
+    roomHost = liveSessionDoc.data().sellerID;
+
+
+    for (const [itemIndex, itemValue] of orderItems.entries()) {
+        // :: Live Selling => Live Cart
+        const liveCartColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${itemValue.id}`);
+        const liveCartDoc = await getDoc(liveCartColRef);
+        orderItems[itemIndex].image = liveCartDoc.data().itemImg;
+
+        delete orderItems[itemIndex].id;
+        delete orderItems[itemIndex].productID;
     }
+
+    // :: Live Selling => Get sellerUID
+    const sellerSessionRef = doc(db, `Sellers/${roomHost}/LiveSessions/sessionID_${roomID}`);
+    const sellerSessionDoc = await getDoc(sellerSessionRef);
+
+    // :: Customer Collection
+    const customerRef = doc(db, `Customers/${uid}`);
+    const customerDoc = await getDoc(customerRef);
 
     // :: Customer Collection -> Orders
     const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${orderUniqueID}`);
     await setDoc(customerOrderRef, {
         id: orderUniqueID,
         transactionID: transUniqueID,
+        seller: {
+            uid: roomHost,
+            storeName: sellerSessionDoc.data().roomName
+        },
         items: currentItemObj.currentCheckoutItems,
         modeOfPayment: currentItemObj.currentPaymentMethod,
         placedOn: stringDateFormat(),
@@ -294,21 +406,13 @@ const livePaymentSuccess = async (req, res) => {
         status: 'Processing',
     })
 
-    // :: Live Selling => Get sellerUID
-    const liveSessionRef = doc(db, `LiveSession/sessionID_${roomID}`);
-    const liveSessionDoc = await getDoc(liveSessionRef);
-    roomHost = liveSessionDoc.data().sellerID;
-
-    // :: Customer Collection
-    const customerRef = doc(db, `Customers/${uid}`);
-    const customerDoc = await getDoc(customerRef);
-
 
     // :: Seller Collection -> Transaction
     const sellerTransactionRef = doc(db, `Sellers/${roomHost}/Transactions/transactionID_${transUniqueID}`);
     await setDoc(sellerTransactionRef, {
         id: transUniqueID,
         orderID: orderUniqueID,
+        stripePaymentID: currentItemObj.currentPaymentID,
         customer: {
             uid: customerDoc.id,
             address: currentItemObj.orderAddress,
@@ -339,7 +443,7 @@ const livePaymentSuccess = async (req, res) => {
     // ========================================== Stripe ==================================================
     //* ===================================================================================================
     const last10Payments = await getAllPaymentList();
-    
+
     // :: Stripe Collection
     const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
     const stripePaymentDoc = await getDocs(stripePaymentRef);
@@ -484,11 +588,41 @@ const stringDateFormat = () => {
     return formattedDate;
 }
 
+const convertStringDateToNumDate = (strDate) => {
+    let stringDate = strDate.split(" ");
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    for (let j = 0; j < months.length; j++) {
+        if (stringDate[1] == months[j]) {
+            stringDate[1] = months.indexOf(months[j]) + 1;
+        }
+    }
+    if (stringDate[1] < 10) {
+        stringDate[1] = '0' + stringDate[1];
+    }
+    if (stringDate[0] < 10) {
+        stringDate[0] = '0' + stringDate[0];
+    }
+    let result = `${stringDate[1]}/${stringDate[0]}/${stringDate[2]}`;
+    return result;
+}
+
+const rgbToHex = (r, g, b) => {
+    let rgb = b | (g << 8) | (r << 16);
+    return (0x1000000 | rgb).toString(16).substring(1);
+}
+
+const formatThousands = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 
 
 export {
     customerDash,
+
     orderPage,
+    orderStatusPage,
+
     reviewPage,
 
     settingsPage,

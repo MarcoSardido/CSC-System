@@ -188,12 +188,9 @@ $(document).ready(() => {
                     const codObjData = {
                         modeOfPayment: paymentObj.paymentMethod,
                         orderAddress: paymentObj.address,
-                        
                     }
                     codPaymentHandler(trimmedUID, liveRoomID, codObjData, cartItems).then(() => {
                         window.location.reload();
-                        // $('#cartPaymentModal').modal('hide');
-                        // $('#cartPaymentModal').css('cursor', 'auto');
                     });
                 }
             })

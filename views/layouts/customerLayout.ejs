@@ -58,9 +58,11 @@
     <!-- Charts -->
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
 
+    <!-- Color Converter -->
+    <script defer src="https://chir.ag/projects/ntc/ntc.js" type="text/javascript"></script>
+    
     <!-- My Script -->
-    <script defer src="/public/script/general.js"></script>
-    <!-- <script defer src="/public/script/customer.js"></script> -->
+    <script defer src="/public/script/customer/general.js"></script>
 
     <!-- General Style -->
     <link rel="stylesheet" href="/public/assets/css/customer/general.css">
@@ -73,17 +75,17 @@
 </head>
 <body id="styledScrollBar">
 
-    <div class="customer-container">
-        
-        <% if (onLive === false) { %>
+    <% if (onLive === false) { %>
+        <div class="customer-container">
             <%- include('../partials/customer/_sideBar') %>
             <%-body%>
             <%- include('../partials/customer/_sideBar2') %>
+        </div>
 
-        <% } else{ %>
-            <%-body%>
-        <% } %> 
-        
-    </div>
+    <% } else{ %>
+        <%-body%>
+    <% } %> 
+
+    
 </body>
 </html>

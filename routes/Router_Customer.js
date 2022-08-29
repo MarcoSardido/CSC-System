@@ -3,8 +3,12 @@ const router = express.Router();
 
 import { 
     customerDash,
+
     orderPage,
+    orderStatusPage,
+
     reviewPage,
+
     settingsPage, 
     profileUpdate,
 
@@ -34,10 +38,19 @@ router.get('/auth/logout', customerLogout);
 //                       Pages
 //! ----------------------------------------------------------------
 router.get('/', verifyCookieCustomer, customerDash);
-router.get('/orders', verifyCookieCustomer, orderPage);
-router.get('/reviews', verifyCookieCustomer, reviewPage);
-router.get('/settings', verifyCookieCustomer, settingsPage);
 
+
+
+router.get('/orders', verifyCookieCustomer, orderPage);
+router.get('/orders/orderstatus/:id?', verifyCookieCustomer, orderStatusPage)
+
+
+router.get('/reviews', verifyCookieCustomer, reviewPage);
+
+
+
+router.get('/settings', verifyCookieCustomer, settingsPage);
+router.post('/', profileUpdate);
 
 
 //! ---------------------------------------------------------------- 
@@ -52,6 +65,6 @@ router.get('/live/room/:roomId/success', verifyCookieCustomer, livePaymentSucces
 
 
 
-router.post('/', profileUpdate);
+
 
 export { router as routes }

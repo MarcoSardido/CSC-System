@@ -1,11 +1,13 @@
 /*MAIN*/
-main{
+main {
 	margin-top: 1.4rem;
 }
-main .orders{
+
+main .orders {
 	margin-top: 1.2rem;
 }
-main .nav-orders{
+
+main .nav-orders {
 	position: sticky;
 	top: 0;
 	z-index: 233;
@@ -18,56 +20,69 @@ main .nav-orders{
 	background: var(--color-white);
 	box-shadow: var(--box-shadow);
 }
-main .nav-orders .back{
+
+main .nav-orders .back {
 	padding: 0.7rem;
 }
-main .nav-orders .orderInfo{
+
+main .nav-orders .orderInfo {
 	display: flex;
 	gap: 0.55rem;
 	padding: 1rem;
 }
-main .nav-orders a{
+
+main .nav-orders a {
 	font-size: 1rem;
 }
-main .nav-orders .nav-item{
+
+main .nav-orders .nav-item {
 	cursor: pointer;
 	transition: all 300ms ease;
 }
-main .nav-orders li{
+
+main .nav-orders li {
 	text-align: center;
 	padding: 1rem;
 	width: 100%;
 }
-main .nav-orders li a:hover{
+
+main .nav-orders li a:hover {
 	color: #6875e3;
 }
-main .nav-orders li.active{
+
+main .nav-orders li.active {
 	border-bottom: 2px solid #6875e3;
 }
-main .nav-orders li.active a{
+
+main .nav-orders li.active a {
 	color: #6875e3;
 	font-weight: 500;
 }
+
 /*======== STEPPER PROGRESS BAR ==========*/
-main .order .orderProgress{
+main .order .orderProgress {
 	background: var(--color-white);
 	padding: var(--card-padding);
 }
-main .order .orderProgress ul{
+
+main .order .orderProgress ul {
 	display: flex;
 	justify-content: center;
 }
-main .order .orderProgress ul li{
+
+main .order .orderProgress ul li {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
-main .order .orderProgress ul li .icon{
+
+main .order .orderProgress ul li .icon {
 	font-size: 35px;
 	color: var(--color-primary);
 	margin: 0 60px;
 }
-main .order .orderProgress ul li .order-progress{
+
+main .order .orderProgress ul li .order-progress {
 	margin: 13px 0;
 	width: 30px;
 	height: 30px;
@@ -77,24 +92,29 @@ main .order .orderProgress ul li .order-progress{
 	place-items: center;
 	position: relative;
 }
-main .order .orderProgress ul li .active{
+
+main .order .orderProgress ul li .active {
 	background: var(--color-primary);
 }
-main .order .orderProgress ul li .active::after{
+
+main .order .orderProgress ul li .active::after {
 	background: var(--color-primary);
 }
+
 /*========= ACTIVE PROGRESS BAR CLASS ===========*/
 /*Hides the step numbers if it is in active state (1,2,3,4)*/
-main .order .orderProgress ul li .active p{
+main .order .orderProgress ul li .active p {
 	display: none;
 }
-main .orders .order .orderProgress ul li .active ion-icon{
+
+main .orders .order .orderProgress ul li .active ion-icon {
 	color: #fff;
 	font-size: 18px;
 	display: flex;
 }
+
 /*PROGRESS line*/
-.order-progress::after{
+.order-progress::after {
 	content: " ";
 	position: absolute;
 	width: 125px;
@@ -102,75 +122,97 @@ main .orders .order .orderProgress ul li .active ion-icon{
 	background: rgba(68, 68, 68, 0.781);
 	right: 30px;
 }
-.one::after{
+
+.one::after {
 	width: 0;
 	height: 0;
 }
-main .order .orderProgress ul li .order-progress p{
+
+main .order .orderProgress ul li .order-progress p {
 	color: #fff;
 	font-size: 14px;
 }
-main .order .orderProgress ul li .order-progress ion-icon{
+
+main .order .orderProgress ul li .order-progress ion-icon {
 	display: none;
 }
-main .order .orderProgress ul li h2{
-	font-weight: 600; 
+
+main .order .orderProgress ul li h2 {
+	font-weight: 600;
 	font-size: 0.88rem;
 }
-main #all, main #toShip, main #toReceive, main #delivered{
+
+main #all,
+main #toShip,
+main #toReceive,
+main #delivered {
 	transition: all 300ms ease;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 0.7rem;
 }
-main .order table{
+
+main .order table {
 	width: 100%;
 	border-collapse: collapse;
 }
-main .order table, td, th{
+
+main .order table,
+td,
+th {
 	border: 1px solid #b1bcbe;
 	padding: 0.78rem;
 }
-main .order .customerInfo .delivAdd{
+
+main .order .customerInfo .delivAdd {
 	display: flex;
 	gap: 0.48rem;
 }
-main .order .customerInfo .delivAdd ion-icon{
+
+main .order .customerInfo .delivAdd ion-icon {
 	font-size: 2rem;
 }
-main .order table td{
+
+main .order table td {
 	padding: 1rem;
 	width: 25%;
 	text-align: right;
 }
-main .order table #orderTotal{
+
+main .order table #orderTotal {
 	font-size: 1.3rem;
 	font-weight: 500;
 	color: var(--color-primary);
 }
-main .order table tr th{
+
+main .order table tr th {
 	text-align: right;
 	font-weight: 400;
 }
-main .order .customerInfo{
+
+main .order .customerInfo {
 	padding: 2rem;
 	background: var(--color-white);
 }
-main .order .customerInfo .customerDetails{
+
+main .order .customerInfo .customerDetails {
 	padding: 1.1rem;
 }
-main .order{
+
+main .order {
 	background: var(--color-white);
 	margin-top: 1.5rem;
 	transition: all 300ms ease;
 	box-shadow: var(--box-shadow);
 }
-main .order .top{
+
+main .order .top {
 	padding: var(--card-padding);
 	display: flex;
 	justify-content: space-between;
 }
-main .order .top .shop{
+
+main .order .top .shop {
 	width: 50%;
 	display: flex;
 	flex-wrap: wrap;
@@ -178,7 +220,8 @@ main .order .top .shop{
 	justify-content: flex-start;
 	gap: 1.5%;
 }
-main .order .top .status{
+
+main .order .top .status {
 	width: 50%;
 	display: flex;
 	flex-direction: row;
@@ -186,31 +229,43 @@ main .order .top .status{
 	flex-wrap: wrap;
 	gap: 1%;
 }
-main .order .top .status ion-icon, main .order .top .shop ion-icon{
+
+main .order .top .status ion-icon,
+main .order .top .shop ion-icon {
 	font-size: 1.2rem;
 }
-main .order .middle{
+
+main .order .middle {
 	margin-top: 1.4rem;
 	margin-bottom: 1.8rem;
 }
-main .order .middle .item-content{
+
+main .order .middle .item-content {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
 	flex-wrap: wrap;
 }
-main .order .middle .item-content .item{
+
+main .order .middle .item-content:nth-child(even) {
+	margin-top: 10px;
+}
+
+main .order .middle .item-content .item {
 	display: flex;
 	gap: 3%;
 }
-main .order .middle .item-content img{
+
+main .order .middle .item-content img {
 	border: 1px solid var(--color-info-dark);
 	width: 100px;
 }
-main .order .middle .item-content .item-price{
+
+main .order .middle .item-content .item-price {
 	color: #6875e3;
 }
-main .order .btn-group{
+
+main .order .btn-group {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -218,7 +273,8 @@ main .order .btn-group{
 	gap: 2%;
 	padding: var(--card-padding);
 }
-main .order .btn-group a{
+
+main .order .btn-group a {
 	cursor: pointer;
 	padding: 1rem;
 	background: transparent;
@@ -227,8 +283,10 @@ main .order .btn-group a{
 	border-radius: var(--border-radius-1);
 	width: 20%;
 	text-align: center;
+	text-decoration: none;
 }
-main .order .btn-group a.active{
+
+main .order .btn-group a.active {
 	border: 0;
 	background: var(--color-primary);
 	color: #fff;
@@ -236,82 +294,98 @@ main .order .btn-group a.active{
 
 /*MEDIA QUERIES*/
 /*BIG TABLETS AND SMALL LAPTOPS*/
-@media screen and (max-width: 1200px){ 
-	.customer-container{
+@media screen and (max-width: 1200px) {
+	.customer-container {
 		width: 94%;
 		grid-template-columns: 7rem auto 23rem;
 	}
-	aside .logo img{
+
+	aside .logo img {
 		margin-left: 1.3rem;
 		width: 3rem;
 		height: 3rem;
 	}
-	aside .logo h2{
+
+	aside .logo h2 {
 		display: none;
 	}
-	aside .sidebar h3{
+
+	aside .sidebar h3 {
 		display: none;
 	}
-	aside .sidebar a{
+
+	aside .sidebar a {
 		width: 5.6rem;
 	}
-	aside .sidebar a:last-child{
+
+	aside .sidebar a:last-child {
 		position: relative;
 		top: 0.4rem;
 	}
-	main .order .btn-group a{
+
+	main .order .btn-group a {
 		padding: 0.80rem 0.5rem;
 		font-size: 0.78rem;
-		width: 19%;
+		width: 20%;
 	}
-	main .order .middle .item-content img{
+
+	main .order .middle .item-content img {
 		width: 70px;
 		height: 70px;
 	}
+
 	main .order .middle .item-content .item .item-name h2,
 	main .order .middle .item-content .item-qty h2,
-	main .order .middle .item-content .item-price h2{
+	main .order .middle .item-content .item-price h2 {
 		font-size: 1.1rem;
 	}
-	
-	main .order .orderProgress ul{
+
+	main .order .orderProgress ul {
 		flex-direction: column;
 		padding: 0 6rem;
 	}
-	main .order .orderProgress ul li{
+
+	main .order .orderProgress ul li {
 		flex-direction: row;
 	}
-	main .order .orderProgress ul li .order-progress{
+
+	main .order .orderProgress ul li .order-progress {
 		margin: 0 20px;
 	}
-	.order-progress::after{
+
+	.order-progress::after {
 		width: 5px;
 		height: 50px;
 		bottom: 30px;
 		left: 50%;
 		transform: translateX(-50%);
 	}
-	.one::after{
+
+	.one::after {
 		height: 0;
 	}
-	main .order .orderProgress ul li small{
+
+	main .order .orderProgress ul li small {
 		margin-left: 10px;
 	}
-	main .order .orderProgress ul li .icon{
+
+	main .order .orderProgress ul li .icon {
 		margin: 24px 0;
 	}
-	main .order .orderProgress ul li h2{
+
+	main .order .orderProgress ul li h2 {
 		font-size: 0.78rem;
 	}
 }
 
 /*SMALLER TABLETS AND MOBILE*/
-@media screen and (max-width: 768px){
-	.customer-container{
+@media screen and (max-width: 768px) {
+	.customer-container {
 		width: 100%;
 		grid-template-columns: 1fr;
 	}
-	aside{
+
+	aside {
 		position: fixed;
 		left: -100%;
 		background: var(--color-white);
@@ -324,95 +398,120 @@ main .order .btn-group a.active{
 		animation: showMenu 400ms ease forwards;
 	}
 
-	@keyframes showMenu{
-		to{
+	@keyframes showMenu {
+		to {
 			left: 0;
 		}
 	}
 
-	aside .logo img{
+	aside .logo img {
 		margin-left: 1;
 		width: 2rem;
 		height: 2rem;
 	}
-	aside .logo h2{
+
+	aside .logo h2 {
 		display: inline;
 	}
-	aside .sidebar h3{
+
+	aside .sidebar h3 {
 		display: inline;
 	}
-	aside .sidebar a{
+
+	aside .sidebar a {
 		width: 18rem;
 		height: 3.4rem;
 	}
-	aside .sidebar a:last-child{
+
+	aside .sidebar a:last-child {
 		position: absolute;
 		top: 18rem;
 	}
-	aside .close{
+
+	aside .close {
 		display: inline-block;
 		cursor: pointer;
 	}
-	main{
+
+	main {
 		margin-top: 7rem;
 		padding: 2rem 1rem;
 	}
-	main .orders{
+
+	main .orders {
 		width: 92vw;
 	}
-	main .nav-orders{
+
+	main .nav-orders {
 		position: relative;
 		z-index: 0;
 	}
-	main .nav-orders li{
+
+	main .nav-orders li {
 		padding: 0.7rem;
 	}
-	main .nav-orders a{
+
+	main .nav-orders a {
 		font-size: 0.734rem;
 	}
+
 	main .orders .order .top .status,
-	main .orders .order .top .shop{
+	main .orders .order .top .shop {
 		font-size: 0.73rem;
 	}
-	main .orders .order .top ion-icon{
+
+	main .orders .order .top ion-icon {
 		font-size: 1rem;
 	}
+
+	main .order .orderProgress ul {
+		padding: 0 3rem;
+	}
+
 	main .order .middle .item-content .item .item-name h2,
 	main .order .middle .item-content .item-qty h2,
-	main .order .middle .item-content .item-price h2{
+	main .order .middle .item-content .item-price h2 {
 		font-size: 0.85rem;
 	}
-	main .order .middle .item-content .item .item-name p{
+
+	main .order .middle .item-content .item .item-name p {
 		font-size: 0.76rem;
 	}
-	main .order .middle .item-content img{
+
+	main .order .middle .item-content img {
 		width: 50px;
 		height: 50px;
 	}
 
-	main .order .btn-group a{
+	main .order .btn-group a {
 		padding: 0.6rem 0.3rem;
 		font-size: 0.68rem;
 		width: 23%;
 	}
-	main .order table th{
+
+	main .order table th {
 		font-size: 0.68rem;
 		padding: 0.45rem;
 	}
-	main .order table td{
+
+	main .order table td {
 		padding: 0.67rem;
 	}
-	main .order table #orderTotal{
+
+	main .order table #orderTotal {
 		font-size: 1rem;
 	}
-	main .order table #modeOfPayment{
+
+	main .order table #modeOfPayment {
 		font-size: 0.65rem;
 	}
-	.right{
+
+	.right {
 		width: 94%;
 		margin: 0 auto 4rem;
 	}
-	.right .top{
+
+	.right .top {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -426,15 +525,17 @@ main .order .btn-group a.active{
 		box-shadow: 0 1rem 1rem var(--color-light);
 	}
 
-	.right .top .theme-toggler{
+	.right .top .theme-toggler {
 		width: 4.4rem;
 		position: absolute;
 		left: 65%;
 	}
-	.right .profile .info{
+
+	.right .profile .info {
 		display: none;
 	}
-	.right .top button{
+
+	.right .top button {
 		display: inline-block;
 		background: transparent;
 		cursor: pointer;

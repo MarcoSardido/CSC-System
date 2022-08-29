@@ -61,6 +61,7 @@ const calcItems = async (uid, sid, arrayOfItems) => {
                 id: liveCartSubColDoc.id,
                 productID: liveCartSubColDoc.data().prodID,
                 name: liveCartSubColDoc.data().itemName,
+                color: liveCartSubColDoc.data().itemColor,
                 description: liveCartSubColDoc.data().itemDesc,
                 quantity: liveCartSubColDoc.data().itemQty,
                 priceInCents: Number(priceInCents),
@@ -121,19 +122,6 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
             })
         })
 
-        // :: Customer Collection -> Orders
-        const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${orderUniqueID}`);
-        await setDoc(customerOrderRef, {
-            id: orderUniqueID,
-            transactionID: transUniqueID,
-            items: items,
-            modeOfPayment: data.modeOfPayment,
-            placedOn: stringDateFormat(),
-            totalAmount: totalPrice,
-            orderAddress: data.orderAddress,
-            status: 'Processing',
-        })
-
         // :: Live Selling => Get sellerUID
         const liveSessionRef = doc(db, `LiveSession/sessionID_${roomID}`);
         const liveSessionDoc = await getDoc(liveSessionRef);
@@ -142,6 +130,10 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
         // :: Customer Collection
         const customerRef = doc(db, `Customers/${uid}`);
         const customerDoc = await getDoc(customerRef);
+        
+        // :: Seller Collection -> Live Sessions
+        const sellerRef = doc(db, `Sellers/${roomHost}/LiveSessions/sessionID_${roomID}`);
+        const sellerDoc = await getDoc(sellerRef);
 
         // :: Seller Collection -> Transaction
         const sellerTransactionRef = doc(db, `Sellers/${roomHost}/Transactions/transactionID_${transUniqueID}`);
@@ -158,6 +150,23 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
             payment: data.modeOfPayment,
             status: 'Pending',
             totalPrice: totalPrice
+        })
+
+        // :: Customer Collection -> Orders
+        const customerOrderRef = doc(db, `Customers/${uid}/Orders/orderID_${orderUniqueID}`);
+        await setDoc(customerOrderRef, {
+            id: orderUniqueID,
+            transactionID: transUniqueID,
+            seller: {
+                uid: roomHost,
+                storeName: sellerDoc.data().roomName
+            },
+            items: items,
+            modeOfPayment: data.modeOfPayment,
+            placedOn: stringDateFormat(),
+            totalAmount: totalPrice,
+            orderAddress: data.orderAddress,
+            status: 'Processing',
         })
 
     } catch (error) {

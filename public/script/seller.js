@@ -38,12 +38,6 @@ $(document).ready(() => {
             } else {
                 list[i].closest('li').className = 'active';
             }
-            
-            
-
-            
-
-            
         }
     }
 
