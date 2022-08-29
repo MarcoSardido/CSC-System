@@ -29,26 +29,34 @@ import {
 //! ---------------------------------------------------------------- 
 //                       Auth
 //! ----------------------------------------------------------------
+
+// Register
 router.get('/auth', signInAndSignUpRoute);
-router.get('/auth/sessionLogin', sessionLoginCustomer);
 router.post('/auth', signUp);
+
+// Login
+router.get('/auth/sessionLogin', sessionLoginCustomer);
+
+// Logout
 router.get('/auth/logout', customerLogout);
 
 //! ---------------------------------------------------------------- 
 //                       Pages
 //! ----------------------------------------------------------------
+
+// Dashboard Page
 router.get('/', verifyCookieCustomer, customerDash);
 
 
-
+// Order Page
 router.get('/orders', verifyCookieCustomer, orderPage);
 router.get('/orders/orderstatus/:id?', verifyCookieCustomer, orderStatusPage)
 
-
+// Review Page
 router.get('/reviews', verifyCookieCustomer, reviewPage);
 
 
-
+// Settings Page
 router.get('/settings', verifyCookieCustomer, settingsPage);
 router.post('/', profileUpdate);
 
@@ -56,13 +64,15 @@ router.post('/', profileUpdate);
 //! ---------------------------------------------------------------- 
 //                       Live Selling
 //! ----------------------------------------------------------------
+
+// Live Selling Page
 router.get('/live/room/:roomId', verifyCookieCustomer, liveSession);
+
+// Stripe Handle Payment
 router.post('/live/room/:roomId', verifyCookieCustomer, livePayment);
+
+// Stripe Payment Success PAge 
 router.get('/live/room/:roomId/success', verifyCookieCustomer, livePaymentSuccess);
-
-
-
-
 
 
 

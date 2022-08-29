@@ -163,7 +163,7 @@ $(document).ready(() => {
         paymentObj.email = billerEmail;
         paymentObj.address = `${selectedAddress} ${selectedPostal}`;
 
-        calcItems(trimmedUID, liveRoomID, paymentObj.itemsArray)
+        calcItems(trimmedUID, liveRoomID, paymentObj.itemsArray, paymentObj.paymentMethod)
             .then(result => {
                 const cartItems = result;
 

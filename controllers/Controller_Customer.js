@@ -124,6 +124,8 @@ const orderStatusPage = async (req, res) => {
         let orderItem = {
             id: orderDocument.data().id,
             placedOn: convertStringDateToNumDate(orderDocument.data().placedOn),
+            shippedOn: orderDocument.data().shippedOn !== '' ? convertStringDateToNumDate(orderDocument.data().shippedOn) : '',
+            deliveredOn :orderDocument.data().deliveredOn !== '' ? convertStringDateToNumDate(orderDocument.data().deliveredOn) : '',
             status: orderDocument.data().status,
             customer: {
                 name: customerDocument.data().displayName,

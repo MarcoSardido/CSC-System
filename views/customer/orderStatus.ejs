@@ -11,11 +11,12 @@
                     <ion-icon name="chevron-back-outline"></ion-icon> Back
                 </a>
             </div>
-
+            
             <div class="orderInfo">
                 <div>ORDER ID: </div>
                 <div id="orderID" style="font-weight: 600"><%= displayOrderInfo.id %></div> |
-                <b style="color: #ff7782"><%= displayOrderInfo.status %></b>
+                <b <%= displayOrderInfo.status === 'Processing' ? 'style=color:orange' : displayOrderInfo.status === 'Shipped' ? 'style=color:#ff7782' : 'style=color:mediumseagreen' %>
+                 ><%= displayOrderInfo.status %></b>
             </div>
 
         </div><!-- END OF NAVIGATION and ORDER INFO -->
@@ -30,7 +31,10 @@
                         <!-- ORDER PLACED -->
                         <li>
                             <ion-icon name="receipt-outline" class="icon"></ion-icon>
-                            <div class="active order-progress one">
+                            <div class="<%= displayOrderInfo.status === 'Processing' ? 'active' : 
+                                            displayOrderInfo.status === 'Shipped' ? 'active' : 
+                                            displayOrderInfo.status === 'Delivered' ? 'active' : ''%>
+                                 order-progress one">
                                 <p>1</p>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
@@ -38,34 +42,29 @@
                             <small id="orderDate" class="text-muted" style="display: block;"><%= displayOrderInfo.placedOn %></small>
                         </li>
 
-                        <!-- PAYMENT INFO CONFIRMED -->
-                        <li>
-                            <ion-icon name="cash-outline" class="icon"></ion-icon>
-                            <div class="order-progress two">
-                                <p>2</p>
-                                <ion-icon name="checkmark-outline"></ion-icon>
-                            </div>
-                            <h2>Confirmed</h2>
-                        </li>
-
                         <!-- ORDER SHIPPED OUT-->
                         <li>
                             <ion-icon name="rocket-outline" class="icon"></ion-icon>
-                            <div class="order-progress three">
-                                <p>3</p>
+                            <div class="<%= displayOrderInfo.status === 'Shipped' ? 'active' : 
+                                            displayOrderInfo.status === 'Delivered' ? 'active' : ''%> 
+                                order-progress two">
+                                <p>2</p>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
-                            <h2>Shipping</h2>
+                            <h2>Shipped</h2>
+                            <small id="orderDate" class="text-muted" style="display: block;"><%= displayOrderInfo.shippedOn !== '' ? displayOrderInfo.shippedOn : ''  %></small>
                         </li>
 
                         <!-- DELIVERED-->
                         <li>
                             <ion-icon name="archive-outline" class="icon"></ion-icon>
-                            <div class="order-progress four">
-                                <p>4</p>
+                            <div class=" <%= displayOrderInfo.status === 'Delivered' ? 'active' : ''%> 
+                                order-progress three">
+                                <p>3</p>
                                 <ion-icon name="checkmark-outline"></ion-icon>
                             </div>
                             <h2>Delivered</h2>
+                            <small id="orderDate" class="text-muted" style="display: block;"><%= displayOrderInfo.deliveredOn !== '' ? displayOrderInfo.deliveredOn : ''  %></small>
                         </li>
 
                     </ul>

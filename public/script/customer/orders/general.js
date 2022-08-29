@@ -36,7 +36,10 @@ $(document).ready(() => {
                         <div class="status">
                             <ion-icon name="rocket-outline" class="text-muted"></ion-icon>
                             <div class="text-muted">${checkStatusLabel}</div> |
-                            <b style="color: #ff7782">${orderIndex.status}</b>
+                            <b style="color:${orderIndex.status === 'Processing' ? 'orange' :
+                                              orderIndex.status === 'Shipped' ? '#ff7782' : 'mediumseagreen'}">
+                                ${orderIndex.status}
+                            </b>
                         </div>
                     </div>
                     <hr size="3" style="width: 86%; margin: auto; background-color: #7d8da1;">
@@ -45,7 +48,14 @@ $(document).ready(() => {
                     </div>
                     <hr size="3" style="background-color: #7d8da1;">
                     <div class="btn-group">
-                        <a href="orders/orderstatus?id=${orderIndex.id}" class="active">Check Status</a>
+                        ${orderIndex.status === 'Delivered' ? 
+                            (`  <a href="/customercenter/reviews" class="active">Rate</a>
+                                <a href="orders/orderstatus?id=${orderIndex.id}" data-order-id="${orderIndex.id}">Check Status</a>
+                            `) : 
+                            (`
+                                <a href="orders/orderstatus?id=${orderIndex.id}" class="active">Check Status</a>
+                            `)
+                        }
                     </div>
                 </div>
             `;
@@ -62,7 +72,7 @@ $(document).ready(() => {
                             <div class="status">
                                 <ion-icon name="rocket-outline" class="text-muted"></ion-icon>
                                 <div class="text-muted">${checkStatusLabel}</div> |
-                                <b style="color: #ff7782">${orderIndex.status}</b>
+                                <b style="color: orange">${orderIndex.status}</b>
                             </div>
                         </div>
                         <hr size="3" style="width: 86%; margin: auto; background-color: #7d8da1;">
@@ -71,7 +81,7 @@ $(document).ready(() => {
                         </div>
                         <hr size="3" style="background-color: #7d8da1;">
                         <div class="btn-group">
-                            <a href="orderStatus.html" class="active" data-order-id="${orderIndex.id}">Check Status</a>
+                            <a href="orders/orderstatus?id=${orderIndex.id}" class="active" data-order-id="${orderIndex.id}">Check Status</a>
                         </div>
                     </div>
                 `;
@@ -98,7 +108,7 @@ $(document).ready(() => {
                         </div>
                         <hr size="3" style="background-color: #7d8da1;">
                         <div class="btn-group">
-                            <a href="orderStatus.html" class="active" data-order-id="${orderIndex.id}">Check Status</a>
+                            <a href="orders/orderstatus?id=${orderIndex.id}" class="active" data-order-id="${orderIndex.id}">Check Status</a>
                         </div>
                     </div>
                 `;
@@ -116,7 +126,7 @@ $(document).ready(() => {
                             <div class="status">
                                 <ion-icon name="rocket-outline" class="text-muted"></ion-icon>
                                 <div class="text-muted">${checkStatusLabel}</div> |
-                                <b style="color: #ff7782">${orderIndex.status}</b>
+                                <b style="color: mediumseagreen">${orderIndex.status}</b>
                             </div>
                         </div>
                         <hr size="3" style="width: 86%; margin: auto; background-color: #7d8da1;">
@@ -125,7 +135,8 @@ $(document).ready(() => {
                         </div>
                         <hr size="3" style="background-color: #7d8da1;">
                         <div class="btn-group">
-                            <a href="orderStatus.html" class="active" data-order-id="${orderIndex.id}">Check Status</a>
+                            <a href="/customercenter/reviews" class="active">Rate</a>
+                            <a href="orders/orderstatus?id=${orderIndex.id}" data-order-id="${orderIndex.id}">Check Status</a>
                         </div>
                     </div>
                 `;

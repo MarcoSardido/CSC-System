@@ -46,7 +46,7 @@ const addNewAddress = async (uid, addressObj) => {
     }
 }
 
-const calcItems = async (uid, sid, arrayOfItems) => {
+const calcItems = async (uid, sid, arrayOfItems, payment) => {
     const items = [];
 
     try {
@@ -59,6 +59,7 @@ const calcItems = async (uid, sid, arrayOfItems) => {
 
             items.push({
                 id: liveCartSubColDoc.id,
+                image: payment === 'STRIPE' ? '' : liveCartSubColDoc.data().itemImg,
                 productID: liveCartSubColDoc.data().prodID,
                 name: liveCartSubColDoc.data().itemName,
                 color: liveCartSubColDoc.data().itemColor,
