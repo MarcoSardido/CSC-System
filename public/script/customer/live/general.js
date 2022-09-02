@@ -60,16 +60,16 @@ $(document).ready(() => {
     })
 
     // Live Video
-    // const videoContainer = document.getElementById('video-container');
-    // connection.onstream = (event) => {
-    //     let video = event.mediaElement;
-    //     videoContainer.appendChild(video);
-    // }
+    const videoContainer = document.getElementById('video-container');
+    connection.onstream = (event) => {
+        let video = event.mediaElement;
+        videoContainer.appendChild(video);
+    }
 
-    // connection.checkPresence(liveRoomID, (isRoomExist, roomid) => {
-    //     if (!(isRoomExist === true)) return alert(`There is no room with ID: ${roomid} or Name: ${liveRoomID}`)
-    //     connection.join(roomid);
-    // });
+    connection.checkPresence(liveRoomID, (isRoomExist, roomid) => {
+        if (!(isRoomExist === true)) return alert(`There is no room with ID: ${roomid} or Name: ${liveRoomID}`)
+        connection.join(roomid);
+    });
 
     addUserCount(trimmedUID, liveRoomID)
 })

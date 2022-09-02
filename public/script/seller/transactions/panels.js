@@ -50,7 +50,6 @@ $(document).ready(() => {
         }
 
         for (const dataDayIndex of dataDates) {
-
             if (last7Days.includes(dataDayIndex.date)) {
                 let amount = dataDayIndex.profit;
                 amount = amount.replace(/[^\d\.]/g, "");
@@ -60,7 +59,6 @@ $(document).ready(() => {
         }
 
         return lastWeekProfit;
-
     }
 
 
@@ -98,7 +96,7 @@ $(document).ready(() => {
 
     const getLastWeek = () => {
         let result = [];
-        for (let i = 13; 6 < i; i--) {
+        for (let i = 7; 0 < i; i--) {
             let d = new Date();
             d.setDate(d.getDate() - i);
             result.push(formatDate(d))

@@ -83,6 +83,7 @@ $(document).ready(() => {
 
     const liveSessionDuration = async (roomID) => {
         let sessionTime;
+
         try {
             //* LIVE SESSION COLLECTION
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
@@ -93,6 +94,7 @@ $(document).ready(() => {
             } else {
                 sessionTime = liveSessionColDoc.data().sessionDuration;
             }
+
             return sessionTime;
         } catch (error) {
             console.error(`Firestore Error: @liveSessionDuration -> ${error.message}`)
@@ -139,6 +141,8 @@ $(document).ready(() => {
         } else {
             totalSeconds = result;
         }
+
+        console.log(totalSeconds)
 
     })
 

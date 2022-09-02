@@ -73,7 +73,7 @@ const dataForRecentTransactions = async (uuid) => {
         const subsDocument = await getDoc(subscriptionRef);
 
         const subType = subsDocument.data().sellerType === 'Individual Seller' ? 'Individual Seller' : 'Corporate Seller';
-        const priceType = subsDocument.data().sellerType === 'Individual Seller' ? 100 : 500;
+        const priceType = subsDocument.data().sellerType === 'Individual Seller' ? 500 : 1000;
 
         const subsDate = subsDocument.data().currentSubscriptionBill.split(' ');
         const formatSubDate = `${subsDate[2]} ${subsDate[1]} ${subsDate[3]}`;
@@ -92,6 +92,8 @@ const dataForRecentTransactions = async (uuid) => {
 }
 
 const formatThousands = (price) => {
+    // let format = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // return Number(format)
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 

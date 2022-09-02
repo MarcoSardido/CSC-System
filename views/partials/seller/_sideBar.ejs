@@ -37,6 +37,7 @@
                 <span class='title'>Reports</span>
             </a>
         </li>
+        <hr>
         <li class="list" id="listSettings">
             <b></b>
             <b></b>
@@ -45,28 +46,22 @@
                 <span class='title'>Settings</span>
             </a>
         </li>
-        <hr>
-        <div class="nav-utils">
-            <input type="checkbox" class="checkbox" id="checkbox">
-            <label for="checkbox" class="label">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-                <div class="ball"></div>
-            </label>
-        </div>
-
     </ul>
     <div class="profile-container">
         <div class="profile">
             <div class="profile-details">
                 <div class="picture">
                     <a href="/sellercenter/settings/?tab=account">
-                        <img src="/public/assets/images/Avatar.png" alt="MarcoSardido">
+                        <% if(sellerInfo.accountCol.userPhoto === '' ) { %>
+                            <img src="/public/assets/images/default/user-default-profile.png" alt="<%=sellerInfo.accountCol.displayName%>">
+                            <% } else { %>
+                                <img src="data:<%=sellerInfo.accountCol.imgType%>;base64,<%=sellerInfo.accountCol.userPhoto%>"alt="<%=sellerInfo.accountCol.displayName%>">
+                        <% } %>
                     </a>
                 </div>
                 <div class="details">
-                    <div class="name"><%=sellerInfo.displayName%></div>
-                    <div class="subType">Individual Seller</div>
+                    <div class="name"><%= sellerInfo.accountCol.displayName %></div>
+                    <div class="subType"><%= sellerInfo.stripeCol.sellerType %> </div>
                 </div>
             </div>
             <div class="logout">

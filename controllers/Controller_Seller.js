@@ -16,13 +16,13 @@ const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 
 const dashboardPage = async (req, res) => {
     const uid = req.body.uid;
+    const sellerData = {};
 
     try {
         adminAuth.getUser(uid).then(async (userRecord) => {
             let isVerified = userRecord.emailVerified;
 
             if (isVerified) { //Already verified
-
                 const stripeAccRef = doc(db, 'Stripe Accounts', `seller_${uid}`);
                 const stripeAccData = await getDoc(stripeAccRef);
 
@@ -36,15 +36,28 @@ const dashboardPage = async (req, res) => {
                     const stripeSubColRef = doc(db, 'Stripe Accounts', `seller_${uid}`, 'Services', 'Subscription');
                     const stripeSubColData = await getDoc(stripeSubColRef);
 
-                    const sellerRef = doc(db, 'Sellers', uid);
-                    const sellerData = await getDoc(sellerRef);
-
                     const sellerSubRef = collection(db, `Sellers/${uid}/Business Information`)
                     const sellerSubData = await getDocs(sellerSubRef);
                     let storeName;
                     sellerSubData.forEach(item => {
                         storeName = item.id
                     })
+
+                    //* ACCOUNTS COLLECTION
+                    const accountColRef = doc(db, `Accounts/seller_${uid}`);
+                    const accountColDoc = await getDoc(accountColRef);
+
+                    //* SELLER COLLECTION
+                    const sellerColRef = doc(db, `Sellers/${uid}`);
+                    const sellerColDoc = await getDoc(sellerColRef);
+
+                    //* STRIPE COLLECTION -> SUB-COLLECTION: Services
+                    const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
+                    const stripeColDoc = await getDoc(stripeColRef);
+
+                    sellerData.accountCol = accountColDoc.data();
+                    sellerData.sellerCol = sellerColDoc.data();
+                    sellerData.stripeCol = stripeColDoc.data();
 
                     if (!(stripeAccData.data().isNew)) { //Old Subscriber
 
@@ -60,7 +73,7 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: '',
                             subUpdateSuccess: '',
-                            sellerInfo: sellerData.data(),
+                            sellerInfo: sellerData,
                             store: storeName,
                             isSelling: false,
 
@@ -80,7 +93,7 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: 'subscriptionSuccess',
                             subUpdateSuccess: '',
-                            sellerInfo: sellerData.data(),
+                            sellerInfo: sellerData,
                             store: storeName,
                             isSelling: false,
 
@@ -100,7 +113,7 @@ const dashboardPage = async (req, res) => {
                             hasSubscription: true,
                             subSuccess: '',
                             subUpdateSuccess: 'subscriptionUpdateSuccess',
-                            sellerInfo: sellerData.data(),
+                            sellerInfo: sellerData,
                             store: storeName,
                             isSelling: false,
 
@@ -151,117 +164,209 @@ const dashboardPage = async (req, res) => {
 
 
 
-const productPage = (req, res) => {
+const productPage = async (req, res) => {
+    const uid = req.body.uid;
+    const sellerData = {};
 
-    res.render('seller/manageProduct', {
-        title: 'products',
-        url: "urlPath",
-        uid: res.locals.uid,
-        layout: 'layouts/sellerLayout',
-        verification: '',
-        user: '',
-        hasSubscription: true,
-        subSuccess: '',
-        subUpdateSuccess: '',
-        sellerInfo: '',
-        isSelling: false,
-    })
+    try {
+        //* ACCOUNTS COLLECTION
+        const accountColRef = doc(db, `Accounts/seller_${uid}`);
+        const accountColDoc = await getDoc(accountColRef);
+
+        //* SELLER COLLECTION
+        const sellerColRef = doc(db, `Sellers/${uid}`);
+        const sellerColDoc = await getDoc(sellerColRef);
+
+        //* STRIPE COLLECTION -> SUB-COLLECTION: Services
+        const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
+        const stripeColDoc = await getDoc(stripeColRef);
+
+        sellerData.accountCol = accountColDoc.data();
+        sellerData.sellerCol = sellerColDoc.data();
+        sellerData.stripeCol = stripeColDoc.data();
+
+        res.render('seller/manageProduct', {
+            title: 'products',
+            url: "urlPath",
+            uid: res.locals.uid,
+            layout: 'layouts/sellerLayout',
+            verification: '',
+            user: '',
+            hasSubscription: true,
+            subSuccess: '',
+            subUpdateSuccess: '',
+            sellerInfo: sellerData,
+            isSelling: false,
+        })
+
+    } catch (error) {
+        console.error(`Firestore Error -> @productPage: ${error.message}`);
+    }
 }
 
 
 
-const transactionPage = (req, res) => {
+const transactionPage = async (req, res) => {
+    const uid = req.body.uid;
+    const sellerData = {};
 
-    res.render('seller/manageTransaction', {
-        title: 'transactions',
-        url: "urlPath",
-        layout: 'layouts/sellerLayout',
-        verification: '',
-        user: '',
-        hasSubscription: true,
-        subSuccess: '',
-        subUpdateSuccess: '',
-        sellerInfo: '',
-        isSelling: false,
-    })
+    try {
+        //* ACCOUNTS COLLECTION
+        const accountColRef = doc(db, `Accounts/seller_${uid}`);
+        const accountColDoc = await getDoc(accountColRef);
+
+        //* SELLER COLLECTION
+        const sellerColRef = doc(db, `Sellers/${uid}`);
+        const sellerColDoc = await getDoc(sellerColRef);
+
+        //* STRIPE COLLECTION -> SUB-COLLECTION: Services
+        const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
+        const stripeColDoc = await getDoc(stripeColRef);
+
+        sellerData.accountCol = accountColDoc.data();
+        sellerData.sellerCol = sellerColDoc.data();
+        sellerData.stripeCol = stripeColDoc.data();
+
+        res.render('seller/manageTransaction', {
+            title: 'products',
+            url: "urlPath",
+            uid: res.locals.uid,
+            layout: 'layouts/sellerLayout',
+            verification: '',
+            user: '',
+            hasSubscription: true,
+            subSuccess: '',
+            subUpdateSuccess: '',
+            sellerInfo: sellerData,
+            isSelling: false,
+        })
+
+    } catch (error) {
+        console.error(`Firestore Error -> @transactionPage: ${error.message}`);
+    }
 }
 
-const reportPage = (req, res) => {
+const reportPage = async (req, res) => {
+    const uid = req.body.uid;
+    const sellerData = {};
 
-    res.render('seller/manageReport', {
-        title: 'report',
-        url: "urlPath",
-        uid: res.locals.uid,
-        layout: 'layouts/sellerLayout',
-        verification: '',
-        user: '',
-        hasSubscription: true,
-        subSuccess: '',
-        subUpdateSuccess: '',
-        sellerInfo: '',
-        isSelling: false,
-    })
+    try {
+        //* ACCOUNTS COLLECTION
+        const accountColRef = doc(db, `Accounts/seller_${uid}`);
+        const accountColDoc = await getDoc(accountColRef);
+
+        //* SELLER COLLECTION
+        const sellerColRef = doc(db, `Sellers/${uid}`);
+        const sellerColDoc = await getDoc(sellerColRef);
+
+        //* STRIPE COLLECTION -> SUB-COLLECTION: Services
+        const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
+        const stripeColDoc = await getDoc(stripeColRef);
+
+        sellerData.accountCol = accountColDoc.data();
+        sellerData.sellerCol = sellerColDoc.data();
+        sellerData.stripeCol = stripeColDoc.data();
+
+        res.render('seller/manageReport', {
+            title: 'products',
+            url: "urlPath",
+            uid: res.locals.uid,
+            layout: 'layouts/sellerLayout',
+            verification: '',
+            user: '',
+            hasSubscription: true,
+            subSuccess: '',
+            subUpdateSuccess: '',
+            sellerInfo: sellerData,
+            isSelling: false,
+        })
+
+    } catch (error) {
+        console.error(`Firestore Error -> @reportPage: ${error.message}`);
+    }
 }
 
 const settingsPage = async (req, res) => {
     const uid = req.body.uid;
+    const sellerData = {};
     const currentTab = req.query.tab === 'account' ? 'account' :
-                       req.query.tab === 'faq' ? 'faq' :
-                       'about';
+        req.query.tab === 'faq' ? 'faq' :
+            'about';
 
-    // Get user data
-    if (currentTab === 'account') {
-        const userData = {};
+    try {
+        //* ACCOUNTS COLLECTION
+        const accountColRef = doc(db, `Accounts/seller_${uid}`);
+        const accountColDoc = await getDoc(accountColRef);
 
-        // Accounts Collection
-        const accountRef = doc(db, `Accounts/seller_${uid}`);
-        const accountDoc = await getDoc(accountRef);
+        //* SELLER COLLECTION
+        const sellerColRef = doc(db, `Sellers/${uid}`);
+        const sellerColDoc = await getDoc(sellerColRef);
 
-        // Seller Collection
-        const sellerRef = doc(db, `Sellers/${uid}`);
-        const sellerDoc = await getDoc(sellerRef);
+        //* STRIPE COLLECTION -> SUB-COLLECTION: Services
+        const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
+        const stripeColDoc = await getDoc(stripeColRef);
 
-        Object.assign(userData, {
-            accountPhoto: accountDoc.data().userPhoto,
-            photoType: accountDoc.data().imgType,
-            accountName: accountDoc.data().displayName,
-            accountFname: sellerDoc.data().fullName,
-            accountEmail: accountDoc.data().email,
-            accountNumber: sellerDoc.data().contactNo,
-            accountBirthday: sellerDoc.data().birthday,
-            accountGender: sellerDoc.data().gender,
-        })
+        sellerData.accountCol = accountColDoc.data();
+        sellerData.sellerCol = sellerColDoc.data();
+        sellerData.stripeCol = stripeColDoc.data();
 
-        res.render('seller/settings', {
-            title: 'settings',
-            url: "urlPath",
-            layout: 'layouts/sellerLayout',
-            settingsTab: currentTab,
-            settingsData: userData,
-            verification: '',
-            user: '',
-            hasSubscription: true,
-            subSuccess: '',
-            subUpdateSuccess: '',
-            sellerInfo: '',
-            isSelling: false,
-        })
-    } else {
+        // Get user data
+        if (currentTab === 'account') {
+            const userData = {};
 
-        res.render('seller/settings', {
-            title: 'settings',
-            url: "urlPath",
-            layout: 'layouts/sellerLayout',
-            settingsTab: currentTab,
-            settingsData: '',
-            verification: '',
-            user: '',
-            hasSubscription: true,
-            subSuccess: '',
-            subUpdateSuccess: '',
-            sellerInfo: '',
-            isSelling: false,
-        })
+            // Accounts Collection
+            const accountRef = doc(db, `Accounts/seller_${uid}`);
+            const accountDoc = await getDoc(accountRef);
+
+            // Seller Collection
+            const sellerRef = doc(db, `Sellers/${uid}`);
+            const sellerDoc = await getDoc(sellerRef);
+
+            Object.assign(userData, {
+                accountPhoto: accountDoc.data().userPhoto,
+                photoType: accountDoc.data().imgType,
+                accountName: accountDoc.data().displayName,
+                accountFname: sellerDoc.data().fullName,
+                accountEmail: accountDoc.data().email,
+                accountNumber: sellerDoc.data().contactNo,
+                accountBirthday: sellerDoc.data().birthday,
+                accountGender: sellerDoc.data().gender,
+            })
+
+            res.render('seller/settings', {
+                title: 'settings',
+                url: "urlPath",
+                layout: 'layouts/sellerLayout',
+                settingsTab: currentTab,
+                settingsData: userData,
+                verification: '',
+                user: '',
+                hasSubscription: true,
+                subSuccess: '',
+                subUpdateSuccess: '',
+                sellerInfo: sellerData,
+                isSelling: false,
+            })
+        } else {
+
+            res.render('seller/settings', {
+                title: 'settings',
+                url: "urlPath",
+                layout: 'layouts/sellerLayout',
+                settingsTab: currentTab,
+                settingsData: '',
+                verification: '',
+                user: '',
+                hasSubscription: true,
+                subSuccess: '',
+                subUpdateSuccess: '',
+                sellerInfo: sellerData,
+                isSelling: false,
+            })
+        }
+
+    } catch (error) {
+        console.error(`Firestore Error -> @reportPage: ${error.message}`);
     }
 }
 

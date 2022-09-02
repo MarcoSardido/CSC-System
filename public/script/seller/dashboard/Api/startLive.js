@@ -10,7 +10,6 @@ const startLiveSelling = async (uid, data) => {
     const uniqueID = generateId();
 
     try {
-
         //* SELLER COLLECTION: Sub-collection: LiveSessions
         const sellerSubRef = doc(db, `Sellers/${uid}/LiveSessions/sessionID_${uniqueID}`)
         await setDoc(sellerSubRef, {
@@ -40,7 +39,8 @@ const startLiveSelling = async (uid, data) => {
             sessionStatus: 'Open',
             sessionStart: data.eventStart,
             sessionDuration: data.eventDuration === '30' ? `${data.eventDuration} Minutes` : `${data.eventDuration} Hours`,
-            sessionEnd: data.eventEnd
+            sessionEnd: data.eventEnd,
+            timeLeft: 0
         })
 
         // Room ID

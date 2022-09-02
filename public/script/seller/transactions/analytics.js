@@ -7,37 +7,85 @@ $(document).ready(() => {
     const trimmedUID = uuid.trim();
 
     dataForAnalytics(trimmedUID).then(res => {
-        const data = [];
+        const weekData = [], monthData = [];
         const week = getLast7Days();
+        const month = getMonths();
+        let addAmount = 0;
 
-        for (const iterator of res) {
-            // let amount = iterator.totalPrice;
-            // amount = amount.replace(/[^\d\.]/g, "");
-            // amount = parseFloat(amount);
+        // Week
+        for (let index1 = 0; index1 < res.length; index1++) {
+            for (let index2 = index1 + 1; index2 < res.length; index2++) {
+                if (res[index1].date == res[index2].date) {
 
-            data.push({
-                x: convertStringDateToNumDate(iterator.date),
-                y: iterator.totalPrice,
-            })
-        }
+                    // Check and format price if has ","
+                    let formatPrice1 = res[index1].totalPrice.replaceAll(',', '');
+                    let formatPrice2 = res[index2].totalPrice.replaceAll(',', '');
+                    let price1 = Number(formatPrice1)
+                    let price2 = Number(formatPrice2)
+                    addAmount = price1 + price2;
 
-       
-
-        for (let dataIndex = 0; dataIndex < data.length; dataIndex++) {
-            for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
-
-                if (data[dataIndex].x === week[weekIndex].x) {
-                    week[weekIndex] = data[dataIndex];
+                    res[index2].totalPrice = addAmount.toString();
+                    res.splice(index1, 1);
                 }
             }
         }
 
-        return { week, res };
-    }).then(({ week, res }) => {
-        if (res.length === 0) {
-            loadChart(getLast7Days())
+        for (const iterator of res) {
+            let formatPrice = iterator.totalPrice.replaceAll(',', '');
+
+            weekData.push({
+                x: convertStringDateToNumDate(iterator.date),
+                y: Number(formatPrice),
+            })
+
+
+            monthData.push({
+                x: convertStringDateToNumDate(iterator.date),
+                y: Number(formatPrice)
+            })
         }
-        loadChart(week)
+
+        for (let dataWeekIndex = 0; dataWeekIndex < weekData.length; dataWeekIndex++) {
+            for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
+
+                if (weekData[dataWeekIndex].x === week[weekIndex].x) {
+                    week[weekIndex] = weekData[dataWeekIndex];
+                }
+            }
+        }
+
+        
+
+        for (let removeDayIndex = 0; removeDayIndex < monthData.length; removeDayIndex++) {
+            const split = monthData[removeDayIndex].x.split('-');
+            split.splice(2, 1)
+            monthData[removeDayIndex].x = split.join('-')
+        }
+
+        for (let monthDataIndex1 = 0; monthDataIndex1 < monthData.length; monthDataIndex1++) {
+            for (let monthDataIndex2 = monthDataIndex1 + 1; monthDataIndex2 < monthData.length; monthDataIndex2++) {
+
+                if (monthData[monthDataIndex1].x === monthData[monthDataIndex2].x) {
+                    monthData[monthDataIndex2].y += monthData[monthDataIndex1].y;
+                    monthData[monthDataIndex1].y = 0;
+                }
+            }
+        }
+
+        for (let dataMonthIndex = 0; dataMonthIndex < monthData.length; dataMonthIndex++) {
+            for (let monthIndex = 0; monthIndex < month.length; monthIndex++) {
+
+                if (monthData[dataMonthIndex].x === month[monthIndex].x) {
+                    if (monthData[dataMonthIndex].y !== 0) {
+                        month[monthIndex - 1].y = monthData[dataMonthIndex].y;
+                    }
+                }
+            }
+        }
+
+        return { week, month };
+    }).then(({ week, month }) => {
+        checkChartOption(week, month);
     })
 
     // Get last week days
@@ -53,7 +101,7 @@ $(document).ready(() => {
 
     const getLast7Days = () => {
         let result = [];
-        for (let i = 6; 0 <= i; i--) {
+        for (let i = 7; 0 < i; i--) {
             let d = new Date();
             d.setDate(d.getDate() - i);
             result.push({
@@ -62,6 +110,27 @@ $(document).ready(() => {
             })
         }
         return result;
+    }
+
+    const getMonths = () => {
+        const d = new Date();
+        const currentYear = d.getFullYear();
+        const month = [
+            { x: `${currentYear}-01`, y: 0 },
+            { x: `${currentYear}-02`, y: 0 },
+            { x: `${currentYear}-03`, y: 0 },
+            { x: `${currentYear}-04`, y: 0 },
+            { x: `${currentYear}-05`, y: 0 },
+            { x: `${currentYear}-06`, y: 0 },
+            { x: `${currentYear}-07`, y: 0 },
+            { x: `${currentYear}-08`, y: 0 },
+            { x: `${currentYear}-09`, y: 0 },
+            { x: `${currentYear}-10`, y: 0 },
+            { x: `${currentYear}-11`, y: 0 },
+            { x: `${currentYear}-12`, y: 0 }
+        ];
+
+        return month;
     }
 
     //! To be used in user transaction page
@@ -90,80 +159,175 @@ $(document).ready(() => {
             stringDate[0] = '0' + stringDate[0];
         }
         let result = `${stringDate[2]}-${stringDate[1]}-${stringDate[0]}`;
+
         return result;
     }
 
+    // Chart
+    const transactionChart = document.getElementById("transaction-chart").getContext('2d');
+    const transChart = new Chart(transactionChart, {
+        type: 'line',
+        data: {},
+        options: {}
+    });
 
-    //  Chart
-    const loadChart = (data) => {
-        const transactionChart = document.getElementById("transaction-chart").getContext('2d');
-        new Chart(transactionChart, {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: 'Transaction Chart',
-                    data: data,
-                    fill: true,
-                    borderWidth: 3,
-                    borderColor: 'rgb(72, 95, 237)',
-                    backgroundColor: 'rgb(72, 95, 237, 0.5)',
+    // Chart option
+    const chartOption = document.getElementById('selectChartOption');
+    const chartLabel = document.getElementById('lblChartOption');
+    const checkChartOption = (week, month) => {
 
-                    pointBackgroundColor: 'rgb(72, 95, 237)',
-                    pointBorderColor: 'rgb(255, 255, 255)',
-                    pointBorderWidth: 1,
-                    pointHitRadius: 3,
+        // Options
+        // Weekly Sales
+        const weeklyData = {
+            datasets: [{
+                label: 'Transaction Chart',
+                data: week,
+                fill: true,
+                borderWidth: 3,
+                borderColor: 'rgb(72, 95, 237)',
+                backgroundColor: 'rgb(72, 95, 237, 0.5)',
 
-                    tension: 0.3,
-                }]
+                pointBackgroundColor: 'rgb(72, 95, 237)',
+                pointBorderColor: 'rgb(255, 255, 255)',
+                pointBorderWidth: 1,
+                pointHitRadius: 3,
+
+                tension: 0.3,
+            }]
+        }
+        const weeklyOptions = {
+            layout: {
+                padding: 20,
             },
-            options: {
-                layout: {
-                    padding: 20,
+            plugins: {
+                title: {
+                    display: false
                 },
-                plugins: {
-                    title: {
-                        display: false
-                    },
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgb(72, 95, 237, 0.8)',
-                        displayColors: false,
-
-                        bodyFont: {
-                            size: 15,
-                        },
-                        callbacks: {
-                            label: function (item) {
-                                let value = item.raw.y;
-
-                                value = value.toLocaleString();
-                                let label = `You've Earned ₱${value}`
-
-                                return label;
-                            }
-                        }
-                    }
+                legend: {
+                    display: false
                 },
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'day'
-                        },
-                        grid: {
-                            display: false
-                        }
+                tooltip: {
+                    backgroundColor: 'rgb(72, 95, 237, 0.8)',
+                    displayColors: false,
+
+                    bodyFont: {
+                        size: 15,
                     },
-                    y: {
-                        grid: {
-                            display: false
+                    callbacks: {
+                        label: function (item) {
+                            let value = item.raw.y;
+
+                            value = value.toLocaleString();
+                            let label = `You've Earned ₱${value}`
+
+                            return label;
                         }
                     }
                 }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
             }
-        });
+        }
+
+        // Monthly Sales
+        const monthlyData = {
+            datasets: [{
+                label: 'Transaction Chart',
+                data: month,
+                fill: true,
+                borderWidth: 3,
+                borderColor: 'rgb(72, 95, 237)',
+                backgroundColor: 'rgb(72, 95, 237, 0.5)',
+
+                pointBackgroundColor: 'rgb(72, 95, 237)',
+                pointBorderColor: 'rgb(255, 255, 255)',
+                pointBorderWidth: 1,
+                pointHitRadius: 3,
+
+                tension: 0.3,
+            }]
+        }
+        const monthlyOptions = {
+            layout: {
+                padding: 20,
+            },
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgb(72, 95, 237, 0.8)',
+                    displayColors: false,
+
+                    bodyFont: {
+                        size: 15,
+                    },
+                    callbacks: {
+                        label: function (item) {
+                            let value = item.raw.y;
+
+                            value = value.toLocaleString();
+                            let label = `You've Earned ₱${value}`
+
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'month'
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+
+        // Default Load
+        transChart.data = weeklyData;
+        transChart.options = weeklyOptions;
+        transChart.update();
+
+
+        chartOption.addEventListener('change', () => {
+            if (chartOption.value === 'weekly') {
+                chartLabel.innerText = 'Weekly Sales';
+                transChart.data = weeklyData;
+                transChart.options = weeklyOptions;
+                transChart.update();
+            } else if (chartOption.value === 'monthly') {
+                chartLabel.innerText = 'Monthly Sales';
+                transChart.data = monthlyData;
+                transChart.options = monthlyOptions;
+                transChart.update();
+            }
+        })
     }
 
 })

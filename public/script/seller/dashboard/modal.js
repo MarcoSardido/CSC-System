@@ -9,6 +9,7 @@ $(document).ready(() => {
 
     const startTime = document.getElementById('inputStartTime');
     const checkTimeSelection = [];
+    
     startTime.addEventListener('change', () => {
         const date = new Date();
         const hours = date.getHours();
@@ -29,6 +30,8 @@ $(document).ready(() => {
                         startTime.value = `${hours}:00`;
                         break;
                     }
+                } else {
+                    startTime.value = selectedTime;
                 }
             }
         } else {

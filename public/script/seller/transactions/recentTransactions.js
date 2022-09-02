@@ -47,7 +47,7 @@ $(document).ready(() => {
                     <p>${subsItem.subscriptionDate}</p>
                 </div>
                 <div class="item-amount">
-                    - ₱${subsItem.subscriptionPrice}
+                    - ₱${subsItem.subscriptionPrice.toLocaleString()}
                 </div>
             </div>
         `;

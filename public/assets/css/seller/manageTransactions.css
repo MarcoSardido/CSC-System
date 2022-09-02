@@ -54,7 +54,9 @@
     margin-top: -10px;
 }
 
-.profit i, .revenue i, .income-cont i {
+.profit i,
+.revenue i,
+.income-cont i {
     color: #485fed;
     font-size: 1.8em;
     padding: 10px 20px 0;
@@ -106,16 +108,42 @@ p:nth-child(2) {
 .panel {
     width: 100%;
     height: 430px;
-    font-size: 1.em;
     font-weight: 600;
 }
+
+.chart-options {
+    display: flex;
+    align-items: center;
+}
+
+.chart-option-label {
+    margin: 0;
+}
+
+.chart-options select {
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+    margin-left: 500px;
+}
+
+.chart-options select:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 5px 10px;
+    border: 1px solid #485fed;
+}
+
+
 
 .transaction-chart {
     width: 110vh;
     height: auto;
 }
 
-table.tbl-history  {
+table.tbl-history {
     width: 100% !important;
 }
 
@@ -365,6 +393,19 @@ table.tbl-history  {
 
 
 /*** Transaction Modal ***/
+
+.invoice-header {
+    align-items: center;
+}
+
+.invoice-header button {
+    font-size: 15px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #777;
+}
 
 .modal-static-text {
     color: #5c5c5c;

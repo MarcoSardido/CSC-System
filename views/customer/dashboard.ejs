@@ -1,69 +1,22 @@
 <link rel="stylesheet" href="/public/assets/css/customer/dashboard.css">
 <script defer src="/public/script/customer/dashboard/general.js" type="module"></script>
+<script defer src="/public/script/customer/dashboard/modal.js" type="module"></script>
 
 <main>
     <h1>Live Streams</h1>
-    <div class="lives">
-
-        <div class="live">
-            <ion-icon name="logo-apple"></ion-icon>
-
-            <div class="middle">
-                <div class="left" style="color: #fff;">
-                    <br><br>
-                    <span class="live-tag">LIVE NOW</span><h1>Apple</h1>
-                </div>
-            </div>
-            <small class="text-muted" style="color: #fff">Introducing the all new apple products.</small>
-        </div>
-        
-        <div class="live live-two">
-            <ion-icon name="bag-check"></ion-icon>
-
-            <div class="middle">
-                <div class="left" style="color: #fff;">
-                    <br><br>
-                    <span class="live-tag">LIVE NOW</span><h1>Sample Store</h1>
-                </div>
-            </div>
-            <small class="text-muted" style="color: #fff">Lorem ipsum dolor sit amet consectetur.</small>
-        </div>
-        
-        <div class="live live-three">
-            <ion-icon name="bag-check"></ion-icon>
-
-            <div class="middle">
-                <div class="left" style="color: #fff;">
-                    <br><br>
-                    <span class="live-tag">LIVE NOW</span><h1>Testing Store</h1>
-                </div>
-            </div>
-            <small class="text-muted" style="color: #fff">Lorem ipsum dolor sit amet consectetur.</small>
-        </div>
-        
-        <div class="live live-four">
-            <ion-icon name="bag-check"></ion-icon>
-
-            <div class="middle">
-                <div class="left" style="color: #fff;">
-                    <br><br>
-                    <span class="live-tag">LIVE NOW</span><h1>Coco's Surplus Shop</h1>
-                </div>
-            </div>
-            <small class="text-muted" style="color: #fff">Shop, interact and have fun with my virtual room.</small>
-        </div>
-        
-        <div class="live live-five">
-            <ion-icon name="bag-check"></ion-icon>
-
-            <div class="middle">
-                <div class="left" style="color: #fff;">
-                    <br><br>
-                    <span class="live-tag">LIVE NOW</span><h1>Pet Supply and Accessories</h1>
-                </div>
-            </div>
-            <small class="text-muted" style="color: #fff">Shop, interact and have fun with my virtual room.</small>
-        </div>
+    <div class="no-live-text">
+        <h2>There are no live session available at the moment.</h2>
+        <h3>Please check again later.</h3>
     </div>
-    <br><br>
+
+    <div class="live-container"></div>
+    
+    <br><br> 
 </main>
+
+<!-- Join room modal -->
+<div class="modal fade" id="joinRoomModal" tabindex="-1" aria-labelledby="joinModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content"></div>
+    </div>
+</div>

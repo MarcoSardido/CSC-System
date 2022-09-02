@@ -84,7 +84,9 @@ aside .sidebar a.active .notif-count{
 
 /*RIGHT*/
 .right{
-	margin-top: 1.4rem;
+	height: 97vh;
+    position: sticky;
+    top: 1.4rem;
 }
 .right .top{
 	display: flex;
