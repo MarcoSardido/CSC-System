@@ -40,7 +40,6 @@ $(document).ready(() => {
 
     const tableDataOptions = (data) => {
         const dropDown = document.querySelectorAll('.dropright');
-        console.log(dropDown)
         for (const [index, value] of dropDown.entries()) {
 
             const menuContent = `

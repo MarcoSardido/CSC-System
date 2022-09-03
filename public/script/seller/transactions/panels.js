@@ -61,16 +61,6 @@ $(document).ready(() => {
         return lastWeekProfit;
     }
 
-
-
-
-
-
-
-
-
-
-
     const stringDateFormat = () => {
         let currentDate;
         const date = new Date();

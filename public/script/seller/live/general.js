@@ -122,29 +122,48 @@ $(document).ready(() => {
     //                                     Script Function
     //! ----------------------------------------------------------------------------------------
 
+    const exitLive = () => {
+        // Disconnect all viewers
+        connection.getAllParticipants().forEach(participantId => {
+            connection.disconnectWith(participantId);
+        });
+
+        // Shut down live
+        connection.attachStreams.forEach(localStream => {
+            localStream.stop();
+        });
+
+        // Close socket
+        connection.closeSocket();
+
+        // Remove room in customer dashboard
+        endLiveSession(trimmedUID, liveRoomID);
+
+        // Back to seller dashboard
+        window.location.assign(`/sellercenter`);
+    }
+
     // Live Countdown
     const timerLabel = document.getElementById('lblTimer');
-    let interval = null, totalSeconds;
+    let interval = null, totalSeconds = 60;
 
-    liveSessionDuration(liveRoomID).then(result => {
-        if (typeof result === 'string') {
-            let time = result.split(' ')[0];
-            let label = result.split(' ')[1];
+    // liveSessionDuration(liveRoomID).then(result => {
+    //     if (typeof result === 'string') {
+    //         let time = result.split(' ')[0];
+    //         let label = result.split(' ')[1];
 
-            if (label === 'Minutes') {
-                const sec = 60;
-                totalSeconds = Number(time) * sec;
-            } else {
-                const sec = 3600;
-                totalSeconds = Number(time) * sec;
-            }
-        } else {
-            totalSeconds = result;
-        }
+    //         if (label === 'Minutes') {
+    //             const sec = 60;
+    //             totalSeconds = Number(time) * sec;
+    //         } else {
+    //             const sec = 3600;
+    //             totalSeconds = Number(time) * sec;
+    //         }
+    //     } else {
+    //         totalSeconds = result;
+    //     }
 
-        console.log(totalSeconds)
-
-    })
+    // })
 
     const countdownTimer = () => {
         totalSeconds--;
@@ -162,7 +181,9 @@ $(document).ready(() => {
             clearInterval(interval)
             interval = null;
 
-            alert('Time is done')
+            alert('Your Live Selling Session Is Done.')
+            exitLive();
+
         }
 
         timerLabel.innerText = `${hrs}:${mins}:${secs}`;
@@ -196,37 +217,19 @@ $(document).ready(() => {
     // Close Live Session
     const btnExit = document.getElementById('btnExit');
     btnExit.addEventListener('click', () => {
-
-        // Disconnect all viewers
-        connection.getAllParticipants().forEach(participantId => {
-            connection.disconnectWith(participantId);
-        });
-
-        // Shut down live
-        connection.attachStreams.forEach(localStream => {
-            localStream.stop();
-        });
-
-        // Close socket
-        connection.closeSocket();
-
-        // Remove room in customer dashboard
-        endLiveSession(trimmedUID, liveRoomID);
-
-        // Back to seller dashboard
-        window.location.assign(`/sellercenter`);
+        exitLive();
     })
-
-    window.onbeforeunload = event => {
-        updateTimeLeft(liveRoomID, totalSeconds)
-        event.returnValue = "Write something clever here..";
-    };
 
 
     // Viewer count
     const displayTotalViewers = (count) => {
         document.getElementById('lblViewCount').innerHTML = count;
     }
+
+    window.onbeforeunload = event => {
+        updateTimeLeft(liveRoomID, totalSeconds)
+        event.returnValue = "Write something clever here..";
+    };
 
     realTimeViewerCount(liveRoomID)
     startTimer();

@@ -31,6 +31,9 @@ import {
 //? SignIn and SignUp Route
 router.get('/auth', sellerSignInAndSignUpRoute);
 
+//? Register Seller
+router.post('/', sellerSignUp);
+
 //? Creates a new session cookie when user sign in.
 router.get('/auth/sessionLogin', sessionLoginSeller);
 
@@ -42,15 +45,21 @@ router.get('/', verifyCookieSeller, dashboardPage);
 
 router.get('/subscription_success/:id', subscriptionSuccess);
 
+
 router.get('/products', verifyCookieSeller, productPage)
 
+
 router.get('/transactions', verifyCookieSeller, transactionPage)
+
+
 router.get('/reports', verifyCookieSeller, reportPage)
+
+
+
 router.get('/settings', verifyCookieSeller, settingsPage)
 
-
-
-
+//? Settings: Update User Account 
+router.post('/settings', updateProfile)
 
 //! ---------------------------------------------------------------- 
 //                       Live Selling
@@ -58,17 +67,9 @@ router.get('/settings', verifyCookieSeller, settingsPage)
 
 router.get('/live/room/:roomId', verifyCookieSeller, liveSession);
 
-
-
-
-
-//ANCHOR: All POST Request
-
-router.post('/', sellerSignUp); //creates new account
-
+//? Live Selling Checkout
 router.post('/create-checkout-session', stripeCheckoutSession);
 
-//? Settings: Update User Account 
-router.post('/settings', updateProfile)
+
 
 export { router as routes }

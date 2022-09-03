@@ -31,6 +31,7 @@ const getAllTransactionRecords = async (uuid) => {
 
 const dataForAnalytics = async (uuid) => {
     const analyticsContainer = [];
+    const panelsContainer = [];
 
     try {
         const collectionRef = collection(db, `Sellers/${uuid}/Transactions`);
@@ -38,10 +39,12 @@ const dataForAnalytics = async (uuid) => {
         const transactionCollection = await getDocs(filter);
 
         transactionCollection.forEach(record => {
-            analyticsContainer.push({
-                date: record.data().date,
-                totalPrice: formatThousands(record.data().totalPrice / 100)
-            })
+            if (record.data().status === 'Success') {
+                analyticsContainer.push({
+                    date: record.data().date,
+                    totalPrice: formatThousands(record.data().totalPrice / 100)
+                })
+            }
         });
 
         return analyticsContainer;
