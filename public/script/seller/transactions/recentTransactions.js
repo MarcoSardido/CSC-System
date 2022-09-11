@@ -30,8 +30,8 @@ $(document).ready(() => {
                         ${transItem[itemIndex].customerName}
                         <p>${transItem[itemIndex].date}</p>
                     </div>
-                    <div class="item-amount">
-                        + ₱${transItem[itemIndex].totalPrice}
+                    <div class="item-amount" ${transItem[itemIndex].status === 'Success' ? 'style="color: #20bf55"' : 'style="color: #ffcc2f"'}>
+                        ${transItem[itemIndex].status === 'Success' ? '+' : '~'} ₱${transItem[itemIndex].totalPrice}
                     </div>
                 </div>
             `;
@@ -46,7 +46,7 @@ $(document).ready(() => {
                     Subscription <span>(${subsItem.subscriptionType})</span>
                     <p>${subsItem.subscriptionDate}</p>
                 </div>
-                <div class="item-amount">
+                <div class="item-amount" style="color:#e50914">
                     - ₱${subsItem.subscriptionPrice.toLocaleString()}
                 </div>
             </div>

@@ -1,29 +1,29 @@
 import express from 'express';
 const router = express.Router();
 
-import { 
-    customerDash,
+import { dashboard } from '../controllers/Customer/Dashboard/Controller_Dashboard.js';
+import { order } from '../controllers/Customer/Order/Controller_Order.js';
+import { orderStatus } from '../controllers/Customer/Order/Controller_OrderStatus.js';
+import { review } from '../controllers/Customer/Review/Controller_Review.js';
+import { setting } from '../controllers/Customer/Setting/Controller_Setting.js';
+import { updateProfile } from '../controllers/Customer/Setting/Controller_UpdateProfile.js';
 
-    orderPage,
-    orderStatusPage,
-
-    reviewPage,
-
-    settingsPage, 
-    profileUpdate,
-
+import {
     liveSession,
     livePayment,
     livePaymentSuccess
-} from '../controllers/Controller_Customer.js';
+} from '../controllers/LiveSelling/Customer/Controller_LiveSelling.js';
 
-import { 
+import { marketPlace } from '../controllers/LiveSelling/Customer/Controller_MarketPlace.js'
+
+
+import {
     signInAndSignUpRoute,
-    sessionLoginCustomer,
-    verifyCookieCustomer,
+    logout,
     signUp,
-    customerLogout
-} from '../controllers/Controller_Auth.js';
+    sessionLogin,
+    verifyCookie
+} from '../controllers/Customer/Auth/Controller_Auth.js';
 
 
 //! ---------------------------------------------------------------- 
@@ -35,46 +35,50 @@ router.get('/auth', signInAndSignUpRoute);
 router.post('/auth', signUp);
 
 // Login
-router.get('/auth/sessionLogin', sessionLoginCustomer);
+router.get('/auth/sessionLogin', sessionLogin);
 
 // Logout
-router.get('/auth/logout', customerLogout);
+router.get('/auth/logout', logout);
 
 //! ---------------------------------------------------------------- 
 //                       Pages
 //! ----------------------------------------------------------------
 
 // Dashboard Page
-router.get('/', verifyCookieCustomer, customerDash);
+router.get('/', verifyCookie, dashboard);
 
 
 // Order Page
-router.get('/orders', verifyCookieCustomer, orderPage);
-router.get('/orders/orderstatus/:id?', verifyCookieCustomer, orderStatusPage)
+router.get('/orders', verifyCookie, order);
+router.get('/orders/orderstatus/:id?', verifyCookie, orderStatus)
 
 // Review Page
-router.get('/reviews', verifyCookieCustomer, reviewPage);
+router.get('/reviews', verifyCookie, review);
 
 
 // Settings Page
-router.get('/settings', verifyCookieCustomer, settingsPage);
-router.post('/', profileUpdate);
+router.get('/settings', verifyCookie, setting);
+router.post('/', updateProfile);
 
 
 //! ---------------------------------------------------------------- 
 //                       Live Selling
 //! ----------------------------------------------------------------
 
-// Live Selling Page
-router.get('/live/room/:roomId', verifyCookieCustomer, liveSession);
+// Main Page
+router.get('/live/room/:roomId', verifyCookie, liveSession);
 
 // Stripe Handle Payment
-router.post('/live/room/:roomId', verifyCookieCustomer, livePayment);
+router.post('/live/room/:roomId', verifyCookie, livePayment);
 
 // Stripe Payment Success PAge 
-router.get('/live/room/:roomId/success', verifyCookieCustomer, livePaymentSuccess);
+router.get('/live/room/:roomId/success', verifyCookie, livePaymentSuccess);
 
+//! ---------------------------------------------------------------- 
+//                       Market Place
+//! ----------------------------------------------------------------
 
-
+// Main Page
+router.get('/marketplace/room/:roomId', verifyCookie, marketPlace);
 
 export { router as routes }

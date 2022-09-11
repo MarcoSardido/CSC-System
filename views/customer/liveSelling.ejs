@@ -31,17 +31,15 @@
             </div>
         </div>
         <div class="live-selling">
-            <div class="video" id="video-container">
-                <!-- <video src=""></video> -->
-            </div>
+            <div class="video" id="video-container"></div>
             <div class="product"></div>
         </div>
         <div class="chat-box">
             <div class="chat">
                 <div class="conversation"></div>
                 <div class="input-form">
-                    <input type="text" id="txtInputChat" placeholder="Aa">
-                    <button id="btnInputChat">
+                    <input type="text" id="txtInputChat" placeholder="Aa" <%= isAnonymous === 'true' ? 'disabled' : '' %> >
+                    <button id="btnInputChat" <%= isAnonymous === 'true' ? 'disabled' : '' %> >
                         <ion-icon name="paper-plane-outline"></ion-icon>
                     </button>
                 </div>

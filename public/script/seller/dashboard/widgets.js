@@ -259,4 +259,5 @@ $(document).ready(() => {
         liveSummaryChart(week);
     })
 
+
 })

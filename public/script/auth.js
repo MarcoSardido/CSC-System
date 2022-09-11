@@ -53,6 +53,10 @@ $(document).ready(() => {
             }).catch(error => {
                 console.log(error.message);
             })
+        }).catch(error => {
+            alert(errorHandler(error.code))
+            $("#email").val('');
+            $("#password").val('');
         });
     });
 
@@ -69,9 +73,7 @@ $(document).ready(() => {
             });
         }).catch(error => {
             const credential = GoogleAuthProvider.credentialFromError(error);
-            const errorMessage = error.message;
-            console.log('Error @Firebase Google Auth: ',errorMessage);
-            console.log('Error @Google Auth: ',credential)
+            alert(errorHandler(credential || error.code))
         })
     })
 
@@ -88,14 +90,23 @@ $(document).ready(() => {
             });
         }).catch(error => {
             const credential = FacebookAuthProvider.credentialFromError(error);
-            const errorMessage = error.message;
-            console.log('Error @Firebase Facebook Auth: ',errorMessage);
-            console.log('Error @Facebook Auth: ',credential)
+            alert(errorHandler(credential || error.code))
         })
     })
 
+    const errorHandler = (code) => {
+        let errMessage = '';
 
+        if (code === 'auth/invalid-email') {
+            errMessage = `You've entered an invalid email address!`;
+        } else if (code === 'auth/wrong-password') {
+            errMessage = `You've entered an invalid password!`;
+        } else if (code === 'auth/user-not-found') {
+            errMessage = `There are no users matching that email!`;
+        } else {
+            errMessage = code;
+        }
 
-
-
+        return errMessage
+    }
 });

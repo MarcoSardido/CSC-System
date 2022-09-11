@@ -20,8 +20,11 @@ $(document).ready(() => {
     const checkIfRoomIsAvailable = doc(db, `LiveSession/sessionID_${liveRoomID}`)
     onSnapshot(checkIfRoomIsAvailable, doc => {
         if (doc.data().sessionStatus === 'Closed') {
-            alert('This room has been closed by the seller. Redirecting to dashboard!');
-            window.location.assign(`/customercenter`)
+            alert('This room has been closed by the seller. Redirecting to Dashboard!');
+            window.location.assign(`/customercenter`);
+        } else if (doc.data().sessionStatus === 'Market') {
+            alert('This room has been closed by the seller. Redirecting to MarketPlace!');
+            window.location.assign(`/customercenter/marketplace/room/${liveRoomID}`);
         }
     })
 

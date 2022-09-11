@@ -15,7 +15,8 @@ $(document).ready(() => {
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
-    
+    const isAnonymousBuyer = window.location.search.split('=')[1];
+
     const addChat = async (uid, data, sessionID) => {
         const currentDateAndTime = new Date();
         const uniqueID = generateId();
@@ -123,12 +124,23 @@ $(document).ready(() => {
     //                          ADDING DATA
     //! -------------------------------------------------------------
     const txtChatInput = document.getElementById('txtInputChat');
+    if (isAnonymousBuyer === 'true') {
+        txtChatInput.value = null;
+        txtChatInput.placeholder = 'Anonymous Buyer Enabled';
+        txtChatInput.classList.add('error');
+    }
+    
     txtChatInput.addEventListener('keypress', e => {
         if (e.key !== 'Enter') return;
+        if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
+
         inputFunction(txtChatInput.value);
     })
+
     const btnChatInput = document.getElementById('btnInputChat');
     btnChatInput.addEventListener('click', () => {
+        if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
+        
         inputFunction(txtChatInput.value);
     })
 

@@ -1,0 +1,129 @@
+<link rel="stylesheet" href="/public/assets/css/customer/market.css">
+<script defer src="/public/script/customer/market/general.js"></script>
+<script defer src="/public/script/customer/market/displayProducts.js" type="module"></script>
+
+<header>
+    <p id="uid" hidden>
+        <%- uid %>
+    </p>
+    <div class="left">
+        Handyman Appliances
+    </div>
+    <div class="right">
+        <div class="cart">
+            <button class="cart-button" id="btnCart">
+                <ion-icon name="cart-outline"></ion-icon>
+            </button>
+            <div class="dropdown-cart-menu" id="dropdownCart">
+                <p class="cart-title">My Cart</p>
+                <div class="cart-container">
+                    <div class="item">
+                        <div class="item-wrapper">
+                            <div class="left">
+                                <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
+                                    alt="">
+                            </div>
+                            <div class="right">
+                                <p class="item-category">Bags</p>
+                                <p class="item-name">Canvas Tote Bag</p>
+                                <div class="variety">
+                                    <div class="item-size">
+                                        <p class="label">Size:</p>
+                                        <p class="size">Large</p>
+                                    </div>
+                                    <div class="item-color">
+                                        <p class="label">Color:</p>
+                                        <div class="color" style="background: red"></div>
+                                    </div>
+                                </div>
+                                <div class="qtyAndPrice">
+                                    <div class="item-quantity">
+                                        <p class="label">Quantity:</p>
+                                        <p class="quantity">13</p>
+                                    </div>
+                                    <p class="item-price">₱<span class="price">1,350</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-footer">
+                            <button class="remove-item" id="btnRemoveItem">
+                                <ion-icon name="trash-outline"></ion-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-checkout">
+                    <div class="cart-total">
+                        <p class="label">Total Price:</p>
+                        <p class="total">₱<span class="total">13,546</span></p>
+                    </div>
+                    <button class="checkout-button" data-toggle="modal" data-target="#modalCheckout">Check out</button>
+                </div>
+            </div>
+            <p class="cart-counter">(1)</p>
+        </div>
+        <button class="exit" id="btnExitMarket">Leave</button>
+    </div>
+</header>
+<main>
+    <div class="filter-container">
+        <div class="category">
+            <p class="title">Category</p>
+            <!-- Add active in <li> if selected -->
+            <!-- <li class="active"> -->
+            <ul id="dynamicCategoryList"></ul>
+        </div>
+        <div class="Size">
+            <p class="title">Size</p>
+            <ul id="dynamicSizeList"></ul>
+        </div>
+        <div class="Type">
+            <p class="title">Type</p>
+            <ul id="dynamicTypeList"></ul>
+        </div>
+        <button class="clear-filter" id="btnClearFilter">Clear Filters</button>
+    </div>
+    <div class="product-container" id="prodContainer"></div>
+</main>
+
+<!-- Add To Cart Modal -->
+<div class="modal fade" id="modalAddToCart" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addToCartModalLabel">Add To Cart</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="modalCheckout" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

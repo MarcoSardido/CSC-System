@@ -4,7 +4,9 @@
 <script defer src="/public/script/seller/products/displayProducts.js" type="module"></script>
 
 <div class="productMainCont">
-    <p id="uid" hidden><%- uid %></p>
+    <p id="uid" hidden>
+        <%- uid %>
+    </p>
 
     <!-- SECTION: Display Products -->
     <div class="displayProductSection">
@@ -21,8 +23,8 @@
         <div class="sideNav">
             <button class="btn btn-primary btn-sideNav" id="slideToAddProduct" type="button">+</button>
         </div>
-        <div class="products-body">
 
+        <div class="products-body">
             <p class="noItems">You Have No Products 🙁</p>
 
             <div id="loading-container">
@@ -87,7 +89,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -281,6 +282,18 @@
                     </div>
                     <div class="productType_cont">
                         <p class="editFieldLabel">Product Type</p>
+                        <div class="prodCat-cont">
+                            <div class="form-group">
+                                <select class="form-control" id="productCategory">
+                                    <option selected hidden>Select Product Category</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Bags">Bags</option>
+                                    <option value="Clothes">Clothes</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Shoes">Shoes</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="prodType-cont">
                             <div class="type-cont">
                                 <div class="type">

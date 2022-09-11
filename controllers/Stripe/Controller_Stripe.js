@@ -1,10 +1,10 @@
-import * as config from '../config.js';
+import * as config from '../../config.js';
 
 import Stripe from 'stripe';
 const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 
-import { firebase, firebaseAdmin } from '../firebase.js';
-import { getFirestore, collection, doc, addDoc, setDoc, getDoc, getDocs } from 'firebase/firestore';
+import { firebase } from '../../firebase.js';
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs } from 'firebase/firestore';
 
 const db = getFirestore(firebase);
 
@@ -214,7 +214,6 @@ const getAllPaymentList = async () => {
 }
 
 const cancelPaymentIntent = async (stripeCheckoutID) => {
-
     try {
         const cancelPayment = await stripe.checkout.sessions.expire(stripeCheckoutID);
 

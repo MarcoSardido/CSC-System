@@ -77,7 +77,7 @@ $(document).ready(() => {
 
                 if (monthData[dataMonthIndex].x === month[monthIndex].x) {
                     if (monthData[dataMonthIndex].y !== 0) {
-                        month[monthIndex - 1].y = monthData[dataMonthIndex].y;
+                        month[monthIndex].y = monthData[dataMonthIndex].y;
                     }
                 }
             }

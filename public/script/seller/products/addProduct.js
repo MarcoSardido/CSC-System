@@ -140,8 +140,8 @@ $(document).ready(() => {
     const prodTypeContainer = document.querySelector('.prodType-cont');
     let prodType = prodTypeContainer.children;
     let selectedTrends = [];
-    for (const type of prodType) {
 
+    for (const type of prodType) {
         type.addEventListener('click', () => {
             let removeIndex;
 
@@ -163,6 +163,7 @@ $(document).ready(() => {
     //                            Finalization
     //! ---------------------------------------------------------------------------------
 
+    const selectProdCat = document.getElementById('productCategory');
     const btnCompleteVariants = document.querySelector('.editDone');
     btnCompleteVariants.addEventListener('click', () => {
         const computedColors = {};
@@ -170,6 +171,7 @@ $(document).ready(() => {
 
         clearTrends(prodType);
 
+        allVariants.push(selectProdCat.value)
         allVariants.push(selectedTrends)
 
         for (const variant of allVariants) {
@@ -199,7 +201,6 @@ $(document).ready(() => {
 
         const toDisplay = [];
         const sizesAndQty = [];
-
         for (const variant of allVariants) {
             if (variant.hasOwnProperty('selectedColors')) {
                 sizesAndQty.push({
@@ -607,6 +608,8 @@ $(document).ready(() => {
         const productId = `productID_${generateId()}`;
         const productTypes = variantData[variantData.length - 1];
         variantData.pop();
+        const productCategory = variantData[variantData.length - 1];
+        variantData.pop();
 
         try {
             await setDoc(doc(db, `Sellers/${trimmedID}/Products`, productId), {
@@ -615,6 +618,7 @@ $(document).ready(() => {
                 prodDesc: detailData[2],
                 prodPrice: detailData[1],
                 prodType: productTypes,
+                prodCategory: productCategory,
                 variants: variantData,
                 productImages: imgData,
             }, { merge: true })

@@ -78,9 +78,34 @@ main .lives .middle .left {
 	margin-right: 1.5rem;
 }
 
+main .live small,
 main .lives small {
+	font-size: 13px;
 	margin-top: 0.6rem;
 	display: block;
+}
+
+/* Modal */
+.modal-content .modal-body .anonymous-info {
+	display: flex;
+	align-items: center;
+}
+
+.modal-content .modal-body .anonymous-info ion-icon {
+	font-size: 3rem;
+    margin-right: 10px;
+}
+
+.modal-content .modal-body .form-input {
+	display: flex;
+	padding: 0 10px;
+}
+
+.modal-content .modal-body .form-input input[type="checkbox"] {
+	appearance: auto;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
 }
 
 /*MEDIA QUERIES*/

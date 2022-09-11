@@ -2,61 +2,60 @@ import express from 'express';
 const router = express.Router();
 
 import {
-    dashboardPage,
-    productPage,
-    transactionPage,
-    reportPage,
-    settingsPage,
-    updateProfile,
+    signInAndSignUpRoute,
+    logout,
+    signUp,
+    sessionLogin,
+    verifyCookie
+} from '../controllers/Seller/Auth/Controller_Auth.js';
 
-    liveSession,
+import { dashboard } from '../controllers/Seller/Dashboard/Controller_Dashboard.js';
+import { product } from '../controllers/Seller/Product/Controller_Product.js';
+import { report } from '../controllers/Seller/Report/Controller_Report.js';
+import { transaction } from '../controllers/Seller/Transaction/Controller_Transaction.js';
+import { settings } from '../controllers/Seller/Setting/Controller_Setting.js';
+import { updateProfile } from '../controllers/Seller/Setting/Controller_UpdateProfile.js';
 
-} from '../controllers/Controller_Seller.js';
+import { liveSession } from '../controllers/LiveSelling/Seller/Controller_LiveSelling.js';
 
-import {
-    sellerSignInAndSignUpRoute,
-    sellerSignUp,
-    sessionLoginSeller,
-    verifyCookieSeller,
-    sellerLogout
-} from '../controllers/Controller_Auth.js';
 
 import {
     subscriptionSuccess,
     stripeCheckoutSession
-} from '../controllers/Controller_Stripe.js';
+} from '../controllers/Stripe/Controller_Stripe.js';
 
-//ANCHOR: All GET Request
+
+ 
 
 //? SignIn and SignUp Route
-router.get('/auth', sellerSignInAndSignUpRoute);
+router.get('/auth', signInAndSignUpRoute);
 
 //? Register Seller
-router.post('/', sellerSignUp);
+router.post('/', signUp);
 
 //? Creates a new session cookie when user sign in.
-router.get('/auth/sessionLogin', sessionLoginSeller);
+router.get('/auth/sessionLogin', sessionLogin);
 
 //? Clears session cookie and logout.
-router.get('/auth/logout', sellerLogout);
+router.get('/auth/logout', logout);
 
 //? Check the user session cookie > direct to dashboard
-router.get('/', verifyCookieSeller, dashboardPage);
+router.get('/', verifyCookie, dashboard);
 
 router.get('/subscription_success/:id', subscriptionSuccess);
 
 
-router.get('/products', verifyCookieSeller, productPage)
+router.get('/products', verifyCookie, product)
 
 
-router.get('/transactions', verifyCookieSeller, transactionPage)
+router.get('/transactions', verifyCookie, transaction)
 
 
-router.get('/reports', verifyCookieSeller, reportPage)
+router.get('/reports', verifyCookie, report)
 
 
 
-router.get('/settings', verifyCookieSeller, settingsPage)
+router.get('/settings', verifyCookie, settings)
 
 //? Settings: Update User Account 
 router.post('/settings', updateProfile)
@@ -65,7 +64,7 @@ router.post('/settings', updateProfile)
 //                       Live Selling
 //! ----------------------------------------------------------------
 
-router.get('/live/room/:roomId', verifyCookieSeller, liveSession);
+router.get('/live/room/:roomId', verifyCookie, liveSession);
 
 //? Live Selling Checkout
 router.post('/create-checkout-session', stripeCheckoutSession);

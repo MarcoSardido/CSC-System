@@ -59,21 +59,21 @@ $(document).ready(() => {
 
 
             //* LIVE SESSION COLLECTION
-            // Check if there are viewers left
-            const liveSessionUsersColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers`);
-            const liveSessionUsersCollection = await getDocs(liveSessionUsersColRef);
-            liveSessionUsersCollection.forEach(user => {
-                removeViewers.push(user.id)
-            })
+            // // Check if there are viewers left
+            // const liveSessionUsersColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers`);
+            // const liveSessionUsersCollection = await getDocs(liveSessionUsersColRef);
+            // liveSessionUsersCollection.forEach(user => {
+            //     removeViewers.push(user.id)
+            // })
 
-            for (const userIndex of removeViewers) {
-                await deleteDoc(doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${userIndex}`));
-            }
+            // for (const userIndex of removeViewers) {
+            //     await deleteDoc(doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${userIndex}`));
+            // }
 
             // Close Live
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
             await updateDoc(liveSessionColRef, {
-                sessionStatus: 'Closed'
+                sessionStatus: 'Market'
             })
 
         } catch (error) {
@@ -111,12 +111,8 @@ $(document).ready(() => {
 
         } catch (error) {
             console.error(`Firestore Error: @updateTimeLeft -> ${error.message}`)
-
         }
     }
-
-
-
 
     //! ----------------------------------------------------------------------------------------
     //                                     Script Function
@@ -145,25 +141,25 @@ $(document).ready(() => {
 
     // Live Countdown
     const timerLabel = document.getElementById('lblTimer');
-    let interval = null, totalSeconds = 60;
+    let interval = null, totalSeconds = 0;
 
-    // liveSessionDuration(liveRoomID).then(result => {
-    //     if (typeof result === 'string') {
-    //         let time = result.split(' ')[0];
-    //         let label = result.split(' ')[1];
+    liveSessionDuration(liveRoomID).then(result => {
+        if (typeof result === 'string') {
+            let time = result.split(' ')[0];
+            let label = result.split(' ')[1];
 
-    //         if (label === 'Minutes') {
-    //             const sec = 60;
-    //             totalSeconds = Number(time) * sec;
-    //         } else {
-    //             const sec = 3600;
-    //             totalSeconds = Number(time) * sec;
-    //         }
-    //     } else {
-    //         totalSeconds = result;
-    //     }
+            if (label === 'Minutes') {
+                const sec = 60;
+                totalSeconds = Number(time) * sec;
+            } else {
+                const sec = 3600;
+                totalSeconds = Number(time) * sec;
+            }
+        } else {
+            totalSeconds = result;
+        }
 
-    // })
+    })
 
     const countdownTimer = () => {
         totalSeconds--;
@@ -181,7 +177,7 @@ $(document).ready(() => {
             clearInterval(interval)
             interval = null;
 
-            alert('Your Live Selling Session Is Done.')
+            alert('Your Live Selling Session Is Done.');
             exitLive();
 
         }

@@ -39,6 +39,7 @@ $(document).ready(() => {
     }
 
     const tableDataOptions = (data) => {
+        console.log(data)
         const dropDown = document.querySelectorAll('.dropright');
         for (const [index, value] of dropDown.entries()) {
 
@@ -214,7 +215,6 @@ $(document).ready(() => {
             },
             business: {
                 name: "City Sales Cloud",
-                address: "California, Sta. Monica",
                 email: "citysalescloud.services@gmail.com",
                 website: "https://citysalescloud.herokuapp.com/",
             },
@@ -287,18 +287,3 @@ $(document).ready(() => {
         viewRecord(res)
     })
 })
-
-
-
-// contact: {
-//     label: "Invoice issued for:",
-//     name: data.customer.displayName,
-//     address: data.customer.address
-// },
-// invoice: {
-//     label: "Invoice #: ",
-//     num: data.id,
-//     invDate: `Payment Date: ${data.date}`,
-//     invGenDte: `Payment Method: ${data.payment}`,
-//     headerBorder: false,
-//     tableBodyBorder: false,

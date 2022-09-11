@@ -758,6 +758,22 @@ SECTION: Add products style
     box-shadow: none;
 }
 
+.mainContainer .right .editDetails .productType_cont .prodCat-cont select {
+    width: 100%;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.mainContainer .right .editDetails .productType_cont .prodCat-cont select:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 5px 10px;
+    border: 1px solid #485fed;
+}
+
 .mainContainer .right .editDetails .productType_cont .prodType-cont {
     display: flex;
     flex-direction: row;

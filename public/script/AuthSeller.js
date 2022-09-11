@@ -43,6 +43,10 @@ $(document).ready(() => {
             }).catch(error => {
                 console.log(error.message);
             })
+        }).catch(error => {
+            alert(errorHandler(error.code));
+            $('#signIn-Email').val('');
+            $('#signIn-password').val('');
         });
     })
 
@@ -58,6 +62,22 @@ $(document).ready(() => {
             console.error(`Firebase Auth Error: @ResetPassword: ${error.message}`)
         })
     })
+
+    const errorHandler = (code) => {
+        let errMessage = '';
+
+        if (code === 'auth/invalid-email') {
+            errMessage = `You've entered an invalid email address!`;
+        } else if (code === 'auth/wrong-password') {
+            errMessage = `You've entered an invalid password!`;
+        } else if (code === 'auth/user-not-found') {
+            errMessage = `There are no users matching that email!`;
+        } else {
+            errMessage = code;
+        }
+
+        return errMessage
+    }
 
     //ANCHOR: END OF AUTHENTICATION CODE//
 

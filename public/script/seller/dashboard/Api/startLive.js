@@ -89,11 +89,20 @@ const generateId = () => {
 
 // Result: 01 Jul 2022
 const stringDateFormat = () => {
+    let formattedMonth;
     const date = new Date();
     const formattedDate = date.toLocaleDateString('en-GB', {
         day: 'numeric', month: 'short', year: 'numeric'
     }).replace(/ /g, ' ');
-    return formattedDate;
+
+    const checkMonth = formattedDate.split(' ')[1];
+    const spread = [...checkMonth];
+    if (spread.length > 3) {
+        spread.pop();
+        formattedMonth = spread.join('')
+    } 
+
+    return formattedMonth;
 }
 
 export {
