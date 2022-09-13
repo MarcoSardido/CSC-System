@@ -7,7 +7,7 @@ import express from 'express';
 import expressLayouts from 'express-ejs-layouts';
 import methodOverride from 'method-override';
 import cookieParser from "cookie-parser";
-// import csrf from "csurf";
+import csrf from "csurf";
 import path from 'path';
 import cors from 'cors';
 
@@ -18,7 +18,6 @@ import * as customerPage from './routes/Router_Customer.js';
 
 const app = express();
 const __dirname = path.resolve();
-// const csrfMiddleware = csrf({ cookie: true });
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -35,16 +34,17 @@ app.use(cors({
     origin: process.env.SERVER_URL,
 }))
 
-// app.use(csrfMiddleware);
+app.use(csrf({ cookie: true }));
 
-// app.all("*", (req, res, next) => {
-//     res.cookie("XSRF-TOKEN", req.csrfToken());
-//     next();
-// });
+app.use("/", (req, res, next) => {
+    res.cookie("XSRF-TOKEN", req.csrfToken());
+    next();
+});
 
 app.use('/', landingPage); //FrontPage
 app.use('/sellercenter', sellerPage.routes); //Access Seller Resource
 app.use('/customercenter', customerPage.routes); //Access Customer Resource
+
 
 app.use((pageNotFound)); //404 Page
 

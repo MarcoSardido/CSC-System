@@ -1,6 +1,9 @@
 (function() {
     "use strict";
-  
+
+    //! CSURF TEST 
+    console.log(document.cookie.split(';'));
+    
     /**
      * Easy selector helper function
      */

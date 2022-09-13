@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="/public/assets/css/customer/market.css">
 <script defer src="/public/script/customer/market/general.js"></script>
 <script defer src="/public/script/customer/market/displayProducts.js" type="module"></script>
+<script defer src="/public/script/customer/market/addToCart.js" type="module"></script>
 
 <header>
     <p id="uid" hidden>
@@ -88,20 +89,104 @@
 
 <!-- Add To Cart Modal -->
 <div class="modal fade" id="modalAddToCart" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="addToCartModalLabel">Add To Cart</h5>
+                <h5 class="modal-title" id="addToCartModalLabel">ADD TO CART</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="modal-body addToCart-modal-body" id="dynamicAddToCartModal">
+                <!-- <div class="wrapper">
+                    <div class="img-container">
+                        <div class="main-image">
+                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
+                                alt="">
+                        </div>
+                        <div class="sub-image">
+                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
+                                alt="">
+                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
+                                alt="">
+                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="info-container">
+                        <p class="product-name">Casual Shoes Fashion Sneakers</p>
+                        <p class="product-price">₱<span>13,453</span></p>
+                        <p class="product-description">Get these shoes now! Very affordable and comfortable to wear!!
+                        </p>
+                        <div class="switch-container">
+                            <div class="switch">
+                                <div class="active">Details</div>
+                                <div>Reviews</div>
+                            </div>
+                            <div class="detail-container">
+                                <div class="unit-type">
+                                    <div class="type">
+                                        <div class="icon unit">
+                                            <ion-icon name="checkmark"></ion-icon>
+                                            <p>145</p>
+                                        </div>
+                                        <p>Available Units</p>
+                                    </div>
+                                    <div class="type">
+                                        <div class="icon trend">
+                                            <ion-icon name="flash"></ion-icon>
+                                        </div>
+                                        <p>Trending</p>
+                                    </div>
+                                    <div class="type">
+                                        <div class="icon new">
+                                            <ion-icon name="heart"></ion-icon>
+                                        </div>
+                                        <p>New Arrival</p>
+                                    </div>
+                                    <div class="type">
+                                        <div class="icon sale">
+                                            <ion-icon name="analytics"></ion-icon>
+                                        </div>
+                                        <p>On Sale</p>
+                                    </div>
+                                </div>
+                                <div class="colors">
+                                    <p class="title">Colors</p>
+                                    <div class="color-container">
+                                        <div class="color" style="background-color:red"></div>
+                                        <div class="color" style="background-color:blue"></div>
+                                        <div class="color" style="background-color:yellow"></div>
+                                        <div class="color" style="background-color:green"></div>
+                                        <div class="color" style="background-color:palevioletred"></div>
+                                    </div>
+                                </div>
+                                <div class="sizes">
+                                    <p class="title">Sizes</p>
+                                    <div class="size-container">
+                                        <button class="size">XS (20)</button>
+                                        <button class="size">S (20)</button>
+                                        <button class="size">M (20)</button>
+                                        <button class="size">L (20)</button>
+                                        <button class="size">XL (20)</button>
+                                        <button class="size">XXL (20)</button>
+                                    </div>
+                                </div>
+                                <div class="input-group detail-input">
+                                    <input type="text" class="form-control" placeholder="Enter quantity">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text" id="basic-addon2">/ ~</span>
+                                    </div>
+                                  </div>
+                            </div>
+
+                            <div class="review-container" style="display: none"></div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary">Confirm</button>
             </div>
         </div>
     </div>

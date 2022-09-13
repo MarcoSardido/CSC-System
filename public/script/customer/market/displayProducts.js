@@ -1,4 +1,4 @@
-import { getAllProducts, getFilteredProducts } from './Api/products.js'
+import { getAllProducts, getProduct, getFilteredProducts } from './Api/products.js'
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -16,6 +16,11 @@ $(document).ready(() => {
     const sizeList = document.getElementById('dynamicSizeList');
     const typeList = document.getElementById('dynamicTypeList');
     const btnClearFilter = document.getElementById('btnClearFilter');
+
+    //* :: Modal
+    const modalContainer = document.getElementById('dynamicAddToCartModal');
+
+
 
     const loader = () => {
         const LOADER_TEMPLATE = `
@@ -84,7 +89,7 @@ $(document).ready(() => {
                         </div>
                     </div>
                     <div class="product-button">
-                        <button class="addToCart-button" data-toggle="modal" data-target="#modalAddToCart">Add To Cart</button>
+                        <button class="addToCart-button" data-prod-id="${productIndex.prodID}">Add To Cart</button>
                     </div>
                 </div>
             `;
@@ -497,6 +502,8 @@ $(document).ready(() => {
 
             // Display filtered products
             generateProductItem(data);
+
+            addToCartModal();
         })
     }
 
@@ -539,8 +546,241 @@ $(document).ready(() => {
 
             getAllProducts(liveRoomID).then(data => {
                 generateProductItem(data);
+
+                addToCartModal();
             })
         })
+    }
+
+    //* MODAL
+    const loopImages = () => {
+        const mainImage = document.querySelector('.main-image').firstElementChild;
+        const subImage = document.querySelector('.sub-image').children;
+
+        const mainImgSrc = mainImage.src;
+        for (const subImgIndex of subImage) {
+            subImgIndex.addEventListener('mouseenter', () => {
+                const subImgSrc = subImgIndex.src;
+                mainImage.src = subImgSrc;
+            })
+
+            subImgIndex.addEventListener('mouseleave', () => {
+                mainImage.src = mainImgSrc;
+            })
+        }
+    }
+
+    
+    const selectedVariety = (data, checkSize) => {
+        const colorContainer = document.getElementById('colorContainer');
+        const quantitySpan = document.getElementById('basic-addon2');
+
+        let changeColors = [], changeQuantity = 0;
+        let color_template = ``;
+
+        const variants = data.variants;
+        for (const variantIndex of variants) {
+            if (variantIndex.selectedSize === checkSize) {
+                changeColors = [...variantIndex.selectedColors];
+                changeQuantity = Number(variantIndex.selectedQty);
+            }
+        }
+
+        for (let colorIndex = 0; colorIndex < changeColors.length; colorIndex++) {
+            color_template += `
+                <div class="color ${colorIndex === 0 ? 'selected' : ''} "style="background-color:${changeColors[colorIndex]}"></div> 
+            `;
+        }
+
+        $('#colorContainer').empty();
+
+        colorContainer.insertAdjacentHTML('beforeend', color_template);
+        quantitySpan.textContent = `/ ${changeQuantity}`;
+
+        varietiesSelection(data)
+    }
+
+    const varietiesSelection = (productData) => {
+        const color = document.getElementById('colorContainer').children;
+        const size = document.getElementById('sizeContainer').children;
+
+        for (const colorIndex of color) {
+            colorIndex.addEventListener('click', () => {
+                if (!colorIndex.classList.contains('selected')) {
+
+                    for (const removeClass of color) {
+                        removeClass.classList.remove('selected');
+                    }
+                    colorIndex.classList.add('selected');
+                }
+            })
+        }
+
+        for (const sizeIndex of size) {
+            sizeIndex.addEventListener('click', () => {
+                if (!sizeIndex.classList.contains('selected')) {
+                    
+                    for (const removeClass of size) {
+                        removeClass.classList.remove('selected');
+                    }
+                    sizeIndex.classList.add('selected');
+                    const changeSize = sizeIndex.textContent.split(' ')[0];
+
+                    selectedVariety(productData, changeSize);
+                }
+            })
+        }
+    }
+
+    const addToCartModal = () => {
+        const modalButtons = document.querySelectorAll('.addToCart-button');
+
+        for (const btnModal of modalButtons) {
+            btnModal.addEventListener('click', () => {
+                const prodID = btnModal.dataset.prodId;
+
+                if (modalContainer.hasChildNodes) {
+                    $('#dynamicAddToCartModal').empty();
+                }
+
+                getProduct(liveRoomID, prodID).then(product => {
+                    const generateSubImages = () => {
+                        let generate_template = ``;
+
+                        for (let imgIndex = 1; imgIndex < product.productImages.length; imgIndex++) {
+                            generate_template += `
+                                <img src="data:${product.productImages[imgIndex].type};base64,${product.productImages[imgIndex].data}" alt="${product.prodName}">
+                            `;
+                        }
+
+                        return generate_template;
+                    }
+
+                    const generateUnitType = () => {
+                        let generate_template = ``;
+                        let totalUnit = 0;
+
+                        // Compute total quantity
+                        for (const variant of product.variants) {
+                            totalUnit += Number(variant.selectedQty);
+                        }
+
+                        generate_template += `
+                            <div class="type">
+                                <div class="icon unit">
+                                    <ion-icon name="checkmark"></ion-icon>
+                                    <p>${totalUnit}</p>
+                                </div>
+                                <p>Available Units</p>
+                            </div>
+                        `;
+
+                        for (const type of product.prodType) {
+                            const typeForClass = type === 'Trending' ? 'trend' :
+                                type === 'New Arrival' ? 'new' : 'sale';
+
+                            const typeForIcon = type === 'Trending' ? 'flash' :
+                                type === 'New Arrival' ? 'heart' : 'analytics';
+
+                            generate_template += `
+                                <div class="type">
+                                    <div class="icon ${typeForClass}">
+                                        <ion-icon name="${typeForIcon}"></ion-icon>
+                                    </div>
+                                    <p>${type}</p>
+                                </div>
+                            `;
+                        }
+
+                        return generate_template;
+                    }
+
+                    const generateColors = () => {
+                        let generate_template = ``;
+
+                        for (let variantIndex = 0; variantIndex < product.variants.length; variantIndex++) {
+                            if (variantIndex === 0) {
+                                const colors = product.variants[variantIndex].selectedColors;
+                                for (const [index, value] of colors.entries()) {
+                                    generate_template += `
+                                        <div class="color ${index === 0 ? 'selected' : ''} "style="background-color:${value}"></div> 
+                                    `;
+                                }
+                            }
+                        }
+
+                        return generate_template;
+                    }
+
+                    const generateSizes = () => {
+                        let generate_template = ``;
+
+                        for (const [iterator, value] of product.variants.entries()) {
+                            generate_template += `
+                                <button class="size ${iterator === 0 ? 'selected' : ''}">${value.selectedSize} (${value.selectedQty})</button>
+                            `;
+                        }
+
+                        return generate_template;
+                    }
+
+
+                    const MODAL_TEMPLATE = `
+                        <div class="wrapper">
+                            <div class="img-container">
+                                <div class="main-image">
+                                    <img src="data:${product.productImages[0].type};base64,${product.productImages[0].data}"
+                                        alt="${product.prodName}">
+                                </div>
+                                <div class="sub-image">
+                                    ${product.productImages.length > 1 ? generateSubImages() : ''} 
+                                </div>
+                            </div>
+                            <div class="info-container">
+                                <p class="product-name">${product.prodName}</p>
+                                <p class="product-price">₱<span>${product.prodPrice}</span></p>
+                                <p class="product-description">${product.prodDesc}</p>
+                                <div class="switch-container">
+                                    <div class="switch">
+                                        <div class="active">Details</div>
+                                        <div>Reviews</div>
+                                    </div>
+                                    <div class="detail-container">
+                                        <div class="unit-type">${generateUnitType()}</div>
+                                        <div class="colors">
+                                            <p class="title">Colors</p>
+                                            <div class="color-container" id="colorContainer">${generateColors()}</div>
+                                        </div>
+                                        <div class="sizes">
+                                            <p class="title">Sizes</p>
+                                            <div class="size-container" id="sizeContainer">${generateSizes()}</div>
+                                        </div>
+                                        <div class="input-group detail-input">
+                                            <input type="text" class="form-control" placeholder="Enter quantity">
+                                            <div class="input-group-append">
+                                            <span class="input-group-text" id="basic-addon2">/ ${product.variants[0].selectedQty}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="review-container" style="display: none"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    modalContainer.insertAdjacentHTML('beforeend', MODAL_TEMPLATE);
+
+                    return product;
+                }).then((product) => {
+                    loopImages();
+                    varietiesSelection(product);
+                })
+
+                $('#modalAddToCart').modal('show');
+            })
+        }
+
     }
 
 
@@ -556,5 +796,8 @@ $(document).ready(() => {
 
         selectFilter();
         clearFilter();
+
+
+        addToCartModal();
     })
 })

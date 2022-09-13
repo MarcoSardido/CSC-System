@@ -18,6 +18,19 @@ const getAllProducts = async (sessionID) => {
     }
 }
 
+const getProduct = async (sessionID, productID) => {
+    try {
+        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
+        const productSubColRef = doc(db, `LiveSession/sessionID_${sessionID}/sessionProducts/${productID}`);
+        const productDoc = await getDoc(productSubColRef);
+
+        return productDoc.data();
+
+    } catch (error) {
+        console.error(`Firestore Error -> @getProduct: ${error.message}`)
+    }
+}
+
 const getFilteredProducts = async (sessionID, productIDs) => {
     const filteredProducts = [];
 
@@ -39,5 +52,6 @@ const getFilteredProducts = async (sessionID, productIDs) => {
 
 export {
     getAllProducts,
+    getProduct,
     getFilteredProducts
 }

@@ -453,3 +453,242 @@ main .product-container .product .product-button>.addToCart-button:hover {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+
+/* Add to cart Modal */
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.modal-content {
+    background: #f1f1ff;
+}
+
+.addToCart-modal-body .wrapper {
+    display: flex;
+    height: 530px;
+}
+
+.img-container {
+    width: 40%;
+    height: 100%;
+}
+
+.main-image {
+    border-bottom: 1px solid #d0d0d0;
+    height: 365px;
+    padding: 5px;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sub-image {
+    display: flex;
+    height: 170px;
+    padding: 5px 0;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.sub-image img {
+    height: 100%;
+    width: 140px;
+    object-fit: cover;
+    border: 1px solid #acacac;
+}
+
+.info-container {
+    width: 60%;
+    padding: 0 20px;
+}
+
+.info-container p {
+    color: black;
+}
+
+.info-container .product-name {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.info-container .product-price {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 5px 0;
+}
+
+.info-container .product-price span {
+    margin-left: 5px;
+}
+
+.info-container .product-description {
+    font-size: 15px;
+    max-height: 70px;
+    margin: 10px 0;
+}
+
+.info-container .switch-container {
+    padding: 10px 0;
+}
+
+.info-container .switch-container .switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 45px;
+    background: #dde0fd;
+    border-radius: 20px;
+}
+
+.switch div {
+    width: 200px;
+    text-align: center;
+    padding: 10px 0px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.switch > div.active {
+    color: #fff;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.info-container .switch-container .detail-container,
+.info-container .switch-container .review-container {
+    padding-top: 15px;
+    height: 350px;
+}
+
+.info-container .switch-container .detail-container .title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.detail-container .unit-type {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+
+.detail-container .unit-type > .type {
+    display: flex;
+    align-items: center;
+}
+
+.detail-container .unit-type > .type .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    padding: 4px 0;
+    border-radius: 20px;
+    margin-right: 10px;
+    background: #e3f7f3;
+}
+
+.detail-container .unit-type > .type .icon.unit {
+    color: #00d200;
+}
+
+.detail-container .unit-type > .type .icon.unit p {
+    color: lime;
+    font-size: 15px;
+    margin-left: 3px;
+    font-weight: 600;
+}
+
+.detail-container .unit-type > .type .icon.trend {
+    color: #485def;
+}
+
+.detail-container .unit-type > .type .icon.new {
+    color: #ff2c76;
+}
+
+.detail-container .unit-type > .type .icon.sale {
+    color: #80ff72;
+}
+
+.detail-container .unit-type > .type .icon ion-icon {
+    font-size: 25px;
+}
+
+.detail-container .unit-type > .type > p {
+    margin-left: 2px;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.detail-container .colors {
+    margin: 10px 0;
+}
+
+.detail-container .colors .color-container {
+    display: flex;
+}
+
+.detail-container .colors .color-container > .color {
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+    margin: 0 15px;
+}
+
+.detail-container .colors .color-container > .color.selected {
+    box-shadow: none;
+    border-color: black;
+}
+
+.detail-container .sizes .size-container {
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.detail-container .sizes .size-container > .size {
+    margin: 0 15px;
+    padding: 5px 20px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.detail-container .sizes .size-container > .size.selected {
+    box-shadow: none;
+    color: #fff;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.detail-container .detail-input {
+    margin-top: 20px;
+    width: 60%;
+}
+
+.detail-container .detail-input input {
+    height: 50px;
+    transition: all 0.30s ease-in-out;
+    outline: none;
+    padding: 10px 10px;
+    border: 1px solid #e1e1e1;
+    resize: none;
+    border-radius: 5px;
+}
+
+.detail-container .detail-input input:focus {
+    box-shadow: 0 0 5px #485fed;
+    padding: 10px 10px;
+    border: 1px solid #485fed;
+}
+
+.review-container {
+
+}
