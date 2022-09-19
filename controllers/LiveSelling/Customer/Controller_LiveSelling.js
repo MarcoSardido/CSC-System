@@ -9,7 +9,7 @@ const db = getFirestore(firebase);
 
 const currentItemObj = {};
 const removeItems = [];
-let currentRoomUrl, isCheckoutCancelled = true;
+let currentRoomUrl, isCheckoutCancelled = true, isAnonymousBuyer;
 
 const liveSession = async (req, res) => {
     const { uid, user } = req.body;
@@ -56,11 +56,55 @@ const liveSession = async (req, res) => {
     })
 }
 
+const marketPlace = async (req, res) => {
+    const { uid, user } = req.body;
+    const { isAnonymous } = req.query;
+
+    // Stripe
+    const last10Payments = await getAllPaymentList();
+
+    // Firebase
+    const stripePaymentRef = collection(db, `Stripe Accounts/customer_${uid}/Payment Intents`);
+    const stripePaymentDoc = await getDocs(stripePaymentRef);
+
+    if (currentItemObj.currentPaymentID && isCheckoutCancelled) {
+        cancelPaymentIntent(currentItemObj.currentCheckoutID).then(result => {
+
+            stripePaymentDoc.forEach(document => {
+                for (const paymentIndex of last10Payments) {
+
+                    if (document.data().paymentIntentID === result.payment_intent && paymentIndex.paymentStatus === 'canceled') {
+                        // Update firebase payment status to success
+                        const updateStripePaymentRef = doc(db, `Stripe Accounts/customer_${uid}/Payment Intents/${document.id}`);
+                        setDoc(updateStripePaymentRef, {
+                            paymentIntentStatus: paymentIndex.paymentStatus
+                        }, { merge: true });
+
+                        break;
+                    } else {
+                        continue;
+                    }
+                }
+            })
+
+        })
+    }
+
+    userData(uid).then(result => {
+        res.render('customer/marketPlace', {
+            layout: 'layouts/customerLayout',
+            displayAccountInfo: result.accountArray,
+            displayCustomerInfo: result.customerArray,
+            onLive: true
+        });
+    })
+}
+
 const livePaymentSuccess = async (req, res) => {
     const { uid, user } = req.body;
 
     let splitResult = currentRoomUrl.split("/");
-    let roomID = splitResult[splitResult.length - 1];
+    let roomID = splitResult[splitResult.length - 1].split('?')[0];
 
     // To prevent checkout cancelation
     isCheckoutCancelled = false;
@@ -94,7 +138,6 @@ const livePaymentSuccess = async (req, res) => {
         orderItems[itemIndex].image = liveCartDoc.data().itemImg;
 
         delete orderItems[itemIndex].id;
-        delete orderItems[itemIndex].productID;
     }
 
     // :: Live Selling => Get sellerUID
@@ -117,6 +160,8 @@ const livePaymentSuccess = async (req, res) => {
         items: currentItemObj.currentCheckoutItems,
         modeOfPayment: currentItemObj.currentPaymentMethod,
         placedOn: stringDateFormat(),
+        shippedOn: '',
+        deliveredOn: '',
         totalAmount: currentItemObj.currentPaymentAmount,
         orderAddress: currentItemObj.orderAddress,
         status: 'Processing',
@@ -132,7 +177,7 @@ const livePaymentSuccess = async (req, res) => {
         customer: {
             uid: customerDoc.id,
             address: currentItemObj.orderAddress,
-            displayName: customerDoc.data().displayName
+            displayName: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName
         },
         items: currentItemObj.currentCheckoutItems,
         date: stringDateFormat(),
@@ -186,14 +231,17 @@ const livePaymentSuccess = async (req, res) => {
             layout: 'layouts/customerLayout',
             displayAccountInfo: result.accountArray,
             displayCustomerInfo: result.customerArray,
-            onLive: true
+            onLive: true,
+            isAnonymous: isAnonymousBuyer
         });
     })
 }
 
 const livePayment = async (req, res) => {
-    const { currentUrl, customer, items, method } = req.body;
+    const { currentUrl, customer, items, method, isAnonymous } = req.body;
     const stripeAccounts = [];
+
+    isAnonymousBuyer = isAnonymous;
 
     // For later if payment has made
     currentItemObj.currentCheckoutItems = items;
@@ -221,7 +269,6 @@ const livePayment = async (req, res) => {
         const stripeCustomer = getStripeCustomerColDoc.data().customerID;
 
         liveCartSession(items, stripeCustomer, currentUrl).then(({ session, roomUrl }) => {
-
             currentRoomUrl = roomUrl;
             currentItemObj.currentPaymentID = session.payment_intent;
             currentItemObj.currentCheckoutID = session.id;
@@ -258,6 +305,7 @@ const stringDateFormat = () => {
 
 export {
     liveSession,
+    marketPlace,
     livePayment,
     livePaymentSuccess
 }

@@ -5,7 +5,7 @@
     originUrl = originUrl.substring(0, lastIndex);
 
     setTimeout(() => {
-        window.location = originUrl;
+        window.location = `${originUrl}?isAnonymous=<%= isAnonymous %>`;
     }, 3000)
 </script>
 

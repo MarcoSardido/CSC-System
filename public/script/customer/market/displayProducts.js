@@ -1,4 +1,12 @@
-import { getAllProducts, getProduct, getFilteredProducts } from './Api/products.js'
+import { getAllProducts, getProduct, getFilteredProducts } from './Api/products.js';
+
+import { firebase } from '../../firebaseConfig.js';
+import { getFirestore, doc, collection, getDoc, getDocs, setDoc, deleteDoc, updateDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+
+const db = getFirestore(firebase);
+
+// To be exported when checkout is clicked
+let checkoutArray = [];
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -7,6 +15,132 @@ $(document).ready(() => {
     const urlOrigin = window.location.pathname;
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
+
+    const isAnonymous = window.location.search.split('=')[1];
+
+    //* ----------------------------------------------------------------------------------------
+    //  ---------------------------------- FIREBASE FUNCTIONS ---------------------------------- 
+    //* ---------------------------------------------------------------------------------------- 
+
+    // Real time cart items update
+    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+    const cartSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`);
+    onSnapshot(cartSubColRef, (snapshot) => {
+        countItems(snapshot.size);
+
+        snapshot.docChanges().forEach(change => {
+            if (change.type === "added") {
+                const item = change.doc.data();
+                cartItem(item);
+            }
+            if (change.type === "removed") {
+                processRemove(liveRoomID, change.doc.data())
+            }
+        });
+    })
+
+    const addItem = async (uid, roomID, itemData) => {
+        const uniqueID = generateId();
+
+        try {
+            //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+            const cartSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/itemID_${uniqueID}`);
+            await setDoc(cartSubColRef, {
+                id: uniqueID,
+                ...itemData
+            });
+
+        } catch (error) {
+            console.error(`FireStore Error -> @addItem: ${error.message}`)
+        }
+    }
+
+    const processAdd = async (roomID, itemData) => {
+        try {
+            //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
+            const productsSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionProducts/${itemData.prodID}`);
+            const productSubColDoc = await getDoc(productsSubColRef);
+
+            const variantCopy = productSubColDoc.data().variants;
+            // for (const copyIndex of variantCopy) {
+            //     if (copyIndex.selectedSize === itemData.size) {
+            //         const calcQty = Number(copyIndex.selectedQty) - itemData.quantity;
+            //         copyIndex.selectedQty = calcQty.toString();
+            //     }
+            // }
+
+            // await updateDoc(productsSubColRef, {
+            //     'variants': variantCopy
+            // }, { merge: true });
+
+            console.log('Product updated successfully: Item Added')
+        } catch (error) {
+            console.error(`FireStore Error -> @processAdd: ${error.message}`)
+        }
+    }
+
+    const processRemove = async (roomID, itemData) => {
+        try {
+            //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
+            const productsSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionProducts/${itemData.prodID}`);
+            const productSubColDoc = await getDoc(productsSubColRef);
+
+            const variantCopy = productSubColDoc.data().variants;
+            // for (const copyIndex of variantCopy) {
+            //     if (copyIndex.selectedSize === itemData.size) {
+            //         const calcQty = Number(copyIndex.selectedQty) + itemData.quantity;
+            //         copyIndex.selectedQty = calcQty.toString();
+            //     }
+            // }
+
+            // await updateDoc(productsSubColRef, {
+            //     'variants': variantCopy
+            // }, { merge: true });
+
+            console.log('Product updated successfully: Item Removed')
+        } catch (error) {
+            console.error(`FireStore Error -> @processRemove: ${error.message}`)
+        }
+    }
+
+    const getAllCartItems = async (uid, roomID) => {
+        const cartArray = [];
+        try {
+            //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+            const cartSubColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart`);
+            const cartSubColDocs = await getDocs(cartSubColRef);
+            cartSubColDocs.forEach(doc => cartArray.push(doc.data()));
+
+            return cartArray;
+        } catch (error) {
+            console.error(`FireStore Error -> @getAllCartItems: ${error.message}`)
+        }
+    }
+
+    const removeItem = async (uid, roomID, itemID) => {
+        try {
+            const cartSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/itemID_${itemID}`);
+            await deleteDoc(cartSubColRef);
+
+        } catch (error) {
+            console.error(`FireStore Error -> @removeItem: ${error.message}`)
+        }
+    }
+
+    const generateId = () => {
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for (var i = 0; i < 15; i++) {
+            result += characters.charAt(Math.floor(Math.random() *
+                charactersLength));
+        }
+        return result;
+    }
+
+
+
+
 
     //* ----------------------------------------------------------------------------------------
     //  ---------------------------------- Global Selectors ------------------------------------ 
@@ -20,6 +154,10 @@ $(document).ready(() => {
     //* :: Modal
     const modalContainer = document.getElementById('dynamicAddToCartModal');
 
+    //* :: Add To Cart Modal
+    const cartContainer = document.querySelector('.cart-container');
+    const lblTotal = document.getElementById('dynamicTotalLabel');
+    const btnCheckout = document.getElementById('btnCheckout');
 
 
     const loader = () => {
@@ -35,6 +173,20 @@ $(document).ready(() => {
     const generateProductItem = (productData) => {
         let product_template = ``;
 
+        const generateStocks = (varietyData) => {
+            let stocks_template = ``, productStock = 0;
+
+            for (const varietyIndex of varietyData) {
+                productStock += Number(varietyIndex.selectedQty)
+            }
+
+            stocks_template = `
+                <p class="stock-label" id="dynamicStockLabel">In Stock: ${productStock}pcs</p>
+            `;
+
+            return stocks_template;
+        }
+
         const generateVarieties = (varietyData) => {
             let variety_template = ``;
 
@@ -43,7 +195,6 @@ $(document).ready(() => {
                     <div class="size">${varietyIndex.selectedSize}</div>
                 `;
             }
-
             return variety_template;
         }
 
@@ -66,11 +217,12 @@ $(document).ready(() => {
 
             return type_template;
         }
-
+        
         for (const productIndex of productData) {
             product_template += `
                 <div class="product">
                     <div class="product-image">
+                        ${generateStocks(productIndex.variants)}
                         <img
                             src="data:${productIndex.productImages[0].type};base64,${productIndex.productImages[0].data}">
                         <div class="variety">
@@ -82,7 +234,7 @@ $(document).ready(() => {
                     <div class="product-details">
                         <div class="detail-wrapper">
                             <p class="item-name">${productIndex.prodName}</p>
-                            <p class="item-price">₱<span class="price">${Number(productIndex.prodPrice.toLocaleString())}</span></p>
+                            <p class="item-price">₱<span class="price">${productIndex.prodPrice}</span></p>
                         </div>
                         <div class="type-container">
                             ${generateTypes(productIndex.prodType)}
@@ -570,7 +722,6 @@ $(document).ready(() => {
         }
     }
 
-    
     const selectedVariety = (data, checkSize) => {
         const colorContainer = document.getElementById('colorContainer');
         const quantitySpan = document.getElementById('basic-addon2');
@@ -619,7 +770,7 @@ $(document).ready(() => {
         for (const sizeIndex of size) {
             sizeIndex.addEventListener('click', () => {
                 if (!sizeIndex.classList.contains('selected')) {
-                    
+
                     for (const removeClass of size) {
                         removeClass.classList.remove('selected');
                     }
@@ -713,11 +864,29 @@ $(document).ready(() => {
                     }
 
                     const generateSizes = () => {
+                        let selectedIndex, emptySizes = [];
                         let generate_template = ``;
+
+                        const sizes = product.variants;
+
+                        // Get 0 quantity
+                        for (let quantityIndex = 0; quantityIndex < sizes.length; quantityIndex++) {
+                            if (Number(sizes[quantityIndex].selectedQty) === 0) {
+                                emptySizes.push(quantityIndex);
+                            }
+                        }
+
+                        // Check sizes quantity
+                        for (let sizeIndex = 0; sizeIndex < sizes.length; sizeIndex++) {
+                            if (Number(sizes[sizeIndex].selectedQty) > 0) {
+                                selectedIndex = sizeIndex;
+                                break;
+                            }
+                        }
 
                         for (const [iterator, value] of product.variants.entries()) {
                             generate_template += `
-                                <button class="size ${iterator === 0 ? 'selected' : ''}">${value.selectedSize} (${value.selectedQty})</button>
+                                <button class="size ${iterator === selectedIndex ? 'selected' : ''} ${emptySizes.includes(iterator) ? 'noStock' : ''}" ${emptySizes.includes(iterator) ? 'disabled' : ''}>${value.selectedSize} (${value.selectedQty})</button>
                             `;
                         }
 
@@ -756,12 +925,14 @@ $(document).ready(() => {
                                             <div class="size-container" id="sizeContainer">${generateSizes()}</div>
                                         </div>
                                         <div class="input-group detail-input">
-                                            <input type="text" class="form-control" placeholder="Enter quantity">
+                                            <input type="text" class="form-control" id="inputQty" placeholder="Enter quantity">
                                             <div class="input-group-append">
                                             <span class="input-group-text" id="basic-addon2">/ ${product.variants[0].selectedQty}</span>
                                             </div>
                                         </div>
                                     </div>
+                                    
+                                    <button type="button" class="btn btn-primary" id="btnConfirmItem">Confirm</button>
 
                                     <div class="review-container" style="display: none"></div>
                                 </div>
@@ -771,10 +942,9 @@ $(document).ready(() => {
 
                     modalContainer.insertAdjacentHTML('beforeend', MODAL_TEMPLATE);
 
-                    return product;
-                }).then((product) => {
                     loopImages();
                     varietiesSelection(product);
+                    confirmItem(product);
                 })
 
                 $('#modalAddToCart').modal('show');
@@ -783,9 +953,225 @@ $(document).ready(() => {
 
     }
 
+    const confirmItem = (productData) => {
+        const btnConfirmItem = document.getElementById('btnConfirmItem');
+        btnConfirmItem.addEventListener('click', () => {
+            let selectedProductData = {};
+
+            selectedProductData.prodID = productData.prodID;
+            selectedProductData.itemName = productData.prodName;
+            selectedProductData.itemDesc = productData.prodDesc;
+            selectedProductData.itemCategory = productData.prodCategory;
+            selectedProductData.itemImg = `data:${productData.productImages[0].type};base64,${productData.productImages[0].data}`;
+
+            // Colors
+            const colorContainer = document.getElementById('colorContainer').children;
+            for (const colorIndex of colorContainer) {
+                if (colorIndex.classList.contains('selected')) {
+                    selectedProductData.itemColor = colorIndex.style.backgroundColor;
+                }
+            }
+
+            // Size
+            const size = document.getElementById('sizeContainer').children;
+            for (const sizeIndex of size) {
+                if (sizeIndex.classList.contains('selected')) {
+                    selectedProductData.itemSize = sizeIndex.textContent.split(' ')[0];
+
+                }
+            }
+
+            // Quantity
+            const quantityCount = document.getElementById('basic-addon2');
+            const quantityValue = document.getElementById('inputQty');
+
+            const getQtyInput = Number(quantityValue.value);
+            const getQtyCount = Number(quantityCount.textContent.split(' ')[1]);
+
+            if (getQtyInput > getQtyCount) {
+                quantityValue.classList.add('error');
+                quantityValue.value = null;
+                quantityValue.placeholder = 'Inputted quantity is higher than allowed';
+
+                setTimeout(() => {
+                    quantityValue.classList.remove('error');
+                    quantityValue.placeholder = 'Enter quantity';
+                }, 3000)
+
+            } else {
+                selectedProductData.itemQty = getQtyInput;
+                selectedProductData.itemPrice = convertIntoCents(Number(productData.prodPrice));
+                selectedProductData.itemTotal = convertIntoCents(Number(productData.prodPrice) * getQtyInput);
+
+
+                $('#modalAddToCart').modal('hide');
+
+                addItem(trimmedUID, liveRoomID, selectedProductData).then(() => {
+                    processAdd(liveRoomID, selectedProductData);
+                });
+
+                calculateCartItems();
+            }
+        })
+    }
+
+
+    //* ADD TO CART MODAL
+    const cartItem = (itemData) => {
+        const emptyText = document.querySelector('.empty');
+
+        let CART_ITEM_TEMPLATE = `
+            <div class="item">
+                <div class="item-wrapper">
+                    <div class="left">
+                        <img src="${itemData.itemImg}"
+                            alt="${itemData.itemName}">
+                    </div>
+                    <div class="right">
+                        <p class="item-category">${itemData.itemCategory}</p>
+                        <p class="item-name">${itemData.itemName}</p>
+                        <div class="variety">
+                            <div class="item-size">
+                                <p class="label">Size:</p>
+                                <p class="size">${itemData.itemSize}</p>
+                            </div>
+                            <div class="item-color">
+                                <p class="label">Color:</p>
+                                <div class="color" style="background: ${itemData.itemColor}"></div>
+                            </div>
+                        </div>
+                        <div class="qtyAndPrice">
+                            <div class="item-quantity">
+                                <p class="label">Quantity:</p>
+                                <p class="quantity">${itemData.itemQty}</p>
+                            </div>
+                            <p class="item-price">${convertIntoWholeNumber(itemData.itemTotal)}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-footer">
+                    <button class="remove-item" id="btnRemoveItem" data-item-id="${itemData.id}">
+                        <ion-icon name="trash-outline"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        if (emptyText) {
+            emptyText.remove();
+        }
+
+        cartContainer.insertAdjacentHTML('beforeend', CART_ITEM_TEMPLATE);
+
+        removeCartItem();
+    }
+
+    const calculateCartItems = () => {
+        let cartItemTotal = 0;
+
+        getAllCartItems(trimmedUID, liveRoomID).then(data => {
+
+            if (data.length > 0) {
+                btnCheckout.removeAttribute('disabled');
+                btnCheckout.classList.remove('disable');
+            }
+
+            for (const dataIndex of data) {
+                const currentDataPrice = Number(dataIndex.itemTotal);
+                cartItemTotal += currentDataPrice;
+            }
+            lblTotal.textContent = convertIntoWholeNumber(cartItemTotal);
+        })
+        
+    }
+
+    const removeCartItem = () => {
+        // Selector
+        const cartItems = document.querySelectorAll('#btnRemoveItem');
+
+        for (const itemIndex of cartItems) {
+            itemIndex.addEventListener('click', () => {
+                const itemID = itemIndex.dataset.itemId;
+
+                removeItem(trimmedUID, liveRoomID, itemID).then(() => {
+                    const ItemElNode = itemIndex.parentNode.parentNode;
+                    const getRemoveIndex = Array.from(cartContainer.children).indexOf(ItemElNode);
+                    cartContainer.removeChild(cartContainer.children[getRemoveIndex]);
+
+                    if (cartContainer.children.length === 0) {
+                        showEmptyText();
+                        btnCheckout.setAttribute('disabled', '');
+                        btnCheckout.classList.add('disable');
+                    }
+                })
+
+                calculateCartItems();
+            })
+        }
+    }
+
+    const showEmptyText = () => {
+        let textContext = `
+            <p class="empty">
+                You have no items in your cart. 🙁
+            </p>
+        `;
+        cartContainer.insertAdjacentHTML('beforeend', textContext)
+    }
+
+    const countItems = (size) => {
+        const lblItemCounter = document.getElementById('dynamicItemCounter');
+        lblItemCounter.textContent = size;
+    }
+
+    const createCheckoutObj = () => {
+        btnCheckout.addEventListener('click', () => {
+            getAllCartItems(trimmedUID, liveRoomID).then(data => {
+                checkoutArray = [...data];
+            })
+        })
+    }
+
+
+
+
+    /**
+     * ?Converts whole number into cents
+     * @param price 300
+     * @returns 30000
+     */
+    const convertIntoCents = (price) => {
+        return (Number(price) * 100).toString();
+    }
+
+    /**
+     * ?Converts cents into whole number with currency symbol
+     * @param price 30000
+     * @returns ₱300.00
+     */
+    const convertIntoWholeNumber = (price) => {
+        return (price / 100).toLocaleString("en-US", { style: "currency", currency: "PHP" })
+    }
+
+
+
+    /**
+     * ? Show if no items in cart
+     * @showEmptyText
+     */
+    if (cartContainer.children.length === 0) {
+        showEmptyText();
+    }
+
+
 
     // Display loader
     loader();
+
+    // Calculate cart items
+    calculateCartItems();
+
+    createCheckoutObj();
 
     getAllProducts(liveRoomID).then(data => {
         // Remove loader
@@ -799,5 +1185,9 @@ $(document).ready(() => {
 
 
         addToCartModal();
-    })
+    });
 })
+
+export {
+    checkoutArray
+}

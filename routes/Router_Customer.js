@@ -10,11 +10,10 @@ import { updateProfile } from '../controllers/Customer/Setting/Controller_Update
 
 import {
     liveSession,
+    marketPlace,
     livePayment,
     livePaymentSuccess
 } from '../controllers/LiveSelling/Customer/Controller_LiveSelling.js';
-
-import { marketPlace } from '../controllers/LiveSelling/Customer/Controller_MarketPlace.js'
 
 
 import {
@@ -71,7 +70,7 @@ router.get('/live/room/:roomId', verifyCookie, liveSession);
 // Stripe Handle Payment
 router.post('/live/room/:roomId', verifyCookie, livePayment);
 
-// Stripe Payment Success PAge 
+// Stripe Payment Success Page 
 router.get('/live/room/:roomId/success', verifyCookie, livePaymentSuccess);
 
 //! ---------------------------------------------------------------- 
@@ -80,5 +79,11 @@ router.get('/live/room/:roomId/success', verifyCookie, livePaymentSuccess);
 
 // Main Page
 router.get('/marketplace/room/:roomId', verifyCookie, marketPlace);
+
+// Stripe Handle Payment
+router.post('/marketplace/room/:roomId', verifyCookie, livePayment);
+
+// Stripe Payment Success Page 
+router.get('/marketplace/room/:roomId/success', verifyCookie, livePaymentSuccess);
 
 export { router as routes }

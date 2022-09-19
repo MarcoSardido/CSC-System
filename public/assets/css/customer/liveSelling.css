@@ -228,6 +228,19 @@
 .video {
     height: 60vh;
     padding: 10px 15px;
+    position: relative;
+}
+
+.video .live-label {
+    top: 30px;
+    left: 30px;
+    margin: 0;
+    font-size: 18px;
+    position: absolute;
+    background: red;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 10px;
 }
 
 .video video {

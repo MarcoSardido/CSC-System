@@ -1,18 +1,27 @@
+import { addUser, removeUser } from './Api/users.js';
+
 $(document).ready(() => {
+    const uuid = $('#uid').text();
+    const trimmedUID = uuid.trim();
+
+    const urlOrigin = window.location.pathname;
+    const getRoomId = urlOrigin.split('/');
+    const liveRoomID = getRoomId[getRoomId.length - 1];
 
     //* ----------------------------------------------------------------------------------------
     //  ---------------------------------- Global Selectors ------------------------------------ 
     //* ---------------------------------------------------------------------------------------- 
     const btnShowCart = document.getElementById('btnCart');
     const cartDropdownMenu = document.getElementById('dropdownCart');
-    const cartContainer = document.querySelector('.cart-container');
 
     const btnExitMarket = document.getElementById('btnExitMarket');
 
 
     // Exit Marketplace
     btnExitMarket.addEventListener('click', () => {
-        window.location.assign('/customercenter')
+        removeUser(trimmedUID, liveRoomID).then(() => {
+            window.location.assign('/customercenter');
+        })
     })
 
 
@@ -30,41 +39,8 @@ $(document).ready(() => {
         }
     }
 
-
-    const showEmptyText = () => {
-        let textContext = `
-            <p class="empty">
-                You have no items in your cart. 🙁
-            </p>
-        `;
-        cartContainer.insertAdjacentHTML('beforeend', textContext)
-    }
-
-    const removeCartItem = () => {
-        // Selector
-        const cartItems = document.querySelectorAll('#btnRemoveItem');
-
-        for (const itemIndex of cartItems) {
-            itemIndex.addEventListener('click', () => {
-                const ItemElNode = itemIndex.parentNode.parentNode;
-                const getRemoveIndex = Array.from(cartContainer.children).indexOf(ItemElNode);
-                cartContainer.removeChild(cartContainer.children[getRemoveIndex]);
-
-                if (cartContainer.children.length === 0) {
-                    showEmptyText();
-                }
-            })
-        }
-    }
-
-    /**
-     * ? Show if no items in cart
-     * @showEmptyText
-     */
-    if (cartContainer.children.length === 0) {
-        showEmptyText();
-    }
-
-    removeCartItem();
     toggleCartShow();
+
+    //? Add customer when joined 
+    addUser(trimmedUID, liveRoomID)
 })

@@ -27,15 +27,30 @@ header {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .cart ion-icon {
-    font-size: 25px;
+    font-size: 30px;
     margin-right: 5px;
 }
 
 .cart .cart-button {
     background: none;
+    padding-top: 5px;
+}
+
+.cart .cartItemCounter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    padding-top: 1px;
+    border-radius: 50%;
+    width: 20px;
+    color: #fff;
+    height: 20px;
+    z-index: 1;
 }
 
 .dropdown-cart-menu {
@@ -53,6 +68,7 @@ header {
     transform: translateY(-10px);
     transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
 }
+
 
 .dropdown-cart-menu .cart-title {
     font-size: 20px;
@@ -166,10 +182,6 @@ header {
     margin-right: 10px;
 }
 
-.cart-container .item .item-wrapper .right .qtyAndPrice .item-price .price {
-    margin-left: 5px;
-}
-
 .cart-container .item .item-footer {
     display: flex;
     justify-content: end;
@@ -203,10 +215,6 @@ header {
     font-weight: 600;
 }
 
-.cart-checkout .cart-total .total span.total {
-    margin-left: 5px;
-}
-
 .cart-checkout .checkout-button {
     width: 100%;
     height: 3rem;
@@ -217,15 +225,15 @@ header {
     text-transform: uppercase;
 }
 
+.cart-checkout .checkout-button.disable {
+    background: #bababa;
+    cursor: not-allowed;
+}
+
 .cart .cart-button.active+.dropdown-cart-menu {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
-}
-
-.cart-counter {
-    font-size: 16px;
-    color: black;
 }
 
 .right .exit {
@@ -355,7 +363,17 @@ main .product-container .product .product-image img {
     height: 280px;
 }
 
-
+main .product-container .product .product-image>.stock-label {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    padding: 5px 8px;
+    color: #fff;
+    font-weight: 500;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
 
 main .product-container .product .product-image>.variety {
     position: absolute;
@@ -467,7 +485,7 @@ main .product-container .product .product-button>.addToCart-button:hover {
 
 .addToCart-modal-body .wrapper {
     display: flex;
-    height: 530px;
+    height: 570px;
 }
 
 .img-container {
@@ -552,9 +570,10 @@ main .product-container .product .product-button>.addToCart-button:hover {
     border-radius: 20px;
     font-size: 16px;
     font-weight: 500;
+    cursor: pointer;
 }
 
-.switch > div.active {
+.switch>div.active {
     color: #fff;
     background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
 }
@@ -576,12 +595,12 @@ main .product-container .product .product-button>.addToCart-button:hover {
     gap: 10px 20px;
 }
 
-.detail-container .unit-type > .type {
+.detail-container .unit-type>.type {
     display: flex;
     align-items: center;
 }
 
-.detail-container .unit-type > .type .icon {
+.detail-container .unit-type>.type .icon {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -592,34 +611,34 @@ main .product-container .product .product-button>.addToCart-button:hover {
     background: #e3f7f3;
 }
 
-.detail-container .unit-type > .type .icon.unit {
+.detail-container .unit-type>.type .icon.unit {
     color: #00d200;
 }
 
-.detail-container .unit-type > .type .icon.unit p {
+.detail-container .unit-type>.type .icon.unit p {
     color: lime;
     font-size: 15px;
     margin-left: 3px;
     font-weight: 600;
 }
 
-.detail-container .unit-type > .type .icon.trend {
+.detail-container .unit-type>.type .icon.trend {
     color: #485def;
 }
 
-.detail-container .unit-type > .type .icon.new {
+.detail-container .unit-type>.type .icon.new {
     color: #ff2c76;
 }
 
-.detail-container .unit-type > .type .icon.sale {
+.detail-container .unit-type>.type .icon.sale {
     color: #80ff72;
 }
 
-.detail-container .unit-type > .type .icon ion-icon {
+.detail-container .unit-type>.type .icon ion-icon {
     font-size: 25px;
 }
 
-.detail-container .unit-type > .type > p {
+.detail-container .unit-type>.type>p {
     margin-left: 2px;
     font-weight: 600;
     font-size: 15px;
@@ -633,7 +652,7 @@ main .product-container .product .product-button>.addToCart-button:hover {
     display: flex;
 }
 
-.detail-container .colors .color-container > .color {
+.detail-container .colors .color-container>.color {
     width: 45px;
     height: 45px;
     cursor: pointer;
@@ -643,7 +662,7 @@ main .product-container .product .product-button>.addToCart-button:hover {
     margin: 0 15px;
 }
 
-.detail-container .colors .color-container > .color.selected {
+.detail-container .colors .color-container>.color.selected {
     box-shadow: none;
     border-color: black;
 }
@@ -654,7 +673,7 @@ main .product-container .product .product-button>.addToCart-button:hover {
     font-weight: 600;
 }
 
-.detail-container .sizes .size-container > .size {
+.detail-container .sizes .size-container>.size {
     margin: 0 15px;
     padding: 5px 20px;
     box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
@@ -662,10 +681,16 @@ main .product-container .product .product-button>.addToCart-button:hover {
     border-radius: 10px;
 }
 
-.detail-container .sizes .size-container > .size.selected {
+.detail-container .sizes .size-container>.size.selected {
     box-shadow: none;
     color: #fff;
     background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.detail-container .sizes .size-container>.size.noStock {
+    cursor: not-allowed;
+    background: #bcbcbc;
+    box-shadow: none;
 }
 
 .detail-container .detail-input {
@@ -683,12 +708,261 @@ main .product-container .product .product-button>.addToCart-button:hover {
     border-radius: 5px;
 }
 
+.detail-container .detail-input input.error {
+    box-shadow: 0 0 5px red;
+    padding: 10px 10px;
+    border: 1px solid red;
+    background: #ffdede;
+}
+
 .detail-container .detail-input input:focus {
     box-shadow: 0 0 5px #485fed;
     padding: 10px 10px;
     border: 1px solid #485fed;
 }
 
-.review-container {
+.review-container {}
 
+
+
+
+
+
+
+/* Payment Method Modal */
+.payment-modal-body {
+    padding: 20px 30px;
+    height: 650px;
+    overflow: auto;
+}
+
+.payment-modal-body p {
+    margin: 0;
+}
+
+.payment-modal-body .header {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.payment-modal-body .content .section-label {
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.payment-modal-body .content .payment-method {
+    margin-bottom: 30px;
+}
+
+.payment-modal-body .content .payment-method img {
+    width: 50%;
+    height: 65%;
+}
+
+.payment-modal-body .content .payment-method .method-container {
+    display: flex;
+    justify-content: space-around
+}
+
+.payment-modal-body .content .payment-method .method-container .method {
+    border: 2px solid #eee;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #fafafa;
+    cursor: pointer;
+}
+
+.payment-modal-body .content .payment-method .method-container .method:hover {
+    border-color: #485def;
+}
+
+.payment-modal-body .content .payment-method .method-container .method.selected {
+    border: 3px solid #485def;
+    background: #f1f1ff;
+}
+
+.payment-modal-body .content .payment-method .method-container .method.selected .brand-label {
+    color: black;
+}
+
+.payment-modal-body .content .payment-method .method-container .method .brand-label {
+    text-transform: uppercase;
+    font-size: 15px;
+    color: #acacac;
+}
+
+.payment-modal-body .content .payment-method .method-container .method .stripe {
+    width: 80%;
+}
+
+.payment-modal-body .content .payment-method .method-container .method .cod {
+    width: 50%;
+}
+
+.payment-modal-body .content .payment-info .info .user-address {
+    margin-bottom: 20px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .selected {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .selected .main,
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address {
+    display: flex;
+    align-items: center;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .selected .main .address,
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address .address {
+    font-size: 15px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .selected .toggle-address {
+    font-size: 13px;
+    padding: 2px 10px;
+    border: none;
+    border-left: 2px solid #aeaeae;
+    background: #f1f1ff;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .selected .main .tag,
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address .tag {
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-right: 10px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list {
+    max-height: 160px;
+    overflow-x: auto;
+    border-top: 1px solid #cbcbcb;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .add-address {
+    padding: 10px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .add-address button {
+    width: 100%;
+    height: 60px;
+    border-style: dashed;
+    border-radius: 10px;
+    background: #fff;
+    border-color: #acacac;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .add-address button .icon {
+    font-size: 25px;
+    color: #485def;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .add-address button span {
+    font-size: 15px;
+    color: #777;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address {
+    padding: 5px 10px;
+    cursor: pointer;
+    height: 70px;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address:hover,
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address.selected-address {
+    background: #485def1a;
+}
+
+.payment-modal-body .content .payment-info .info .user-address .address-list .other-address:nth-child(even) {
+    border-top: 1px solid #cbcbcb;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.payment-modal-body .content .payment-info .info .user-info .row1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-modal-body .content .payment-info .info .user-info .row1 .form-group {
+    width: 48%;
+}
+
+.payment-modal-body .content .payment-info .info label,
+.address-modal-body label {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.payment-modal-body .content .payment-info .info input {
+    font-style: italic;
+    padding: 25px 15px;
+}
+
+.payment-modal-body .footer {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0px 1px 0px;
+}
+
+.payment-modal-body .footer button {
+    text-transform: uppercase;
+    padding: 15px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+}
+
+.payment-modal-body .footer .cancel {
+    border: 3px solid transparent;
+    background: transparent;
+    color: #777;
+    font-weight: 600;
+}
+
+.payment-modal-body .footer .cancel:hover {
+    border: 3px solid #eee;
+    box-shadow: none;
+}
+
+.payment-modal-body .footer .proceed {
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+    border: none;
+}
+
+/* Add New Address Modal */
+.address-modal-body .form-buttons button {
+    width: 100px;
+    height: 40px;
+    text-transform: capitalize;
+    border-radius: 10px;
+    border: none;
+    background: #f1f1ff;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+}
+
+.address-modal-body .form-buttons button.selected-type {
+    box-shadow: none;
+    background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+    color: #fff;
+}
+
+.address-modal-body .form-buttons button:hover {
+    box-shadow: none;
+}
+
+.address-modal-body .form-buttons button:nth-child(2) {
+    margin: 0 15px;
 }

@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/public/assets/css/customer/market.css">
-<script defer src="/public/script/customer/market/general.js"></script>
+<script defer src="/public/script/customer/market/general.js" type="module"></script>
 <script defer src="/public/script/customer/market/displayProducts.js" type="module"></script>
-<script defer src="/public/script/customer/market/addToCart.js" type="module"></script>
+<script defer src="/public/script/customer/market/checkout.js" type="module"></script>
 
 <header>
     <p id="uid" hidden>
@@ -13,59 +13,25 @@
     <div class="right">
         <div class="cart">
             <button class="cart-button" id="btnCart">
+                <div class="cartItemCounter" id="dynamicItemCounter">0</div>
                 <ion-icon name="cart-outline"></ion-icon>
             </button>
             <div class="dropdown-cart-menu" id="dropdownCart">
                 <p class="cart-title">My Cart</p>
-                <div class="cart-container">
-                    <div class="item">
-                        <div class="item-wrapper">
-                            <div class="left">
-                                <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
-                                    alt="">
-                            </div>
-                            <div class="right">
-                                <p class="item-category">Bags</p>
-                                <p class="item-name">Canvas Tote Bag</p>
-                                <div class="variety">
-                                    <div class="item-size">
-                                        <p class="label">Size:</p>
-                                        <p class="size">Large</p>
-                                    </div>
-                                    <div class="item-color">
-                                        <p class="label">Color:</p>
-                                        <div class="color" style="background: red"></div>
-                                    </div>
-                                </div>
-                                <div class="qtyAndPrice">
-                                    <div class="item-quantity">
-                                        <p class="label">Quantity:</p>
-                                        <p class="quantity">13</p>
-                                    </div>
-                                    <p class="item-price">₱<span class="price">1,350</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-footer">
-                            <button class="remove-item" id="btnRemoveItem">
-                                <ion-icon name="trash-outline"></ion-icon>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="cart-container"></div>
                 <div class="cart-checkout">
                     <div class="cart-total">
                         <p class="label">Total Price:</p>
-                        <p class="total">₱<span class="total">13,546</span></p>
+                        <p class="total" id="dynamicTotalLabel"></p>
                     </div>
-                    <button class="checkout-button" data-toggle="modal" data-target="#modalCheckout">Check out</button>
+                    <button class="checkout-button disable" disabled id="btnCheckout" data-toggle="modal" data-target="#cartPaymentModal">Check out</button>
                 </div>
             </div>
-            <p class="cart-counter">(1)</p>
         </div>
         <button class="exit" id="btnExitMarket">Leave</button>
     </div>
 </header>
+
 <main>
     <div class="filter-container">
         <div class="category">
@@ -97,117 +63,126 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body addToCart-modal-body" id="dynamicAddToCartModal">
-                <!-- <div class="wrapper">
-                    <div class="img-container">
-                        <div class="main-image">
-                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
-                                alt="">
-                        </div>
-                        <div class="sub-image">
-                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
-                                alt="">
-                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
-                                alt="">
-                            <img src="https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/445076/item/goods_30_445076.jpg?width=1600&impolicy=quality_75"
-                                alt="">
-                        </div>
-                    </div>
-                    <div class="info-container">
-                        <p class="product-name">Casual Shoes Fashion Sneakers</p>
-                        <p class="product-price">₱<span>13,453</span></p>
-                        <p class="product-description">Get these shoes now! Very affordable and comfortable to wear!!
-                        </p>
-                        <div class="switch-container">
-                            <div class="switch">
-                                <div class="active">Details</div>
-                                <div>Reviews</div>
-                            </div>
-                            <div class="detail-container">
-                                <div class="unit-type">
-                                    <div class="type">
-                                        <div class="icon unit">
-                                            <ion-icon name="checkmark"></ion-icon>
-                                            <p>145</p>
-                                        </div>
-                                        <p>Available Units</p>
-                                    </div>
-                                    <div class="type">
-                                        <div class="icon trend">
-                                            <ion-icon name="flash"></ion-icon>
-                                        </div>
-                                        <p>Trending</p>
-                                    </div>
-                                    <div class="type">
-                                        <div class="icon new">
-                                            <ion-icon name="heart"></ion-icon>
-                                        </div>
-                                        <p>New Arrival</p>
-                                    </div>
-                                    <div class="type">
-                                        <div class="icon sale">
-                                            <ion-icon name="analytics"></ion-icon>
-                                        </div>
-                                        <p>On Sale</p>
-                                    </div>
-                                </div>
-                                <div class="colors">
-                                    <p class="title">Colors</p>
-                                    <div class="color-container">
-                                        <div class="color" style="background-color:red"></div>
-                                        <div class="color" style="background-color:blue"></div>
-                                        <div class="color" style="background-color:yellow"></div>
-                                        <div class="color" style="background-color:green"></div>
-                                        <div class="color" style="background-color:palevioletred"></div>
-                                    </div>
-                                </div>
-                                <div class="sizes">
-                                    <p class="title">Sizes</p>
-                                    <div class="size-container">
-                                        <button class="size">XS (20)</button>
-                                        <button class="size">S (20)</button>
-                                        <button class="size">M (20)</button>
-                                        <button class="size">L (20)</button>
-                                        <button class="size">XL (20)</button>
-                                        <button class="size">XXL (20)</button>
-                                    </div>
-                                </div>
-                                <div class="input-group detail-input">
-                                    <input type="text" class="form-control" placeholder="Enter quantity">
-                                    <div class="input-group-append">
-                                      <span class="input-group-text" id="basic-addon2">/ ~</span>
-                                    </div>
-                                  </div>
-                            </div>
+            <div class="modal-body addToCart-modal-body" id="dynamicAddToCartModal"></div>
+        </div>
+    </div>
+</div>
 
-                            <div class="review-container" style="display: none"></div>
+<!-- Payment Modal -->
+<div class="modal fade" id="cartPaymentModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="cartPaymentModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body payment-modal-body">
+                <div class="header">Payment</div>
+                <div class="content">
+                    <div class="payment-method">
+                        <p class="section-label">Choose payment method below</p>
+                        <div class="method-container">
+                            <div class="method" id="STRIPE">
+                                <img class="stripe"
+                                    src="/public/assets/images/customer/live_selling/payment_method_card.png"
+                                    alt="stripe" class="brand">
+                                <p class="brand-label">pay with credit card via stripe</p>
+                            </div>
+                            <div class="method" id="COD">
+                                <img class="cod"
+                                    src="/public/assets/images/customer/live_selling/payment_method_cod.png" alt="cod"
+                                    class="brand">
+                                <p class="brand-label">pay when you got the package</p>
+                            </div>
                         </div>
                     </div>
-                </div> -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Confirm</button>
+                    <div class="payment-info">
+                        <p class="section-label">Billing Info</p>
+                        <div class="info">
+                            <div class="user-address" id="dynamicAddress"></div>
+                            <div class="user-info">
+                                <div class="row1">
+                                    <div class="form-group">
+                                        <label for="bill-name">full name</label>
+                                        <input type="text" id="inputBillerName" value="Marco Sardido"
+                                            class="form-control" id="bill-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bill-phone">phone number</label>
+                                        <input type="text" id="inputBillerPhone" value="09761591486"
+                                            class="form-control" id="bill-phone">
+                                    </div>
+                                </div>
+                                <div class="row2">
+                                    <div class="form-group">
+                                        <label for="bill-email">Email address</label>
+                                        <input type="email" id="inputBillerEmail" value="marcosardido@gmail.com"
+                                            class="form-control" id="bill-email" aria-describedby="emailHelp">
+                                        <small id="emailHelp" class="form-text text-muted">To notify you about your
+                                            order.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <button class="cancel" data-dismiss="modal">return to live selling</button>
+                    <button class="proceed" id="btnConfirmPay">confirm my purchase</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Checkout Modal -->
-<div class="modal fade" id="modalCheckout" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+<!-- Add new address Modal -->
+<div class="modal fade" id="addNewAddressModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-labelledby="addNewAddressModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="checkoutModalLabel">Checkout</h5>
+                <h5 class="modal-title">Add new shipping address</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
+            <div class="modal-body address-modal-body">
+                <div class="form-group">
+                    <label for="newAddressHouse">House Number, Building and Street Name</label>
+                    <input type="text" class="form-control" id="newAddressHouse">
+                </div>
+                <div class="form-group">
+                    <label for="newAddressProvince">Province</label>
+                    <select class="form-control" id="newAddressProvince">
+                        <option value="" disabled selected hidden>Please choose your province</option>
+                        <option value="Laguna">Laguna</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressCity">City</label>
+                    <select class="form-control" id="newAddressCity">
+                        <option value="" disabled selected hidden>Please choose your city</option>
+                        <option value="Cabuyao">Cabuyao</option>
+                        <option value="Sta Rosa">Sta. Rosa</option>
+                        <option value="Calamba">Calamba</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressBarangay">Barangay</label>
+                    <select class="form-control" id="newAddressBarangay">
+                        <option value="" disabled selected hidden>Please choose your barangay</option>
+                        <option value="Pulo">Pulo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="newAddressPostal">Postal Code</label>
+                    <input type="text" class="form-control" id="newAddressPostal">
+                </div>
+                <div class="form-buttons">
+                    <button class="address-type">home</button>
+                    <button class="address-type">work</button>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btnExit btn-primary" id="btnSaveNewAddress">Save</button>
             </div>
         </div>
     </div>

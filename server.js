@@ -34,12 +34,12 @@ app.use(cors({
     origin: process.env.SERVER_URL,
 }))
 
-app.use(csrf({ cookie: true }));
+// app.use(csrf({ cookie: true }));
 
-app.use("/", (req, res, next) => {
-    res.cookie("XSRF-TOKEN", req.csrfToken());
-    next();
-});
+// app.use("/", (req, res, next) => {
+//     res.cookie("XSRF-TOKEN", req.csrfToken());
+//     next();
+// });
 
 app.use('/', landingPage); //FrontPage
 app.use('/sellercenter', sellerPage.routes); //Access Seller Resource

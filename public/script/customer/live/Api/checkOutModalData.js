@@ -93,7 +93,7 @@ const addStripePaymentID = async (uid, stripePaymentID, stripePaymentStatus) => 
 }
 
 
-const codPaymentHandler = async (uid, roomID, data, items) => {
+const codPaymentHandler = async (uid, roomID, data, items, isAnonymousBuyer) => {
     const orderUniqueID = generateId(), transUniqueID = generateId();
     let totalPrice = 0, roomHost;
 
@@ -131,7 +131,7 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
         // :: Customer Collection
         const customerRef = doc(db, `Customers/${uid}`);
         const customerDoc = await getDoc(customerRef);
-        
+
         // :: Seller Collection -> Live Sessions
         const sellerRef = doc(db, `Sellers/${roomHost}/LiveSessions/sessionID_${roomID}`);
         const sellerDoc = await getDoc(sellerRef);
@@ -144,7 +144,7 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
             customer: {
                 uid: customerDoc.id,
                 address: data.orderAddress,
-                displayName: customerDoc.data().displayName
+                displayName: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName
             },
             items: items,
             date: stringDateFormat(),
@@ -165,6 +165,8 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
             items: items,
             modeOfPayment: data.modeOfPayment,
             placedOn: stringDateFormat(),
+            shippedOn: '',
+            deliveredOn: '',
             totalAmount: totalPrice,
             orderAddress: data.orderAddress,
             status: 'Processing',
@@ -179,7 +181,7 @@ const codPaymentHandler = async (uid, roomID, data, items) => {
 //* =================================================================================================== 
 // ========================================== Stripe ==================================================
 //* ===================================================================================================
-const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod) => {
+const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod, isAnonymousBuyer) => {
 
     try {
         const stripeResult = await fetch(window.location.href, {
@@ -189,13 +191,15 @@ const stripePaymentHandler = async (uid, userObj, itemArr, paymentMethod) => {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                currentUrl: window.location.href,
+                currentUrl: window.location.href.split("?")[0],
+                isAnonymous: isAnonymousBuyer,
                 customer: userObj,
                 items: itemArr,
                 method: paymentMethod
             })
 
         });
+
         // Result Object
         const jsonResult = await stripeResult.json();
 
