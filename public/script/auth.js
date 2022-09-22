@@ -21,10 +21,6 @@ $(document).ready(() => {
     onAuthStateChanged(auth, (loggedUser) =>  {
 
         if (loggedUser) {
-            // console.log(loggedUser.getIdTokenResult().then(idTokenResult => {
-            //     console.log(idTokenResult.claims)
-            // }))
-
             if (loggedUser.emailVerified) {
                 console.log('Customer is already verified');
             } else {

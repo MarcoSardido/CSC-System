@@ -91,7 +91,6 @@ const signUp = (req, res) => {
 
 //* Function -> Add Session Cookie When Logging In 
 const sessionLogin = (req, res) => {
-
     // get the idToken passed from client side.
     const idToken = req.query.token.toString();
 
@@ -104,9 +103,7 @@ const sessionLogin = (req, res) => {
         res.cookie('session', sessionCookie, options);
 
         res.redirect('/customercenter')
-
     }).catch((error) => {
-
         // throw a error if idToken is not valid.
         console.error(error);
         res.status(404).send('UNAUTHORIZED REQUEST!');
@@ -146,17 +143,17 @@ function verifyCookie(req, res, next) {
                 req.body.uid = decodedClaims.uid;
                 req.body.user = decodedClaims.firebase;
 
-                userAccessControl(decodedClaims.uid).then(accType => {
-                    if (accType === 'Customer') {
-                        console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
-                        res.locals.uid = decodedClaims.uid;
-                        return next();
-                    } else {
-                        console.info('Account used to login is for Seller only')
-                        res.clearCookie('session');
-                        res.redirect('/customercenter/auth');
-                    }
-                })
+                // userAccessControl(decodedClaims.uid).then(accType => {
+                //     if (accType === 'Customer') {
+                //         console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
+                //         res.locals.uid = decodedClaims.uid;
+                //         return next();
+                //     } else {
+                //         console.info('Account used to login is for Seller only')
+                //         res.clearCookie('session');
+                //         res.redirect('/customercenter/auth');
+                //     }
+                // })
                 
             }).catch((error) => {
                 console.error(error);
