@@ -56,22 +56,30 @@ $(document).ready(() => {
     }
 
     const processAdd = async (roomID, itemData) => {
+        let availableStocks = 0;
+
         try {
             //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
             const productsSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionProducts/${itemData.prodID}`);
             const productSubColDoc = await getDoc(productsSubColRef);
 
             const variantCopy = productSubColDoc.data().variants;
-            // for (const copyIndex of variantCopy) {
-            //     if (copyIndex.selectedSize === itemData.size) {
-            //         const calcQty = Number(copyIndex.selectedQty) - itemData.quantity;
-            //         copyIndex.selectedQty = calcQty.toString();
-            //     }
-            // }
+            for (const copyIndex of variantCopy) {
+                if (copyIndex.selectedSize === itemData.itemSize) {
+                    const calcQty = Number(copyIndex.selectedQty) - itemData.itemQty;
+                    copyIndex.selectedQty = calcQty.toString();
+                }
+            }
 
-            // await updateDoc(productsSubColRef, {
-            //     'variants': variantCopy
-            // }, { merge: true });
+            //? For stocks label
+            for (const variantIndex of variantCopy) {
+                availableStocks += Number(variantIndex.selectedQty);
+            }
+            updateProductStocks(itemData.prodID, availableStocks);
+
+            await updateDoc(productsSubColRef, {
+                'variants': variantCopy
+            }, { merge: true });
 
             console.log('Product updated successfully: Item Added')
         } catch (error) {
@@ -80,22 +88,30 @@ $(document).ready(() => {
     }
 
     const processRemove = async (roomID, itemData) => {
+        let availableStocks = 0;
+
         try {
             //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
             const productsSubColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionProducts/${itemData.prodID}`);
             const productSubColDoc = await getDoc(productsSubColRef);
 
             const variantCopy = productSubColDoc.data().variants;
-            // for (const copyIndex of variantCopy) {
-            //     if (copyIndex.selectedSize === itemData.size) {
-            //         const calcQty = Number(copyIndex.selectedQty) + itemData.quantity;
-            //         copyIndex.selectedQty = calcQty.toString();
-            //     }
-            // }
+            for (const copyIndex of variantCopy) {
+                if (copyIndex.selectedSize === itemData.itemSize) {
+                    const calcQty = Number(copyIndex.selectedQty) + itemData.itemQty;
+                    copyIndex.selectedQty = calcQty.toString();
+                }
+            }
 
-            // await updateDoc(productsSubColRef, {
-            //     'variants': variantCopy
-            // }, { merge: true });
+            //? For stocks label
+            for (const variantIndex of variantCopy) {
+                availableStocks += Number(variantIndex.selectedQty);
+            }
+            updateProductStocks(itemData.prodID, availableStocks);
+
+            await updateDoc(productsSubColRef, {
+                'variants': variantCopy
+            }, { merge: true });
 
             console.log('Product updated successfully: Item Removed')
         } catch (error) {
@@ -173,7 +189,7 @@ $(document).ready(() => {
     const generateProductItem = (productData) => {
         let product_template = ``;
 
-        const generateStocks = (varietyData) => {
+        const generateStocks = (varietyData, prodID) => {
             let stocks_template = ``, productStock = 0;
 
             for (const varietyIndex of varietyData) {
@@ -181,7 +197,7 @@ $(document).ready(() => {
             }
 
             stocks_template = `
-                <p class="stock-label" id="dynamicStockLabel">In Stock: ${productStock}pcs</p>
+                <p class="stock-label" data-prod-id="${prodID}">In Stock: ${productStock}pcs</p>
             `;
 
             return stocks_template;
@@ -222,7 +238,7 @@ $(document).ready(() => {
             product_template += `
                 <div class="product">
                     <div class="product-image">
-                        ${generateStocks(productIndex.variants)}
+                        ${generateStocks(productIndex.variants, productIndex.prodID)}
                         <img
                             src="data:${productIndex.productImages[0].type};base64,${productIndex.productImages[0].data}">
                         <div class="variety">
@@ -248,6 +264,16 @@ $(document).ready(() => {
         }
 
         productContainer.insertAdjacentHTML('beforeend', product_template)
+    }
+
+    const updateProductStocks = (productID, availableStocks) => {
+        const stocksLabelList = document.querySelectorAll('.stock-label');
+
+        for (const stockLabelIndex of stocksLabelList) {
+            if (stockLabelIndex.dataset.prodId === productID) {
+                stockLabelIndex.textContent = `In Stock: ${availableStocks}pcs`;
+            }
+        }
     }
 
 

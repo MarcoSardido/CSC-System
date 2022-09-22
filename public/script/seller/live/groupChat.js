@@ -141,8 +141,13 @@ $(document).ready(() => {
 
     const OTHER_MESSAGE_TEMPLATE =
         `<div class="chat-item other-user">
-            <div class="chat-head">
+            <div class="chat-head" data-toggle="dropdown">
                 <img id="pic" src="" alt="user">
+            </div>
+            <div class="dropdown-menu">
+                <a class="dropdown-item">Mute</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item remove">Remove</a>
             </div>
             <div class="chat-body">
                 <p class="name"></p>
@@ -197,6 +202,7 @@ $(document).ready(() => {
 
             const div = container.firstChild;
             div.setAttribute('id', chatID);
+            div.setAttribute('uid', uid);
 
             // If timestamp is null, assume we've gotten a brand new message.
             time = time ? new Date(time.seconds * 1000 + time.nanoseconds / 1000000) : Date.now();

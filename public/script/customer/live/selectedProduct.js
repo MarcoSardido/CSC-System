@@ -88,16 +88,16 @@ $(document).ready(() => {
                 }
             }
 
-            updateModalChanges(variantCopy)
+            // updateModalChanges(variantCopy)
 
-            // await updateDoc(subColRef, {
-            //     'variants': variantCopy
-            // }, { merge: true }).then(() => {
-            //     const docRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`)
-            //     onSnapshot(docRef, doc => {
-            //         updateModalChanges(doc.data().variants)
-            //     })
-            // })
+            await updateDoc(subColRef, {
+                'variants': variantCopy
+            }, { merge: true }).then(() => {
+                const docRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionProducts/${pid}`)
+                onSnapshot(docRef, doc => {
+                    updateModalChanges(doc.data().variants)
+                })
+            });
 
             console.log('Product updated successfully: Item Added')
 
@@ -120,11 +120,11 @@ $(document).ready(() => {
                 }
             }
 
-            updateModalChanges(variantCopy)
+            // updateModalChanges(variantCopy)
 
-            // await updateDoc(subColRef, {
-            //     'variants': variantCopy
-            // }, { merge: true })
+            await updateDoc(subColRef, {
+                'variants': variantCopy
+            }, { merge: true })
 
             console.log('Product updated successfully: Item Removed')
 

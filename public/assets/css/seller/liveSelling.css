@@ -242,6 +242,14 @@ p {
     margin: 15px 0;
 }
 
+.dropdown-item {
+    font-size: 13px;
+}
+
+.dropdown-item.remove {
+    color: red;
+}
+
 .chat-item.this-user {
     justify-content: flex-end;
 }
@@ -252,6 +260,7 @@ p {
 
 .chat-item .chat-head {
     margin-right: 15px;
+    cursor: pointer;
 }
 
 .chat-item .chat-head img {

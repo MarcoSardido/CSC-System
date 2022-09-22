@@ -16,6 +16,22 @@ header {
     font-weight: 600;
 }
 
+.middle {
+    text-align: center;
+}
+
+.middle label {
+    font-weight: 500;
+    margin: 0;
+    font-size: 15px;
+}
+
+.middle .timer {
+    color: black;
+    font-size: 21px;
+    font-weight: 600;
+}
+
 .right {
     display: flex;
     align-items: center;

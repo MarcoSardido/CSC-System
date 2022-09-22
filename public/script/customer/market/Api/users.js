@@ -54,7 +54,32 @@ const removeUser = async (uid, roomID) => {
     }
 }
 
+const roomExpire = async (uid, roomID) => {
+    const deleteCartItemsArray = [];
+    try {
+        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+        const liveCartSubColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart`);
+        const liveCartSubColDocs = await getDocs(liveCartSubColRef);
+        liveCartSubColDocs.forEach(doc => deleteCartItemsArray.push(doc.id));
+
+        //? Delete all items in LiveCart 
+        for (const itemIndex of deleteCartItemsArray) {
+            const deleteCartItem = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${itemIndex}`);
+            await deleteDoc(deleteCartItem);
+        }
+
+        //* LIVE SESSION COLLECTION
+        const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
+        await setDoc(liveSessionColRef, {
+            sessionStatus: 'Close'
+        }, { merge: true});
+    } catch (error) {
+        console.error(`Firestore Error -> @roomExpire: ${error.message}`)
+    }
+}
+
 export {
     addUser,
-    removeUser
+    removeUser,
+    roomExpire
 }

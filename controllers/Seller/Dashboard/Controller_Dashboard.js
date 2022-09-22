@@ -30,6 +30,7 @@ export const dashboard = async (req, res) => {
 
                     const stripeRetrievedSubscription = await stripe.subscriptions.retrieve(stripeAccData.data().subscriptionID);
                     const stripeCurrentSubBill = new Date(stripeRetrievedSubscription.current_period_start * 1000).toDateString();
+                    const stripeNextSubBill = new Date(stripeRetrievedSubscription.current_period_end * 1000).toDateString();
 
                     const stripeSubColRef = doc(db, 'Stripe Accounts', `seller_${uid}`, 'Services', 'Subscription');
                     const stripeSubColData = await getDoc(stripeSubColRef);
@@ -52,6 +53,13 @@ export const dashboard = async (req, res) => {
                     //* STRIPE COLLECTION -> SUB-COLLECTION: Services
                     const stripeColRef = doc(db, `Stripe Accounts/seller_${uid}/Services/Subscription`)
                     const stripeColDoc = await getDoc(stripeColRef);
+
+                        //? :: Update stripe subscription date 
+                        await setDoc(stripeColRef, {
+                            currentSubscriptionBill: stripeCurrentSubBill,
+                            nextSubscriptionBill: stripeNextSubBill
+                        }, { merge: true })
+
 
                     sellerData.accountCol = accountColDoc.data();
                     sellerData.sellerCol = sellerColDoc.data();

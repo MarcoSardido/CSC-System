@@ -149,7 +149,7 @@ async function hasSubscription() {
         return customersWithActiveSubscription;
 
     } catch (error) {
-        console.error(error.message)
+        console.error(`Stripe Error -> @hasSubscription: ${error.message}`)
     };
 };
 
