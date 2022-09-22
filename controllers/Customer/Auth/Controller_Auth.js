@@ -143,18 +143,22 @@ function verifyCookie(req, res, next) {
                 req.body.uid = decodedClaims.uid;
                 req.body.user = decodedClaims.firebase;
 
+                console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
+                res.locals.uid = decodedClaims.uid;
+                return next();
+
                 // userAccessControl(decodedClaims.uid).then(accType => {
                 //     if (accType === 'Customer') {
-                //         console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
-                //         res.locals.uid = decodedClaims.uid;
-                //         return next();
+                // console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
+                // res.locals.uid = decodedClaims.uid;
+                // return next();
                 //     } else {
                 //         console.info('Account used to login is for Seller only')
                 //         res.clearCookie('session');
                 //         res.redirect('/customercenter/auth');
                 //     }
                 // })
-                
+
             }).catch((error) => {
                 console.error(error);
             });
