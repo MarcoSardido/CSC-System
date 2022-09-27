@@ -15,13 +15,9 @@
         <% displayAccountInfo.forEach(accountKey=> { %>
             <div class="profile">
                 <div class="info">
-                    <% if(accountKey.displayName !=='' && accountKey.isVerified){ %>
-                        <p>Hey, <b><%=accountKey.displayName%></b></p>
-                        <small class="text-muted">Verified 👍</small>
-                        <% }else{ %>
-                            <p>Hey, <b>Customer123</b></p>
-                            <small class="text-muted">Not Verified 👎</small>
-                    <% } %>
+                    <p>Hey, <b><%= accountKey.displayName === '' ? 'Customer' : accountKey.displayName %></b></p>
+                    <small class="text-muted"><%= accountKey.isVerified ? 'Verified 👍' : 'Not Verified 👎' %></small>
+                    
                 </div>
                 <div class="profile-photo">
                     <% if(accountKey.userPhoto==='' ) { %>

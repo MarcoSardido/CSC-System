@@ -8,6 +8,16 @@ main .no-live-text {
     margin-top: 10rem;
 }
 
+main .not-verified {
+	text-align: center;
+	margin: 10rem auto;
+}
+
+main .not-verified ion-icon {
+	color: red;
+    font-size: 3rem;
+}
+
 main .lives {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);

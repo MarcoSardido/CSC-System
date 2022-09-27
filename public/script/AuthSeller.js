@@ -11,15 +11,11 @@ $(document).ready(() => {
     onAuthStateChanged(auth, (loggedUser) =>  {
 
         if (loggedUser) {
-            // console.log(loggedUser.getIdTokenResult().then(idTokenResult => {
-            //     console.log(idTokenResult.claims)
-            // }))
-
             if (loggedUser.emailVerified) {
                 console.log('Seller is already verified');
             } else {
                 sendEmailVerification(loggedUser).then(() => {
-                    console.log('Email verification sent');
+                    alert('Email verification sent');
                 });
             }
         } else {

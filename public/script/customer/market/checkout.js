@@ -51,32 +51,46 @@ $(document).ready(() => {
 
             const ADDRESS_TEMPLATE = `
                 <label>shipping address</label>
-                <div class="selected">
-                    <div class="main" id="dynamicChangeAddress">
-                        <div class="tag">${result[0].addressType}</div>
-                        <div class="address">
-                            <p id="addressValue">${result[0].HouseOrUnitNo}, ${result[0].Barangay}, ${result[0].City}, ${result[0].Province}.</p>
-                            <p id="postalValue">${result[0].zipCode}</p>
+                ${result.length > 0 ? 
+                `
+                    <div class="selected">
+                        <div class="main" id="dynamicChangeAddress">
+                            <div class="tag">${result[0].addressType}</div>
+                            <div class="address">
+                                <p id="addressValue">${result[0].HouseOrUnitNo}, ${result[0].Barangay}, ${result[0].City}, ${result[0].Province}.</p>
+                                <p id="postalValue">${result[0].zipCode}</p>
+                            </div>
+                        </div>
+                        <button class="toggle-address" data-toggle="collapse" data-target="#collapseAddress"
+                            aria-expanded="false" aria-controls="collapseAddress">
+                            Choose other address
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseAddress">
+                        <div class="address-list">
+                            <div class="add-address">
+                                <button class="add-another-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
+                                    <div class="icon">
+                                        <ion-icon name="add-outline"></ion-icon>
+                                    </div>
+                                    <span>Add another address</span>
+                                </button>
+                            </div>
+                            <div class="list" id="dynamicList">${result.length > 1 ? loopOtherAddress() : ''}</div>
                         </div>
                     </div>
-                    <button class="toggle-address" data-toggle="collapse" data-target="#collapseAddress"
-                        aria-expanded="false" aria-controls="collapseAddress">
-                        Choose other address
-                    </button>
-                </div>
-                <div class="collapse" id="collapseAddress">
-                    <div class="address-list">
-                        <div class="add-address">
-                            <button class="add-another-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
-                                <div class="icon">
-                                    <ion-icon name="add-outline"></ion-icon>
-                                </div>
-                                <span>Add another address</span>
-                            </button>
-                        </div>
-                        <div class="list" id="dynamicList">${result.length > 1 ? loopOtherAddress() : ''}</div>
+                ` : 
+                `
+                    <div class="selected">
+                        <button class="add-another-address no-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
+                            <div class="icon">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </div>
+                            <span>Add address</span>
+                        </button>
                     </div>
-                </div>
+                `}
+                
             `;
 
             dynamicAddressContainer.insertAdjacentHTML('beforeend', ADDRESS_TEMPLATE)

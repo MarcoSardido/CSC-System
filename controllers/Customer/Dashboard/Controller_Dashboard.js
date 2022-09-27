@@ -47,20 +47,22 @@ export const dashboard = (req, res) => {
         } else { // If there is user document, then update sign in time
 
             await setDoc(doc(db, 'Accounts', `customer_${userRecord.uid}`), {
-                signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z')
+                signedInAt: date.format(now, 'MMM DD, YYYY hh:mm A [GMT]Z'),
+                isVerified: userRecord.emailVerified
             }, { merge: true });
-
-            userData(userRecord.uid).then(result => {
-                res.render('customer/dashboard', {
-                    layout: 'layouts/customerLayout',
-                    displayAccountInfo: result.accountArray,
-                    displayCustomerInfo: result.customerArray,
-                    messageCode: '',
-                    infoMessage: '',
-                    onLive: false,
-                });
-            })
         }
+
+        userData(userRecord.uid).then(result => {
+            res.render('customer/dashboard', {
+                layout: 'layouts/customerLayout',
+                displayAccountInfo: result.accountArray,
+                displayCustomerInfo: result.customerArray,
+                isVerified: userRecord.emailVerified,
+                messageCode: '',
+                infoMessage: '',
+                onLive: false,
+            });
+        })
     }).catch(error => {
         console.error(`Error fetching user data: ${error}`);
     });

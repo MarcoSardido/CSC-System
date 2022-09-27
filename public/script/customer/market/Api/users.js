@@ -44,9 +44,26 @@ const addUser = async (uid, roomID) => {
 }
 
 const removeUser = async (uid, roomID) => {
+    const cartItemsArray = [];
+
     try {
         //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
-        const subColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}`)
+        const subColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}`);
+
+        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+        const cartSubColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart`);
+        const cartSubColDocs = await getDocs(cartSubColRef);
+        cartSubColDocs.forEach(doc => cartItemsArray.push(doc.id));
+
+        if (cartItemsArray.length > 0) {
+            // LiveCart is not empty, delete all items.
+            for (const itemID of cartItemsArray) {
+                const cartSubDocRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}/LiveCart/${itemID}`);
+                await deleteDoc(cartSubDocRef);
+            }
+        }
+
+        // Delete user in 'sessionUsers' -> sub-collection.
         await deleteDoc(subColRef);
 
     } catch (error) {
@@ -72,7 +89,7 @@ const roomExpire = async (uid, roomID) => {
         const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
         await setDoc(liveSessionColRef, {
             sessionStatus: 'Close'
-        }, { merge: true});
+        }, { merge: true });
     } catch (error) {
         console.error(`Firestore Error -> @roomExpire: ${error.message}`)
     }

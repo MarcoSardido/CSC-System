@@ -25,7 +25,7 @@ $(document).ready(() => {
                 console.log('Customer is already verified');
             } else {
                 sendEmailVerification(loggedUser).then(() => {
-                    console.log('Email verification sent');
+                    Alert('Email verification sent');
                 });
             }
             console.log(loggedUser);

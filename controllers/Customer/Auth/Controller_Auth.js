@@ -2,6 +2,8 @@ import { firebase, firebaseAdmin } from '../../../firebase.js';
 import { getAuth, sendPasswordResetEmail, sendEmailVerification } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 
+import date from 'date-and-time';
+
 const adminAuth = firebaseAdmin.auth();
 const auth = getAuth(firebase);
 const db = getFirestore(firebase);
@@ -13,7 +15,6 @@ const signInAndSignUpRoute = (req, res) => {
 
     // Check if session cookie is available.
     if (!sessionCookie) {
-
         //no sessionCookie available, user rendered to login page.
         res.render('authentication/auth', {
             title: 'City Sales Cloud',
@@ -23,7 +24,6 @@ const signInAndSignUpRoute = (req, res) => {
         });
 
     } else {
-
         //sessionCookie available, user rendered to customer center page
         //to logout.
         res.render('customer/dashboard', {
@@ -39,10 +39,25 @@ const signInAndSignUpRoute = (req, res) => {
 };
 
 //* Method: GET -> Logout
-const logout = (req, res) => {
-    res.clearCookie('session');
-    res.redirect('/customercenter/auth')
-    console.log('Successfully Logged out');
+const logout = async (req, res) => {
+    const uid = req.body.uid;
+    const user = req.body.user;
+
+    const currentDate = new Date();
+    try {
+        //* ACCOUNTS COLLECTION
+        const accountColRef = doc(db, `Accounts/customer_${uid}`);
+        await setDoc(accountColRef, {
+            signedOutAt: date.format(currentDate, 'MMM DD, YYYY hh:mm A [GMT]Z')
+        }, { merge: true })
+
+        res.clearCookie('session');
+        res.redirect('/customercenter/auth')
+
+        console.log('Successfully Logged out');
+    } catch (error) {
+        console.error(`Authentication -> @logout: ${error.message}`);
+    }
 };
 
 //* Method: POST -> Register Seller
@@ -112,22 +127,36 @@ const sessionLogin = (req, res) => {
 
 //* Function -> Check Access Control
 async function userAccessControl(uid) {
-    let currentAccount;
-    try {
+    let existingAccRole;
+    const allTrimmedAccountsArray = [], allOriginAccountsArray = [], accObj = {};
 
-        const accountColRef = collection(db, `Accounts`)
-        const accountCollection = await getDocs(accountColRef)
+    try {
+        //* ACCOUNTS COLLECTIONS 
+        const accountColRef = collection(db, `Accounts`);
+        const accountCollection = await getDocs(accountColRef);
         accountCollection.forEach(doc => {
             const colID = doc.id.split('_')[1];
-            if (uid === colID) {
-                currentAccount = doc.id;
-            }
+            allTrimmedAccountsArray.push(colID); //I.E 123456
+            allOriginAccountsArray.push(doc.id); //I.E customer_123456
         })
 
-        const accountDataRef = doc(db, `Accounts/${currentAccount}`)
-        const accountData = await getDoc(accountDataRef)
+        //? If user found, check account role. Otherwise create account data;
+        if (allTrimmedAccountsArray.includes(uid)) {
+            for (const accountIndex of allOriginAccountsArray) {
+                if (accountIndex.split('_')[1] === uid) {
+                    accObj.existingAccID = accountIndex;
+                    break;
+                }
+            }
+        }
 
-        return accountData.data().accRole
+        if (Object.keys(accObj).length > 0) {
+            const accountColRef = doc(db, `Accounts/${accObj.existingAccID}`);
+            const accountColDoc = await getDoc(accountColRef)
+            existingAccRole = accountColDoc.data().accRole;
+        }
+
+        return existingAccRole === undefined ? 'New' : existingAccRole;
     } catch (error) {
         console.error(`Firebase Auth: @userAccessControl -> ${error.message}`)
     }
@@ -143,21 +172,24 @@ function verifyCookie(req, res, next) {
                 req.body.uid = decodedClaims.uid;
                 req.body.user = decodedClaims.firebase;
 
-                console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
-                res.locals.uid = decodedClaims.uid;
-                return next();
+                userAccessControl(decodedClaims.uid).then(resultData => {
+                    if (resultData === 'New') {
+                        console.log(`Customer Created Successfully: ${decodedClaims.uid}`);
+                        res.locals.uid = decodedClaims.uid;
+                        return next();
+                    } else {
+                        if (resultData === 'Customer') {
+                            console.log(`Customer ID: ${decodedClaims.uid} Successfully Verified.`);
+                            res.locals.uid = decodedClaims.uid;
+                            return next();
+                        } else {
+                            console.info('Account used to login is for Seller only')
+                            res.clearCookie('session');
+                            res.redirect('/customercenter/auth');
+                        }
+                    }
 
-                // userAccessControl(decodedClaims.uid).then(accType => {
-                //     if (accType === 'Customer') {
-                // console.log(`Customer Successfully SignedIn: ${decodedClaims.uid}`);
-                // res.locals.uid = decodedClaims.uid;
-                // return next();
-                //     } else {
-                //         console.info('Account used to login is for Seller only')
-                //         res.clearCookie('session');
-                //         res.redirect('/customercenter/auth');
-                //     }
-                // })
+                })
 
             }).catch((error) => {
                 console.error(error);

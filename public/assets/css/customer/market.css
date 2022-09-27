@@ -860,6 +860,12 @@ main .product-container .product .product-button>.addToCart-button:hover {
     margin-right: 10px;
 }
 
+.payment-modal-body .content .payment-info .info .user-address .selected .no-address {
+    padding: 10px;
+    font-size: 13px;
+    width: 100%;
+}
+
 .payment-modal-body .content .payment-info .info .user-address .address-list {
     max-height: 160px;
     overflow-x: auto;

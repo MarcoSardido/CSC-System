@@ -37,7 +37,7 @@ router.post('/auth', signUp);
 router.get('/auth/sessionLogin', sessionLogin);
 
 // Logout
-router.get('/auth/logout', logout);
+router.get('/auth/logout', verifyCookie, logout);
 
 //! ---------------------------------------------------------------- 
 //                       Pages

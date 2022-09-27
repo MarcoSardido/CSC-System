@@ -3,12 +3,20 @@
 
 <main>
     <h1>Live Streams</h1>
-    <div class="no-live-text">
-        <h2>There are no live session available at the moment.</h2>
-        <h3>Please check again later.</h3>
-    </div>
-
-    <div class="live-container"></div>
+    <% if (isVerified) { %> 
+        <div class="no-live-text" id="noLiveText">
+            <h2>There are no live session available at the moment.</h2>
+            <h3>Please check again later.</h3>
+        </div>
+       
+        <div class="live-container"></div>
+    <% } else { %> 
+        <div class="not-verified">
+            <ion-icon name="alert-outline"></ion-icon>
+            <h2>Email account not verified.</h2>
+            <h3>Please verify your email to continue shopping.</h3>
+        </div>
+    <% } %> 
     
     <br><br> 
 </main>

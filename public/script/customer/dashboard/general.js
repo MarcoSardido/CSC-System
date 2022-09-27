@@ -185,11 +185,12 @@ $(document).ready(() => {
     const displayRooms = (data) => {
         const size = data.length;
         if (size > 0) {
-            $('.no-live-text').remove();
+            $('#noLiveText').remove();
             $('.live-container').empty();
             generateRoom(data);
 
             initializeModal(data);
         }
     };
+    
 })
