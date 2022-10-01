@@ -89,20 +89,26 @@ const generateId = () => {
 
 // Result: 01 Jul 2022
 const stringDateFormat = () => {
-    let formattedMonth;
+    let finalDate;
     const date = new Date();
-    const formattedDate = date.toLocaleDateString('en-GB', {
+
+    let formattedDate = date.toLocaleDateString('en-GB', {
         day: 'numeric', month: 'short', year: 'numeric'
     }).replace(/ /g, ' ');
 
     const checkMonth = formattedDate.split(' ')[1];
     const spread = [...checkMonth];
-    if (spread.length > 3) {
-        spread.pop();
-        formattedMonth = spread.join('')
-    } 
 
-    return formattedMonth;
+    if (spread.length > 3) {
+        let trimmedMonth, convertDateToArray;
+        convertDateToArray = formattedDate.split(' ');
+        spread.pop();
+        trimmedMonth = spread.join('');
+        convertDateToArray.splice(1, 1, trimmedMonth);
+        finalDate = convertDateToArray.join(' ');
+    }
+
+    return finalDate === undefined ? formattedDate : finalDate;
 }
 
 export {

@@ -421,16 +421,17 @@ main .settings .content .middle form table td .save-btn {
 }
 
 main .settings .content .middle .uploadPhoto {
-    display: grid;
-    grid-template-columns: auto;
-    place-items: center;
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 main .settings .content .middle .uploadPhoto .profile-photo {
     height: 120px;
     width: 120px;
-    margin-top: 5rem;
+    margin-bottom: 15px;
+    position: relative;
 }
 
 main .settings .content .middle .uploadPhoto .profile-photo img {
@@ -438,9 +439,19 @@ main .settings .content .middle .uploadPhoto .profile-photo img {
     width: 120px;
 }
 
+main .settings .content .middle .uploadPhoto .profile-photo ion-icon {
+    background: #898989ad;
+    position: absolute;
+    font-size: 30px;
+    bottom: 0;
+    padding: 5px 43px;
+    cursor: pointer;
+}
+
 main .settings .content .middle .uploadPhoto .input-file {
-    margin-bottom: 12rem;
     text-align: center;
+    width: 120px;
+    margin-bottom: 15px;
 }
 
 main .settings .content .middle .uploadPhoto .input-file input[type=file] {
@@ -448,6 +459,16 @@ main .settings .content .middle .uploadPhoto .input-file input[type=file] {
     width: 80%;
     margin-left: 2rem;
     cursor: pointer;
+}
+
+main .settings .content .middle .uploadPhoto .input-file .button-group {
+    width: 120px;
+    justify-content: space-between;
+    display: flex;
+}
+
+main .settings .content .middle .uploadPhoto .input-file .button-group button {
+    padding: 5px 5px;
 }
 
 main .content .middle .location,

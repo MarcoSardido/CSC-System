@@ -224,8 +224,9 @@ $(document).ready(() => {
                     previewObj.eventDuration = secondPartInput[1].value;
                     previewObj.eventEnd = computeTime(secondPartInput[0].value, secondPartInput[1].value);
 
+                    console.log(previewObj)
                     startLiveSelling(trimmedUID, previewObj).then(res => {
-                        window.location.assign(`${window.location.href}/live/room/${res}`)
+                        window.location.assign(`${window.location.href}/live/room/${res}`);
                     })
                 })
 

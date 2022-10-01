@@ -6,7 +6,7 @@ import { order } from '../controllers/Customer/Order/Controller_Order.js';
 import { orderStatus } from '../controllers/Customer/Order/Controller_OrderStatus.js';
 import { review } from '../controllers/Customer/Review/Controller_Review.js';
 import { setting } from '../controllers/Customer/Setting/Controller_Setting.js';
-import { updateProfile } from '../controllers/Customer/Setting/Controller_UpdateProfile.js';
+import { updateProfileData, updateProfilePhoto } from '../controllers/Customer/Setting/Controller_UpdateProfile.js';
 
 import {
     liveSession,
@@ -57,8 +57,8 @@ router.get('/reviews', verifyCookie, review);
 
 // Settings Page
 router.get('/settings', verifyCookie, setting);
-router.post('/', updateProfile);
-
+router.post('/settings', verifyCookie, updateProfileData);
+router.post('/settings/updatePhoto', verifyCookie, updateProfilePhoto);
 
 //! ---------------------------------------------------------------- 
 //                       Live Selling
