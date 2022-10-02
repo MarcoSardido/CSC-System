@@ -3,8 +3,6 @@ import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 const db = getFirestore(firebase);
 
 import date from 'date-and-time';
-
-const imageMimeTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/PNG'];
 const now = new Date();
 
 const updateProfileData = async (req, res) => {

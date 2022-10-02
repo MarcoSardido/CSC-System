@@ -108,11 +108,11 @@ if (modal_edit_btn) {
 			main.classList.add("active-edit");
 		});
 	});
-	close_btn.forEach(function (btn) {
-		btn.addEventListener("click", function () {
-			main.classList.remove("active-edit");
-		});
-	});
+	// close_btn.forEach(function (btn) {
+	// 	btn.addEventListener("click", function () {
+	// 		main.classList.remove("active-edit");
+	// 	});
+	// });
 }
 if (modal_btn_card) {
 	// ADD NEW CARD MODAL
@@ -166,10 +166,11 @@ document.querySelector(".save-btn").addEventListener('click', function () {
 
 
 // SWEET ALERT (Add new address modal)
-document.querySelector(".submit-btn").addEventListener('click', function () {
-	main.classList.remove("active");
-	Swal.fire("Added Successfully", "Your new address has been added", "success");
-});
+// document.querySelector(".submit-btn").addEventListener('click', function () {
+// 	// main.classList.remove("active");
+// 	// Swal.fire("Added Successfully", "Your new address has been added", "success");
+// 	// console.log('new address added')
+// });
 
 // SWEET ALERT (Edit address modal)
 document.querySelector(".update-btn").addEventListener('click', function () {

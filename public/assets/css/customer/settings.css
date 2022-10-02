@@ -733,42 +733,42 @@ i:hover {
     align-items: center;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-flex,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-flex,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-flex,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-flex,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-flex,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-flex {
     display: flex;
     gap: 3%;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-grid,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-grid,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-grid,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-grid,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-grid,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-grid {
     display: grid;
     grid-template-columns: auto;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .field-label,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .field-label {
     margin: 1rem;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label p,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label p {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label p,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label p {
     font-size: 1.1rem;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types {
     display: flex;
     gap: 2%;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types>label {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types>label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types>label {
     font-size: 0.99rem;
     margin-top: 12px;
     cursor: pointer;
@@ -777,20 +777,20 @@ i:hover {
     border-radius: 10px;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types label:hover {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types label:hover,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types label:hover {
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label #label-types .label-active {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types .label-active,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label #label-types .label-active {
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field {
     position: relative;
@@ -799,50 +799,25 @@ i:hover {
     padding-top: 20px;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default {
     padding: 1.2rem;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default input.chb,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default input.chb {
     visibility: hidden;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.chb+label {
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default input.chb+label,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .field-label .set-default input.chb+label {
     position: relative;
     padding-left: 7px;
     font-size: 1rem;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault+label::before {
-    position: absolute;
-    left: -20px;
-    top: 1px;
-    /*   text-align: center; */
-    border: 2px solid var(--color-primary);
-    content: " ";
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
-    transition: all 0.1s ease-in, border-color 0.05s ease-in;
-}
-
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .field-label .set-default input.setDefault:checked+label::before {
-    transform: rotate(40deg);
-    border-top-color: transparent;
-    border-left-color: transparent;
-    top: 0;
-    left: -15px;
-    width: 7px;
-    height: 14px;
-}
-
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input {
     border: 1px solid var(--color-light);
@@ -860,15 +835,15 @@ i:hover {
     font-size: 14px;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:focus,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:focus,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus {
     border: 1px solid var(--color-primary);
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field .placeholder,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field .placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field .placeholder,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field .placeholder {
     position: absolute;
@@ -882,10 +857,10 @@ i:hover {
         color 0.3s ease-in-out;
 }
 
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:valid+.placeholder,
-.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap form .custom-field input:focus+.placeholder,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:valid+.placeholder,
+.modal-wrap .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:focus+.placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:valid+.placeholder,
+.modal-wrap-edit .modal-address .modal-container .modal-body .modal-address-wrap .custom-field input:focus+.placeholder,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
 .modal-wrap-card .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:focus+.placeholder,
 .modal-wrap-card-edit .modal-card .modal-container .modal-body .modal-card-wrap form .custom-field input:valid+.placeholder,
