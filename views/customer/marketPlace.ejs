@@ -28,7 +28,8 @@
                         <p class="label">Total Price:</p>
                         <p class="total" id="dynamicTotalLabel"></p>
                     </div>
-                    <button class="checkout-button disable" disabled id="btnCheckout" data-toggle="modal" data-target="#cartPaymentModal">Check out</button>
+                    <button class="checkout-button disable" disabled id="btnCheckout" data-toggle="modal"
+                        data-target="#cartPaymentModal">Check out</button>
                 </div>
             </div>
         </div>
@@ -104,23 +105,19 @@
                             <div class="user-info">
                                 <div class="row1">
                                     <div class="form-group">
-                                        <label for="bill-name">full name</label>
-                                        <input type="text" id="inputBillerName" value="Marco Sardido"
-                                            class="form-control" id="bill-name">
+                                        <label for="inputBillerName">full name</label>
+                                        <input type="text" id="inputBillerName" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="bill-phone">phone number</label>
-                                        <input type="text" id="inputBillerPhone" value="09761591486"
-                                            class="form-control" id="bill-phone">
+                                        <label for="inputBillerPhone">phone number</label>
+                                        <input type="text" id="inputBillerPhone" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row2">
                                     <div class="form-group">
-                                        <label for="bill-email">Email address</label>
-                                        <input type="email" id="inputBillerEmail" value="marcosardido@gmail.com"
-                                            class="form-control" id="bill-email" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">To notify you about your
-                                            order.</small>
+                                        <label for="inputBillerEmail">Email address</label>
+                                        <input type="email" id="inputBillerEmail" value="<%= displayAccountInfo[0].email %> " class="form-control" aria-describedby="emailHelp">
+                                        <small id="emailHelp" class="form-text text-muted">To notify you about your order.</small>
                                     </div>
                                 </div>
                             </div>
@@ -148,16 +145,35 @@
                 </button>
             </div>
             <div class="modal-body address-modal-body">
+                <div class="form-wrap">
+                    <div class="form-group form-name">
+                        <label for="newAddressName">Full Name</label>
+                        <input type="text" class="form-control" id="newAddressName">
+                    </div>
+                    <div class="form-group form-phone">
+                        <label for="newAddressPhone">Phone Number</label>
+                        <input type="text" class="form-control" id="newAddressPhone">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="newAddressHouse">House Number, Building and Street Name</label>
                     <input type="text" class="form-control" id="newAddressHouse">
                 </div>
-                <div class="form-group">
-                    <label for="newAddressProvince">Province</label>
-                    <select class="form-control" id="newAddressProvince">
-                        <option value="" disabled selected hidden>Please choose your province</option>
-                        <option value="Laguna">Laguna</option>
-                    </select>
+                <div class="form-wrap">
+                    <div class="form-group">
+                        <label for="newAddressBarangay">Barangay</label>
+                        <select class="form-control" id="newAddressBarangay">
+                            <option value="" disabled selected hidden>Please choose your barangay</option>
+                            <option value="Pulo">Pulo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newAddressProvince">Province</label>
+                        <select class="form-control" id="newAddressProvince">
+                            <option value="" disabled selected hidden>Please choose your province</option>
+                            <option value="Laguna">Laguna</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="newAddressCity">City</label>
@@ -166,13 +182,6 @@
                         <option value="Cabuyao">Cabuyao</option>
                         <option value="Sta Rosa">Sta. Rosa</option>
                         <option value="Calamba">Calamba</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="newAddressBarangay">Barangay</label>
-                    <select class="form-control" id="newAddressBarangay">
-                        <option value="" disabled selected hidden>Please choose your barangay</option>
-                        <option value="Pulo">Pulo</option>
                     </select>
                 </div>
                 <div class="form-group">

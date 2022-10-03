@@ -177,7 +177,10 @@ const livePaymentSuccess = async (req, res) => {
         customer: {
             uid: customerDoc.id,
             address: currentItemObj.orderAddress,
-            displayName: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName
+            name: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName,
+            phone: customerDoc.data().contactNo,
+            checkoutName: currentItemObj.checkoutName,
+            checkoutPhone: currentItemObj.checkoutPhone,
         },
         items: currentItemObj.currentCheckoutItems,
         date: stringDateFormat(),
@@ -247,6 +250,9 @@ const livePayment = async (req, res) => {
     currentItemObj.currentCheckoutItems = items;
     currentItemObj.currentPaymentMethod = method;
     currentItemObj.orderAddress = customer.address;
+    currentItemObj.checkoutPhone = customer.contactNo;
+    currentItemObj.checkoutName = `${customer.fName} ${customer.lName}`;
+
 
     try {
         // Stripe Account Collection

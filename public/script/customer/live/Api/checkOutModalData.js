@@ -32,12 +32,14 @@ const addNewAddress = async (uid, addressObj) => {
 
         const addressColRef = doc(db, `Customers/${uid}/AddressBook/address${addressCounter}`);
         await setDoc(addressColRef, {
-            Barangay: addressObj.barangay,
-            City: addressObj.city,
-            HouseOrUnitNo: addressObj.home,
-            Province: addressObj.province,
-            addressType: addressObj.type,
-            zipCode: addressObj.postal,
+            name: addressObj.name,
+            phone: addressObj.phone,
+            barangay: addressObj.barangay,
+            city: addressObj.city,
+            street: addressObj.home,
+            province: addressObj.province,
+            type: addressObj.type,
+            postal: addressObj.postal,
         });
 
         return addressObj;
@@ -144,7 +146,10 @@ const codPaymentHandler = async (uid, roomID, data, items, isAnonymousBuyer) => 
             customer: {
                 uid: customerDoc.id,
                 address: data.orderAddress,
-                displayName: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName
+                name: isAnonymousBuyer === 'true' ? 'Anonymous Buyer' : customerDoc.data().displayName,
+                phone: customerDoc.data().contactNo,
+                checkoutName: `${data.fName} ${data.lName}`,
+                checkoutPhone: data.contactNo,
             },
             items: items,
             date: stringDateFormat(),

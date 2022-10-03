@@ -965,6 +965,19 @@ main .product-container .product .product-button>.addToCart-button:hover {
 }
 
 /* Add New Address Modal */
+.address-modal-body .form-wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+.address-modal-body .form-wrap .form-name {
+    width: 52%;
+}
+
+.address-modal-body .form-wrap .form-phone {
+    width: 45%;
+}
+
 .address-modal-body .form-buttons button {
     width: 100px;
     height: 40px;
