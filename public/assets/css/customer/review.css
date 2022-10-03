@@ -93,6 +93,7 @@ main .order .middle {
 main .order .middle .item-content {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-around;
     flex-wrap: wrap;
 }
@@ -280,7 +281,7 @@ i:hover {
     font-size: 1.2rem;
 }
 
-.modal-wrap .custom-modal .modal-container .modal-body .modal-suggestions-wrap form textarea {
+.modal-wrap .custom-modal .modal-container .modal-body .modal-suggestions-wrap textarea {
     width: 100%;
     font-family: Poppins;
     color: var(--color-dark);
@@ -560,7 +561,7 @@ i:hover {
         font-size: 0.65rem;
     }
 
-    .modal-wrap .modal .modal-container .modal-body .modal-suggestions-wrap form textarea {
+    .modal-wrap .modal .modal-container .modal-body .modal-suggestions-wrap textarea {
         font-size: 0.77rem;
     }
 

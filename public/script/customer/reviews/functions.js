@@ -1,6 +1,6 @@
 //REVIEWS
-let review_All = document.getElementById('all');
-let review_History = document.getElementById('history');
+let review_All = document.getElementById('reviewFilterAll');
+let review_History = document.getElementById('reviewFilterHistory');
 // Links
 let review_TabLinks = document.querySelectorAll(".nav-item");
 
@@ -22,23 +22,3 @@ for (let i = 0; i < review_TabLinks.length; i++) {
         review_TabLinks[i].className = 'nav-item active';
      };
 };
-
-// ============== MODAL =================
-let modal_btn = document.querySelector(".modal-btn");
-let main = document.querySelector(".main");
-let close_btn = document.querySelectorAll(".close-btn");
-
-modal_btn.addEventListener("click", function(){
-    main.classList.add("active");
-});
-close_btn.forEach(function(btn){
-        btn.addEventListener("click", function(){
-        main.classList.remove("active");
-    });
-});
-
-// SWEET ALERT
-document.querySelector(".submit-btn").addEventListener('click', function(){
-  main.classList.remove("active");  
-  Swal.fire("Rated Successfully", "Thank you for purchasing this product", "success");
-});

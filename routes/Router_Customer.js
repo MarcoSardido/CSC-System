@@ -4,7 +4,7 @@ const router = express.Router();
 import { dashboard } from '../controllers/Customer/Dashboard/Controller_Dashboard.js';
 import { order } from '../controllers/Customer/Order/Controller_Order.js';
 import { orderStatus } from '../controllers/Customer/Order/Controller_OrderStatus.js';
-import { review } from '../controllers/Customer/Review/Controller_Review.js';
+import { review, getAllReview, addReview } from '../controllers/Customer/Review/Controller_Review.js';
 import { setting } from '../controllers/Customer/Setting/Controller_Setting.js';
 import { updateProfileData, updateProfilePhoto } from '../controllers/Customer/Setting/Controller_UpdateProfile.js';
 import { addNewAddress, getAddress, updateAddress, deleteAddress } from '../controllers/Customer/Setting/Controller_Address.js'
@@ -54,6 +54,8 @@ router.get('/orders/orderstatus/:id?', verifyCookie, orderStatus)
 
 // Review Page
 router.get('/reviews', verifyCookie, review);
+router.get('/reviews/:uid/getAllReview', verifyCookie, getAllReview);
+router.post('/reviews/addReview', verifyCookie, addReview);
 
 
 // Settings Page
