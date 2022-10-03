@@ -19,9 +19,6 @@
                 <a>Addresses</a>
             </li>
             <li class="nav-item">
-                <a>Finance</a>
-            </li>
-            <li class="nav-item">
                 <a>Feedback</a>
             </li>
             <li class="nav-item">
@@ -228,71 +225,6 @@
                         : '' %>
 
                         <% }) %>
-            </div>
-        </div>
-
-        <!-- BANKS & CARDS SETTINGS -->
-        <div id="finance-tab" style="display: none">
-            <div class="content">
-                <div class="top-finance">
-                    <div class="title">
-                        <h2>Credit / Debit Card</h2>
-                    </div>
-                    <div class="btn-finance">
-                        <button class="active modal-btn-card">+ Add New Card</button>
-                    </div>
-                </div>
-
-                <!-- CARDS -->
-
-                <!-- CARD 1 -->
-                <div class="middle">
-                    <div class="card">
-                        <div class="cardDetails">
-                            <i class="fab fa-cc-mastercard" style="color: var(--color-danger); font-size: 1.9rem"></i>
-                            <h2 id="cardName">Mastercard Account</h2>
-                            <p id="cardNumber" class="text-muted">**********5105100</p>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <div class="edit">
-                            <button class="edit-card-btn">
-                                <ion-icon name="create-outline"></ion-icon> Edit
-                            </button>
-                        </div>
-                        <div class="delete">
-                            <button class="delete-card-btn">
-                                <ion-icon name="trash-outline"></ion-icon> Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <hr size="3" style="width: 95%; margin: auto; background-color: var(--color-info-light);">
-
-                <!-- CARD 2 -->
-                <div class="middle">
-                    <div class="card">
-                        <div class="cardDetails">
-                            <i class="fab fa-cc-visa" style="color: var(--color-warning); font-size: 1.9rem"></i>
-                            <h2 id="cardName">Visa Account</h2>
-                            <p id="cardNumber" class="text-muted">**********4241342</p>
-                        </div>
-                    </div>
-                    <div class="card-action">
-                        <div class="edit">
-                            <button class="edit-card-btn">
-                                <ion-icon name="create-outline"></ion-icon> Edit
-                            </button>
-                        </div>
-                        <div class="delete">
-                            <button class="delete-card-btn">
-                                <ion-icon name="trash-outline"></ion-icon> Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
@@ -568,188 +500,26 @@
     <div class="modal-wrap-edit">
         <div class="shadow close-btn"></div>
         <div class="modal-address">
-
             <div class="header">
                 <div class="title">Edit Address</div>
                 <span class="icon close-btn" id="btnCloseUpdateModal">
                     <ion-icon class="i" name="close-outline"></ion-icon>
                 </span>
             </div>
-
             <div class="modal-container">
                 <div class="modal-body" id="modal_editAddress">
                     <div class="spinner-border text-primary" id="loader" role="status" style="margin: 20px auto;">
                         <span class="sr-only">Loading...</span>
                       </div>
                 </div>
-
                 <div class="footer">
                     <div class="footer-btn">
-                        <button class="update-btn active">UPDATE</button>
+                        <button class="update-btn active" id="btnUpdateAddress">UPDATE</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- ================== END OF EDIT ADDRESS MODAL ==================== -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- ================== ADD NEW DEBIT/CREDIT CARD MODAL ==================== -->
-    <div class="modal-wrap-card">
-        <div class="shadow close-btn"></div>
-
-        <div class="modal-card">
-
-            <div class="header">
-                <div class="title">Add Card</div>
-                <span class="icon close-btn">
-                    <ion-icon class="i" name="close-outline"></ion-icon>
-                </span>
-            </div>
-
-            <div class="modal-container">
-                <div class="modal-body">
-                    <div class="modal-card-wrap">
-
-                        <div class="card-title-brand">
-                            <p>Card Details</p>
-                            <div class="card-variations">
-                                <i class="fab fa-cc-visa"></i>
-                                <i class="fab fa-cc-mastercard"></i>
-                                <i class="fab fa-cc-jcb"></i>
-                                <i class="fab fa-cc-amex"></i>
-                            </div>
-                        </div>
-
-                        <form action="#" class="form-card">
-                            <div class="field-grid">
-                                <label class="custom-field">
-                                    <input type="text" name="card-number" id="cardNumber" required>
-                                    <span class="placeholder">Card Number</span>
-                                </label>
-                                <label class="custom-field">
-                                    <input type="text" name="card-owner-name" id="cardOwnerName" required>
-                                    <span class="placeholder">Name on Card</span>
-                                </label>
-                            </div>
-                            <div class="field-flex">
-                                <label class="custom-field">
-                                    <input type="text" name="card-expiry-date" id="cardExpiryDate" required>
-                                    <span class="placeholder">Expiry Date (MM/YY)</span>
-                                </label>
-
-                                <label class="custom-field">
-                                    <input type="text" name="card-cvv" id="cardCVV"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                        required>
-                                    <span class="placeholder">CVV</span>
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <div class="footer-btn">
-                        <button class="close-btn">CANCEL</a>
-                            <button class="submit-card-btn active">SUBMIT</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- ================== END OF ADD NEW DEBIT/CREDIT CARD MODAL ==================== -->
-
-
-    <!-- ================== EDIT DEBIT/CREDIT CARD MODAL ==================== -->
-    <div class="modal-wrap-card-edit">
-        <div class="shadow close-btn"></div>
-
-        <div class="modal-card">
-
-            <div class="header">
-                <div class="title">Add Card</div>
-                <span class="icon close-btn">
-                    <ion-icon class="i" name="close-outline"></ion-icon>
-                </span>
-            </div>
-
-            <div class="modal-container">
-                <div class="modal-body">
-                    <div class="modal-card-wrap">
-
-                        <div class="card-title-brand">
-                            <p>Card Details</p>
-                            <div class="card-variations">
-                                <i class="fab fa-cc-visa"></i>
-                                <i class="fab fa-cc-mastercard"></i>
-                                <i class="fab fa-cc-jcb"></i>
-                                <i class="fab fa-cc-amex"></i>
-                            </div>
-                        </div>
-
-                        <form action="#" class="form-card">
-                            <div class="field-grid">
-                                <label class="custom-field">
-                                    <input type="text" name="card-number" id="cardNumber" value="2134 3222 5105 5100"
-                                        required>
-                                    <span class="placeholder">Card Number</span>
-                                </label>
-                                <label class="custom-field">
-                                    <input type="text" name="card-owner-name" id="cardOwnerName" value="Marco Sardido"
-                                        required>
-                                    <span class="placeholder">Name on Card</span>
-                                </label>
-                            </div>
-                            <div class="field-flex">
-                                <label class="custom-field">
-                                    <input type="text" name="card-expiry-date" id="cardExpiryDate" value="02/24"
-                                        required>
-                                    <span class="placeholder">Expiry Date (MM/YY)</span>
-                                </label>
-
-                                <label class="custom-field">
-                                    <input type="text" name="card-cvv" id="cardCVV"
-                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                                        value="388" required>
-                                    <span class="placeholder">CVV</span>
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <div class="footer-btn">
-                        <button class="close-btn">CANCEL</a>
-                            <button class="update-card-btn active">UPDATE</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
-    <!-- ================== END OF EDIT NEW DEBIT/CREDIT CARD MODAL ==================== -->
-
 
 </main>

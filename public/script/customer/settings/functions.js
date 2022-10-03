@@ -1,7 +1,6 @@
 //SETTINGS NAV
 let settings_account = document.getElementById('account-tab');
 let settings_addresses = document.getElementById('addresses-tab');
-let settings_banksCards = document.getElementById('finance-tab');
 let settings_feedback = document.getElementById('feedback-tab');
 let settings_help = document.getElementById('help-tab');
 let settings_policy = document.getElementById('policy-tab');
@@ -14,46 +13,34 @@ for (let i = 0; i < settings_TabLinks.length; i++) {
 		while (j < settings_TabLinks.length) {
 			settings_TabLinks[j++].className = 'nav-item';
 		};
-		//Account[0], Addresses[1], Finance[2], Feedback[3], Help[4], CSC Policies[5]
+		//Account[0], Addresses[1], Feedback[3], Help[4], CSC Policies[5]
 		if ([i] == 0) {
 			settings_account.style.display = "block";
 			settings_addresses.style.display = "none";
-			settings_banksCards.style.display = "none";
 			settings_feedback.style.display = "none";
 			settings_help.style.display = "none";
 			settings_policy.style.display = "none";
 		} else if ([i] == 1) {
 			settings_account.style.display = "none";
 			settings_addresses.style.display = "block";
-			settings_banksCards.style.display = "none";
 			settings_feedback.style.display = "none";
 			settings_help.style.display = "none";
 			settings_policy.style.display = "none";
 		} else if ([i] == 2) {
 			settings_account.style.display = "none";
 			settings_addresses.style.display = "none";
-			settings_banksCards.style.display = "block";
-			settings_feedback.style.display = "none";
+			settings_feedback.style.display = "block";
 			settings_help.style.display = "none";
 			settings_policy.style.display = "none";
 		} else if ([i] == 3) {
 			settings_account.style.display = "none";
 			settings_addresses.style.display = "none";
-			settings_banksCards.style.display = "none";
-			settings_feedback.style.display = "block";
-			settings_help.style.display = "none";
+			settings_feedback.style.display = "none";
+			settings_help.style.display = "block";
 			settings_policy.style.display = "none";
 		} else if ([i] == 4) {
 			settings_account.style.display = "none";
 			settings_addresses.style.display = "none";
-			settings_banksCards.style.display = "none";
-			settings_feedback.style.display = "none";
-			settings_help.style.display = "block";
-			settings_policy.style.display = "none";
-		} else if ([i] == 5) {
-			settings_account.style.display = "none";
-			settings_addresses.style.display = "none";
-			settings_banksCards.style.display = "none";
 			settings_feedback.style.display = "none";
 			settings_help.style.display = "none";
 			settings_policy.style.display = "block";
@@ -78,7 +65,6 @@ btnChangeToDisplay.addEventListener('click', () => {
 	displayProfile.style.display = 'block';
 	changeProfile.style.display = 'none';
 })
-
 
 
 // ============== MODAL =================
@@ -108,35 +94,6 @@ if (modal_edit_btn) {
 			main.classList.add("active-edit");
 		});
 	});
-	// close_btn.forEach(function (btn) {
-	// 	btn.addEventListener("click", function () {
-	// 		main.classList.remove("active-edit");
-	// 	});
-	// });
-}
-if (modal_btn_card) {
-	// ADD NEW CARD MODAL
-	modal_btn_card.addEventListener("click", function () {
-		main.classList.add("active-card");
-	});
-	close_btn.forEach(function (btn) {
-		btn.addEventListener("click", function () {
-			main.classList.remove("active-card");
-		});
-	});
-}
-if (modal_edit_card) {
-	// EDIT CARD MODAL
-	modal_edit_card.forEach(function (btn) {
-		btn.addEventListener("click", function () {
-			main.classList.add("active-edit-card");
-		});
-	});
-	close_btn.forEach(function (btn) {
-		btn.addEventListener("click", function () {
-			main.classList.remove("active-edit-card");
-		});
-	});
 }
 
 
@@ -162,75 +119,4 @@ document.querySelector(".save-btn").addEventListener('click', function () {
 		showCancelButton: false,
 		showConfirmButton: false
 	})
-});
-
-
-// SWEET ALERT (Add new address modal)
-// document.querySelector(".submit-btn").addEventListener('click', function () {
-// 	// main.classList.remove("active");
-// 	// Swal.fire("Added Successfully", "Your new address has been added", "success");
-// 	// console.log('new address added')
-// });
-
-// SWEET ALERT (Edit address modal)
-document.querySelector(".update-btn").addEventListener('click', function () {
-	main.classList.remove("active-edit");
-	Swal.fire("Updated Successfully", "Your address has been updated", "success");
-});
-
-// SWEET ALERT (Delete address)
-document.querySelectorAll(".delete-btn").forEach(function (btn) {
-	btn.addEventListener('click', function () {
-		Swal.fire({
-			title: 'Delete Address?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#6875e3',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Delete'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire(
-					'Deleted!',
-					'Your address has been deleted.',
-					'success'
-				)
-			}
-		});
-	});
-});
-
-
-// SWEET ALERT (Add new card modal)
-document.querySelector(".submit-card-btn").addEventListener('click', function () {
-	main.classList.remove("active-card");
-	Swal.fire("Added Successfully", "Your new credit/debit card has been added", "success");
-});
-// SWEET ALERT (Edit card modal)
-document.querySelector(".update-card-btn").addEventListener('click', function () {
-	main.classList.remove("active-edit-card");
-	Swal.fire("Updated Successfully", "Your card details has been updated", "success");
-});
-// SWEET ALERT (Delete credit/debit card)
-document.querySelectorAll(".delete-card-btn").forEach(function (btn) {
-	btn.addEventListener('click', function () {
-		Swal.fire({
-			title: 'Delete card?',
-			text: "You won't be able to revert this!",
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonColor: '#6875e3',
-			cancelButtonColor: '#d33',
-			confirmButtonText: 'Delete'
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire(
-					'Deleted!',
-					'Your credit/debit card has been deleted.',
-					'success'
-				)
-			}
-		});
-	});
 });

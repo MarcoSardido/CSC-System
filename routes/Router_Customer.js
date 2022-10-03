@@ -7,7 +7,7 @@ import { orderStatus } from '../controllers/Customer/Order/Controller_OrderStatu
 import { review } from '../controllers/Customer/Review/Controller_Review.js';
 import { setting } from '../controllers/Customer/Setting/Controller_Setting.js';
 import { updateProfileData, updateProfilePhoto } from '../controllers/Customer/Setting/Controller_UpdateProfile.js';
-import { addNewAddress, getAddress } from '../controllers/Customer/Setting/Controller_Address.js'
+import { addNewAddress, getAddress, updateAddress, deleteAddress } from '../controllers/Customer/Setting/Controller_Address.js'
 
 import {
     liveSession,
@@ -58,10 +58,14 @@ router.get('/reviews', verifyCookie, review);
 
 // Settings Page
 router.get('/settings', verifyCookie, setting);
+// :: Info
 router.post('/settings/updateData', verifyCookie, updateProfileData);
 router.post('/settings/updatePhoto', verifyCookie, updateProfilePhoto);
+// :: Address
+router.get('/settings/:uid/getAddress/:id', verifyCookie, getAddress);
 router.post('/settings/addAddress', verifyCookie, addNewAddress);
-router.post('/settings/getAddress', verifyCookie, getAddress);
+router.post('/settings/updateAddress', verifyCookie, updateAddress);
+router.delete('/settings/:uid/deleteAddress/:id', verifyCookie, deleteAddress);
 
 //! ---------------------------------------------------------------- 
 //                       Live Selling
