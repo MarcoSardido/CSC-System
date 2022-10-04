@@ -41,7 +41,6 @@ export const dashboard = (req, res) => {
                 email: userRecord.email,
                 fullName: '',
                 gender: '',
-                isAnonymous: false,
             });
 
         } else { // If there is user document, then update sign in time

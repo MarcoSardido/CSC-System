@@ -9,25 +9,36 @@ $(document).ready(() => {
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
-    const paymentObj = selectedCartItems;
+    //! Main Object
+    const checkoutObject = {};
+
+    //* ================================== Global Selectors =================================== *// 
+    const billerName = document.getElementById('inputBillerName');
+    const billerPhone = document.getElementById('inputBillerPhone');
+    const billerEmail = document.getElementById('inputBillerEmail');
+    const btnConfirmPay = document.getElementById('btnConfirmPay');
+
+
 
     const loadCustomerAddress = () => {
         getAllCustomerAddress(trimmedUID).then(result => {
-            // -----------------------------------------------------------------------------------
-            //* -------------------------------- LIST ALL ADDRESS --------------------------------
-            // -----------------------------------------------------------------------------------
+            const billerName = document.getElementById('inputBillerName');
+            const billerPhone = document.getElementById('inputBillerPhone');
             const dynamicAddressContainer = document.getElementById('dynamicAddress');
 
+            //* List all address
             const loopOtherAddress = () => {
                 let OTHER_ADDRESS_TEMPLATE = ``;
 
                 for (const [addressIndex, addressValue] of Object.entries(result)) {
                     OTHER_ADDRESS_TEMPLATE += `
                         <div class="other-address ${addressIndex === '0' ? 'selected-address' : ''}">
-                            <div class="tag">${addressValue.addressType}</div>
+                            <div class="tag">${addressValue.type}</div>
                             <div class="address">
-                                <p>${addressValue.HouseOrUnitNo}, ${addressValue.Barangay}, ${addressValue.City}, ${addressValue.Province}.</p>
-                                <p>${addressValue.zipCode}</p>
+                                <p hidden>${addressValue.name}</p>
+                                <p hidden>${addressValue.phone}</p>
+                                <p>${addressValue.street}, ${addressValue.barangay}, ${addressValue.city}, ${addressValue.province}.</p>
+                                <p>${addressValue.postal}</p>
                             </div>
                         </div>
                     `;
@@ -38,47 +49,67 @@ $(document).ready(() => {
 
             const ADDRESS_TEMPLATE = `
                 <label>shipping address</label>
-                <div class="selected">
-                    <div class="main" id="dynamicChangeAddress">
-                        <div class="tag">${result[0].addressType}</div>
-                        <div class="address">
-                            <p id="addressValue">${result[0].HouseOrUnitNo}, ${result[0].Barangay}, ${result[0].City}, ${result[0].Province}.</p>
-                            <p id="postalValue">${result[0].zipCode}</p>
+                ${result.length > 0 ?
+                    `
+                    <div class="selected">
+                        <div class="main" id="dynamicChangeAddress">
+                            <div class="tag">${result[0].type}</div>
+                            <div class="address">
+                                <p id="otherAddressName" hidden>${result[0].name}</p>
+                                <p id="otherAddressPhone" hidden>${result[0].phone}</p>
+                                <p id="addressValue">${result[0].street}, ${result[0].barangay}, ${result[0].city}, ${result[0].province}.</p>
+                                <p id="postalValue">${result[0].postal}</p>
+                            </div>
+                        </div>
+                        <button class="toggle-address" data-toggle="collapse" data-target="#collapseAddress"
+                            aria-expanded="false" aria-controls="collapseAddress">
+                            Choose other address
+                        </button>
+                    </div>
+                    <div class="collapse" id="collapseAddress">
+                        <div class="address-list">
+                            <div class="add-address">
+                                <button class="add-another-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
+                                    <div class="icon">
+                                        <ion-icon name="add-outline"></ion-icon>
+                                    </div>
+                                    <span>Add another address</span>
+                                </button>
+                            </div>
+                            <div class="list" id="dynamicList">${result.length > 1 ? loopOtherAddress() : ''}</div>
                         </div>
                     </div>
-                    <button class="toggle-address" data-toggle="collapse" data-target="#collapseAddress"
-                        aria-expanded="false" aria-controls="collapseAddress">
-                        Choose other address
-                    </button>
-                </div>
-                <div class="collapse" id="collapseAddress">
-                    <div class="address-list">
-                        <div class="add-address">
-                            <button class="add-another-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
-                                <div class="icon">
-                                    <ion-icon name="add-outline"></ion-icon>
-                                </div>
-                                <span>Add another address</span>
-                            </button>
-                        </div>
-                        <div class="list" id="dynamicList">${result.length > 1 ? loopOtherAddress() : ''}</div>
+                ` :
+                    `
+                    <div class="selected">
+                        <button class="add-another-address no-address" id="btnAddAddress" data-toggle="modal" data-target="#addNewAddressModal">
+                            <div class="icon">
+                                <ion-icon name="add-outline"></ion-icon>
+                            </div>
+                            <span>Add address</span>
+                        </button>
                     </div>
-                </div>
+                `}
             `;
-
             dynamicAddressContainer.insertAdjacentHTML('beforeend', ADDRESS_TEMPLATE)
 
 
-            // -----------------------------------------------------------------------------------
-            //* -------------------------------- SWITCH ADDRESS ----------------------------------
-            // -----------------------------------------------------------------------------------
+            billerName.value = $('#otherAddressName').text();
+            billerPhone.value = $('#otherAddressPhone').text();
+
+            //* Switch address 
             const getAllOtherAddresses = document.querySelectorAll('.other-address');
             const changeAddress = document.getElementById('dynamicChangeAddress');
 
             for (const otherAddressIndex of getAllOtherAddresses) {
                 otherAddressIndex.addEventListener('click', () => {
-                    const address = otherAddressIndex.children[1].firstElementChild;
+                    const name = otherAddressIndex.children[1].firstElementChild.textContent;
+                    const phone = otherAddressIndex.children[1].children[1].textContent;
+                    const address = otherAddressIndex.children[1].children[2];
                     const postal = otherAddressIndex.children[1].lastElementChild;
+
+                    billerName.value = name;
+                    billerPhone.value = phone;
 
                     address.setAttribute('id', 'addressValue')
                     postal.setAttribute('id', 'postalValue')
@@ -97,8 +128,9 @@ $(document).ready(() => {
         });
     }
 
-    // Add new address
-    const newAddressFunc = () => {
+    const createNewAddress = () => {
+        const nameValue = document.getElementById('newAddressName');
+        const phoneValue = document.getElementById('newAddressPhone');
         const homeValue = document.getElementById('newAddressHouse');
         const provinceValue = document.getElementById('newAddressProvince');
         const cityValue = document.getElementById('newAddressCity');
@@ -120,6 +152,8 @@ $(document).ready(() => {
 
         btnSaveNewAddress.addEventListener('click', () => {
             const newAddressObj = {
+                name: nameValue.value,
+                phone: phoneValue.value,
                 home: homeValue.value,
                 province: provinceValue.value,
                 city: cityValue.value,
@@ -128,7 +162,7 @@ $(document).ready(() => {
                 type: getAddressType
             }
 
-            addNewAddress(trimmedUID, newAddressObj).then(result => {
+            addNewAddress(trimmedUID, newAddressObj).then(() => {
                 $('#dynamicAddress').empty();
                 loadCustomerAddress();
                 $('#addNewAddressModal').modal('hide');
@@ -143,52 +177,58 @@ $(document).ready(() => {
             methodIndex.addEventListener('click', () => {
                 methods.forEach(removeClass => removeClass.classList.remove('selected'))
                 methodIndex.classList.add('selected')
-                paymentObj.paymentMethod = methodIndex.id;
+                checkoutObject.paymentMethod = methodIndex.id;
             })
         }
 
     }
 
-    document.getElementById('btnConfirmPay').addEventListener('click', () => {
+    btnConfirmPay.addEventListener('click', () => {
         $('#cartPaymentModal').css('cursor', 'wait');
 
         const selectedAddress = document.getElementById('addressValue').textContent;
         const selectedPostal = document.getElementById('postalValue').textContent;
-        const billerName = document.getElementById('inputBillerName').value;
-        const billerPhone = document.getElementById('inputBillerPhone').value;
-        const billerEmail = document.getElementById('inputBillerEmail').value;
 
-        paymentObj.name = billerName;
-        paymentObj.phone = billerPhone;
-        paymentObj.email = billerEmail;
-        paymentObj.address = `${selectedAddress} ${selectedPostal}`;
+        // items in cart
+        checkoutObject.items = selectedCartItems;
 
-        calcItems(trimmedUID, liveRoomID, paymentObj.itemsArray, paymentObj.paymentMethod)
+        // user info
+        checkoutObject.name = billerName.value;
+        checkoutObject.phone = billerPhone.value;
+        checkoutObject.email = billerEmail.value;
+        checkoutObject.address = `${selectedAddress} ${selectedPostal}`;
+
+        calcItems(trimmedUID, liveRoomID, checkoutObject.items, checkoutObject.paymentMethod)
             .then(result => {
                 const cartItems = result;
 
+                const firstName = checkoutObject.name.split(' ')[0];
+                const lastName = checkoutObject.name.split(' ')[checkoutObject.name.split(' ').length - 1];
+
                 // Method: Credit Card
-                if (paymentObj.paymentMethod === 'STRIPE') {
+                if (checkoutObject.paymentMethod === 'STRIPE') {
                     const method = 'Credit Card';
-                    const firstName = paymentObj.name.split(' ')[0];
-                    const lastName = paymentObj.name.split(' ')[paymentObj.name.split(' ').length - 1];
 
                     const user = {
                         uid: trimmedUID,
                         fName: firstName,
                         lName: lastName,
-                        email: paymentObj.email,
-                        contactNo: paymentObj.phone,
-                        address: paymentObj.address
+                        email: checkoutObject.email,
+                        contactNo: checkoutObject.phone,
+                        address: checkoutObject.address
                     };
-
+                    
                     stripePaymentHandler(trimmedUID, user, cartItems, method);
                 } else {
                     // Method: Cash On Delivery
                     const codObjData = {
-                        modeOfPayment: paymentObj.paymentMethod,
-                        orderAddress: paymentObj.address,
+                        fName: firstName,
+                        lName: lastName,
+                        contactNo: checkoutObject.phone,
+                        modeOfPayment: checkoutObject.paymentMethod,
+                        orderAddress: checkoutObject.address,
                     }
+
                     codPaymentHandler(trimmedUID, liveRoomID, codObjData, cartItems).then(() => {
                         window.location.reload();
                     });
@@ -199,5 +239,5 @@ $(document).ready(() => {
 
     getPaymentMethod();
     loadCustomerAddress();
-    newAddressFunc();
+    createNewAddress();
 })

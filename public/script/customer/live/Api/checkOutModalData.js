@@ -50,9 +50,9 @@ const addNewAddress = async (uid, addressObj) => {
 
 const calcItems = async (uid, sid, arrayOfItems, payment) => {
     const items = [];
-
+    
     try {
-        for (const itemIndex of arrayOfItems) {
+        for (const itemIndex of arrayOfItems.itemsArray) {
             const liveCartSubColRef = doc(db, `LiveSession/sessionID_${sid}/sessionUsers/${uid}/LiveCart/${itemIndex}`);
             const liveCartSubColDoc = await getDoc(liveCartSubColRef);
 

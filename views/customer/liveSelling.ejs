@@ -97,20 +97,19 @@
                             <div class="user-info">
                                 <div class="row1">
                                     <div class="form-group">
-                                        <label for="bill-name">full name</label>
-                                        <input type="text" id="inputBillerName" value="<%= displayCustomerInfo[0].fullName === '' ? 'Customer Name' : displayCustomerInfo[0].fullName %>" class="form-control" id="bill-name">
+                                        <label for="inputBillerName">full name</label>
+                                        <input type="text" id="inputBillerName" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="bill-phone">phone number</label>
-                                        <input type="text" id="inputBillerPhone" value="<%= displayCustomerInfo[0].contactNo === '' ? 'Contact Number' : displayCustomerInfo[0].contactNo %>" class="form-control" id="bill-phone">
+                                        <label for="inputBillerPhone">phone number</label>
+                                        <input type="text" id="inputBillerPhone" class="form-control">
                                     </div>
                                 </div>
                                 <div class="row2">
                                     <div class="form-group">
-                                        <label for="bill-email">Email address</label>
-                                        <input type="email" id="inputBillerEmail" value="<%= displayCustomerInfo[0].email %>" class="form-control" id="bill-email" aria-describedby="emailHelp">
-                                        <small id="emailHelp" class="form-text text-muted">To notify you about your
-                                            order.</small>
+                                        <label for="inputBillerEmail">Email address</label>
+                                        <input type="email" id="inputBillerEmail" value="<%= displayAccountInfo[0].email %> " class="form-control" aria-describedby="emailHelp">
+                                        <small id="emailHelp" class="form-text text-muted">To notify you about your order.</small>
                                     </div>
                                 </div>
                             </div>
@@ -132,22 +131,41 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add new shipping address</h5>
+                <h2 class="modal-title">Add new shipping address</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body address-modal-body">
+                <div class="form-wrap">
+                    <div class="form-group form-name">
+                        <label for="newAddressName">Full Name</label>
+                        <input type="text" class="form-control" id="newAddressName">
+                    </div>
+                    <div class="form-group form-phone">
+                        <label for="newAddressPhone">Phone Number</label>
+                        <input type="text" class="form-control" id="newAddressPhone">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="newAddressHouse">House Number, Building and Street Name</label>
                     <input type="text" class="form-control" id="newAddressHouse">
                 </div>
-                <div class="form-group">
-                    <label for="newAddressProvince">Province</label>
-                    <select class="form-control" id="newAddressProvince">
-                        <option value="" disabled selected hidden>Please choose your province</option>
-                        <option value="Laguna">Laguna</option>
-                    </select>
+                <div class="form-wrap">
+                    <div class="form-group">
+                        <label for="newAddressBarangay">Barangay</label>
+                        <select class="form-control" id="newAddressBarangay">
+                            <option value="" disabled selected hidden>Please choose your barangay</option>
+                            <option value="Pulo">Pulo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="newAddressProvince">Province</label>
+                        <select class="form-control" id="newAddressProvince">
+                            <option value="" disabled selected hidden>Please choose your province</option>
+                            <option value="Laguna">Laguna</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="newAddressCity">City</label>
@@ -156,13 +174,6 @@
                         <option value="Cabuyao">Cabuyao</option>
                         <option value="Sta Rosa">Sta. Rosa</option>
                         <option value="Calamba">Calamba</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="newAddressBarangay">Barangay</label>
-                    <select class="form-control" id="newAddressBarangay">
-                        <option value="" disabled selected hidden>Please choose your barangay</option>
-                        <option value="Pulo">Pulo</option>
                     </select>
                 </div>
                 <div class="form-group">

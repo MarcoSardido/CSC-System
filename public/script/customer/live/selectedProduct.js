@@ -175,7 +175,7 @@ $(document).ready(() => {
         //* Firestore
         itemData(pid).then(result => {
             const productData = result;
-
+            
             const getVariants = () => {
                 let VARIANT_TEMPLATE = ``;
                 for (const itemIndex of productData.variants) {
@@ -236,7 +236,6 @@ $(document).ready(() => {
 
     //* Cart Modal
     let currentQty, selectedQty, selectedSize, selectedColor;
-
     const initializeCartModal = () => {
         const btnAddToCart = document.getElementById('btnAddToCart')
         btnAddToCart.addEventListener('click', () => {
@@ -545,7 +544,7 @@ $(document).ready(() => {
                         </div>
                         <div class="price">
                             <div class="color" style="background-color:${itemData.itemColor}"></div>
-                            <p class="item-price">₱<span>${itemData.itemTotal}</span></p>
+                            <p class="item-price">${convertIntoWholeNumber(itemData.itemTotal)}</p>
                         </div>
                     </div>
                 </div>
@@ -596,13 +595,11 @@ $(document).ready(() => {
         // Remove item in live cart
         for (const btnRemoveIndex of btnRemoveCartItem) {
             btnRemoveIndex.addEventListener('click', () => {
-
                 const parentEl = btnRemoveIndex.parentElement;
                 const variantEl = parentEl.children[3].children[1];
                 const cartSizeAndQty = variantEl.children[0];
                 const size = cartSizeAndQty.children[0].innerHTML;
                 const qty = cartSizeAndQty.children[1].innerHTML;
-
 
                 const itemID = parentEl.dataset.itemId;
 
@@ -655,10 +652,26 @@ $(document).ready(() => {
         }
     }
 
-   
 
 
+    
+    /**
+     * ?Converts whole number into cents
+     * @param price 300
+     * @returns 30000
+     */
+     const convertIntoCents = (price) => {
+        return (Number(price) * 100).toString();
+    }
 
+    /**
+     * ?Converts cents into whole number with currency symbol
+     * @param price 30000
+     * @returns ₱300.00
+     */
+    const convertIntoWholeNumber = (price) => {
+        return (price / 100).toLocaleString("en-US", { style: "currency", currency: "PHP" })
+    }
 })
 
 export {

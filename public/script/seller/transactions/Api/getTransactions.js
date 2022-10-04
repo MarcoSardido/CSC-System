@@ -67,7 +67,7 @@ const dataForRecentTransactions = async (uuid) => {
         transactionCollection.forEach(record => recentTransContainer.push({
             date: record.data().date,
             totalPrice: formatThousands(record.data().totalPrice / 100),
-            customerName: record.data().customer.displayName,
+            customerName: record.data().customer.name,
             status: record.data().status
         }));
         recentTransContainer.reverse();

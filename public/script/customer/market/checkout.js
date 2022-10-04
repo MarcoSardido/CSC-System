@@ -15,13 +15,10 @@ $(document).ready(() => {
     //! Main Object
     const checkoutObject = {};
 
-    //* ----------------------------------------------------------------------------------------
-    //  ---------------------------------- Global Selectors ------------------------------------ 
-    //* ----------------------------------------------------------------------------------------
+    //* ================================== Global Selectors =================================== *// 
     const billerName = document.getElementById('inputBillerName');
     const billerPhone = document.getElementById('inputBillerPhone');
     const billerEmail = document.getElementById('inputBillerEmail');
-
     const btnConfirmPay = document.getElementById('btnConfirmPay');
 
 
@@ -50,6 +47,7 @@ $(document).ready(() => {
 
                 return OTHER_ADDRESS_TEMPLATE;
             }
+
 
             const ADDRESS_TEMPLATE = `
                 <label>shipping address</label>
@@ -96,6 +94,7 @@ $(document).ready(() => {
                 `}
             `;
             dynamicAddressContainer.insertAdjacentHTML('beforeend', ADDRESS_TEMPLATE)
+
 
             billerName.value = $('#otherAddressName').text();
             billerPhone.value = $('#otherAddressPhone').text();
@@ -165,7 +164,7 @@ $(document).ready(() => {
                 type: getAddressType
             }
 
-            addNewAddress(trimmedUID, newAddressObj).then(result => {
+            addNewAddress(trimmedUID, newAddressObj).then(() => {
                 $('#dynamicAddress').empty();
                 loadCustomerAddress();
                 $('#addNewAddressModal').modal('hide');
@@ -207,7 +206,6 @@ $(document).ready(() => {
     }
 
 
-
     btnConfirmPay.addEventListener('click', () => {
         $('#cartPaymentModal').css('cursor', 'wait');
 
@@ -242,6 +240,7 @@ $(document).ready(() => {
                 contactNo: checkoutObject.phone,
                 address: checkoutObject.address
             };
+
             stripePaymentHandler(trimmedUID, user, checkoutItems, method, isAnonymousBuyer);
         } else {
             //* :: Method -> Cash On Delivery
@@ -252,6 +251,7 @@ $(document).ready(() => {
                 modeOfPayment: checkoutObject.paymentMethod,
                 orderAddress: checkoutObject.address,
             }
+            
             codPaymentHandler(trimmedUID, liveRoomID, codObjData, checkoutItems, isAnonymousBuyer).then(() => {
                 window.location.reload();
             });

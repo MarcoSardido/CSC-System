@@ -11,7 +11,7 @@ $(document).ready(() => {
             data: data,
             columns: [
                 { data: 'date' },
-                { data: 'customer.displayName' },
+                { data: 'customer.name' },
                 { data: 'payment' },
                 { data: 'totalPrice' },
                 {
@@ -39,7 +39,6 @@ $(document).ready(() => {
     }
 
     const tableDataOptions = (data) => {
-        console.log(data)
         const dropDown = document.querySelectorAll('.dropright');
         for (const [index, value] of dropDown.entries()) {
 
@@ -102,7 +101,7 @@ $(document).ready(() => {
                     <div class="bill-info">
                         <p class="modal-static-text">Billed To</p>
                         <p class="modal-dynamic-text">
-                            <p class="bill-client">${data.customer.displayName}</p>
+                            <p class="bill-client">${data.customer.checkoutName}</p>
                             <p class="bill-street">${firstAddress}</p>
                             <p class="bill-address">${secondAddress}</p>
                         </p>
@@ -202,7 +201,7 @@ $(document).ready(() => {
         let props = {
             outputType: jsPDFInvoiceTemplate.OutputType.Save,
             returnJsPDFDocObject: true,
-            fileName: "Product Invoice",
+            fileName: `Product Invoice for ${data.customer.checkoutName}`,
             orientationLandscape: false,
             logo: {
                 src: "/public/assets/images/mainLogo.png",
@@ -220,8 +219,9 @@ $(document).ready(() => {
             },
             contact: {
                 label: "Invoice issued for:",
-                name: data.customer.displayName,
+                name: data.customer.checkoutName,
                 address: data.customer.address,
+                phone: data.customer.checkoutPhone,
             },
             invoice: {
                 label: "Invoice #: ",
