@@ -258,6 +258,10 @@ p {
     justify-content: flex-start;
 }
 
+.chat-item.other-user .dropdown-menu a {
+    cursor: pointer;
+}
+
 .chat-item .chat-head {
     margin-right: 15px;
     cursor: pointer;

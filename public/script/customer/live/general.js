@@ -39,7 +39,8 @@ $(document).ready(() => {
         await setDoc(subColRef, {
             uid: docData.id,
             displayName: docData.data().displayName,
-            fullName: docData.data().fullName
+            fullName: docData.data().fullName,
+            isMuted: false
         })
     }
 

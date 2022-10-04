@@ -16,6 +16,17 @@ $(document).ready(() => {
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
     const isAnonymousBuyer = window.location.search.split('=')[1];
+    let userIsMuted = false;
+
+
+    //? Check if user is muted by the seller.
+    //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
+    const usersSubColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}`);
+    onSnapshot(usersSubColRef, doc => {
+        const isMuted = doc.data().isMuted;
+        userIsMuted = isMuted;
+        checkUserIfMuted(isMuted)
+    });
 
     const addChat = async (uid, data, sessionID) => {
         const currentDateAndTime = new Date();
@@ -45,9 +56,7 @@ $(document).ready(() => {
         }
     }
 
-
     const getRealTimeData = async (sessionID) => {
-
         try {
             // LiveSession Collection
             const chatRef = collection(db, `LiveSession/sessionID_${sessionID}/sessionChat`)
@@ -119,6 +128,7 @@ $(document).ready(() => {
         return status;
     }
 
+    
 
     //! -------------------------------------------------------------
     //                          ADDING DATA
@@ -133,6 +143,7 @@ $(document).ready(() => {
     txtChatInput.addEventListener('keypress', e => {
         if (e.key !== 'Enter') return;
         if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
+        if (userIsMuted) return txtChatInput.value = null;
 
         inputFunction(txtChatInput.value);
     })
@@ -140,12 +151,23 @@ $(document).ready(() => {
     const btnChatInput = document.getElementById('btnInputChat');
     btnChatInput.addEventListener('click', () => {
         if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
-        
+        if (userIsMuted) return txtChatInput.value = null;
+
         inputFunction(txtChatInput.value);
     })
 
-
-
+    const checkUserIfMuted = (mute) => {
+        if (mute) {
+            txtChatInput.setAttribute('disabled', '');
+            txtChatInput.value = null;
+            txtChatInput.placeholder = `You've been muted by the seller.`;
+            txtChatInput.classList.add('error');
+        } else {
+            txtChatInput.removeAttribute('disabled');
+            txtChatInput.placeholder = `Aa`;
+            txtChatInput.classList.remove('error');
+        }
+    }
 
 
     //! -------------------------------------------------------------

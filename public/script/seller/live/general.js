@@ -59,16 +59,16 @@ $(document).ready(() => {
 
 
             //* LIVE SESSION COLLECTION
-            // // Check if there are viewers left
-            // const liveSessionUsersColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers`);
-            // const liveSessionUsersCollection = await getDocs(liveSessionUsersColRef);
-            // liveSessionUsersCollection.forEach(user => {
-            //     removeViewers.push(user.id)
-            // })
+            // Check if there are viewers left
+            const liveSessionUsersColRef = collection(db, `LiveSession/sessionID_${roomID}/sessionUsers`);
+            const liveSessionUsersCollection = await getDocs(liveSessionUsersColRef);
+            liveSessionUsersCollection.forEach(user => {
+                removeViewers.push(user.id)
+            })
 
-            // for (const userIndex of removeViewers) {
-            //     await deleteDoc(doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${userIndex}`));
-            // }
+            for (const userIndex of removeViewers) {
+                await deleteDoc(doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${userIndex}`));
+            }
 
             // Close Live
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
@@ -113,6 +113,10 @@ $(document).ready(() => {
             console.error(`Firestore Error: @updateTimeLeft -> ${error.message}`)
         }
     }
+
+    //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
+    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}`);
+    
 
     //! ----------------------------------------------------------------------------------------
     //                                     Script Function
@@ -226,6 +230,8 @@ $(document).ready(() => {
         updateTimeLeft(liveRoomID, totalSeconds)
         event.returnValue = "Write something clever here..";
     };
+
+    $('#liveToast').toast('show')
 
     realTimeViewerCount(liveRoomID)
     startTimer();

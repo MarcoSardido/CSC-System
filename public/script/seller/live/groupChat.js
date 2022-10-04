@@ -66,6 +66,32 @@ $(document).ready(() => {
         }
     }
 
+    const muteUser = async (uid, sessionID) => {
+        try {
+            //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
+            const usersSubColRef = doc(db, `LiveSession/sessionID_${sessionID}/sessionUsers/${uid}`);
+            await setDoc(usersSubColRef, {
+                isMuted: true,
+            }, { merge: true });
+
+        } catch (error) {
+            console.error(`Firestore Error -> @muteUser -> ${error.message}`)
+        }
+    }
+
+    const unMuteUser = async (uid, sessionID) => {
+        try {
+            //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
+            const usersSubColRef = doc(db, `LiveSession/sessionID_${sessionID}/sessionUsers/${uid}`);
+            await setDoc(usersSubColRef, {
+                isMuted: false,
+            }, { merge: true });
+
+        } catch (error) {
+            console.error(`Firestore Error -> @unMuteUser -> ${error.message}`)
+        }
+    }
+
 
     const generateId = () => {
         var result = '';
@@ -145,9 +171,9 @@ $(document).ready(() => {
                 <img id="pic" src="" alt="user">
             </div>
             <div class="dropdown-menu">
-                <a class="dropdown-item">Mute</a>
+                <a class="dropdown-item" name="chatHeadMute">Mute</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item remove">Remove</a>
+                <a class="dropdown-item remove" name="chatHeadRemove">Remove</a>
             </div>
             <div class="chat-body">
                 <p class="name"></p>
@@ -238,6 +264,25 @@ $(document).ready(() => {
         }
     }
 
+    const initChatHeadButton = () => {
+        const allMuteSelector = document.querySelectorAll('[name="chatHeadMute"]');
+        for (const muteIndex of allMuteSelector) {
+            muteIndex.addEventListener('click', () => {
+                const mainParent = muteIndex.parentNode.parentNode;
+                const uid = mainParent.getAttribute("uid")
+
+                if (muteIndex.innerHTML === 'Mute') {
+                    muteIndex.innerHTML = 'UnMute';
+                    muteUser(uid, liveRoomID);
+                } else {
+                    muteIndex.innerHTML = 'Mute';
+                    unMuteUser(uid, liveRoomID);
+                }
+                
+            })
+        }
+    }
+
     const getAllChatData = (chatID, message, time, name, uid, photo) => {
         const div = document.getElementById(chatID) || createAndInsertMessage(chatID, time, uid)
 
@@ -259,6 +304,8 @@ $(document).ready(() => {
 
         // Show the card fading-in and scroll to view the new message.
         $(".conversation").stop().animate({ scrollTop: $(".conversation")[0].scrollHeight }, 1000);
+
+        initChatHeadButton();
     }
 
     displayMessage();
