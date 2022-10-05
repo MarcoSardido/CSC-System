@@ -13,6 +13,8 @@ $(document).ready(() => {
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
+    const userObj = {};
+
     //! ----------------------------------------------------------------------------------------
     //                                     Firebase Functions
     //! ----------------------------------------------------------------------------------------
@@ -28,8 +30,34 @@ $(document).ready(() => {
         }
     })
 
-    const addUserCount = async (uid, roomID) => {
+    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+    const cartSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`);
+    onSnapshot(cartSubColRef, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                const liveColRef = doc(db, `LiveSession/sessionID_${liveRoomID}`);
+                setDoc(liveColRef, {
+                    customer: userObj.displayName
+                }, { merge: true }).then(() => {
+                    setTimeout(() => {
+                        setDoc(liveColRef, {
+                            customer: ''
+                        }, { merge: true });
+                    }, 3000)
+                })
+            }
+        })
+    })
 
+    const getUserData = async (uid) => {
+        //* CUSTOMER COLLECTION
+        const customerDocRef = doc(db, `Customers/${uid}`);
+        const customerDocument = await getDoc(customerDocRef);
+
+        userObj.displayName = customerDocument.data().displayName;
+    }
+
+    const addUserCount = async (uid, roomID) => {
         //* CUSTOMER COLLECTION
         const docRef = doc(db, `Customers/${uid}`);
         const docData = await getDoc(docRef);
@@ -45,7 +73,6 @@ $(document).ready(() => {
     }
 
     const removeUserCount = async (uid, roomID) => {
-
         //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
         const subColRef = doc(db, `LiveSession/sessionID_${roomID}/sessionUsers/${uid}`)
         await deleteDoc(subColRef);
@@ -75,5 +102,6 @@ $(document).ready(() => {
         connection.join(roomid);
     });
 
-    addUserCount(trimmedUID, liveRoomID)
+    addUserCount(trimmedUID, liveRoomID);
+    getUserData(trimmedUID);
 })

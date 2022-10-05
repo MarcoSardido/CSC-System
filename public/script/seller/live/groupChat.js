@@ -56,7 +56,7 @@ $(document).ready(() => {
                 snapshot.docChanges().forEach(change => {
                     if (change.type === "added") {
                         const message = change.doc.data();
-                        getAllChatData(change.doc.id, message.content, message.createdAt, message.displayName, message.uid, message.photo)
+                        getAllChatData(change.doc.id, message.content, message.createdAt, message.displayName, message.uid, message.photo, snapshot.size)
                     }
                 });
             });
@@ -146,10 +146,14 @@ $(document).ready(() => {
     const txtChatInput = document.getElementById('txtInputChat');
     txtChatInput.addEventListener('keypress', e => {
         if (e.key !== 'Enter') return;
+        if (txtChatInput.value === '') return;
+
         inputFunction(txtChatInput.value);
     })
     const btnChatInput = document.getElementById('btnInputChat');
     btnChatInput.addEventListener('click', () => {
+        if (txtChatInput.value === '') return;
+        
         inputFunction(txtChatInput.value);
     })
 
@@ -283,7 +287,8 @@ $(document).ready(() => {
         }
     }
 
-    const getAllChatData = (chatID, message, time, name, uid, photo) => {
+    let chatCounter = 1;
+    const getAllChatData = (chatID, message, time, name, uid, photo, size) => {
         const div = document.getElementById(chatID) || createAndInsertMessage(chatID, time, uid)
 
         let messageElement = div.querySelector('.message');
@@ -305,7 +310,11 @@ $(document).ready(() => {
         // Show the card fading-in and scroll to view the new message.
         $(".conversation").stop().animate({ scrollTop: $(".conversation")[0].scrollHeight }, 1000);
 
-        initChatHeadButton();
+        if (chatCounter === size) {
+            initChatHeadButton();
+        } else {
+            chatCounter++;
+        }
     }
 
     displayMessage();

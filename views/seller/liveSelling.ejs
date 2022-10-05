@@ -34,7 +34,9 @@
                 <!-- Video will be generated here -->
                 <!-- <video src=""></video> -->
             </div>
-            <div class="product"></div>
+            <div class="product">
+                <p style="color: #9f9f9f;">Please select a product.</p>
+            </div>
         </div>
         <div class="chat-box">
             <div class="chat">
@@ -67,9 +69,9 @@
     </div>
 </div>
 
-<!-- Toast -->
+<!-- Buy Toast -->
 <div class="position-fixed top-0 right-0 p-3" style="z-index: 99; right: 0; top: 0;">
-    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000"
+    <div id="buyToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000"
         style="width: 500px">
         <div class="toast-header">
             <img src="/public/assets/images/mainLogo.png" class="mr-2" style="width: 35px; height: 35px;">
@@ -79,10 +81,11 @@
             </button>
         </div>
         <div class="toast-body" style="display: flex; align-items: center; color: limegreen;">
-            <div class="tost-icon">
+            <div class="tost-icon"
+                style=" display: flex; align-items: center; justify-content: center; margin-right: 10px;">
                 <ion-icon name="cash-outline" style="font-size: 25px; margin-right: 5px;"></ion-icon>
             </div>
-            <div class="tost-message">Customer bought a product!</div>
+            <div class="tost-message"></div>
         </div>
     </div>
 </div>

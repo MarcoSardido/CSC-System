@@ -19,21 +19,26 @@ $(document).ready(() => {
             const rooms = checkTimeSelection;
             const selectedTime = `${splitTimeValue}:00`;
 
-            for (const roomIndex of rooms) {
-                if (roomIndex.time === selectedTime) {
-
-                    if (roomIndex.numberOfRooms !== 5) {
-                        startTime.value = selectedTime;
-                        break;
-                    } else {
-                        alert(`Time: ${roomIndex.time} already has ${roomIndex.numberOfRooms} waiting rooms. Please select another time.`);
-                        startTime.value = `${hours}:00`;
-                        break;
+            if (rooms.length > 0) {
+                for (const roomIndex of rooms) {
+                    if (roomIndex.time === selectedTime) {
+                        if (roomIndex.numberOfRooms !== 5) {
+                            startTime.value = selectedTime;
+                            break;
+                        } else {
+                            alert(`Time: ${roomIndex.time} already has ${roomIndex.numberOfRooms} waiting rooms. Please select another time.`);
+                            startTime.value = `${hours}:00`;
+                            break;
+                        }
                     }
-                } else {
-                    startTime.value = selectedTime;
                 }
+                startTime.value = selectedTime;
+            } else {
+                startTime.value = selectedTime;
             }
+
+            
+
         } else {
             alert('Please select ahead of time');
             startTime.value = `${hours}:00`;

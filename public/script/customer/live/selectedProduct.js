@@ -88,8 +88,6 @@ $(document).ready(() => {
                 }
             }
 
-            // updateModalChanges(variantCopy)
-
             await updateDoc(subColRef, {
                 'variants': variantCopy
             }, { merge: true }).then(() => {
@@ -469,7 +467,7 @@ $(document).ready(() => {
             itemSize: size,
             itemQty: qty,
             itemColor: color,
-            itemPrice: Number(product.prodPrice)
+            itemPrice: Number(product.prodPrice + '00')
         }
 
         addItemToCart(item).then(() => {
@@ -519,7 +517,7 @@ $(document).ready(() => {
     const displayLiveCart = (itemData) => {
         let CART_TEMPLATE = '';
         let trimmedItemName;
-
+        
         // cut item name if long
         if (itemData.itemName.length > 20) {
             let text = itemData.itemName;
@@ -572,7 +570,8 @@ $(document).ready(() => {
             btnCheckCartItem[i].addEventListener('click', () => {
                 const parentEl = btnCheckCartItem[i].parentElement;
                 const itemID = parentEl.dataset.itemId;
-                const itemPrice = parentEl.children[3].children[2].children[1].firstElementChild.textContent;
+                const originPrice = parentEl.children[3].children[2].children[1].textContent;
+                const formattedPrice = originPrice.split('₱')[1].replace(/,(?=.*\.\d+)/g, '');
 
                 if (btnCheckCartItem[i].classList.contains('checked')) {
                     btnCheckCartItem[i].classList.remove('checked');
@@ -580,12 +579,12 @@ $(document).ready(() => {
                     // find and remove
                     const findIndex = selectedCartItems.itemsArray.indexOf(itemID);
                     selectedCartItems.itemsArray.splice(findIndex, 1);
-                    totalAmount -= Number(itemPrice);
+                    totalAmount -= Number(formattedPrice);
 
                 } else {
                     btnCheckCartItem[i].classList.add('checked');
                     selectedCartItems.itemsArray.push(itemID)
-                    totalAmount += Number(itemPrice);
+                    totalAmount += Number(formattedPrice);
                 }
                 checkoutLiveCart()
             })

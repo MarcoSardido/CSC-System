@@ -142,6 +142,7 @@ $(document).ready(() => {
     
     txtChatInput.addEventListener('keypress', e => {
         if (e.key !== 'Enter') return;
+        if (txtChatInput.value === '') return;
         if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
         if (userIsMuted) return txtChatInput.value = null;
 
@@ -150,6 +151,7 @@ $(document).ready(() => {
 
     const btnChatInput = document.getElementById('btnInputChat');
     btnChatInput.addEventListener('click', () => {
+        if (txtChatInput.value === '') return;
         if (isAnonymousBuyer === 'true') return txtChatInput.value = null;
         if (userIsMuted) return txtChatInput.value = null;
 
@@ -158,6 +160,7 @@ $(document).ready(() => {
 
     const checkUserIfMuted = (mute) => {
         if (mute) {
+            $('#muteToast').toast('show')
             txtChatInput.setAttribute('disabled', '');
             txtChatInput.value = null;
             txtChatInput.placeholder = `You've been muted by the seller.`;
@@ -300,7 +303,6 @@ $(document).ready(() => {
         // Show the card fading-in and scroll to view the new message.
         $(".conversation").stop().animate({ scrollTop: $(".conversation")[0].scrollHeight }, 1000);
     }
-
 
     displayMessage()
 });

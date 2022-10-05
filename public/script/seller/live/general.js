@@ -114,13 +114,23 @@ $(document).ready(() => {
         }
     }
 
-    //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
-    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}`);
+    const liveDocRef = doc(db, `LiveSession/sessionID_${liveRoomID}`);
+    onSnapshot(liveDocRef, doc => {
+        if (doc.data().customer !== '') {
+            showBuyToast(doc.data().customer)
+            
+        }
+    })
     
 
     //! ----------------------------------------------------------------------------------------
     //                                     Script Function
     //! ----------------------------------------------------------------------------------------
+
+    const showBuyToast = (user) => {
+        $('.tost-message').text(`${user} has bought a product!`);
+        $('#buyToast').toast('show')
+    }
 
     const exitLive = () => {
         // Disconnect all viewers
@@ -231,7 +241,6 @@ $(document).ready(() => {
         event.returnValue = "Write something clever here..";
     };
 
-    $('#liveToast').toast('show')
 
     realTimeViewerCount(liveRoomID)
     startTimer();
