@@ -38,62 +38,48 @@ p {
     align-items: center;
 }
 
-.header-container .right .participants {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
-    padding: 5px 10px;
-    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .header-container .right .dropdown-menu {
-    width: 250px;
-    left: -40px !important;
+    width: 340px;
+    min-height: 150px;
+    left: -64px !important;
+}
+.header-container .right .dropdown-menu .no-customer {
+    margin: 35px 0;
+    text-align: center;
+    padding: 10px;
 }
 
-.header-container .right .participants ion-icon {
-    font-size: 25px;
-    margin-right: 5px;
-}
+
 
 .dropdown-menu .customer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
+    padding-bottom: 8px;
     margin: 0 5px;
+    border-bottom: 1px solid #9c9c9c;
 }
 
-.dropdown-menu .customer .inner-left {
+.dropdown-menu .customer .cust-info {
     display: flex;
     align-items: center;
-    width: 160px;
-    border-right: 1px solid #d2d2d2;
 }
 
-.dropdown-menu .customer .inner-right {
+.dropdown-menu .customer .cust-control {
     display: flex;
-    justify-content: space-between;
-    width: 45px;
-    font-size: 18px;
-}
-
-.dropdown-menu .customer .inner-right div {
     cursor: pointer;
 }
 
-.dropdown-menu .customer .inner-right .mute {
-    color: #ffc107;
+.dropdown-menu .customer .cust-control ion-icon {
+    font-size: 20px;
 }
 
-.dropdown-menu .customer .inner-right .kick {
-    color: red;
+.dropdown-menu .customer .cust-control ion-icon:nth-child(1) {
+    margin-right: 15px;
 }
 
-.dropdown-menu .customer img {
+.dropdown-menu .customer .cust-info img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -101,13 +87,12 @@ p {
     margin-right: 10px;
 }
 
-.dropdown-menu .customer .name {
+.dropdown-menu .customer .cust-info p {
     font-size: 18px;
 }
 
 .header-container .right button {
     border: none;
-    color: red;
     font-weight: 600;
     padding: 10px 20px;
     border-radius: 5px;
@@ -116,9 +101,23 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
-.header-container .right button:hover {
+.header-container .right .customers {
+    margin-right: 20px;
+    color: #485def;
+}
+
+.header-container .right .exit-live-selling {
+    color: red;
+}
+
+.header-container .right .exit-live-selling:hover {
     color: #fff;
     background: red;
+}
+
+.header-container .right .customers:hover {
+    color: #fff;
+    background: #485def;
 }
 
 .body-container {
@@ -335,13 +334,8 @@ p {
     justify-content: flex-start;
 }
 
-.chat-item.other-user .dropdown-menu a {
-    cursor: pointer;
-}
-
 .chat-item .chat-head {
     margin-right: 15px;
-    cursor: pointer;
 }
 
 .chat-item .chat-head img {

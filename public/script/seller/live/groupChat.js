@@ -1,5 +1,5 @@
 import { firebase } from '../../firebaseConfig.js';
-import { getFirestore, doc, collection, getDoc, getDocs, setDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+import { getFirestore, doc, collection, getDoc, getDocs, deleteDoc, setDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
 const db = getFirestore(firebase)
 
@@ -12,9 +12,41 @@ $(document).ready(() => {
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
 
-    //! -------------------------------------------------------------
-    //                         Start of Live Chat
-    //! -------------------------------------------------------------
+    //! ============================== Firebase Functions ================================  !// 
+
+    //? Checks realtime if customer joins.
+    // ::
+    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
+    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers`);
+    onSnapshot(usersSubColRef, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "added") {
+                getCustomer(change.doc.data().uid, snapshot.size);
+            }
+        });
+    })
+
+    const getCustomer = async (uid, collectionSize) => {
+        const customerObj = {};
+
+        try {
+            //* CUSTOMER COLLECTION
+            const customerDocRef = doc(db, `Accounts/customer_${uid}`);
+            const customerDocument = await getDoc(customerDocRef);
+
+            customerObj.uid = uid;
+            customerObj.name = customerDocument.data().displayName;
+            customerObj.photo = `data:${customerDocument.data().imgType};base64,${customerDocument.data().userPhoto}`;
+
+            addCustomer(customerObj, collectionSize)
+
+        } catch (error) {
+            console.error(`Firestore Error -> @getCustomer: ${error.message}`)
+        }
+
+
+    }
+
     const addChat = async (uid, data, sessionID) => {
         const currentDateAndTime = new Date();
         const uniqueID = generateId();
@@ -43,7 +75,6 @@ $(document).ready(() => {
         }
     }
 
-
     const getRealTimeData = async (sessionID) => {
 
         try {
@@ -56,7 +87,7 @@ $(document).ready(() => {
                 snapshot.docChanges().forEach(change => {
                     if (change.type === "added") {
                         const message = change.doc.data();
-                        getAllChatData(change.doc.id, message.content, message.createdAt, message.displayName, message.uid, message.photo, snapshot.size)
+                        getAllChatData(change.doc.id, message.content, message.createdAt, message.displayName, message.uid, message.photo)
                     }
                 });
             });
@@ -92,6 +123,16 @@ $(document).ready(() => {
         }
     }
 
+    const removeUser = async (uid, sessionID) => {
+        try {
+            //* COLLECTION: LiveSession -> SUB-COLLECTION: sessionUsers
+            const userDocRef = doc(db, `LiveSession/sessionID_${sessionID}/sessionUsers/${uid}`);
+            await deleteDoc(userDocRef);
+
+        } catch (error) {
+            console.error(`Firestore Error -> @removeUser: ${error.message}`)
+        }
+    }
 
     const generateId = () => {
         var result = '';
@@ -103,6 +144,98 @@ $(document).ready(() => {
         }
         return result;
     }
+
+
+    //* ================================ Global Selectors ================================== *//
+    const customerContainer = document.getElementById('dynamicCustomerContainer');
+
+    let customerCounter = 1;
+    const addCustomer = (userData, size) => {
+        const CUSTOMER_TEMPLATE = `
+            <div class="customer" data-uid="${userData.uid}">
+                <div class="cust-info">
+                    <img src="${userData.photo}" alt="${userData.name}">
+                    <p>${userData.name}</p>
+                </div>
+                <div class="cust-control">
+                    <div class="customer-mute">
+                        <ion-icon name="volume-high"></ion-icon>
+                    </div>
+                <div class="customer-remove">
+                    <ion-icon name="person-remove"></ion-icon>
+                </div> 
+                </div>
+            </div>
+        `;
+
+        $("#noCustomer").remove();
+        customerContainer.insertAdjacentHTML('beforeend', CUSTOMER_TEMPLATE);
+
+        if (customerCounter === size) {
+            initCustomerButtons();
+        } else {
+            customerCounter++;
+        }
+    }
+
+    const removeCustomer = (uid) => {
+        const customerList = customerContainer.children;
+
+        for (let customerIndex = 0; customerIndex < customerList.length; customerIndex++) {
+            const elUid = customerList[customerIndex].dataset.uid;
+
+            if (elUid === uid) {
+                removeUser(uid, liveRoomID).then(() => {
+                    customerContainer.removeChild(customerContainer.children[customerIndex]);
+
+                    if (customerList.length === 0) {
+                        const NO_CUSTOMER = `
+                            <div id="noCustomer" class="no-customer">
+                                You have no viewers 😭
+                            </div>
+                        `;
+
+                        customerContainer.insertAdjacentHTML('beforeend', NO_CUSTOMER)
+                    }
+                })
+            }
+        }
+    }
+
+
+    const initCustomerButtons = () => {
+        const allMuteButtons = document.querySelectorAll('.customer-mute');
+        const allRemoveButtons = document.querySelectorAll('.customer-remove');
+
+        // Mute customer
+        for (const muteIndex of allMuteButtons) {
+            muteIndex.addEventListener('click', () => {
+                const mainParentEl = muteIndex.parentElement.parentElement;
+                const uid = mainParentEl.dataset.uid;
+                const icon = muteIndex.children[0];
+
+                if (icon.getAttribute('name') === 'volume-high') {
+                    icon.setAttribute("name", "volume-mute");
+                    muteUser(uid, liveRoomID)
+
+                } else {
+                    icon.setAttribute("name", "volume-high");
+                    unMuteUser(uid, liveRoomID)
+                }
+            })
+        }
+
+        // Remove customer
+        for (const removeIndex of allRemoveButtons) {
+            removeIndex.addEventListener('click', () => {
+                const mainParentEl = removeIndex.parentElement.parentElement;
+                const uid = mainParentEl.dataset.uid;
+
+                removeCustomer(uid)
+            })
+        }
+    }
+
 
 
     const inputFunction = (data) => {
@@ -141,7 +274,6 @@ $(document).ready(() => {
         return status;
     }
 
-
     // Adding Chat
     const txtChatInput = document.getElementById('txtInputChat');
     txtChatInput.addEventListener('keypress', e => {
@@ -153,7 +285,7 @@ $(document).ready(() => {
     const btnChatInput = document.getElementById('btnInputChat');
     btnChatInput.addEventListener('click', () => {
         if (txtChatInput.value === '') return;
-        
+
         inputFunction(txtChatInput.value);
     })
 
@@ -171,13 +303,8 @@ $(document).ready(() => {
 
     const OTHER_MESSAGE_TEMPLATE =
         `<div class="chat-item other-user">
-            <div class="chat-head" data-toggle="dropdown">
+            <div class="chat-head">
                 <img id="pic" src="" alt="user">
-            </div>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" name="chatHeadMute">Mute</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item remove" name="chatHeadRemove">Remove</a>
             </div>
             <div class="chat-body">
                 <p class="name"></p>
@@ -268,27 +395,7 @@ $(document).ready(() => {
         }
     }
 
-    const initChatHeadButton = () => {
-        const allMuteSelector = document.querySelectorAll('[name="chatHeadMute"]');
-        for (const muteIndex of allMuteSelector) {
-            muteIndex.addEventListener('click', () => {
-                const mainParent = muteIndex.parentNode.parentNode;
-                const uid = mainParent.getAttribute("uid")
-
-                if (muteIndex.innerHTML === 'Mute') {
-                    muteIndex.innerHTML = 'UnMute';
-                    muteUser(uid, liveRoomID);
-                } else {
-                    muteIndex.innerHTML = 'Mute';
-                    unMuteUser(uid, liveRoomID);
-                }
-                
-            })
-        }
-    }
-
-    let chatCounter = 1;
-    const getAllChatData = (chatID, message, time, name, uid, photo, size) => {
+    const getAllChatData = (chatID, message, time, name, uid, photo) => {
         const div = document.getElementById(chatID) || createAndInsertMessage(chatID, time, uid)
 
         let messageElement = div.querySelector('.message');
@@ -309,12 +416,6 @@ $(document).ready(() => {
 
         // Show the card fading-in and scroll to view the new message.
         $(".conversation").stop().animate({ scrollTop: $(".conversation")[0].scrollHeight }, 1000);
-
-        if (chatCounter === size) {
-            initChatHeadButton();
-        } else {
-            chatCounter++;
-        }
     }
 
     displayMessage();

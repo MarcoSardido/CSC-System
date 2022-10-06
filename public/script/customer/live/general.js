@@ -19,6 +19,18 @@ $(document).ready(() => {
     //                                     Firebase Functions
     //! ----------------------------------------------------------------------------------------
 
+    //? Checks realtime if seller kicked the user.
+    // ::
+    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
+    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers`);
+    onSnapshot(usersSubColRef, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+            if (change.type === "removed") {
+                kickedOut();
+            }
+        });
+    })
+
     const checkIfRoomIsAvailable = doc(db, `LiveSession/sessionID_${liveRoomID}`)
     onSnapshot(checkIfRoomIsAvailable, doc => {
         if (doc.data().sessionStatus === 'Closed') {
@@ -81,6 +93,11 @@ $(document).ready(() => {
     //! ----------------------------------------------------------------------------------------
     //                                     Script Function
     //! ----------------------------------------------------------------------------------------
+
+    const kickedOut = () => {
+        alert(`You've been kicked by the seller!`);
+        window.location.assign(`/customercenter`);
+    }
 
     // Exit Live
     const btnExit = document.getElementById('btnExit');
