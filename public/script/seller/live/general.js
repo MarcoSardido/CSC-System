@@ -128,7 +128,7 @@ $(document).ready(() => {
     //! ----------------------------------------------------------------------------------------
 
     const showBuyToast = (user) => {
-        $('.tost-message').text(`${user} has bought a product!`);
+        $('.tost-message').text(`${user} has added item to cart!`);
         $('#buyToast').toast('show')
     }
 
