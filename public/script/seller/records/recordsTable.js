@@ -17,10 +17,10 @@ $(document).ready(() => {
         $('#tableData-report').DataTable({
             data: data,
             columns: [
-                { data: 'ticketID' },
-                { data: 'complainantName' },
+                { data: 'id' },
+                { data: 'reportedCustomerName' },
                 { data: 'reportType' },
-                { data: 'date' },
+                { data: 'reportPlaced' },
                 {
                     "render": function () {
                         return $('<div>')
@@ -53,7 +53,7 @@ $(document).ready(() => {
                     ...
                 </button>
                 <div class="dropdown-menu tbl-dropdown">
-                    <a class="dropdown-item viewRecordModal" data-toggle="modal" data-target="#viewReportModal" data-trans-id="${data[index].ticketID}">More Info</a>
+                    <a class="dropdown-item viewRecordModal" data-toggle="modal" data-target="#viewReportModal" data-trans-id="${data[index].id}">More Info</a>
                 </div>
             `;
 
@@ -77,23 +77,32 @@ $(document).ready(() => {
         for (const modalIndex of viewModal) {
             modalIndex.addEventListener('click', () => {
                 const indexTicketID = modalIndex.dataset.transId;
+                let reportBodyData = ``;
 
                 for (const dataIndex of data) {
-                    if (dataIndex.ticketID === indexTicketID) {
+                    if (dataIndex.id === indexTicketID) {
 
-                        let reportBodyData = `
-                            ${headerContent(dataIndex)} 
-                            ${bodyContent(dataIndex)}
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btnViewItemClose" data-dismiss="modal">Close</button>
-                            </div>
-                        `;
+                        if (dataIndex.status === 'Pending') {
+                            reportBodyData += `
+                                ${headerContent(dataIndex)} 
+                                <div style="text-align: center;padding: 30px 0px;font-size: 18px;">
+                                    Report is still being reviewed by out staff.
+                                </div>
+                            `;
+                        } else {
+                            reportBodyData += `
+                                ${headerContent(dataIndex)} 
+                                ${bodyContent(dataIndex)}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btnViewItemClose" data-dismiss="modal">Close</button>
+                                </div>
+                            `;
+                        }
 
                         modalBodyContainer.insertAdjacentHTML('beforeend', reportBodyData);
 
                     }
                 }
-                
             })
             
         }
@@ -105,7 +114,7 @@ $(document).ready(() => {
         return `
             <div class="modal-header">
                 <div class="title-bar">
-                    <h5 class="main-title" id="staticBackdropLabel">Report Ticket ID# ${data.ticketID}</h5>
+                    <h5 class="main-title" id="staticBackdropLabel">Report Ticket ID# ${data.id}</h5>
                     <h5 class="sub-title">Offense: <span>${data.reportType}</span></h5>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

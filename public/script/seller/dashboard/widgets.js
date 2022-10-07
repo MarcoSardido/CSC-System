@@ -107,13 +107,13 @@ $(document).ready(() => {
                 REPORT_TEMPLATE += `
                     <div class="report-cont">
                         <div class="userPhoto">
-                            <img src="${reportIndex.complainantPhoto}" alt="${reportIndex.complainantName}" class="user">
+                            <img src="${reportIndex.reportedCustomerPhoto}" alt="${reportIndex.reportedCustomerName}" class="user">
                         </div>
                         <div class="userName">
-                            ${reportIndex.complainantName}
+                            ${reportIndex.reportedCustomerName}
                         </div>
                         <div class="reportDate">
-                            ${reportIndex.date}
+                            ${reportIndex.reportPlaced}
                         </div>
                         <div class="reportType">
                             ${reportIndex.reportType}

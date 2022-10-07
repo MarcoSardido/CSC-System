@@ -2,74 +2,32 @@ import { firebase } from '../../../firebaseConfig.js';
 import { getFirestore, doc, collection, getDocs, getDoc, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 const db = getFirestore(firebase)
 
-const getAllReportId = async (uuid) => {
-    const finalContainer = [];
-    const getAllReportIDs = [];
-    const getAllComplainantIDs = [];
+const getAllReportId = async (uid) => {
+    const reportArray = [], reportedCustomerIDs = [];
 
     try {
-        // Get report in seller account
-        const collectionRef = collection(db, `Accounts/seller_${uuid}/Reports`)
-        const sellerReportCollection = await getDocs(collectionRef)
-
-        sellerReportCollection.forEach(item => {
-            getAllReportIDs.push(item.id);
-
-            finalContainer.push({
-                ticketID: item.id,
-                complainantID: '',
-                complainantPhoto: '',
-                complainantName: '',
-                complainantDescription: '',
-                reportType: '',
-                daysBanned: item.data().daysBanned,
-                punishment: item.data().punishment,
-                punishmentMessage: item.data().message,
-                date: '',
-                status: '',
-            })
+        //* COLLECTION: Sellers -> SUB-COLLECTION: Reports
+        const reportsSubColRef = collection(db, `Sellers/${uid}/Reports`);
+        const reportsSubCollection = await getDocs(reportsSubColRef);
+        reportsSubCollection.forEach(doc => {
+            reportedCustomerIDs.push(doc.data().reportedCustomerID);
+            reportArray.push(doc.data());
         })
+        
 
-        // Get report data
-        const reportCollectionRef = collection(db, `Reports`)
-        const reportCollection = await getDocs(reportCollectionRef)
+        for (const reportedIndex of reportedCustomerIDs) {
+            //* COLLECTION: Accounts
+            const accountDocRef = doc(db, `Accounts/customer_${reportedIndex}`);
+            const accountDocument = await getDoc(accountDocRef);
 
-        reportCollection.forEach((reportDoc) => {
-            if (getAllReportIDs.includes(reportDoc.id)) {
-                getAllComplainantIDs.push(reportDoc.data().complainantID)
-
-                for (const finalContIndex of finalContainer) {
-                    if (reportDoc.id === finalContIndex.ticketID) {
-                        finalContIndex.complainantID = reportDoc.data().complainantID;
-                        finalContIndex.complainantName = reportDoc.data().complainant;
-                        finalContIndex.complainantDescription = reportDoc.data().description;
-                        finalContIndex.reportType = reportDoc.data().type;
-                        finalContIndex.status = reportDoc.data().status;
-                        finalContIndex.date = reportDoc.data().reportPlaced;
-                    }
+            for (const [reportDataIndex, reportDataValue] of reportArray.entries()) {
+                if (reportDataValue.reportedCustomerID === reportedIndex) {
+                    reportArray[reportDataIndex].reportedCustomerPhoto = `data:${accountDocument.data().imgType};base64,${accountDocument.data().userPhoto}`;
                 }
             }
-        })
+        }
 
-        // Get account data
-        const accountCollectionRef = collection(db, 'Accounts')
-        const accountCollection = await getDocs(accountCollectionRef)
-
-        accountCollection.forEach(accountDoc => {
-            if (getAllComplainantIDs.includes(accountDoc.id)) {
-
-                for (const finalContIndex of finalContainer) {
-                    if (accountDoc.id === finalContIndex.complainantID) {
-                        finalContIndex.complainantPhoto = `data:${accountDoc.data().imgType};base64,${accountDoc.data().userPhoto}`
-                    }
-                }
-                
-            }
-            
-        })
-
-        return finalContainer;
-
+        return reportArray;
     } catch (err) {
         console.error(`Firestore Error: @Get all reports id -> ${err.message}`)
     }

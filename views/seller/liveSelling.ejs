@@ -16,13 +16,15 @@
             <p class="timer" id="lblTimer">00:00:00</p>
         </div>
         <div class="right">
-            <button class="customers dropdown-toggle" id="btnCustomerList" type="button" data-toggle="dropdown" aria-expanded="false">Customer List</button>
+            <button class="customers dropdown-toggle" id="btnCustomerList" type="button" data-toggle="dropdown"
+                aria-expanded="false">Customer List</button>
             <div class="dropdown-menu" id="dynamicCustomerContainer">
                 <div id="noCustomer" class="no-customer">
                     You have no viewers 😭
                 </div>
             </div>
-            <button class="exit-live-selling" id="btnExitLive" data-toggle="modal" data-target="#exitLiveModal">End Session</button>
+            <button class="exit-live-selling" id="btnExitLive" data-toggle="modal" data-target="#exitLiveModal">End
+                Session</button>
         </div>
     </div>
     <div class="body-container">
@@ -58,11 +60,11 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Exit Modal -->
 <div class="modal fade" id="exitLiveModal" tabindex="-1" aria-labelledby="exitLiveLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body">
+            <div class="modal-body modal-exit">
                 <ion-icon name="warning"></ion-icon>
                 <p class="modal-title">Are you sure?</p>
                 <p class="modal-label">You are about to end this live stream session.</p>
@@ -70,6 +72,72 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
                 <button type="button" class="btn btnExit btn-primary" id="btnExit">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Report Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Report Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body modal-report">
+                <label for="exampleFormControlInput1">Please state your reason for reporting this user:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoProfilePic"
+                        value="Inappropriate profile picture" checked>
+                    <label class="form-check-label" for="rdoProfilePic">
+                        Inappropriate profile picture.
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoChats"
+                        value="Inappropriate chats">
+                    <label class="form-check-label" for="rdoChats">
+                        Inappropriate chats
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoSpam"
+                        value="Spam/advertising">
+                    <label class="form-check-label" for="rdoSpam">
+                        Spam (ads, self-promotion)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoHarassment"
+                        value="Harassment">
+                    <label class="form-check-label" for="rdoHarassment">
+                        Harassment
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoFraud"
+                        value="Fraud">
+                    <label class="form-check-label" for="rdoFraud">
+                        Fraud
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="rdoReport" id="rdoOther"
+                        value="Other">
+                    <label class="form-check-label" for="rdoOther">
+                        Other
+                    </label>
+                </div>
+                <div class="form-group" style="margin-top: 15px;">
+                    <label for="reportDetail">Details about the issue</label>
+                    <textarea class="form-control" id="reportDetail" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnReportCustomer">Report</button>
             </div>
         </div>
     </div>

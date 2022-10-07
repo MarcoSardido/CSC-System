@@ -26,7 +26,16 @@ const signInAndSignUpRoute = (req, res) => {
 
 //* Method: GET -> Logout
 const logout = async (req, res) => {
+    const currentDate = new Date();
+
     try {
+        //* COLLECTION: Accounts
+        const accountDocRef = doc(db, `Accounts/seller_${currentLoggedInUID[0]}`);
+        await setDoc(accountDocRef, {
+            signedOutAt: currentDate
+        }, { merge: true })
+
+        //* COLLECTION: Stripe Accounts
         const stripeAccRef = doc(db, 'Stripe Accounts', `seller_${currentLoggedInUID[0]}`);
         const stripeAccData = await getDoc(stripeAccRef);
 

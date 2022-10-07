@@ -121,8 +121,7 @@
 
 .dashMainCont .body-cont .body-row-1 .startSelling-cont .img-side img {
   margin-top: -30px;
-  margin-left: -80px;
-  transform: scale(1.1)
+  margin-left: -100px;
 }
 
 .dashMainCont .body-cont .body-row-1 .liveStats-cont {
@@ -263,7 +262,7 @@
 }
 
 .dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .reportDate {
-  width: 8rem;
+  width: 7rem;
 
 }
 
@@ -272,7 +271,6 @@
 }
 
 .dashMainCont .body-cont .body-row-2 .reportHistory-cont .reportHist-body .report-cont .reportType {
-  width: 8rem;
   color: red;
   font-weight: 600;
 }

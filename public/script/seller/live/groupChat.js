@@ -134,6 +134,47 @@ $(document).ready(() => {
         }
     }
 
+    const reportUser = async (uid, { type, detail, cid }) => {
+        const uniqueID = generateId();
+        const currentDate = stringDateFormat();
+
+        try {
+            //* COLLECTION: Customers
+            const customerDocRef = doc(db, `Customers/${cid}`);
+            const customerDocument = await getDoc(customerDocRef);
+
+            const customer = customerDocument.data().fullName === '' ? customerDocument.data().displayName : customerDocument.data().fullName;
+
+            //* COLLECTION: Reports
+            const reportsDocRef = doc(db, `Reports/ticket_${uniqueID}`);
+            await setDoc(reportsDocRef, {
+                id: uniqueID,
+                complainantID: uid,
+                reportedCustomerID: cid,
+                reportedCustomerName: customer,
+                reportType: type,
+                reportDetail: detail,
+                reportPlaced: currentDate,
+                status: 'Pending'
+            });
+
+            //* COLLECTION: Sellers -> SUB-COLLECTION: Reports
+            const sellerReportDocRef = doc(db, `Sellers/${uid}/Reports/ticket_${uniqueID}`);
+            await setDoc(sellerReportDocRef, {
+                id: uniqueID,
+                reportedCustomerID: cid,
+                reportedCustomerName: customer,
+                reportType: type,
+                reportDetail: detail,
+                reportPlaced: currentDate,
+                status: 'Pending'
+            })
+            
+        } catch (error) {
+            console.error(`Firestore Error -> @removeUser: ${error.message}`)
+        }
+    }
+
     const generateId = () => {
         var result = '';
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -145,13 +186,25 @@ $(document).ready(() => {
         return result;
     }
 
+    // Result: 01 Jul 2022
+    const stringDateFormat = () => {
+        const date = new Date();
+        const formattedDate = date.toLocaleDateString('en-GB', {
+            day: 'numeric', month: 'short', year: 'numeric'
+        }).replace(/ /g, ' ');
+        return formattedDate;
+    }
+
 
     //* ================================ Global Selectors ================================== *//
     const customerContainer = document.getElementById('dynamicCustomerContainer');
 
+    // :: Report Modal
+    const reportButton = document.getElementById('btnReportCustomer');
+
     let customerCounter = 1;
     const addCustomer = (userData, size) => {
-        const CUSTOMER_TEMPLATE = `
+        const CUSTOMER_TEMPLATE = ` 
             <div class="customer" data-uid="${userData.uid}">
                 <div class="cust-info">
                     <img src="${userData.photo}" alt="${userData.name}">
@@ -161,12 +214,16 @@ $(document).ready(() => {
                     <div class="customer-mute">
                         <ion-icon name="volume-high"></ion-icon>
                     </div>
-                <div class="customer-remove">
-                    <ion-icon name="person-remove"></ion-icon>
-                </div> 
+                    <div class="customer-report">
+                        <ion-icon name="warning"></ion-icon>
+                    </div>
+                    <div class="customer-remove">
+                        <ion-icon name="person-remove"></ion-icon>
+                    </div> 
                 </div>
             </div>
         `;
+        
 
         $("#noCustomer").remove();
         customerContainer.insertAdjacentHTML('beforeend', CUSTOMER_TEMPLATE);
@@ -206,6 +263,7 @@ $(document).ready(() => {
     const initCustomerButtons = () => {
         const allMuteButtons = document.querySelectorAll('.customer-mute');
         const allRemoveButtons = document.querySelectorAll('.customer-remove');
+        const allReportButtons = document.querySelectorAll('.customer-report');
 
         // Mute customer
         for (const muteIndex of allMuteButtons) {
@@ -222,6 +280,36 @@ $(document).ready(() => {
                     icon.setAttribute("name", "volume-high");
                     unMuteUser(uid, liveRoomID)
                 }
+            })
+        }
+
+        // Report Customer
+        for (const reportIndex of allReportButtons) {
+            reportIndex.addEventListener('click', () => {
+                const mainParentEl = reportIndex.parentElement.parentElement;
+                const uid = mainParentEl.dataset.uid;
+
+                $('#reportModal').modal('show');
+
+                reportButton.addEventListener('click', () => {
+                    const reportObj = {};
+                    
+                    const reportDetail = document.getElementById('reportDetail');
+                    const reportRadioButtons = document.querySelectorAll('[name="rdoReport"]');
+                    for (const radioIndex of reportRadioButtons) {
+                        if (radioIndex.checked) {
+                            reportObj.type = radioIndex.value;
+                            reportObj.detail = reportDetail.value;
+                            reportObj.cid = uid;
+                        }
+                    }
+
+                    reportUser(trimmedUID, reportObj).then(() => {
+                        $('#reportModal').modal('hide');
+                        reportRadioButtons[0].checked = true;
+                        reportDetail.value = null;
+                    })
+                })
             })
         }
 

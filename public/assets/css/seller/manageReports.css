@@ -21,6 +21,10 @@
     height: 650px;
 }
 
+.tbl-history {
+    width: 100% !important;
+}
+
 .tbl-history table,
 .tbl-history td {
     text-align: center;
@@ -80,10 +84,8 @@
 */
 .title-bar {
     display: flex;
-}
-
-.title-bar .main-title {
-    margin-right: 150px;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .title-bar .sub-title span {

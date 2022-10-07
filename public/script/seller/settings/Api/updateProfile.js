@@ -4,12 +4,15 @@ import { getFirestore, doc, collection, getDoc, getDocs, updateDoc, setDoc, onSn
 const db = getFirestore(firebase);
 
 const changeProfilePhoto = async (uid, data) => {
+    const currentDate = new Date();
+    
     try {
         //* ACCOUNTS COLLECTION
         const accountsColRef = doc(db, `Accounts/seller_${uid}`);
         await updateDoc(accountsColRef, {
             imgType: data.type,
-            userPhoto: data.data
+            userPhoto: data.data,
+            profileUpdatedAt: currentDate
         })
 
     } catch (error) {

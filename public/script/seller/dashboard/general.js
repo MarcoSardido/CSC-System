@@ -35,11 +35,11 @@ $(document).ready(() => {
     // 
     //* LIVE SESSION COLLECTION 
    
-    onSnapshot(liveDocRef, doc => {
-        if (doc.data().customer !== '') {
-            showBuyToast(doc.data().customer)
-        }
-    })
+    // onSnapshot(liveDocRef, doc => {
+    //     if (doc.data().customer !== '') {
+    //         showBuyToast(doc.data().customer)
+    //     }
+    // })
 
 
 

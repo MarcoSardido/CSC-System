@@ -15,6 +15,7 @@ const stripe = new Stripe(config.STRIPE_PRIVATE_KEY);
 export const dashboard = async (req, res) => {
     const uid = req.body.uid;
     const sellerData = {};
+    const currentDate = new Date();
 
     try {
         adminAuth.getUser(uid).then(async (userRecord) => {
@@ -45,6 +46,11 @@ export const dashboard = async (req, res) => {
                     //* ACCOUNTS COLLECTION
                     const accountColRef = doc(db, `Accounts/seller_${uid}`);
                     const accountColDoc = await getDoc(accountColRef);
+
+                        //? :: Update user logged in at
+                        await setDoc(accountColRef, {
+                            signedInAt: currentDate
+                        }, { merge: true })
 
                     //* SELLER COLLECTION
                     const sellerColRef = doc(db, `Sellers/${uid}`);
