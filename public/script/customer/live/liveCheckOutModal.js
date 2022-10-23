@@ -1,3 +1,8 @@
+import { firebase } from '../../firebaseConfig.js';
+import { getFirestore, doc, collection, getDoc, getDocs, setDoc, deleteDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+
+const db = getFirestore(firebase)
+
 import { getAllCustomerAddress, addNewAddress, calcItems, stripePaymentHandler, codPaymentHandler } from './Api/checkOutModalData.js'
 import { selectedCartItems } from './selectedProduct.js';
 
@@ -11,6 +16,37 @@ $(document).ready(() => {
 
     //! Main Object
     const checkoutObject = {};
+
+    const userObj = {};
+
+    //* ================================== Firebase Functions =================================== *// 
+    const customerBuy = async (roomID) => {
+        try {
+            //* COLLECTION: LiveSession
+            const liveDocRef = doc(db, `LiveSession/sessionID_${roomID}`);
+            await setDoc(liveDocRef, {
+                customer: userObj.displayName
+            }, { merge: true }).then(() => {
+                setTimeout(() => {
+                    setDoc(liveDocRef, {
+                        customer: ''
+                    }, { merge: true });
+                }, 3000)
+            })
+        } catch (error) {
+            console.error(`Firestore Error -> @customerBuy: ${error.message}`)
+        }
+    }
+
+    const getUserData = async (uid) => {
+        //* CUSTOMER COLLECTION
+        const customerDocRef = doc(db, `Customers/${uid}`);
+        const customerDocument = await getDoc(customerDocRef);
+
+        userObj.displayName = customerDocument.data().displayName;
+    }
+
+
 
     //* ================================== Global Selectors =================================== *// 
     const billerName = document.getElementById('inputBillerName');
@@ -198,46 +234,48 @@ $(document).ready(() => {
         checkoutObject.email = billerEmail.value;
         checkoutObject.address = `${selectedAddress} ${selectedPostal}`;
 
-        calcItems(trimmedUID, liveRoomID, checkoutObject.items, checkoutObject.paymentMethod)
-            .then(result => {
-                const cartItems = result;
+        calcItems(trimmedUID, liveRoomID, checkoutObject.items, checkoutObject.paymentMethod).then(result => {
+            const cartItems = result;
 
-                const firstName = checkoutObject.name.split(' ')[0];
-                const lastName = checkoutObject.name.split(' ')[checkoutObject.name.split(' ').length - 1];
+            const firstName = checkoutObject.name.split(' ')[0];
+            const lastName = checkoutObject.name.split(' ')[checkoutObject.name.split(' ').length - 1];
 
-                // Method: Credit Card
-                if (checkoutObject.paymentMethod === 'STRIPE') {
-                    const method = 'Credit Card';
+            // Method: Credit Card
+            if (checkoutObject.paymentMethod === 'STRIPE') {
+                const method = 'Credit Card';
 
-                    const user = {
-                        uid: trimmedUID,
-                        fName: firstName,
-                        lName: lastName,
-                        email: checkoutObject.email,
-                        contactNo: checkoutObject.phone,
-                        address: checkoutObject.address
-                    };
-                    
-                    stripePaymentHandler(trimmedUID, user, cartItems, method);
-                } else {
-                    // Method: Cash On Delivery
-                    const codObjData = {
-                        fName: firstName,
-                        lName: lastName,
-                        contactNo: checkoutObject.phone,
-                        modeOfPayment: checkoutObject.paymentMethod,
-                        orderAddress: checkoutObject.address,
-                    }
+                const user = {
+                    uid: trimmedUID,
+                    fName: firstName,
+                    lName: lastName,
+                    email: checkoutObject.email,
+                    contactNo: checkoutObject.phone,
+                    address: checkoutObject.address
+                };
 
-                    codPaymentHandler(trimmedUID, liveRoomID, codObjData, cartItems).then(() => {
-                        window.location.reload();
-                    });
+                stripePaymentHandler(trimmedUID, user, cartItems, method);
+            } else {
+                // Method: Cash On Delivery
+                const codObjData = {
+                    fName: firstName,
+                    lName: lastName,
+                    contactNo: checkoutObject.phone,
+                    modeOfPayment: checkoutObject.paymentMethod,
+                    orderAddress: checkoutObject.address,
                 }
-            })
+
+                codPaymentHandler(trimmedUID, liveRoomID, codObjData, cartItems).then(() => {
+                    window.location.reload();
+                });
+            }
+
+            customerBuy(liveRoomID);
+        })
     })
 
 
     getPaymentMethod();
     loadCustomerAddress();
     createNewAddress();
+    getUserData(trimmedUID);
 })

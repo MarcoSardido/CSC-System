@@ -114,6 +114,7 @@ $(document).ready(() => {
         }
     }
 
+    //? Show toast if customer added item to cart
     const liveDocRef = doc(db, `LiveSession/sessionID_${liveRoomID}`);
     onSnapshot(liveDocRef, doc => {
         if (doc.data().customer !== '') {
@@ -128,7 +129,7 @@ $(document).ready(() => {
     //! ----------------------------------------------------------------------------------------
 
     const showBuyToast = (user) => {
-        $('.tost-message').text(`${user} has added item to cart!`);
+        $('.tost-message').text(`Customer ${user} has bought an item!`);
         $('#buyToast').toast('show')
     }
 

@@ -33,7 +33,6 @@ const review = async (req, res) => {
                 seller: {
                     uid: doc.data().seller.uid,
                     storeName: doc.data().seller.storeName,
-                    product: 'add this'
                 },
                 rate: 0,
                 feedBack: '',
@@ -142,12 +141,29 @@ const addReview = async (req, res) => {
     let resStatus;
 
     try {
-        //* CUSTOMERS -> SUB-COLLECTION: Reviews.
+        //* COLLECTION: Customers -> SUB-COLLECTION: Reviews
         const reviewDocRef = doc(db, `Customers/${uid}/Reviews/${reviewData.reviewID}`);
+        const reviewDocument = await getDoc(reviewDocRef);
         await setDoc(reviewDocRef, {
+            dateReviewed: stringDateFormat(),
             feedBack: reviewData.feedBack,
             rate: reviewData.rate
         }, { merge: true })
+
+        const productsToBeReviewed = reviewDocument.data().seller.product;
+        for (const productIndex of productsToBeReviewed) {
+
+            //* COLLECTION: Sellers -> SUB-COLLECTION: Products -> SUB-COLLECTION: Reviews
+            const productReviewDoc = doc(db, `Sellers/${reviewDocument.data().seller.uid}/Products/${productIndex}/Reviews/${reviewDocument.id}`);
+            await setDoc(productReviewDoc, {
+                id: reviewDocument.data().id,
+                dateReviewed: reviewDocument.data().dateReviewed,
+                feedBack: reviewData.feedBack,
+                rate: reviewData.rate,
+                customerID: uid
+            })
+        }
+
 
         resStatus = 200;
     } catch (error) {
@@ -158,7 +174,7 @@ const addReview = async (req, res) => {
     res.sendStatus(resStatus);
 }
 
-//? 3 Oct 2022 -> 10/03/2022 
+//? Result: 3 Oct 2022 -> 10/03/2022 
 const convertStringDateToNumDate = (strDate) => {
     let stringDate = strDate.split(" ");
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -175,6 +191,15 @@ const convertStringDateToNumDate = (strDate) => {
     }
     let result = `${stringDate[1]}/${stringDate[0]}/${stringDate[2]}`;
     return result;
+}
+
+//? Result: 3 Oct 2022
+const stringDateFormat = () => {
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ');
+    return formattedDate;
 }
 
 const rgbToHex = (r, g, b) => {

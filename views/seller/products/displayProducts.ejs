@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/public/assets/css/seller/manageProducts.css">
-<script defer src="/public/script/seller/filepond/fileUploadProduct.js"></script>
+<link rel="stylesheet" href="/public/assets/css/seller/products/displayProducts.css">
+<script defer src="/public/script/seller/filepond/products/fileUploadProduct.js"></script>
 <script defer src="/public/script/seller/products/addProduct.js" type="module"></script>
 <script defer src="/public/script/seller/products/displayProducts.js" type="module"></script>
 
@@ -27,65 +27,61 @@
         <div class="products-body">
             <p class="noItems">You Have No Products 🙁</p>
 
-            <div id="loading-container">
-                <div class="skeleton-row">
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
-                    </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
-                    </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
-                    </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
+            <div id="loading-cont" class="loading-container">
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
                     </div>
                 </div>
-                <div class="skeleton-row">
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
                     </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
                     </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
                     </div>
-                    <div class="sampleCard loading">
-                        <div class="image"></div>
-                        <div class="content">
-                            <h4></h4>
-                            <div class="description"></div>
-                        </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
+                    </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
+                    </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
+                    </div>
+                </div>
+                <div class="sampleCard loading">
+                    <div class="image"></div>
+                    <div class="content">
+                        <h4></h4>
+                        <div class="description"></div>
                     </div>
                 </div>
             </div>
@@ -324,26 +320,6 @@
         </div>
     </div>
 
-</div>
-
-<!-- SECTION: Modal for viewing single product -->
-<div class="modal fade viewItemModal" tabindex="-1" id="viewItemModal">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title item-title"></h5>
-            </div>
-            <div class="modal-body item-body">
-                <div class="spinner-border text-primary modal-loader" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
 </div>
 
 <!-- SECTION: Modal for deleting single product -->

@@ -1,3 +1,7 @@
+import { firebase } from '../../firebaseConfig.js';
+import { getFirestore, doc, collection, getDoc, getDocs, setDoc, deleteDoc, updateDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+const db = getFirestore(firebase);
+
 import { getAllCustomerAddress, addNewAddress, stripePaymentHandler, codPaymentHandler } from '../live/Api/checkOutModalData.js'
 import { checkoutArray } from './displayProducts.js';
 
@@ -14,6 +18,37 @@ $(document).ready(() => {
 
     //! Main Object
     const checkoutObject = {};
+
+    const userObj = {};
+
+    //* ================================== Firebase Functions =================================== *// 
+    const customerBuy = async (roomID) => {
+        try {
+            //* COLLECTION: LiveSession
+            const liveDocRef = doc(db, `LiveSession/sessionID_${roomID}`);
+            await setDoc(liveDocRef, {
+                customer: userObj.displayName
+            }, { merge: true }).then(() => {
+                setTimeout(() => {
+                    setDoc(liveDocRef, {
+                        customer: ''
+                    }, { merge: true });
+                }, 3000)
+            })
+        } catch (error) {
+            console.error(`Firestore Error -> @customerBuy: ${error.message}`)
+        }
+    }
+
+    const getUserData = async (uid) => {
+        //* CUSTOMER COLLECTION
+        const customerDocRef = doc(db, `Customers/${uid}`);
+        const customerDocument = await getDoc(customerDocRef);
+
+        userObj.displayName = customerDocument.data().displayName;
+    }
+
+    
 
     //* ================================== Global Selectors =================================== *// 
     const billerName = document.getElementById('inputBillerName');
@@ -251,15 +286,17 @@ $(document).ready(() => {
                 modeOfPayment: checkoutObject.paymentMethod,
                 orderAddress: checkoutObject.address,
             }
-            
+
             codPaymentHandler(trimmedUID, liveRoomID, codObjData, checkoutItems, isAnonymousBuyer).then(() => {
                 window.location.reload();
             });
         }
+
+        customerBuy(liveRoomID);
     })
 
     loadCustomerAddress();
     createNewAddress();
     getPaymentMethod();
-
+    getUserData(trimmedUID);
 })

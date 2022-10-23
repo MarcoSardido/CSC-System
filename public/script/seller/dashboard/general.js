@@ -8,40 +8,66 @@ $(document).ready(() => {
     const trimmedUID = uuid.trim();
 
     //! TODO: Show toast in seller dashboard when customer buys product in its Marketplace.
+    let onGoingMarketPlace;
     const checkCurrentMarketPlace = async (uid) => {
-        const sessionsArray = [];
+        const sellerSessionsArray = [], liveSessionArray = [];
 
-        //* SELLER COLLECTION -> SUB-COLLECTION: LiveSessions
-        const liveSubColRef = collection(db, `Sellers/${uid}/LiveSessions`);
-        const liveCollection = await getDocs(liveSubColRef);
-        liveCollection.forEach(doc => {
-            sessionsArray.push(doc.data().sessionID);
-        })
+        try {
+            //* SELLER COLLECTION -> SUB-COLLECTION: LiveSessions
+            const sellerLiveSubColRef = collection(db, `Sellers/${uid}/LiveSessions`);
+            const sellerLiveCollection = await getDocs(sellerLiveSubColRef);
+            sellerLiveCollection.forEach(doc => {
+                sellerSessionsArray.push(doc.id);
+            })
 
-        // for (const sessionIndex of sessionsArray) {
-        //     const liveDocRef = doc(db, `LiveSession/sessionID_${sessionIndex}`);
-        //     const liveDocument = await getDoc(liveDocRef);
-        // }
+            //* COLLECTION: LiveSession
+            const liveColRef = collection(db, `LiveSession`);
+            const liveCollection = await getDocs(liveColRef);
+            liveCollection.forEach(doc => {
+                liveSessionArray.push(doc.id);
+            })
+
+            for (const sellerSessionIndex of sellerSessionsArray) {
+                for (const liveSessionIndex of liveSessionArray) {
+                    if (sellerSessionIndex === liveSessionIndex) {
+                        const liveDocRef = doc(db, `LiveSession/${sellerSessionIndex}`);
+                        const liveDocument = await getDoc(liveDocRef);
+
+                        if (liveDocument.data().sessionStatus === 'Market') {
+                            onGoingMarketPlace = sellerSessionIndex;
+                        }
+                    }
+                }
+            }
+
+            initRealtimeListener(onGoingMarketPlace);
+        } catch (error) {
+            console.error(`Firestore Error -> @checkCurrentMarketPlace: ${error.message}`)
+        }
     }
 
-   
+    const initRealtimeListener = (liveSessionID) => {
+        try {
+            
+            //? Show toast if customer added item to cart
+            // 
+            //* COLLECTION: LiveSession
+            const liveDocRef = doc(db, `LiveSession/${liveSessionID}`);
+            onSnapshot(liveDocRef, doc => {
+                if (doc.data().customer !== '') {
+                    showBuyToast(doc.data().customer)
+                }
+            })
 
+        } catch (error) {
+            console.error(`Firestore Error -> @initRealtimeListener: ${error.message}`)
+        }
+    }
 
-
-
-
-
-    //? Listen if customer bought item in MarketPlace.
-    // 
-    //* LIVE SESSION COLLECTION 
-   
-    // onSnapshot(liveDocRef, doc => {
-    //     if (doc.data().customer !== '') {
-    //         showBuyToast(doc.data().customer)
-    //     }
-    // })
-
-
+    const showBuyToast = (user) => {
+        $('.tost-message').text(`Customer ${user} has bought an item!`);
+        $('#buyToast').toast('show')
+    }
 
     checkCurrentMarketPlace(trimmedUID);
 })

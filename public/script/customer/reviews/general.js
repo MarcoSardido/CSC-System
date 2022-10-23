@@ -154,7 +154,6 @@ $(document).ready(() => {
     fetch(`/customercenter/reviews/${trimmedUID}/getAllReview`).then(res => {
         if (res.ok) return res.json();
     }).then(data => {
-        // console.log(data)
         reviewItem(data);
     }).catch(err => {
         console.error(`Fetch API Error: ${err.message}`)

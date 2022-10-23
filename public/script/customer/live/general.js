@@ -13,23 +13,11 @@ $(document).ready(() => {
     const getRoomId = urlOrigin.split('/');
     const liveRoomID = getRoomId[getRoomId.length - 1];
 
-    const userObj = {};
+    let isKicked = true;
 
     //! ----------------------------------------------------------------------------------------
     //                                     Firebase Functions
     //! ----------------------------------------------------------------------------------------
-
-    //? Checks realtime if seller kicked the user.
-    // ::
-    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
-    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers`);
-    onSnapshot(usersSubColRef, (snapshot) => {
-        snapshot.docChanges().forEach((change) => {
-            if (change.type === "removed") {
-                kickedOut();
-            }
-        });
-    })
 
     const checkIfRoomIsAvailable = doc(db, `LiveSession/sessionID_${liveRoomID}`)
     onSnapshot(checkIfRoomIsAvailable, doc => {
@@ -42,32 +30,16 @@ $(document).ready(() => {
         }
     })
 
-    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
-    const cartSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`);
-    onSnapshot(cartSubColRef, (snapshot) => {
+    //? Checks realtime if seller kicked the user
+    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers
+    const usersSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers`);
+    onSnapshot(usersSubColRef, (snapshot) => {
         snapshot.docChanges().forEach((change) => {
-            if (change.type === "added") {
-                const liveColRef = doc(db, `LiveSession/sessionID_${liveRoomID}`);
-                setDoc(liveColRef, {
-                    customer: userObj.displayName
-                }, { merge: true }).then(() => {
-                    setTimeout(() => {
-                        setDoc(liveColRef, {
-                            customer: ''
-                        }, { merge: true });
-                    }, 3000)
-                })
+            if (change.type === "removed") {
+                kickedOut();
             }
-        })
+        });
     })
-
-    const getUserData = async (uid) => {
-        //* CUSTOMER COLLECTION
-        const customerDocRef = doc(db, `Customers/${uid}`);
-        const customerDocument = await getDoc(customerDocRef);
-
-        userObj.displayName = customerDocument.data().displayName;
-    }
 
     const addUserCount = async (uid, roomID) => {
         //* CUSTOMER COLLECTION
@@ -95,13 +67,16 @@ $(document).ready(() => {
     //! ----------------------------------------------------------------------------------------
 
     const kickedOut = () => {
-        alert(`You've been kicked by the seller!`);
-        window.location.assign(`/customercenter`);
+        if (isKicked) {
+            alert(`You've been kicked by the seller!`);
+            window.location.assign(`/customercenter`);
+        }
     }
 
     // Exit Live
     const btnExit = document.getElementById('btnExit');
     btnExit.addEventListener('click', () => {
+        isKicked = false;
         removeUserCount(trimmedUID, liveRoomID).then(() => {
             window.location.assign(`/customercenter`)
         })
@@ -120,5 +95,4 @@ $(document).ready(() => {
     });
 
     addUserCount(trimmedUID, liveRoomID);
-    getUserData(trimmedUID);
 })

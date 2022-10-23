@@ -22,7 +22,7 @@ $(document).ready(() => {
         
         if (list[i].href === currentLocation) {
             const getPath = list[i].href.split('/')[4];
-
+            
             if (getPath) {
                 const checkTab = getPath.split('?');
                 if (checkTab[0] === 'settings') {
@@ -38,6 +38,10 @@ $(document).ready(() => {
             } else {
                 list[i].closest('li').className = 'active';
             }
+        }
+
+        if (currentLocation.split('/')[4] === 'products' && currentLocation.split('/').length === 6) {
+            list[1].closest('li').className = 'active';
         }
     }
 

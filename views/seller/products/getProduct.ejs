@@ -1,0 +1,259 @@
+<link rel="stylesheet" href="/public/assets/css/seller/products/getProduct.css">
+<script defer src="/public/script/seller/filepond/products/fileUpdateProduct.js"></script>
+<script defer src="/public/script/seller/products/getProduct/general.js" type="text/javascript"></script>
+<script defer src="/public/script/seller/products/getProduct/getProductReview.js" type="text/javascript"></script>
+
+
+
+<div class="mainContainer">
+    <p id="uid" hidden>
+        <%- uid %>
+    </p>
+    <div class="left">
+        <div class="product-header">
+            <button onClick="window.location.href='/sellercenter/products'" class="btnGoBack" id="closeAddProduct_slider">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </button>
+            <p class="header-btnLabel">Back to Products</p>
+        </div>
+
+        <div class="product-body">
+            <div class="product-images" id="switchImg">
+                <% productData.productImages.forEach(img => { %>
+                    <img src="data:<%= img.type %>;base64,<%= img.data %>">
+                <% }) %>
+            </div>
+            <div class="addProductImg" id="switchEditImg" style="display: none;">
+                <input type="file" class="filepond" id="productsImg" name="filepondProducts" multiple
+                    data-max-file-size="3MB" data-max-files="4" />
+            </div>
+
+
+            <div class="displayDetails">
+                <div class="input-field">
+                    <input disabled type="text" id="txtProductName" placeholder="Product name" value="<%= productData.prodName %>">
+                </div>
+                <div class="price-field">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text defaultCurrency">₱</span>
+                    </div>
+                    <input disabled type="text" id="txtProductPrice" placeholder="Enter Amount..." value="<%= productData.prodPrice %>">
+                </div>
+                <div class="desc-field">
+                    <textarea disabled id="txtProductDesc" rows="5" cols="48"
+                        placeholder="Product description"><%= productData.prodDesc %></textarea>
+                </div>
+                <div class="color-field">
+                    <p class="fieldLabel">Available Colors</p>
+                    <div class="color-cont hasColor">
+                        <% productData.variants[0].selectedColors.forEach(color => { %>
+                            <div class="selected-color hasColor" style="background-color:<%= color %>"></div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="type-field">
+                    <p class="fieldLabel">Product Type</p>
+                    <div class="type-cont">
+                        <% productData.prodType.forEach(type => { %>
+                            <div class="selected-type hasType <%= type === 'Trending' ? 'trending' : type === 'New Arrival' ? 'arrival' : 'sale' %>">
+                                <ion-icon class="icon-trending md hydrated" name="<%= type === 'Trending' ? 'flash' : type === 'New Arrival' ? 'heart' : 'analytics' %>" role="img"></ion-icon>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+                <div class="size-field">
+                    <p class="fieldLabel">Available Sizes</p>
+                    <div class="size-cont">
+                        <% productData.variants.forEach(size => { %>
+                            <div class="selected-size hasSize">
+                                <span class="size"><%= size.selectedSize %></span>
+                                <div class="badge-cont">
+                                    <span class="badge"><%= size.selectedQty %>pcs</span>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-footer">
+            <div id="switchDisplayButton">
+                <button class="btnPreviewProduct editProductButton">Edit Product</button>
+            </div>
+            <div id="switchEditButtons" style="display: none">
+                <button class="btnPreviewProduct" id="btnSaveEditProduct">Save</button>
+                <button class="cancelEditButton" id="btnCancelEditProduct">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="review-container">
+            <p class="title">Reviews</p>
+            <div class="review-wrapper" id="dynamicReviewContainer">
+                <p id="defaultTitle" style="text-align: center; font-size: 18px; margin-top: 50%;">
+                    This product has no reviews. 🙁
+                </p>
+            </div>
+        </div>
+
+        <div class="product-variety" style="display: none">
+            <div class="size-qty-colors_cont">
+                <div class="variety-header">
+                    <p class="editFieldLabel">Product Varieties</p>
+                    <button class="btnAddVariety" id="addSize">
+                        <ion-icon name="add-outline"></ion-icon>
+                    </button>
+                    <div class="addSize-wrapper">
+                        <div class="header">
+                            <button class="close">
+                                &times;
+                            </button>
+                        </div>
+                        <div class="quantity">
+                            <span class="mainText">How many quantity?</span>
+                            <div class="availableQty">
+                                <div class="range">
+                                    <input id="slide-range" type="range" min="0" max="100" step="1" value="50">
+                                </div>
+                                <div class="qty-input">
+                                    <div class="input-group mb-3">
+                                        <input id="input-quantity" value="20">
+                                        <span class="input-group-text pieces">Pieces</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="size-field">
+                            <span class="mainText">Select a size:</span>
+                            <div class="availableSize-cont">
+                                <button class="sizes" value='XS'>XS</button>
+                                <button class="sizes" value='S'>S</button>
+                                <button class="sizes" value='M'>M</button>
+                                <button class="sizes" value='L'>L</button>
+                                <button class="sizes" value='XL'>XL</button>
+                                <button class="sizes" value='XXL'>XXL</button>
+                            </div>
+                        </div>
+                        <div class="color-field">
+                            <span class="mainText">Select a color:</span>
+                            <div class="availableColors-cont">
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                                <div class="add-color"></div>
+                            </div>
+                            <input type="color" id="color-picker" />
+                        </div>
+                        <div class="footer">
+                            <button class="submitSizesAndQty">ADD</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="sizesQty-cont">
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                    <div class="sizesQty">
+                        <div class="add-size">
+                            <span class="size"></span>
+                        </div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                        <div class="add-color"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="productType_cont">
+                <p class="editFieldLabel">Product Type</p>
+                <div class="prodCat-cont">
+                    <div class="form-group">
+                        <select class="form-control" id="productCategory">
+                            <option selected hidden>Select Product Category</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Bags">Bags</option>
+                            <option value="Clothes">Clothes</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Shoes">Shoes</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="prodType-cont">
+                    <div class="type-cont">
+                        <div class="type">
+                            <ion-icon class="icon-trending" name="flash"></ion-icon>
+                        </div>
+                        <p class="typeLabel">Trending</p>
+                    </div>
+                    <div class="type-cont">
+                        <div class="type">
+                            <ion-icon class="icon-arrival" name="heart"></ion-icon>
+                        </div>
+                        <p class="typeLabel">New Arrival</p>
+                    </div>
+                    <div class="type-cont">
+                        <div class="type">
+                            <ion-icon class="icon-sale" name="analytics"></ion-icon>
+                        </div>
+                        <p class="typeLabel">On Sale</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <button class="editDone">Done</button>
+            </div>
+        </div>
+    </div>
+
+</div>

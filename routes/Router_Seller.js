@@ -10,7 +10,7 @@ import {
 } from '../controllers/Seller/Auth/Controller_Auth.js';
 
 import { dashboard } from '../controllers/Seller/Dashboard/Controller_Dashboard.js';
-import { product } from '../controllers/Seller/Product/Controller_Product.js';
+import { product, getProduct, getReviews } from '../controllers/Seller/Product/Controller_Product.js';
 import { report } from '../controllers/Seller/Report/Controller_Report.js';
 import { transaction } from '../controllers/Seller/Transaction/Controller_Transaction.js';
 import { settings } from '../controllers/Seller/Setting/Controller_Setting.js';
@@ -45,20 +45,21 @@ router.get('/', verifyCookie, dashboard);
 router.get('/subscription_success/:id', subscriptionSuccess);
 
 
-router.get('/products', verifyCookie, product)
+router.get('/products', verifyCookie, product);
+router.get('/products/:id', verifyCookie, getProduct)
+router.get('/products/:id/reviews', verifyCookie, getReviews)
+
+router.get('/transactions', verifyCookie, transaction);
 
 
-router.get('/transactions', verifyCookie, transaction)
-
-
-router.get('/reports', verifyCookie, report)
+router.get('/reports', verifyCookie, report);
 
 
 
-router.get('/settings', verifyCookie, settings)
+router.get('/settings', verifyCookie, settings);
 
 //? Settings: Update User Account 
-router.post('/settings', updateProfile)
+router.post('/settings', updateProfile);
 
 //! ---------------------------------------------------------------- 
 //                       Live Selling

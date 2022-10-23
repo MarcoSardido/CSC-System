@@ -21,9 +21,9 @@ $(document).ready(() => {
     //* ----------------------------------------------------------------------------------------
     //  ---------------------------------- FIREBASE FUNCTIONS ---------------------------------- 
     //* ---------------------------------------------------------------------------------------- 
-
-    // Real time cart items update
-    //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
+    
+    //? Real time cart items update
+    //* COLLECTION: LiveSession -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
     const cartSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`);
     onSnapshot(cartSubColRef, (snapshot) => {
         countItems(snapshot.size);
@@ -1017,7 +1017,17 @@ $(document).ready(() => {
             if (getQtyInput > getQtyCount) {
                 quantityValue.classList.add('error');
                 quantityValue.value = null;
-                quantityValue.placeholder = 'Inputted quantity is higher than allowed';
+                quantityValue.placeholder = 'Inputted quantity is higher than allowed.';
+
+                setTimeout(() => {
+                    quantityValue.classList.remove('error');
+                    quantityValue.placeholder = 'Enter quantity';
+                }, 3000)
+
+            } else if (getQtyInput === 0) {
+                quantityValue.classList.add('error');
+                quantityValue.value = null;
+                quantityValue.placeholder = 'Please enter a quantity.';
 
                 setTimeout(() => {
                     quantityValue.classList.remove('error');

@@ -86,7 +86,7 @@ $(document).ready(() => {
                             reportBodyData += `
                                 ${headerContent(dataIndex)} 
                                 <div style="text-align: center;padding: 30px 0px;font-size: 18px;">
-                                    Report is still being reviewed by out staff.
+                                    Report is still being reviewed by our staff.
                                 </div>
                             `;
                         } else {

@@ -23,6 +23,10 @@ $(document).ready(() => {
             if (change.type === "added") {
                 getCustomer(change.doc.data().uid, snapshot.size);
             }
+
+            if (change.type === "removed") {
+                removeCustomer(change.doc.data().uid)
+            }
         });
     })
 
@@ -224,7 +228,6 @@ $(document).ready(() => {
             </div>
         `;
         
-
         $("#noCustomer").remove();
         customerContainer.insertAdjacentHTML('beforeend', CUSTOMER_TEMPLATE);
 
