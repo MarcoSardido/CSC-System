@@ -21,7 +21,7 @@ $(document).ready(() => {
     //* ----------------------------------------------------------------------------------------
     //  ---------------------------------- FIREBASE FUNCTIONS ---------------------------------- 
     //* ---------------------------------------------------------------------------------------- 
-    
+
     //? Real time cart items update
     //* COLLECTION: LiveSession -> SUB-COLLECTION: sessionUsers -> SUB-COLLECTION: LiveCart
     const cartSubColRef = collection(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}/LiveCart`);
@@ -233,7 +233,7 @@ $(document).ready(() => {
 
             return type_template;
         }
-        
+
         for (const productIndex of productData) {
             product_template += `
                 <div class="product">
@@ -731,6 +731,29 @@ $(document).ready(() => {
     }
 
     //* MODAL
+    const switchButtons = () => {
+        const productDetailPanel = document.getElementById('detailContainer');
+        const productReviewPanel = document.getElementById('reviewContainer');
+        const buttons = document.querySelectorAll('.switch-button');
+
+        for (const [buttonIndex, buttonValue] of buttons.entries()) {
+            buttonValue.addEventListener('click', () => {
+                for (const removeClassIndex of buttons) {
+                    removeClassIndex.classList.remove('active');
+                }
+                buttonValue.classList.add('active');
+
+                if (buttonIndex === 0) {
+                    productDetailPanel.style.display = 'block';
+                    productReviewPanel.style.display = 'none';
+                } else {
+                    productDetailPanel.style.display = 'none';
+                    productReviewPanel.style.display = 'block';
+                }
+            })
+        }
+    }
+
     const loopImages = () => {
         const mainImage = document.querySelector('.main-image').firstElementChild;
         const subImage = document.querySelector('.sub-image').children;
@@ -820,13 +843,14 @@ $(document).ready(() => {
                     $('#dynamicAddToCartModal').empty();
                 }
 
-                getProduct(liveRoomID, prodID).then(product => {
+                getProduct(liveRoomID, prodID).then(({ prodData, reviewData }) => {
+
                     const generateSubImages = () => {
                         let generate_template = ``;
 
-                        for (let imgIndex = 1; imgIndex < product.productImages.length; imgIndex++) {
+                        for (let imgIndex = 1; imgIndex < prodData.productImages.length; imgIndex++) {
                             generate_template += `
-                                <img src="data:${product.productImages[imgIndex].type};base64,${product.productImages[imgIndex].data}" alt="${product.prodName}">
+                                <img src="data:${prodData.productImages[imgIndex].type};base64,${prodData.productImages[imgIndex].data}" alt="${prodData.prodName}">
                             `;
                         }
 
@@ -838,7 +862,7 @@ $(document).ready(() => {
                         let totalUnit = 0;
 
                         // Compute total quantity
-                        for (const variant of product.variants) {
+                        for (const variant of prodData.variants) {
                             totalUnit += Number(variant.selectedQty);
                         }
 
@@ -852,7 +876,7 @@ $(document).ready(() => {
                             </div>
                         `;
 
-                        for (const type of product.prodType) {
+                        for (const type of prodData.prodType) {
                             const typeForClass = type === 'Trending' ? 'trend' :
                                 type === 'New Arrival' ? 'new' : 'sale';
 
@@ -875,9 +899,9 @@ $(document).ready(() => {
                     const generateColors = () => {
                         let generate_template = ``;
 
-                        for (let variantIndex = 0; variantIndex < product.variants.length; variantIndex++) {
+                        for (let variantIndex = 0; variantIndex < prodData.variants.length; variantIndex++) {
                             if (variantIndex === 0) {
-                                const colors = product.variants[variantIndex].selectedColors;
+                                const colors = prodData.variants[variantIndex].selectedColors;
                                 for (const [index, value] of colors.entries()) {
                                     generate_template += `
                                         <div class="color ${index === 0 ? 'selected' : ''} "style="background-color:${value}"></div> 
@@ -893,7 +917,7 @@ $(document).ready(() => {
                         let selectedIndex, emptySizes = [];
                         let generate_template = ``;
 
-                        const sizes = product.variants;
+                        const sizes = prodData.variants;
 
                         // Get 0 quantity
                         for (let quantityIndex = 0; quantityIndex < sizes.length; quantityIndex++) {
@@ -910,7 +934,7 @@ $(document).ready(() => {
                             }
                         }
 
-                        for (const [iterator, value] of product.variants.entries()) {
+                        for (const [iterator, value] of prodData.variants.entries()) {
                             generate_template += `
                                 <button class="size ${iterator === selectedIndex ? 'selected' : ''} ${emptySizes.includes(iterator) ? 'noStock' : ''}" ${emptySizes.includes(iterator) ? 'disabled' : ''}>${value.selectedSize} (${value.selectedQty})</button>
                             `;
@@ -920,27 +944,74 @@ $(document).ready(() => {
                     }
 
 
+                    // Review Section
+                    const loopStarForRate = (rateData) => {
+                        let rateTemplate = ``;
+
+                        for (let rateIndex = 0; rateIndex < rateData; rateIndex++) {
+                            rateTemplate += `<ion-icon name="star"></ion-icon>`;
+                        }
+
+                        return rateTemplate;
+                    }
+
+                    const generateReview = () => {
+                        let reviewTemplate = ``;
+
+                        if (reviewData.length > 0) {
+                            for (const reviewIndex of reviewData) {
+                                reviewTemplate += `
+                                    <div class="review">
+                                        <div class="top">
+                                            <div class="image">
+                                                <img src="${reviewIndex.customer.picture}" alt="${reviewIndex.customer.displayName}" />
+                                            </div>
+                                            <div class="info">
+                                                <div class="name">${reviewIndex.customer.displayName}</div>
+                                                <div class="rate-container">
+                                                    ${loopStarForRate(reviewIndex.rate)}
+                                                    <div class="rate">${reviewIndex.rate}.0</div>
+                                                </div>
+                                            </div>
+                                            <div class="date">${reviewIndex.dateReviewed}</div>
+                                        </div>
+                                        <div class="bottom">${reviewIndex.feedBack}</div>
+                                    </div>
+                                `;
+                            }
+                        } else {
+                            reviewTemplate += `
+                                <p id="defaultTitle" style="text-align: center; font-size: 15px; margin-top: 150px;">
+                                    This product has no reviews. 🙁
+                                </p>
+                            `;
+                        }
+
+                        return reviewTemplate;
+                    }
+
+
                     const MODAL_TEMPLATE = `
                         <div class="wrapper">
                             <div class="img-container">
                                 <div class="main-image">
-                                    <img src="data:${product.productImages[0].type};base64,${product.productImages[0].data}"
-                                        alt="${product.prodName}">
+                                    <img src="data:${prodData.productImages[0].type};base64,${prodData.productImages[0].data}"
+                                        alt="${prodData.prodName}">
                                 </div>
                                 <div class="sub-image">
-                                    ${product.productImages.length > 1 ? generateSubImages() : ''} 
+                                    ${prodData.productImages.length > 1 ? generateSubImages() : ''} 
                                 </div>
                             </div>
                             <div class="info-container">
-                                <p class="product-name">${product.prodName}</p>
-                                <p class="product-price">₱<span>${product.prodPrice}</span></p>
-                                <p class="product-description">${product.prodDesc}</p>
+                                <p class="product-name">${prodData.prodName}</p>
+                                <p class="product-price">₱<span>${prodData.prodPrice}</span></p>
+                                <p class="product-description">${prodData.prodDesc}</p>
                                 <div class="switch-container">
                                     <div class="switch">
-                                        <div class="active">Details</div>
-                                        <div>Reviews</div>
+                                        <div class="switch-button active">Details</div>
+                                        <div class="switch-button">Reviews</div>
                                     </div>
-                                    <div class="detail-container">
+                                    <div class="detail-container" id="detailContainer">
                                         <div class="unit-type">${generateUnitType()}</div>
                                         <div class="colors">
                                             <p class="title">Colors</p>
@@ -953,14 +1024,20 @@ $(document).ready(() => {
                                         <div class="input-group detail-input">
                                             <input type="text" class="form-control" id="inputQty" placeholder="Enter quantity">
                                             <div class="input-group-append">
-                                            <span class="input-group-text" id="basic-addon2">/ ${product.variants[0].selectedQty}</span>
+                                            <span class="input-group-text" id="basic-addon2">/ ${prodData.variants[0].selectedQty}</span>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="review-container" id="reviewContainer" style="display: none">
+                                        <div class="review-wrapper" id="dynamicReviewContainer">
+                                            
+                                            ${generateReview()}
                                         </div>
                                     </div>
                                     
                                     <button type="button" class="btn btn-primary" id="btnConfirmItem">Confirm</button>
 
-                                    <div class="review-container" style="display: none"></div>
                                 </div>
                             </div>
                         </div>
@@ -969,8 +1046,10 @@ $(document).ready(() => {
                     modalContainer.insertAdjacentHTML('beforeend', MODAL_TEMPLATE);
 
                     loopImages();
-                    varietiesSelection(product);
-                    confirmItem(product);
+                    varietiesSelection(prodData);
+                    confirmItem(prodData);
+
+                    switchButtons();
                 })
 
                 $('#modalAddToCart').modal('show');
@@ -1118,7 +1197,7 @@ $(document).ready(() => {
             }
             lblTotal.textContent = convertIntoWholeNumber(cartItemTotal);
         })
-        
+
     }
 
     const removeCartItem = () => {

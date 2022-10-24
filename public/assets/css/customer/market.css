@@ -518,7 +518,7 @@ main .product-container .product .product-button>.addToCart-button:hover {
 .main-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .sub-image {
@@ -599,6 +599,11 @@ main .product-container .product .product-button>.addToCart-button:hover {
     padding-top: 15px;
     height: 350px;
 }
+
+.info-container .switch-container .review-container {
+    margin: 0 20px;
+}
+
 
 .info-container .switch-container .detail-container .title {
     font-size: 20px;
@@ -737,7 +742,66 @@ main .product-container .product .product-button>.addToCart-button:hover {
     border: 1px solid #485fed;
 }
 
-.review-container {}
+/* Review Style */
+.review-container .review-wrapper {
+    border-top: 1px solid #d8d8d8;
+    height: 95%;
+    overflow-y: auto;
+}
+
+.review-wrapper .review {
+    margin: 15px 0;
+}
+
+.review .top {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.top .image {
+    width: 15%;
+}
+
+.top .image img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.top .info {
+    width: 60%;
+}
+
+.top .info .name {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.top .info .rate-container {
+    display: flex;
+    align-items: center;
+}
+
+.top .info .rate-container ion-icon {
+    color: #f5a117;
+    font-size: 18px;
+}
+
+.top .info .rate-container .rate {
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.top .date {
+    width: 25%;
+}
+
+.review .bottom {
+    color: #4d4d4d;
+    font-size: 15px;
+}
+/* End of Review Style */
 
 
 

@@ -19,13 +19,51 @@ const getAllProducts = async (sessionID) => {
 }
 
 const getProduct = async (sessionID, productID) => {
+    const prodObj = {};
+    const productReviewArray = [], customerIDArray = [];
+
     try {
-        //* LIVE SESSION COLLECTION -> SUB-COLLECTION: sessionProducts
+        //* COLLECTION: LiveSession
+        const liveSessionDocRef = doc(db, `LiveSession/sessionID_${sessionID}`);
+        const liveSessionDocument = await getDoc(liveSessionDocRef);
+
+        //* COLLECTION: LiveSession -> SUB-COLLECTION: sessionProducts
         const productSubColRef = doc(db, `LiveSession/sessionID_${sessionID}/sessionProducts/${productID}`);
         const productDoc = await getDoc(productSubColRef);
 
-        return productDoc.data();
+        //* COLLECTION: Sellers -> SUB-COLLECTION: Products -> SUB-COLLECTION: Reviews
+        const reviewSubColRef = collection(db, `Sellers/${liveSessionDocument.data().sellerID}/Products/${productID}/Reviews`);
+        const reviewCollection = await getDocs(reviewSubColRef);
+        reviewCollection.forEach(doc => {
+            customerIDArray.push(doc.data().customerID);
+            productReviewArray.push({
+                customer: {
+                    uid: doc.data().customerID
+                },
+                dateReviewed: doc.data().dateReviewed,
+                feedBack: doc.data().feedBack,
+                id: doc.data().id,
+                rate: doc.data().rate
+            })
+        })
 
+        for (const customerIDIndex of customerIDArray) {
+            //* COLLECTION: Accounts
+            const accountDocRef = doc(db, `Accounts/customer_${customerIDIndex}`);
+            const accountDocument = await getDoc(accountDocRef);
+
+            for (const [productIndex, productValue] of productReviewArray.entries()) {
+                if (productValue.customer.uid === customerIDIndex) {
+                    productReviewArray[productIndex].customer.picture = `data:${accountDocument.data().imgType};base64,${accountDocument.data().userPhoto}`;
+                    productReviewArray[productIndex].customer.displayName = accountDocument.data().displayName;
+                }
+            }
+        }
+
+        prodObj.prodData = productDoc.data();
+        prodObj.reviewData = productReviewArray;
+
+        return prodObj;
     } catch (error) {
         console.error(`Firestore Error -> @getProduct: ${error.message}`)
     }
@@ -44,7 +82,7 @@ const getFilteredProducts = async (sessionID, productIDs) => {
         }
 
         return filteredProducts;
-        
+
     } catch (error) {
         console.error(`Firestore Error -> @getFilteredProducts: ${error.message}`)
     }

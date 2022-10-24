@@ -38,11 +38,11 @@ $(document).ready(() => {
             lblTimer.style.color = 'black';
         }
 
-        if (timeLeft === 0) {
-            alert('Market place closed');
-            window.location.assign('/customercenter');
-            roomExpire(trimmedUID, liveRoomID);
-        }
+        // if (timeLeft === 0) {
+        //     alert('Market place closed');
+        //     window.location.assign('/customercenter');
+        //     roomExpire(trimmedUID, liveRoomID);
+        // }
 
         lblTimer.innerText = `${hrs}:${mins}:${secs}`;
 
