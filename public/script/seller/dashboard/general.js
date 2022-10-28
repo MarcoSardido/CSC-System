@@ -64,6 +64,15 @@ $(document).ready(() => {
         }
     }
 
+    const verifyDocumentsInfo = document.getElementById('needVerifyInfo');
+    const verifyDocumentsInfoText = document.getElementById('needVerifyText');
+    verifyDocumentsInfo.addEventListener('mouseenter', () => {
+        verifyDocumentsInfoText.style.display = 'block';
+    })
+    verifyDocumentsInfo.addEventListener('mouseleave', () => {
+        verifyDocumentsInfoText.style.display = 'none';
+    })
+
     const showBuyToast = (user) => {
         $('.tost-message').text(`Customer ${user} has bought an item!`);
         $('#buyToast').toast('show')

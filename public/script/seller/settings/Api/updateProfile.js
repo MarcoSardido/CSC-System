@@ -5,19 +5,40 @@ const db = getFirestore(firebase);
 
 const changeProfilePhoto = async (uid, data) => {
     const currentDate = new Date();
+    const actLogID = `log_${generateId()}`;
     
     try {
         //* ACCOUNTS COLLECTION
-        const accountsColRef = doc(db, `Accounts/seller_${uid}`);
-        await updateDoc(accountsColRef, {
-            imgType: data.type,
-            userPhoto: data.data,
-            profileUpdatedAt: currentDate
-        })
+        const accountsDocRef = doc(db, `Accounts/seller_${uid}`);
+        const accountsDocument = await getDoc(accountsDocRef)
+        // await updateDoc(accountsDocRef, {
+        //     imgType: data.type,
+        //     userPhoto: data.data,
+        //     profileUpdatedAt: currentDate
+        // })
+
+         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
+         const actLogSubDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/${actLogID}`)
+         await setDoc(actLogSubDocRef, {
+             dateAdded: new Date(),
+             name: accountsDocument.data().displayName,
+             type: ['Profile', 'Photo']
+         });
 
     } catch (error) {
         console.error(`Firestore Error: @changeProfilePhoto -> ${err.message}`)
     }
+}
+
+const generateId = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 export {

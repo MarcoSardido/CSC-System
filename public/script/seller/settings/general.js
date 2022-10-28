@@ -32,7 +32,6 @@ $(document).ready(() => {
 
     })
 
-
     btnCancelUpdate.addEventListener('click', () => {
         const enableInput = document.querySelectorAll('.form-input')
         for (const inputIndex of enableInput) {

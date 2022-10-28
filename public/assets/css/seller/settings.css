@@ -81,6 +81,10 @@ aside {
     width: 130px;
 }
 
+.tab-container .logs-tab .header-line {
+    width: 165px;
+}
+
 .tab-container .faq-tab .header-line {
     width: 45px;
 }
@@ -88,6 +92,9 @@ aside {
 .tab-container .about-tab .header-line {
     width: 105px;
 }
+
+
+/* Account */
 
 .account-tab .tab-body .profile {
     display: flex;
@@ -303,3 +310,62 @@ aside {
     color: #fff;
     background: red;
 }
+
+
+
+/* Activity Logs */
+
+.activity-logs {
+    height: 77vh;
+    overflow-y: auto;
+}
+
+.log-wrapper {
+    margin: 0px 10px;
+    border-radius: 10px;
+    padding: 15px 20px;
+    background: #fff;
+    box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+}
+
+.log-wrapper:nth-child(even) {
+    margin: 20px 10px;
+}
+
+.log-wrapper .log-wrapper-header {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.log {
+    border-bottom: 1px solid #c7c7c7;
+    padding: 20px 0px;
+}
+
+.log:nth-last-child(1) {
+    border: none;
+    padding-top: 20px;
+}
+
+.log .log-body {
+    display: flex;
+}
+
+.log .log-body .photo {
+    margin-right: 20px;
+}
+
+.log .log-body .photo img {
+    width: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.log .log-body .info {
+    width: 100%;
+}
+
+.log .log-body .info .title {}
+
+.log .log-body .info .time-changed {}

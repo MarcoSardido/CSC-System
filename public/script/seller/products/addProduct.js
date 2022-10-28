@@ -1,5 +1,5 @@
 import { firebase } from '../../firebaseConfig.js';
-import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+import { getFirestore, getDoc, setDoc, doc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 const db = getFirestore(firebase)
 
 $(document).ready(() => {
@@ -605,6 +605,7 @@ $(document).ready(() => {
     const addProduct = async () => {
         const uuid = document.getElementById('uid').textContent;
         const trimmedID = uuid.trim();
+        const actLogID = `log_${generateId()}`
         const productId = `productID_${generateId()}`;
         const productTypes = variantData[variantData.length - 1];
         variantData.pop();
@@ -612,6 +613,10 @@ $(document).ready(() => {
         variantData.pop();
 
         try {
+            //* COLLECTION: Accounts
+            const accountDocRef = doc(db, `Accounts/seller_${trimmedID}`);
+            const accountDocument = await getDoc(accountDocRef)
+
             await setDoc(doc(db, `Sellers/${trimmedID}/Products`, productId), {
                 prodID: productId,
                 prodName: detailData[0],
@@ -622,6 +627,12 @@ $(document).ready(() => {
                 variants: variantData,
                 productImages: imgData,
             }, { merge: true })
+
+            await setDoc(doc(db, `Accounts/seller_${trimmedID}/Activity Logs`, actLogID), {
+                name: accountDocument.data().displayName,
+                type: ['Product', 'Added', productId],
+                dateAdded: new Date()
+            })
 
             location.reload();
 

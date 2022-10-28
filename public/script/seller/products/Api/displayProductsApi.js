@@ -1,5 +1,5 @@
 import { firebase } from '../../../firebaseConfig.js';
-import { getFirestore, doc, collection, getDocs, getDoc, deleteDoc  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+import { getFirestore, doc, collection, getDocs, getDoc, deleteDoc, setDoc  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 const db = getFirestore(firebase)
 
 //! ---------------------------------------------------------------------------------
@@ -64,8 +64,20 @@ const getSingleProduct = async (uuid, itemId) => {
 }
 
 const deleteSingleProduct = async (uuid, itemId) => {
+    const actLogID = `log_${generateId()}`
     
     try {
+        //* COLLECTION: Accounts
+        const accountDocRef = doc(db, `Accounts/seller_${uuid}`);
+        const accountDocument = await getDoc(accountDocRef)
+
+        await setDoc(doc(db, `Accounts/seller_${uuid}/Activity Logs`, actLogID), {
+            name: accountDocument.data().displayName,
+            type: ['Product', 'Removed', itemId],
+            dateAdded: new Date()
+        })
+
+        //* COLLECTION: Sellers -> SUB-COLLECTION: Products
         const docRef = doc(db, `Sellers/${uuid}/Products/${itemId}`)
         await deleteDoc(docRef)
         
@@ -73,6 +85,17 @@ const deleteSingleProduct = async (uuid, itemId) => {
         console.error(`Firestore Error: @Delete single product -> ${err.message}`)
     }
 
+}
+
+const generateId = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
 }
 
 export {

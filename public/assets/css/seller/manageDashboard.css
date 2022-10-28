@@ -108,6 +108,17 @@
   margin-bottom: 10px;
 }
 
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .btnStartLiveSell.disabled {
+  background: #7d7d7d;
+  color: #bcbcbc;
+  cursor: not-allowed;
+}
+
+.dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .btnStartLiveSell.disabled:hover {
+  background: #7d7d7d;
+  color: #bcbcbc;
+}
+
 .dashMainCont .body-cont .body-row-1 .startSelling-cont .text-side .lowerTextArea .btnStartLiveSell:hover {
   background: #3478fe;
   color: #fff;

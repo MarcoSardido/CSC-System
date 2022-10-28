@@ -150,25 +150,44 @@ const signUp = (req, res) => {
 };
 
 //* Function -> Add Session Cookie When Logging In 
-const sessionLogin = (req, res) => {
-    // get the idToken passed from client side.
-    const idToken = req.query.token.toString();
+const sessionLogin = async (req, res) => {
+    const { uid, token } = req.query;
 
-    // session expires in 5hrs.
-    const expiresIn = 60 * 60 * 5 * 1000;
+    const uniqueID = generateId();
+    try {
+        //* COLLECTION: Accounts
+        const accountDocRef = doc(db, `Accounts/seller_${uid}`);
+        const accountDocument = await getDoc(accountDocRef)
 
-    // create a new session if idToken is valid.
-    adminAuth.createSessionCookie(idToken, { expiresIn }).then((sessionCookie) => {
-        const options = { maxAge: expiresIn, httpOnly: true, secure: true };
-        res.cookie('session', sessionCookie, options);
-        res.redirect('/sellercenter')
+        //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
+        const activityLogDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/log_${uniqueID}`);
+        await setDoc(activityLogDocRef, {
+            name: accountDocument.data().displayName,
+            dateAdded: new Date(),
+            type: 'Login'
+        })
 
-    }).catch((error) => {
+        // get the idToken passed from client side.
+        const idToken = token.toString();
 
-        // throw a error if idToken is not valid.
-        console.error(`Firebase Auth: Error creating session cookie: ${error.message}`);
-        res.status(404).send('UNAUTHORIZED REQUEST!');
-    });
+        // session expires in 5hrs.
+        const expiresIn = 60 * 60 * 5 * 1000;
+
+        // create a new session if idToken is valid.
+        adminAuth.createSessionCookie(idToken, { expiresIn }).then((sessionCookie) => {
+            const options = { maxAge: expiresIn, httpOnly: true, secure: true };
+            res.cookie('session', sessionCookie, options);
+            res.redirect('/sellercenter')
+
+        }).catch((error) => {
+            // throw a error if idToken is not valid.
+            console.error(`Firebase Auth: Error creating session cookie: ${error.message}`);
+            res.status(401).send('UNAUTHORIZED REQUEST!');
+        });
+
+    } catch (error) {
+        console.error(`Fire Auth Error: @sessionLogin -> ${error.message}`);
+    }
 };
 
 //* Function -> Check Access Control
@@ -224,6 +243,17 @@ function verifyCookie(req, res, next) {
         res.redirect('/sellercenter/auth');
     }
 };
+
+const generateId = () => {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for (var i = 0; i < 10; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+            charactersLength));
+    }
+    return result;
+}
 
 export {
     signInAndSignUpRoute,

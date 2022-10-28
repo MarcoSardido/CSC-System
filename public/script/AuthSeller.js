@@ -1,5 +1,5 @@
 import { firebase } from './firebaseConfig.js';
-import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut, sendEmailVerification, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification, sendPasswordResetEmail  } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
 
 $(document).ready(() => {
 
@@ -32,7 +32,7 @@ $(document).ready(() => {
 
         signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(user => {
             user.user.getIdToken().then(idToken => {
-            window.location.assign('auth/sessionLogin?token='+idToken);
+                window.location.assign(`auth/sessionLogin?token=${idToken}&uid=${user.user.uid}`);
             });
         }).then(() => {
             return signOut(auth).then(() => {
