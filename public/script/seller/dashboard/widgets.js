@@ -83,6 +83,9 @@ $(document).ready(() => {
         const customerRate = [];
         let count = 0, sum, total;
 
+        if (data.length === 0) return customerRatingLabel.innerText = `0/5`;
+
+
         for (const rateIndex of data) {
             customerRate.push(Number(rateIndex))
         }
@@ -96,7 +99,6 @@ $(document).ready(() => {
 
         const formatDecimal = total.toFixed(1);
         customerRatingLabel.innerText = `${formatDecimal}/5`;
-
     }
 
     const recentReports = (data) => {

@@ -8,16 +8,10 @@ $(document).ready(() => {
     const auth = getAuth(firebase);
     setPersistence(auth, inMemoryPersistence);
 
-    onAuthStateChanged(auth, (loggedUser) =>  {
-
+    onAuthStateChanged(auth, loggedUser =>  {
         if (loggedUser) {
-            if (loggedUser.emailVerified) {
-                console.log('Seller is already verified');
-            } else {
-                sendEmailVerification(loggedUser).then(() => {
-                    alert('Email verification sent');
-                });
-            }
+            if (!loggedUser.emailVerified) return sendEmailVerification(loggedUser)
+            console.log(`user: ${loggedUser}`)
         } else {
             console.log('No user');
         }

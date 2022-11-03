@@ -19,21 +19,23 @@
                     <div class="upperTextArea">
                         <p class="mainText">Welcome,</p>
                         <p class="userText">
-                            <%=sellerInfo.accountCol.displayName%>
+                            <%= sellerInfo !== '' ? sellerInfo.accountCol.displayName : '' %>
                         </p>
                     </div>
                     <div class="lowerTextArea">
                         <p class="staticText">Are we all set to live?</p>
-                        <button class="btnStartLiveSell <%- sellerInfo.accountCol.verifiedSeller ? '': 'disabled' %>" <%- sellerInfo.accountCol.verifiedSeller ? '': 'disabled' %> data-toggle="modal" data-target="#modalStartLiveSell" 
-                        style="position: relative;">
-                        <%- sellerInfo.accountCol.verifiedSeller ? '': 
-                        `<div id="needVerifyInfo" style=" position: absolute; width: 20px; height: 20px; background: red; border-radius: 50%; top: -7px; right: -5px;
-                        ">
-                        <ion-icon name="information" style="color: white;font-size: 18px;"></ion-icon>
-                        </div>
-                        ` %> 
-                            start live sell
-                        </button>
+                        <% if (sellerInfo !== '') { %>
+                            <button class="btnStartLiveSell <%- sellerInfo.accountCol.verifiedSeller ? '': 'disabled' %>" <%- sellerInfo.accountCol.verifiedSeller ? '': 'disabled' %> data-toggle="modal" data-target="#modalStartLiveSell" 
+                                style="position: relative;">
+                                <%- sellerInfo.accountCol.verifiedSeller ? '': 
+                                `<div id="needVerifyInfo" style=" position: absolute; width: 20px; height: 20px; background: red; border-radius: 50%; top: -7px; right: -5px;
+                                ">
+                                <ion-icon name="information" style="color: white;font-size: 18px;"></ion-icon>
+                                </div>
+                                ` %> 
+                                    start live sell
+                                </button>
+                        <% } %>
                         <div id="needVerifyText" 
                         style="
                             display: none;

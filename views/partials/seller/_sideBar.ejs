@@ -48,27 +48,30 @@
         </li>
     </ul>
     <div class="profile-container">
-        <div class="profile">
-            <div class="profile-details">
-                <div class="picture">
-                    <a href="/sellercenter/settings/?tab=account">
-                        <% if(sellerInfo.accountCol.userPhoto === '' ) { %>
-                            <img src="/public/assets/images/default/user-default-profile.png" alt="<%=sellerInfo.accountCol.displayName%>">
-                            <% } else { %>
-                                <img src="data:<%=sellerInfo.accountCol.imgType%>;base64,<%=sellerInfo.accountCol.userPhoto%>"alt="<%=sellerInfo.accountCol.displayName%>">
-                        <% } %>
+        <% if (sellerInfo !== '') { %>
+            <div class="profile">
+                <div class="profile-details">
+                    <div class="picture">
+                        <a href="/sellercenter/settings/?tab=account">
+                            
+                            <% if(sellerInfo.accountCol.userPhoto === '' ) { %>
+                                <img src="/public/assets/images/default/user-default-profile.png" alt="<%=sellerInfo.accountCol.displayName%>">
+                                <% } else { %>
+                                    <img src="data:<%=sellerInfo.accountCol.imgType%>;base64,<%=sellerInfo.accountCol.userPhoto%>"alt="<%=sellerInfo.accountCol.displayName%>">
+                            <% } %>
+                        </a>
+                    </div>
+                    <div class="details">
+                        <div class="name"><%= sellerInfo.accountCol.displayName %></div>
+                        <div class="subType"><%= sellerInfo.stripeCol.sellerType %> </div>
+                    </div>
+                </div>
+                <div class="logout">
+                    <a href="/sellercenter/auth/logout">
+                        <ion-icon name="log-in-outline" id="logout"></ion-icon>
                     </a>
                 </div>
-                <div class="details">
-                    <div class="name"><%= sellerInfo.accountCol.displayName %></div>
-                    <div class="subType"><%= sellerInfo.stripeCol.sellerType %> </div>
-                </div>
             </div>
-            <div class="logout">
-                <a href="/sellercenter/auth/logout">
-                    <ion-icon name="log-in-outline" id="logout"></ion-icon>
-                </a>
-            </div>
-        </div>
+        <% } %>
     </div>
 </div>

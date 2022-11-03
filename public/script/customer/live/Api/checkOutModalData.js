@@ -56,9 +56,7 @@ const calcItems = async (uid, sid, arrayOfItems, payment) => {
             const liveCartSubColRef = doc(db, `LiveSession/sessionID_${sid}/sessionUsers/${uid}/LiveCart/${itemIndex}`);
             const liveCartSubColDoc = await getDoc(liveCartSubColRef);
 
-            let convert = liveCartSubColDoc.data().itemPrice.toString();
-            const priceInCents = convert += '00';
-
+            const priceInCents = liveCartSubColDoc.data().itemPrice.toString();
             items.push({
                 id: liveCartSubColDoc.id,
                 image: payment === 'STRIPE' ? '' : liveCartSubColDoc.data().itemImg,
@@ -105,7 +103,6 @@ const codPaymentHandler = async (uid, roomID, data, items, isAnonymousBuyer) => 
         removeItemsArray.push(itemIndex.id)
 
         delete itemIndex.id;
-        delete itemIndex.productID;
 
         totalPrice += itemIndex.subTotal;
     }

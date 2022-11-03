@@ -242,9 +242,8 @@ main .order .middle {
 
 main .order .middle .item-content {
 	display: flex;
-	flex-direction: row;
+    align-items: center;
 	justify-content: space-around;
-	flex-wrap: wrap;
 }
 
 main .order .middle .item-content:nth-child(even) {
@@ -253,12 +252,16 @@ main .order .middle .item-content:nth-child(even) {
 
 main .order .middle .item-content .item {
 	display: flex;
-	gap: 3%;
+	width: 50%;
 }
 
 main .order .middle .item-content img {
 	border: 1px solid var(--color-info-dark);
 	width: 100px;
+}
+
+main .order .middle .item-content .item-name {
+	margin-left: 10px;
 }
 
 main .order .middle .item-content .item-price {
@@ -332,6 +335,10 @@ main .order .btn-group a.active {
 	main .order .middle .item-content img {
 		width: 70px;
 		height: 70px;
+	}
+
+	main .order .middle .item-content .item p {
+		font-size: 10px;
 	}
 
 	main .order .middle .item-content .item .item-name h2,

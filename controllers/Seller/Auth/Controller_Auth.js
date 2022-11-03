@@ -155,14 +155,14 @@ const sessionLogin = async (req, res) => {
 
     const uniqueID = generateId();
     try {
-        //* COLLECTION: Accounts
-        const accountDocRef = doc(db, `Accounts/seller_${uid}`);
-        const accountDocument = await getDoc(accountDocRef)
+        //* COLLECTION: Sellers
+        const sellerDocRef = doc(db, `Sellers/${uid}`);
+        const sellerDocument = await getDoc(sellerDocRef)
 
         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
         const activityLogDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/log_${uniqueID}`);
         await setDoc(activityLogDocRef, {
-            name: accountDocument.data().displayName,
+            name: sellerDocument.data().displayName !== '' ? sellerDocument.data().displayName : sellerDocument.data().fullName,
             dateAdded: new Date(),
             type: 'Login'
         })

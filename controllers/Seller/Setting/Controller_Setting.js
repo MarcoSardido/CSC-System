@@ -8,7 +8,8 @@ export const settings = async (req, res) => {
 
     const sellerData = {}, accountData = {}, actLogsData = [];
     const currentTab = req.query.tab === 'account' ? 'account' :
-        req.query.tab === 'logs' ? 'logs' :
+    req.query.tab === 'verify_documents' ? 'verify_documents' :
+        req.query.tab === 'activity_log' ? 'activity_log' :
             req.query.tab === 'faq' ? 'faq' : 'about';
 
     try {
@@ -111,7 +112,6 @@ export const settings = async (req, res) => {
 
             Object.keys(obj)
                 .sort()
-                .reverse()
                 .forEach(key => {
                     reversedArray.push({
                         'date': key,
@@ -121,6 +121,9 @@ export const settings = async (req, res) => {
             return reversedArray
         }
 
+        actLogsData.sort((a, b) => {
+            return a.date.localeCompare(b.date)
+        })
 
         const groupFormat = groupBy(actLogsData, 'date');
         const finalizedLogs = arrayReverseObj(groupFormat);

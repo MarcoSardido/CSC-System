@@ -146,15 +146,12 @@
     width: 30rem;
 }
 
-.modal-subSuccess .modal-footer .footer-cont button{
-    height: 7vh;
-    width: 12vw;
-    border: none;
+.modal-subSuccess .modal-footer .footer-cont a{
+    padding: 10px 20px;
     border-radius: 5px;
     background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
     color: #fff;
     font-size: 18px;
-    text-transform: capitalize;
     letter-spacing: 0.5px;
 }
 

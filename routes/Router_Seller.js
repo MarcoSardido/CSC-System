@@ -26,50 +26,35 @@ import {
 
 
  
+router.get('/auth', signInAndSignUpRoute); //? SignIn and SignUp Route
+router.post('/', signUp); //? Register Seller
+router.get('/auth/sessionLogin', sessionLogin); //? Creates a new session cookie when user sign in.
+router.get('/auth/logout', logout); //? Clears session cookie and logout.
 
-//? SignIn and SignUp Route
-router.get('/auth', signInAndSignUpRoute);
+//* ================= Dashboard ================= *//
+router.get('/', verifyCookie, dashboard); //? Check the user session cookie -> direct to dashboard
 
-//? Register Seller
-router.post('/', signUp);
-
-//? Creates a new session cookie when user sign in.
-router.get('/auth/sessionLogin', sessionLogin);
-
-//? Clears session cookie and logout.
-router.get('/auth/logout', logout);
-
-//? Check the user session cookie > direct to dashboard
-router.get('/', verifyCookie, dashboard);
-
+//* ================= Subscription ================= *// 
+router.post('/create-checkout-session', stripeCheckoutSession);
 router.get('/subscription_success/:id', subscriptionSuccess);
 
-
+//* ================= Products ================= *// 
 router.get('/products', verifyCookie, product);
 router.get('/products/:id', verifyCookie, getProduct)
 router.get('/products/:id/reviews', verifyCookie, getReviews)
 
+//* =============== Transaction =============== *// 
 router.get('/transactions', verifyCookie, transaction);
 
-
+//* ================= Reports ================= *// 
 router.get('/reports', verifyCookie, report);
 
-
-
+//* ================= Settings ================= *// 
 router.get('/settings', verifyCookie, settings);
+router.post('/settings', updateProfile); //? Settings: Update User Account 
 
-//? Settings: Update User Account 
-router.post('/settings', updateProfile);
-
-//! ---------------------------------------------------------------- 
-//                       Live Selling
-//! ----------------------------------------------------------------
-
+//* ================= Live Selling ================= *// 
 router.get('/live/room/:roomId', verifyCookie, liveSession);
-
-//? Live Selling Checkout
-router.post('/create-checkout-session', stripeCheckoutSession);
-
 
 
 export { router as routes }

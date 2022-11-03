@@ -94,7 +94,6 @@ export const dashboard = async (req, res) => {
                     } else if (stripeSubColData.data().subscriptionCreated == stripeSubColData.data().currentSubscriptionBill) { //New Subscription
 
                         console.log('Render Dashboard (New Subscriber)')
-
                         res.render('seller/manageDashboard', {
                             title: 'dashboard',
                             layout: 'layouts/sellerLayout',

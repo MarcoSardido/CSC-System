@@ -30,8 +30,12 @@ $(document).ready(() => {
                 setTimeout(() => {
                     setDoc(liveDocRef, {
                         customer: ''
-                    }, { merge: true });
+                    }, { merge: true }).catch(err => {
+                        console.error(`Firestore Error -> @customerBuy: ${err.message}`)
+                    });
                 }, 3000)
+            }).catch(err => {
+                console.error(`Firestore Error -> @customerBuy: ${err.message}`)
             })
         } catch (error) {
             console.error(`Firestore Error -> @customerBuy: ${error.message}`)

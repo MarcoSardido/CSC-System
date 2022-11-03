@@ -11,17 +11,21 @@ const changeProfilePhoto = async (uid, data) => {
         //* ACCOUNTS COLLECTION
         const accountsDocRef = doc(db, `Accounts/seller_${uid}`);
         const accountsDocument = await getDoc(accountsDocRef)
-        // await updateDoc(accountsDocRef, {
-        //     imgType: data.type,
-        //     userPhoto: data.data,
-        //     profileUpdatedAt: currentDate
-        // })
+        await updateDoc(accountsDocRef, {
+            imgType: data.type,
+            userPhoto: data.data,
+            profileUpdatedAt: currentDate
+        })
+
+         //* COLLECTION: Sellers
+         const sellerDocRef = doc(db, `Sellers/${uid}`);
+         const sellerDocument = await getDoc(sellerDocRef);
 
          //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
          const actLogSubDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/${actLogID}`)
          await setDoc(actLogSubDocRef, {
              dateAdded: new Date(),
-             name: accountsDocument.data().displayName,
+             name: sellerDocument.data().displayName !== '' ? sellerDocument.data().displayName : sellerDocument.data().fullName,
              type: ['Profile', 'Photo']
          });
 

@@ -4,6 +4,9 @@ $(document).ready(() => {
     const uuid = $('#uid').text();
     const trimmedUID = uuid.trim();
 
+
+    //! ======================================= Account ============================================= !//
+
     const editContainer = document.querySelector('.edit-form');
     const updateContainer = document.querySelector('.submit-form');
     const btnEditProfile = document.getElementById('btnEditProfile');
@@ -89,5 +92,40 @@ $(document).ready(() => {
             });
 
         })
+    })
+
+
+
+    //! =================================== Verify Documents ================================= !//
+
+    const citizenshipHelpTool = document.getElementById('dynamicHelpToolCitizenship');
+    const personalHelpTool = document.getElementById('dynamicHelpToolPersonal');
+    const businessHelpTool = document.getElementById('dynamicHelpToolBusiness');
+
+    const citizenshipHelpText = document.getElementById('dynamicHelpTextCitizenship');
+    const personalHelpText = document.getElementById('dynamicHelpTextPersonal');
+    const businessHelpText = document.getElementById('dynamicHelpTextBusiness');
+
+
+    //? Show help text if hovered
+    citizenshipHelpTool.addEventListener('mouseenter', () => {
+        citizenshipHelpText.style.display = 'block';
+    })
+    citizenshipHelpTool.addEventListener('mouseleave', () => {
+        citizenshipHelpText.style.display = 'none';
+    })
+
+    personalHelpTool.addEventListener('mouseenter', () => {
+        personalHelpText.style.display = 'block';
+    })
+    personalHelpTool.addEventListener('mouseleave', () => {
+        personalHelpText.style.display = 'none';
+    })
+
+    businessHelpTool.addEventListener('mouseenter', () => {
+        businessHelpText.style.display = 'block';
+    })
+    businessHelpTool.addEventListener('mouseleave', () => {
+        businessHelpText.style.display = 'none';
     })
 })

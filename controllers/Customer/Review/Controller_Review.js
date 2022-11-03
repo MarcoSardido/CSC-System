@@ -53,7 +53,6 @@ const review = async (req, res) => {
                 for (const itemIndex of orderItems) {
                     productsContainer.push(itemIndex.productID);
                 }
-
                 toBeCreatedReview[orderIdIndex].seller.product = productsContainer;
             }
 

@@ -35,6 +35,7 @@ const startLiveSelling = async (uid, data) => {
         const liveSessionRef = doc(db, `LiveSession/sessionID_${uniqueID}`)
         await setDoc(liveSessionRef, {
             createdAt: currentDateAndTime,
+            customer: '',
             sellerID: uid,
             sessionStatus: 'Open',
             sessionStart: data.eventStart,

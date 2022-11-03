@@ -13,31 +13,41 @@ export const updateProfile = async (req, res) => {
     try {
         //* COLLECTION: Accounts
         const accountRef = doc(db, `Accounts/seller_${uid}`);
-        const accountDocument = await getDoc(accountRef);
-        // await setDoc(accountRef, {
-        //     displayName: accountName,
-        //     profileUpdatedAt: currentDate
-        // }, { merge: true });
+        await setDoc(accountRef, {
+            displayName: accountName,
+            profileUpdatedAt: currentDate
+        }, { merge: true });
+
+        //* COLLECTION: Sellers
+        const sellerDocRef = doc(db, `Sellers/${uid}`);
+        const sellerDocument = await getDoc(sellerDocRef);
+        await setDoc(sellerDocRef, {
+            birthday: accountBday,
+            contactNo: accountNumber,
+            displayName: accountName,
+            email: accountEmail,
+            fullName: accountFname,
+            gender: accountGender,
+            profileUpdatedAt: currentDate
+        }, { merge: true });
+
+        //* COLLECTION: Stripe Accounts
+        const stripeAccDocRef = doc(db, `Stripe Accounts/seller_${uid}`);
+        const stripeAccDocument = await getDoc(stripeAccDocRef);
+
+        if (stripeAccDocument.data().isNew) {
+            await setDoc(stripeAccDocRef, {
+                isNew: false
+            }, { merge: true });
+        }
 
         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
         const actLogSubDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/${actLogID}`)
         await setDoc(actLogSubDocRef, {
             dateAdded: new Date(),
-            name: accountDocument.data().displayName,
+            name: sellerDocument.data().displayName !== '' ? sellerDocument.data().displayName : sellerDocument.data().fullName,
             type: ['Profile', 'Information']
         });
-
-        //* COLLECTION: Sellers
-        const sellerRef = doc(db, `Sellers/${uid}`);
-        // await setDoc(sellerRef, {
-        //     birthday: accountBday,
-        //     contactNo: accountNumber,
-        //     displayName: accountName,
-        //     email: accountEmail,
-        //     fullName: accountFname,
-        //     gender: accountGender,
-        //     profileUpdatedAt: currentDate
-        // }, { merge: true });
 
     } catch (error) {
         console.error(`Firestore Error: @updateProfile -> ${error.message}`);

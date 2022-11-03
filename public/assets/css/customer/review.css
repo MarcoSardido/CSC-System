@@ -92,20 +92,23 @@ main .order .middle {
 
 main .order .middle .item-content {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    margin: 5px 0;
 }
 
 main .order .middle .item-content .item {
     display: flex;
-    gap: 3%;
+    width: 70%;
+    padding-left: 100px;
 }
 
 main .order .middle .item-content img {
     border: 1px solid var(--color-info-dark);
     width: 100px;
+}
+
+main .order .middle .item-content .item-name {
+    margin-left: 10px;
 }
 
 main .order .middle .item-content .item-price {
@@ -358,6 +361,11 @@ i:hover {
     main .order .middle .item-content img {
         width: 70px;
         height: 70px;
+    }
+
+    main .order .middle .item-content .item {
+        width: 80%;
+        padding-left: 70px;
     }
 
     main .order .middle .item-content .item .item-name h2,

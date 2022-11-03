@@ -1,6 +1,11 @@
 <link rel="stylesheet" href="/public/assets/css/seller/settings.css">
-<script defer src="/public/script/seller/filepond/fileUploadSettings.js"></script>
 <script defer src="/public/script/seller/settings/general.js" type="module"></script>
+
+<% if (settingsTab==='account') { %>
+    <script defer src="/public/script/seller/filepond/fileUploadSettings.js"></script>
+<% } else if (settingsTab==='verify_documents') { %>
+    <script defer src="/public/script/seller/filepond/fileUploadAuthSeller.js"></script>
+<% } %> 
 
 <div class="main-container">
     <header>
@@ -13,7 +18,8 @@
         <aside>
             <div class="tab-links">
                 <a href="?tab=account" class="settings-link">Account</a>
-                <a href="?tab=logs" class="settings-link">Activity log</a>
+                <a href="?tab=verify_documents" class="settings-link">Verify Documents</a>
+                <a href="?tab=activity_log" class="settings-link">Activity log</a>
                 <a href="?tab=faq" class="settings-link">FAQ</a>
                 <a href="?tab=about" class="settings-link">About Us</a>
             </div>
@@ -118,15 +124,15 @@
                                             <option selected value="Male">Male</option>
                                             <option value="Female">Female</option>
                                             <option value="Other">Other</option>
-                                        <%}else if(settingsData[0].accountGender==='Female' ){%>
-                                            <option value="Male">Male</option>
-                                            <option selected value="Female">Female</option>
-                                            <option value="Other">Other</option>
-                                        <%}else{%>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option selected value="Other">Other</option>
-                                        <%}%>
+                                            <%}else if(settingsData[0].accountGender==='Female' ){%>
+                                                <option value="Male">Male</option>
+                                                <option selected value="Female">Female</option>
+                                                <option value="Other">Other</option>
+                                                <%}else{%>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option selected value="Other">Other</option>
+                                                    <%}%>
                                     </select>
                                 </div>
                             </div>
@@ -157,33 +163,137 @@
                 </div>
             </div>
 
+            <!-- Verify Documents Section -->
+            <div class="docs-tab" style=<%=settingsTab==='verify_documents' ? ("display:block") : ("display:none") %> >
+                <div class="tab-header">
+                    Verify Documents
+                    <b class="header-line"></b>
+                </div>
+                <div class="tab-body">
+                    <div class="store-wrapper">
+                        <div class="store-info">
+                            <div>
+                                <label>Store Name:</label>
+                                <p>Handyman Appliances</p>
+                            </div>
+                            <div>
+                                <label>Status:</label>
+                                <p>Not Verified</p>
+                            </div>
+
+                        </div>
+                        <div class="business-info">
+                            <div>
+                                <label>Store Type:</label>
+                                <p>Original Equipment Manufacturer <strong>OEM</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="upload-wrapper">
+                        <div class="citizenship upload">
+                            <div class="upload-header">
+                                <div>
+                                    <p class="main-text">Citizenship ID</p>
+                                    <ion-icon name="help-circle" id="dynamicHelpToolCitizenship"></ion-icon>
+                                    <div class="help-text" id="dynamicHelpTextCitizenship" style="display:none">
+                                        List of Acceptable Valid IDs: Passport, SSS ID, Voter's ID, PhilHealth ID, UMID, PhilID.
+                                    </div>
+                                </div>
+                                <button class="edit-id">Edit</button>
+                            </div>
+                            <div class="upload-body">
+
+                                <!-- Display Image -->
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Philippine_passport_%282016_edition%29_data_page_%28cropped%29.jpg" alt="" style="display: none">
+                                
+                                <!-- Upload Image -->
+                                <div style="width:100%">
+                                    <input type="file" class="filepond">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="personal upload">
+                            <div class="upload-header">
+                                <div>
+                                    <p class="main-text">Personal ID</p>
+                                    <ion-icon name="help-circle" id="dynamicHelpToolPersonal"></ion-icon>
+                                    <div class="help-text" id="dynamicHelpTextPersonal" style="display:none">
+                                        List of Acceptable Valid IDs: Employee's ID, Driver's License, School ID.
+                                    </div>
+                                </div>
+                                <button class="edit-id">Edit</button>
+                            </div>
+                            <div class="upload-body">
+
+                                <!-- Display Image -->
+                                <img src="https://www.sssonlineinquiry.net/wp-content/uploads/2019/08/SSS-ID-Front.jpg" alt="" style="display: none">
+                                
+                                <!-- Upload Image -->
+                                <div style="width:100%">
+                                    <input type="file" class="filepond">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="business upload">
+                            <div class="upload-header">
+                                <div>
+                                    <p class="main-text">Business License</p>
+                                    <ion-icon name="help-circle" id="dynamicHelpToolBusiness"></ion-icon>
+                                    <div class="help-text" id="dynamicHelpTextBusiness" style="display:none">
+                                        This is only for branded stores. You will be labeled as <strong>OEM</strong> if your store is not branded.
+                                    </div>
+                                </div>
+                                <button class="edit-id">Edit</button>
+                            </div>
+                            <div class="upload-body">
+
+                                <!-- Display Image -->
+                                <img src="https://cf.ltkcdn.net/business/images/orig/172149-342x264-business-license-small.jpg" alt="" style="display: none">
+                                
+                                <!-- Upload Image -->
+                                <div style="width:100%">
+                                    <input type="file" class="filepond">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Activity Log Section -->
-            <div class="logs-tab" style=<%=settingsTab==='logs' ? ("display:block") : ("display:none") %> >
+            <div class="logs-tab" style=<%=settingsTab==='activity_log' ? ("display:block") : ("display:none") %> >
                 <div class="tab-header">
                     Activity Log
                     <b class="header-line"></b>
                 </div>
                 <div class="tab-body">
                     <section class="activity-logs">
-                        <% settingsData[1].forEach(logData => { %>
+                        <% settingsData[1].forEach(logData=> { %>
                             <div class="log-wrapper">
-                                <p class="log-wrapper-header"><%= logData.date %></p>
-                                <% logData.logs.reverse().forEach(val => { %>
+                                <p class="log-wrapper-header">
+                                    <%= logData.date %>
+                                </p>
+                                <% logData.logs.reverse().forEach(val=> { %>
                                     <div class="log">
                                         <div class="log-body">
                                             <div class="photo">
-                                                <img src="<%= val.photo %>"
-                                                    alt="<%= val.name %>">
+                                                <img src="<%= val.photo %>" alt="<%= val.name %>">
                                             </div>
                                             <div class="info">
-                                                <div class="title"><strong><%= val.name %></strong> <%- val.description %></div>
-                                                <div class="time-changed"><%= val.time %></div>
+                                                <div class="title"><strong>
+                                                        <%= val.name %>
+                                                    </strong>
+                                                    <%- val.description %>
+                                                </div>
+                                                <div class="time-changed">
+                                                    <%= val.time %>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                <% }) %>
+                                    <% }) %>
                             </div>
-                        <% }) %>
+                            <% }) %>
                     </section>
                 </div>
             </div>
