@@ -91,15 +91,15 @@ main .order .middle {
 }
 
 main .order .middle .item-content {
+    margin: 5px 0;
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    justify-content: space-around;
 }
 
 main .order .middle .item-content .item {
     display: flex;
-    width: 70%;
-    padding-left: 100px;
+    width: 50%;
 }
 
 main .order .middle .item-content img {
@@ -363,10 +363,9 @@ i:hover {
         height: 70px;
     }
 
-    main .order .middle .item-content .item {
-        width: 80%;
-        padding-left: 70px;
-    }
+    main .order .middle .item-content .item p {
+		font-size: 10px;
+	}
 
     main .order .middle .item-content .item .item-name h2,
     main .order .middle .item-content .item-qty h2,

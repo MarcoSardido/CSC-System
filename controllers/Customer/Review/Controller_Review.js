@@ -151,7 +151,6 @@ const addReview = async (req, res) => {
 
         const productsToBeReviewed = reviewDocument.data().seller.product;
         for (const productIndex of productsToBeReviewed) {
-
             //* COLLECTION: Sellers -> SUB-COLLECTION: Products -> SUB-COLLECTION: Reviews
             const productReviewDoc = doc(db, `Sellers/${reviewDocument.data().seller.uid}/Products/${productIndex}/Reviews/${reviewDocument.id}`);
             await setDoc(productReviewDoc, {

@@ -1031,13 +1031,11 @@ $(document).ready(() => {
 
                                     <div class="review-container" id="reviewContainer" style="display: none">
                                         <div class="review-wrapper" id="dynamicReviewContainer">
-                                            
                                             ${generateReview()}
                                         </div>
                                     </div>
                                     
                                     <button type="button" class="btn btn-primary" id="btnConfirmItem">Confirm</button>
-
                                 </div>
                             </div>
                         </div>
