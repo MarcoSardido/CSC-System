@@ -21,13 +21,26 @@ const getItemsToBeSold = async (uid) => {
 }
 
 const getCustomerRate = async (uid) => {
+    const tempSellerIDArray = [];
     const customerRateArray = [];
 
     try {
-        //* SELLER COLLECTION -> SUB-COLLECTION: Rating
-        const ratingColRef = collection(db, `Sellers/${uid}/Rating`);
-        const ratingCollection = await getDocs(ratingColRef);
-        ratingCollection.forEach(rate => customerRateArray.push(rate.data().rate));
+        //* SELLER COLLECTION -> SUB-COLLECTION: Products
+        const productsColRef = collection(db, `Sellers/${uid}/Products`);
+        const productsCollection = await getDocs(productsColRef);
+        productsCollection.forEach(doc => {
+            tempSellerIDArray.push(doc.id)
+        })
+
+        for (const sellerIndex of tempSellerIDArray) {
+            //* SELLER COLLECTION -> SUB-COLLECTION: Products -> SUB-COLLECTION: Reviews
+            const reviewsColRef = collection(db, `Sellers/${uid}/Products/${sellerIndex}/Reviews`);
+            const reviewsCollection = await getDocs(reviewsColRef);
+
+            reviewsCollection.forEach(reviewDoc => {
+                customerRateArray.push(reviewDoc.data().rate)
+            })
+        }
 
         return customerRateArray;
 
@@ -62,7 +75,7 @@ const getTransactions = async (uid) => {
         //? Get total items sold & total revenue & weekly revenue
         transactionsCollection.forEach(itemSold => {
             if (itemSold.data().status === 'Success') {
-                
+
                 itemSoldArray.push(itemSold.data().transactionID);
                 weeklyRevenueArray.push({
                     date: itemSold.data().date,
@@ -90,7 +103,7 @@ const getReport = async (uid) => {
             reportedCustomerIDs.push(doc.data().reportedCustomerID);
             reportArray.push(doc.data());
         })
-        
+
 
         for (const reportedIndex of reportedCustomerIDs) {
             //* COLLECTION: Accounts
@@ -112,9 +125,9 @@ const getReport = async (uid) => {
 
 const getLiveSummary = async (uid) => {
     const liveArray = [];
-    
+
     try {
-      
+
         //* SELLERS COLLECTION -> SUB-COLLECTION: LiveSessions
         const sellerLiveSessionSubColRef = collection(db, `Sellers/${uid}/LiveSessions`);
         const sellerLiveSessionSubCollection = await getDocs(sellerLiveSessionSubColRef);

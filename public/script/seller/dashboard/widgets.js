@@ -80,25 +80,29 @@ $(document).ready(() => {
     }
 
     const calculateRating = (data) => {
-        const customerRate = [];
-        let count = 0, sum, total;
+        const reviewRate = data;
+        let s1 = 0, s2 = 0, s3 = 0, s4 = 0, s5 = 0;
 
-        if (data.length === 0) return customerRatingLabel.innerText = `0/5`;
+        // Cancel computation if no reviews
+        if (reviewRate.length === 0) return customerRatingLabel.innerText = `0/5`;
 
-
-        for (const rateIndex of data) {
-            customerRate.push(Number(rateIndex))
+        for (const rateIndex of reviewRate) {
+            if (rateIndex === 1) {
+                s1++;
+            } else if (rateIndex === 2) {
+                s2++;
+            } else if (rateIndex === 3) {
+                s3++;
+            } else if (rateIndex === 4) {
+                s4++;
+            } else if (rateIndex === 5) {
+                s5++;
+            }
         }
+        const starRate = 1*s1+2*s2+3*s3+4*s4+5*s5/(reviewRate.length);
+        const formatDecimal = starRate.toFixed(1);
 
-        sum = customerRate.reduce((sum, item, index) => {
-            count += item;
-            return sum + item * (index + 1);
-        }, 0)
-
-        total = sum / count;
-
-        const formatDecimal = total.toFixed(1);
-        customerRatingLabel.innerText = `${formatDecimal}/5`;
+        customerRatingLabel.innerText = `${formatDecimal.split('.')[1] === '0' ? formatDecimal.split('.')[0] : formatDecimal }/5`;
     }
 
     const recentReports = (data) => {
@@ -123,12 +127,11 @@ $(document).ready(() => {
                     </div>
                 `;
             }
-            
+
             $('#reportContainer').empty();
             recentReportContainer.insertAdjacentHTML(`beforeend`, REPORT_TEMPLATE);
         }
     }
-
 
     const liveSummaryChart = (data) => {
         const transactionChart = document.getElementById("liveStream-chart").getContext('2d');
@@ -171,7 +174,7 @@ $(document).ready(() => {
                         },
                         callbacks: {
                             label: function (item) {
-                                let value = item.raw.y;7
+                                let value = item.raw.y; 7
                                 let label = `Total Views: ${value}`;
 
                                 return label;
