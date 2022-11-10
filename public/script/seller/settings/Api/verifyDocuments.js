@@ -1,37 +1,43 @@
 import { firebase } from '../../../firebaseConfig.js';
-import { getFirestore, doc, getDoc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js";
 
 const db = getFirestore(firebase);
 
-const changeProfilePhoto = async (uid, data) => {
-    const currentDate = new Date();
+const uploadDocuments = async (uid, data, path) => {
+    let status = {};
+
     const actLogID = `log_${generateId()}`;
 
-    try {
-        //* ACCOUNTS COLLECTION
-        const accountsDocRef = doc(db, `Accounts/seller_${uid}`);
-        const accountsDocument = await getDoc(accountsDocRef)
-        await updateDoc(accountsDocRef, {
-            imgType: data.type,
-            userPhoto: data.data,
-            profileUpdatedAt: currentDate
-        })
+    const subColPath = path === 'citizen' ? 'Citizenship ID' :
+                       path === 'personal' ? 'Personal ID' : 'Business License';
 
-        //* COLLECTION: Sellers
+    try {
+        //* COLLECTION: Seller
         const sellerDocRef = doc(db, `Sellers/${uid}`);
-        const sellerDocument = await getDoc(sellerDocRef);
+        const sellerDocument = await getDoc(sellerDocRef)
+
+        //* COLLECTION: Seller -> SUB-COLLECTION: Business Documents
+        const sellerSubDocRef = doc(db, `Sellers/${uid}/Business Documents/${subColPath}`);
+        await setDoc(sellerSubDocRef, {
+            imgType: data.type,
+            docPhoto: data.data,
+            status: 'Pending'
+        }, { merge: true});
 
         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
         const actLogSubDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/${actLogID}`)
         await setDoc(actLogSubDocRef, {
             dateAdded: new Date(),
             name: sellerDocument.data().displayName !== '' ? sellerDocument.data().displayName : sellerDocument.data().fullName,
-            type: ['Profile', 'Photo']
+            type: ['Documents', subColPath]
         });
 
     } catch (error) {
-        console.error(`Firestore Error: @changeProfilePhoto -> ${err.message}`)
+        status.type = 'error';
+        status.message = error.message;
     }
+
+    return status;
 }
 
 const generateId = () => {
@@ -46,5 +52,5 @@ const generateId = () => {
 }
 
 export {
-    changeProfilePhoto
+    uploadDocuments
 }

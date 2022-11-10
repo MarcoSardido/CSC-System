@@ -174,18 +174,17 @@
                         <div class="store-info">
                             <div>
                                 <label>Store Name:</label>
-                                <p>Handyman Appliances</p>
+                                <p><%= settingsData[2].storeName %></p>
                             </div>
                             <div>
                                 <label>Status:</label>
-                                <p>Not Verified</p>
+                                <p class="<%= settingsData[2].verifiedSeller ? 'success' : 'error'%>"><%= settingsData[2].verifiedSeller ? 'Verified' : 'Not Verified'%></p>
                             </div>
-
                         </div>
                         <div class="business-info">
                             <div>
                                 <label>Store Type:</label>
-                                <p>Original Equipment Manufacturer <strong>OEM</strong></p>
+                                <p><%- settingsData[2].storeType === 'OEM' ? 'Original Equipment Manufacturer <strong>OEM</strong>' : 'Branded'%></p>
                             </div>
                         </div>
                     </div>
@@ -196,22 +195,28 @@
                                     <p class="main-text">Citizenship ID</p>
                                     <ion-icon name="help-circle" id="dynamicHelpToolCitizenship"></ion-icon>
                                     <div class="help-text" id="dynamicHelpTextCitizenship" style="display:none">
-                                        List of Acceptable Valid IDs: Passport, SSS ID, Voter's ID, PhilHealth ID, UMID, PhilID.
+                                        List of Acceptable Valid IDs: Passport, SSS ID, Voter's ID, PhilHealth ID, UMID.
                                     </div>
                                 </div>
-                                <button class="edit-id">Edit</button>
+                                <div class="upload-button-group" id="btnGroupCitizen" style="display:none;">
+                                    <button class="upload-button" id="btnCancelCitizen">Cancel</button>
+                                    <button class="upload-button disabled" disabled id="btnUploadCitizen">Submit</button>
+                                </div>
+                                <button class="upload-button edit-id" id="btnEditCitizen">Edit</button>
                             </div>
                             <div class="upload-body">
-
                                 <!-- Display Image -->
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Philippine_passport_%282016_edition%29_data_page_%28cropped%29.jpg" alt="" style="display: none">
-                                
+                                <img id="displayImgCitizen" class="citizen-image-container" src="<%= settingsData[3][0].citizen %>" alt="Citizenship ID" >
+                    
                                 <!-- Upload Image -->
-                                <div style="width:100%">
-                                    <input type="file" class="filepond">
+                                <div class="citizen-upload-container" id="UploadImgCitizen" style="width:100%; display: none">
+                                    <input type="file" class="filepond" id="fileUploadCitizen" name="filepondCitizen">
                                 </div>
                             </div>
                         </div>
+
+
+
                         <div class="personal upload">
                             <div class="upload-header">
                                 <div>
@@ -221,19 +226,26 @@
                                         List of Acceptable Valid IDs: Employee's ID, Driver's License, School ID.
                                     </div>
                                 </div>
-                                <button class="edit-id">Edit</button>
+                                <div class="upload-button-group" id="btnGroupPersonal" style="display:none;">
+                                    <button class="upload-button" id="btnCancelPersonal">Cancel</button>
+                                    <button class="upload-button disabled" disabled id="btnUploadPersonal">Submit</button>
+                                </div>
+                                <button class="upload-button edit-id" id="btnEditPersonal">Edit</button>
                             </div>
                             <div class="upload-body">
-
                                 <!-- Display Image -->
-                                <img src="https://www.sssonlineinquiry.net/wp-content/uploads/2019/08/SSS-ID-Front.jpg" alt="" style="display: none">
+                                <img id="displayImgPersonal" src="<%= settingsData[3][1].personal %>" alt="Personal ID">
                                 
-                                <!-- Upload Image -->
-                                <div style="width:100%">
-                                    <input type="file" class="filepond">
+                                 <!-- Upload Image -->
+                                 <div class="citizen-upload-container" id="UploadImgPersonal" style="width:100%; display: none">
+                                    <input type="file" class="filepond" id="fileUploadPersonal" name="filepondPersonal">
                                 </div>
                             </div>
                         </div>
+
+
+
+
                         <div class="business upload">
                             <div class="upload-header">
                                 <div>
@@ -243,16 +255,20 @@
                                         This is only for branded stores. You will be labeled as <strong>OEM</strong> if your store is not branded.
                                     </div>
                                 </div>
-                                <button class="edit-id">Edit</button>
+                                <div class="upload-button-group" id="btnGroupBusiness" style="display:none;">
+                                    <button class="upload-button" id="btnCancelBusiness">Cancel</button>
+                                    <button class="upload-button disabled" disabled id="btnUploadBusiness">Submit</button>
+                                </div>
+                                <button class="upload-button edit-id" id="btnEditBusiness">Edit</button>
                             </div>
                             <div class="upload-body">
 
                                 <!-- Display Image -->
-                                <img src="https://cf.ltkcdn.net/business/images/orig/172149-342x264-business-license-small.jpg" alt="" style="display: none">
+                                <img id="displayImgBusiness" src="https://cf.ltkcdn.net/business/images/orig/172149-342x264-business-license-small.jpg" alt="">
                                 
                                 <!-- Upload Image -->
-                                <div style="width:100%">
-                                    <input type="file" class="filepond">
+                                <div class="citizen-upload-container" id="UploadImgBusiness" style="width:100%; display: none">
+                                    <input type="file" class="filepond" id="fileUploadBusiness" name="filepondBusiness">
                                 </div>
                             </div>
                         </div>

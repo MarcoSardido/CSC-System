@@ -108,7 +108,8 @@ const signUp = (req, res) => {
 
                 await setDoc(doc(db, 'Sellers', userRecord.uid, 'Business Information', businessName), {
                     Name: businessName,
-                    Description: businessDesc
+                    Description: businessDesc,
+                    Type: 'OEM'
                 });
 
                 await setDoc(doc(db, 'Sellers', userRecord.uid, 'Business Documents', 'Personal ID'), {

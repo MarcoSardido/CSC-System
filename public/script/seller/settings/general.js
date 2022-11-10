@@ -1,4 +1,5 @@
 import { changeProfilePhoto } from './Api/updateProfile.js';
+import { uploadDocuments } from './Api/verifyDocuments.js';
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -30,7 +31,7 @@ $(document).ready(() => {
                 inputIndex.setAttribute('disabled', '');
             }
             window.location.reload();
-            
+
         }, 2000)
 
     })
@@ -128,4 +129,188 @@ $(document).ready(() => {
     businessHelpTool.addEventListener('mouseleave', () => {
         businessHelpText.style.display = 'none';
     })
+
+
+    
+    //* ================================ Citizenship ID ======================================= *//
+    const btnEditCit = document.getElementById('btnEditCitizen')
+    const btnGroupCit = document.getElementById('btnGroupCitizen')
+    const btnCancelUploadCit = document.getElementById('btnCancelCitizen');
+    const btnUploadCit = document.getElementById('btnUploadCitizen');
+    const displayCitImgContainer = document.getElementById('displayImgCitizen');
+    const uploadCitImgContainer = document.getElementById('UploadImgCitizen');
+    const inputCitizen = document.getElementById('fileUploadCitizen');
+    const uploadCitizenID = document.getElementsByName('filepondCitizen');
+
+
+    // Display
+    btnCancelUploadCit.addEventListener('click', () => {
+        btnGroupCit.style.display = 'none';
+        btnEditCit.style.display = 'block';
+        displayCitImgContainer.style.display = 'block';
+        uploadCitImgContainer.style.display = 'none';
+    })
+
+    // Edit
+    btnEditCit.addEventListener('click', () => {
+        btnGroupCit.style.display = 'block';
+        btnEditCit.style.display = 'none';
+        displayCitImgContainer.style.display = 'none';
+        uploadCitImgContainer.style.display = 'block';
+
+        btnUploadCit.classList.add('disabled');
+        btnUploadCit.setAttribute('disabled', true)
+    })
+
+    // Upload
+    inputCitizen.addEventListener('change', () => {
+        btnUploadCit.classList.remove('disabled');
+        btnUploadCit.removeAttribute('disabled', '')
+
+        btnUploadCit.addEventListener('click', () => {
+            let parsedImg;
+            const acceptedImg = {}
+
+            parsedImg = JSON.parse(uploadCitizenID[0].value);
+
+            if (!imageMimeTypes.includes(parsedImg.type)) return alert('Your profile image type is not supported. Please select image with type (.jpg, .jpeg, .png)');
+
+            Object.assign(acceptedImg, {
+                data: parsedImg.data,
+                type: parsedImg.type
+            })
+
+            uploadDocuments(trimmedUID, acceptedImg, 'citizen').then((status) => {
+                if (status.type === 'error') {
+                    let trimIndex = status.message.lastIndexOf('"') + 1;
+                    let alertMessage = status.message.slice(trimIndex);
+
+                    return alert(`File Upload Error: Selected Image ${alertMessage} Please select a different image.`);
+                }
+
+                window.location.reload();
+            })
+        })
+    })
+
+
+    //* ================================ Personal ID ======================================= *//
+    const btnEditPersonal = document.getElementById('btnEditPersonal')
+    const btnGroupPersonal = document.getElementById('btnGroupPersonal')
+    const btnCancelUploadPersonal = document.getElementById('btnCancelPersonal');
+    const btnUploadPersonal = document.getElementById('btnUploadPersonal');
+    const displayPersonalImgContainer = document.getElementById('displayImgPersonal');
+    const uploadPersonalImgContainer = document.getElementById('UploadImgPersonal');
+    const inputPersonal = document.getElementById('fileUploadPersonal');
+    const uploadPersonalID = document.getElementsByName('filepondPersonal');
+
+
+    // Display
+    btnCancelUploadPersonal.addEventListener('click', () => {
+        btnGroupPersonal.style.display = 'none';
+        btnEditPersonal.style.display = 'block';
+        displayPersonalImgContainer.style.display = 'block';
+        uploadPersonalImgContainer.style.display = 'none';
+    })
+
+    // Edit
+    btnEditPersonal.addEventListener('click', () => {
+        btnGroupPersonal.style.display = 'block';
+        btnEditPersonal.style.display = 'none';
+        displayPersonalImgContainer.style.display = 'none';
+        uploadPersonalImgContainer.style.display = 'block';
+    })
+
+    // Upload
+    inputPersonal.addEventListener('change', () => {
+        btnUploadPersonal.classList.remove('disabled');
+        btnUploadPersonal.removeAttribute('disabled', '')
+
+        btnUploadPersonal.addEventListener('click', () => {
+            let parsedImg;
+            const acceptedImg = {}
+
+            parsedImg = JSON.parse(uploadPersonalID[0].value);
+
+            if (!imageMimeTypes.includes(parsedImg.type)) return alert('Your profile image type is not supported. Please select image with type (.jpg, .jpeg, .png)');
+
+            Object.assign(acceptedImg, {
+                data: parsedImg.data,
+                type: parsedImg.type
+            })
+
+            uploadDocuments(trimmedUID, acceptedImg, 'personal').then((status) => {
+                if (status.type === 'error') {
+                    let trimIndex = status.message.lastIndexOf('"') + 1;
+                    let alertMessage = status.message.slice(trimIndex);
+
+                    return alert(`File Upload Error: Selected Image ${alertMessage} Please select a different image.`);
+                }
+
+                window.location.reload();
+            });
+        })
+    })
+
+
+
+    //* ================================ Business License ======================================= *//
+    const btnEditBusiness = document.getElementById('btnEditBusiness')
+    const btnGroupBusiness = document.getElementById('btnGroupBusiness')
+    const btnCancelUploadBusiness = document.getElementById('btnCancelBusiness');
+    const btnUploadBusiness = document.getElementById('btnUploadBusiness');
+    const displayBusinessImgContainer = document.getElementById('displayImgBusiness');
+    const uploadBusinessImgContainer = document.getElementById('UploadImgBusiness');
+    const inputBusiness = document.getElementById('fileUploadBusiness');
+    const uploadBusinessID = document.getElementsByName('filepondBusiness');
+
+
+    // Display
+    btnCancelUploadBusiness.addEventListener('click', () => {
+        btnGroupBusiness.style.display = 'none';
+        btnEditBusiness.style.display = 'block';
+        displayBusinessImgContainer.style.display = 'block';
+        uploadBusinessImgContainer.style.display = 'none';
+    })
+
+    // Edit
+    btnEditBusiness.addEventListener('click', () => {
+        btnGroupBusiness.style.display = 'block';
+        btnEditBusiness.style.display = 'none';
+        displayBusinessImgContainer.style.display = 'none';
+        uploadBusinessImgContainer.style.display = 'block';
+    })
+
+    // Upload
+    inputBusiness.addEventListener('change', () => {
+        btnUploadBusiness.classList.remove('disabled');
+        btnUploadBusiness.removeAttribute('disabled', '')
+
+        btnUploadBusiness.addEventListener('click', () => {
+            let parsedImg;
+            const acceptedImg = {}
+
+            parsedImg = JSON.parse(uploadBusinessID[0].value);
+
+            if (!imageMimeTypes.includes(parsedImg.type)) return alert('Your profile image type is not supported. Please select image with type (.jpg, .jpeg, .png)');
+
+            Object.assign(acceptedImg, {
+                data: parsedImg.data,
+                type: parsedImg.type
+            })
+
+            uploadDocuments(trimmedUID, acceptedImg, 'business').then((status) => {
+                if (status.type === 'error') {
+                    let trimIndex = status.message.lastIndexOf('"') + 1;
+                    let alertMessage = status.message.slice(trimIndex);
+
+                    return alert(`File Upload Error: Selected Image ${alertMessage} Please select a different image.`);
+                }
+
+                window.location.reload();
+            });
+        })
+    })
+
+
 })

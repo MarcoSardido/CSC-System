@@ -8,11 +8,7 @@ FilePond.registerPlugin(
 );
 
 FilePond.setOptions({
-	imagePreviewHeight: 170,
-    imageCropAspectRatio: '1:1',
     stylePanelAspectRatio: 20 / 100,
-    imageResizeTargetWidth: 100,
-    imageResizeTargetHeight: 20,
 	styleLoadIndicatorPosition: 'center bottom',
     styleProgressIndicatorPosition: 'right bottom',
     styleButtonRemoveItemPosition: 'center bottom',

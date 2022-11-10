@@ -44,8 +44,6 @@ app.use(cors({
 app.use('/', landingPage); //FrontPage
 app.use('/sellercenter', sellerPage.routes); //Access Seller Resource
 app.use('/customercenter', customerPage.routes); //Access Customer Resource
-
-
 app.use((pageNotFound)); //404 Page
 
 app.listen(process.env.PORT || 3000, () => console.log('Server up and running...'));

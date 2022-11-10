@@ -73,7 +73,7 @@ $(document).ready(() => {
             // Close Live
             const liveSessionColRef = doc(db, `LiveSession/sessionID_${roomID}`);
             await updateDoc(liveSessionColRef, {
-                sessionStatus: 'Market'
+                sessionStatus: 'Market',
             })
 
         } catch (error) {

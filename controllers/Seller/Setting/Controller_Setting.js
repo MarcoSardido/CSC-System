@@ -6,7 +6,8 @@ const db = getFirestore(firebase);
 export const settings = async (req, res) => {
     const { uid } = req.body;
 
-    const sellerData = {}, accountData = {}, actLogsData = [];
+    const sellerData = {}, accountData = {}, actLogsData = [], documentData = {}, verifyDocuments = [];
+
     const currentTab = req.query.tab === 'account' ? 'account' :
     req.query.tab === 'verify_documents' ? 'verify_documents' :
         req.query.tab === 'activity_log' ? 'activity_log' :
@@ -16,6 +17,24 @@ export const settings = async (req, res) => {
         //* ACCOUNTS COLLECTION
         const accountColRef = doc(db, `Accounts/seller_${uid}`);
         const accountColDoc = await getDoc(accountColRef);
+
+        //* COLLECTION: Sellers -> SUB-COLLECTION: Business Information
+        const businessColRef = collection(db, `Sellers/${uid}/Business Information`);
+        const businessCollection = await getDocs(businessColRef);
+        businessCollection.forEach(doc => {
+            documentData.storeName = doc.data().Name;
+            documentData.storeType = doc.data().Type;
+            documentData.verifiedSeller = accountColDoc.data().verifiedSeller;
+        })
+
+        //* COLLECTION: Sellers -> SUB-COLLECTION: Business Documents
+        const documentsColRef = collection(db, `Sellers/${uid}/Business Documents`);
+        const documentsCollection = await getDocs(documentsColRef);
+        documentsCollection.forEach(doc => {
+            verifyDocuments.push({
+                [doc.id === 'Citizenship ID' ? 'citizen' : doc.id === 'Personal ID' ? 'personal' : 'business']: `data:${doc.data().imgType};base64,${doc.data().docPhoto}`
+            })
+        })
 
         //* SELLER COLLECTION
         const sellerColRef = doc(db, `Sellers/${uid}`);
@@ -68,14 +87,18 @@ export const settings = async (req, res) => {
             const data = doc.data();
             const convertedTimestamp = new Date(data.dateAdded.seconds * 1000 + data.dateAdded.nanoseconds / 1000);
 
-            if (Array.isArray(data.type)) { //? Product, Profile
+            if (Array.isArray(data.type)) { //? Product, Profile, Verify Documents
                 let logDesc;
                 
                 if (data.type[0] === 'Product') {
                     logDesc = data.type[1] === 'Added' ? `has added a new product <strong>${data.type[2]}</strong>.` :
                     data.type[1] === 'Modified' ? `has updated a product <strong>${data.type[2]}</strong>.` : `has deleted a product <strong>${data.type[2]}</strong>.`;
+
                 } else if (data.type[0] === 'Profile') {
                     logDesc = data.type[1] === 'Information' ? `updated ${detectGender} profile information.` : `updated ${detectGender} profile picture`;
+
+                } else if (data.type[0] === 'Documents') {
+                    logDesc =  `updated ${detectGender} <strong>${data.type[1]}</strong>.`;
                 }
 
                 actLogsData.push({
@@ -112,6 +135,7 @@ export const settings = async (req, res) => {
 
             Object.keys(obj)
                 .sort()
+                .reverse()
                 .forEach(key => {
                     reversedArray.push({
                         'date': key,
@@ -133,7 +157,7 @@ export const settings = async (req, res) => {
             url: "urlPath",
             layout: 'layouts/sellerLayout',
             settingsTab: currentTab,
-            settingsData: [accountData, finalizedLogs],
+            settingsData: [accountData, finalizedLogs, documentData, verifyDocuments],
             verification: '',
             user: '',
             hasSubscription: true,
