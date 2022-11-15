@@ -23,6 +23,8 @@ $(document).ready(() => {
     //* LIVE SESSION -> SUB-COLLECTION: sessionUsers
     const usersSubColRef = doc(db, `LiveSession/sessionID_${liveRoomID}/sessionUsers/${trimmedUID}`);
     onSnapshot(usersSubColRef, doc => {
+        if (isAnonymousBuyer) return;
+
         const isMuted = doc.data().isMuted;
         userIsMuted = isMuted;
         checkUserIfMuted(isMuted)
