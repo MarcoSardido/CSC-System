@@ -26,7 +26,7 @@ $(document).ready(() => {
 
         signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(user => {
             user.user.getIdToken().then(idToken => {
-                window.location.assign(`auth/sessionLogin?token=${idToken}&uid=${user.user.uid}`);
+                window.location.assign(`auth/sessionLogin?token=${idToken}&uid=${user.user.uid}&live=false`);
             });
         }).then(() => {
             return signOut(auth).then(() => {

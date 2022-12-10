@@ -75,17 +75,16 @@ const getTransactions = async (uid) => {
         //? Get total items sold & total revenue & weekly revenue
         transactionsCollection.forEach(itemSold => {
             if (itemSold.data().status === 'Success') {
-
                 itemSoldArray.push(itemSold.data().transactionID);
                 weeklyRevenueArray.push({
                     date: itemSold.data().date,
-                    price: formatThousands(itemSold.data().totalPrice / 100)
+                    price: itemSold.data().totalPrice
                 });
                 totalRevenue += itemSold.data().totalPrice;
             }
         })
 
-        return { totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: formatThousands(totalRevenue / 100) };
+        return { totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: formatPeso(totalRevenue) };
 
     } catch (error) {
         console.error(`Firestore Error: @getTransactions -> ${error.message}`)
@@ -146,9 +145,15 @@ const getLiveSummary = async (uid) => {
     }
 }
 
-const formatThousands = (price) => {
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const formatPeso = (price) => {
+    return price.toLocaleString('en-ph', {
+        style: 'currency',
+        currency: 'PHP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })
 }
+
 
 export {
     getItemsToBeSold,

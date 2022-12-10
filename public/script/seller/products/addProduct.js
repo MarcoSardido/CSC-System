@@ -612,6 +612,15 @@ $(document).ready(() => {
         const productCategory = variantData[variantData.length - 1];
         variantData.pop();
 
+        console.log(productId)
+        console.log(detailData[0])
+        console.log(detailData[2])
+        console.log(detailData[1])
+        console.log(productTypes)
+        console.log(productCategory)
+        console.log(variantData)
+        console.log(imgData)
+
         try {
             //* COLLECTION: Accounts
             const accountDocRef = doc(db, `Accounts/seller_${trimmedID}`);

@@ -152,13 +152,17 @@ const signUp = (req, res) => {
 
 //* Function -> Add Session Cookie When Logging In 
 const sessionLogin = async (req, res) => {
-    const { uid, token } = req.query;
-
+    const { uid, token, live } = req.query;
+    
     const uniqueID = generateId();
     try {
         //* COLLECTION: Sellers
         const sellerDocRef = doc(db, `Sellers/${uid}`);
         const sellerDocument = await getDoc(sellerDocRef)
+
+        //* COLLECTION: Accounts -> SUB-COLLECTION: Products
+        const productsSubColRef = collection(db, `Sellers/${uid}/Products`)
+        const productsCollection = await getDocs(productsSubColRef)
 
         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
         const activityLogDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/log_${uniqueID}`);
@@ -178,8 +182,17 @@ const sessionLogin = async (req, res) => {
         adminAuth.createSessionCookie(idToken, { expiresIn }).then((sessionCookie) => {
             const options = { maxAge: expiresIn, httpOnly: true, secure: true };
             res.cookie('session', sessionCookie, options);
-            res.redirect('/sellercenter')
 
+            if (live) {
+                if (productsCollection.empty) {
+                    res.redirect('/sellercenter/products')
+                } else {
+                    res.redirect('/sellercenter')
+                }
+            } else {
+                res.redirect('/sellercenter')
+            }
+            
         }).catch((error) => {
             // throw a error if idToken is not valid.
             console.error(`Firebase Auth: Error creating session cookie: ${error.message}`);

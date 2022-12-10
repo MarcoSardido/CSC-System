@@ -1,3 +1,7 @@
+import { firebase } from './firebaseConfig.js';
+import { getAuth, setPersistence, inMemoryPersistence, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendEmailVerification, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+
+
 (function () {
   "use strict";
 
@@ -250,5 +254,86 @@
       mirror: false
     });
   });
+
+
+  // Live Sell Login
+  const auth = getAuth(firebase);
+
+  const loginForm = document.getElementById('sellerLoginForm')
+  const loginButton = document.getElementById('btnLogin')
+  const sellerEmail = document.getElementById('loginSellerEmail')
+  const sellerPassword = document.getElementById('loginSellerPassword')
+  const iconTogglePassword = document.getElementById('togglePassword')
+  const checkPasswordLabel = document.getElementById('lblCheckPassword')
+
+  //NOTE: To check a password between 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.
+  const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+  sellerPassword.addEventListener('keyup', () => {
+    if (sellerPassword.value.match(pattern)) {
+      checkPasswordLabel.classList.add('valid');
+      checkPasswordLabel.classList.remove('invalid');
+      checkPasswordLabel.innerText = 'Your password is strong. 🔥';
+      loginButton.removeAttribute('disabled');
+
+    } else {
+      if (checkPasswordLabel.classList.contains('invalid')) return
+
+      checkPasswordLabel.classList.remove('valid');
+      checkPasswordLabel.classList.add('invalid');
+      checkPasswordLabel.innerText = 'Please enter a strong password.';
+      loginButton.setAttribute('disabled', '');
+    }
+  })
+
+  iconTogglePassword.addEventListener('click', () => {
+    const type = sellerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+    sellerPassword.setAttribute('type', type);
+
+    iconTogglePassword.classList.toggle('fa-eye-slash');
+  })
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+
+    let signInEmail = sellerEmail.value;
+    let signInPassword = sellerPassword.value;
+
+    signInWithEmailAndPassword(auth, signInEmail, signInPassword).then(user => {
+      user.user.getIdToken().then(idToken => {
+        window.location.assign(`sellercenter/auth/sessionLogin?token=${idToken}&uid=${user.user.uid}&live=true`);
+      });
+    }).then(() => {
+      return signOut(auth).then(() => {
+      }).catch(error => {
+        console.log(error.message);
+      })
+    }).catch(error => {
+      checkPasswordLabel.classList.remove('valid');
+      checkPasswordLabel.classList.add('invalid');
+      checkPasswordLabel.innerText = 'Please enter a strong password.';
+      loginButton.setAttribute('disabled', '');
+      
+      alert(errorHandler(error.code));
+      sellerEmail.value = null;
+      sellerPassword.value = null;
+    });
+  })
+
+  const errorHandler = (code) => {
+    let errMessage = '';
+
+    if (code === 'auth/invalid-email') {
+        errMessage = `You've entered an invalid email address!`;
+    } else if (code === 'auth/wrong-password') {
+        errMessage = `You've entered an invalid password!`;
+    } else if (code === 'auth/user-not-found') {
+        errMessage = `There are no users matching that email!`;
+    } else {
+        errMessage = code;
+    }
+
+    return errMessage
+}
 
 })()

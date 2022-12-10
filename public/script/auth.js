@@ -18,7 +18,7 @@ $(document).ready(() => {
     const auth = getAuth(firebase);
     setPersistence(auth, inMemoryPersistence);
 
-    onAuthStateChanged(auth, (loggedUser) =>  {
+    onAuthStateChanged(auth, (loggedUser) => {
 
         if (loggedUser) {
             if (loggedUser.emailVerified) {
@@ -35,6 +35,48 @@ $(document).ready(() => {
     });
 
 
+    // Check for strong password
+    const regSubmitButton = document.getElementById('regSubmit')
+    const regPassword = document.getElementById('regPassword')
+    const regConfirmPassword = document.getElementById('regConfirmPassword')
+    const checkPasswordLabel = document.getElementById('lblCheckPassword')
+    const checkMatchPasswordLabel = document.getElementById('lblMatchPassword')
+
+    //NOTE: To check a password between 8 to 15 characters which contain at least one lowercase letter, one uppercase letter, one numeric digit, and one special character.
+    const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+
+    regPassword.addEventListener('keyup', () => {
+        if (regPassword.value.match(pattern)) {
+            checkPasswordLabel.classList.add('valid');
+            checkPasswordLabel.classList.remove('invalid');
+            checkPasswordLabel.innerText = 'Your password is strong. 🔥';
+
+        } else {
+            if (checkPasswordLabel.classList.contains('invalid')) return
+
+            checkPasswordLabel.classList.remove('valid');
+            checkPasswordLabel.classList.add('invalid');
+            checkPasswordLabel.innerText = 'Please enter a strong password.';
+        }
+    })
+
+    regConfirmPassword.addEventListener('keyup', () => {
+        if (regPassword.value !== regConfirmPassword.value) {
+            if (checkMatchPasswordLabel.classList.contains('invalid')) return
+
+            checkMatchPasswordLabel.classList.remove('valid');
+            checkMatchPasswordLabel.classList.add('invalid');
+            checkMatchPasswordLabel.innerText = `Password doesn't match.`;
+            regSubmitButton.setAttribute('disabled', '');
+        } else {
+            checkMatchPasswordLabel.classList.add('valid');
+            checkMatchPasswordLabel.classList.remove('invalid');
+            checkMatchPasswordLabel.innerText = `Password matched.`;
+            regSubmitButton.removeAttribute('disabled');
+        }
+    })
+
+
     $("#signinForm").submit(e => {
         e.preventDefault();
         let email = $("#email").val();
@@ -42,7 +84,7 @@ $(document).ready(() => {
 
         signInWithEmailAndPassword(auth, email, password).then((user) => {
             user.user.getIdToken().then(idToken => {
-                window.location.assign('auth/sessionLogin?token='+idToken);
+                window.location.assign('auth/sessionLogin?token=' + idToken);
             });
         }).then(() => {
             return signOut(auth).then(() => {
@@ -65,7 +107,7 @@ $(document).ready(() => {
             const token = credential.accessToken;
 
             user.user.getIdToken().then(idToken => {
-                window.location.assign('auth/sessionLogin?token='+idToken);
+                window.location.assign('auth/sessionLogin?token=' + idToken);
             });
         }).catch(error => {
             const credential = GoogleAuthProvider.credentialFromError(error);
@@ -82,7 +124,7 @@ $(document).ready(() => {
             const token = credential.accessToken;
 
             user.user.getIdToken().then(idToken => {
-                window.location.assign('auth/sessionLogin?token='+idToken);
+                window.location.assign('auth/sessionLogin?token=' + idToken);
             });
         }).catch(error => {
             const credential = FacebookAuthProvider.credentialFromError(error);

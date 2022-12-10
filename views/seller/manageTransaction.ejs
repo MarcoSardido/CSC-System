@@ -20,7 +20,7 @@
         <div class="mini-panels">
             <div class="income-cont">
                 <div class="income-text">
-                    <p>Today's Profit</p>
+                    <p>Today's Sales</p>
                     <i>
                         <ion-icon name="cash-outline"></ion-icon>
                     </i>
@@ -30,7 +30,7 @@
 
             <div class="income-cont profit">
                 <div class="income-text">
-                    <p>Last Week's Profit</p>
+                    <p>Last Week's Sales</p>
                     <i>
                         <ion-icon name="rocket-outline"></ion-icon>
                     </i>
@@ -40,7 +40,7 @@
 
             <div class="income-cont revenue">
                 <div class="income-text">
-                    <p>Total Revenue</p>
+                    <p>Total Sales</p>
                     <i>
                         <ion-icon name="stats-chart-outline"></ion-icon>
                     </i>
@@ -57,9 +57,10 @@
         <div class="transaction-cont">
             <div id="analytics" class="panel" style="display:block">
                 <div class="chart-options">
-                    <p id="lblChartOption" class="chart-option-label">Weekly Sales</p>
+                    <p id="lblChartOption" class="chart-option-label">Daily Sales</p>
                     <select name="" id="selectChartOption" class="select-chart-options">
-                        <option value="weekly" selected>Weekly Sales</option>
+                        <option value="daily" selected>Daily Sales</option>
+                        <option value="weekly">Weekly Sales</option>
                         <option value="monthly">Monthly Sales</option>
                     </select>
                 </div>

@@ -15,15 +15,11 @@ $(document).ready(() => {
             if (item.date !== currDate) continue;
 
             let amount = item.totalPrice;
-            amount = amount.replace(/[^\d\.]/g, "");
-            amount = parseFloat(amount);
             todaysProfit += amount;
         }
 
         for (const revItem of res) {
             let amount = revItem.totalPrice;
-            amount = amount.replace(/[^\d\.]/g, "");
-            amount = parseFloat(amount);
             totalRevenue += amount;
         }
 
@@ -31,9 +27,9 @@ $(document).ready(() => {
 
         return { todaysProfit, totalRevenue, lastWeekProfit };
     }).then(({ todaysProfit, totalRevenue, lastWeekProfit }) => {
-        $('#todayProfit').text(`₱${todaysProfit.toLocaleString()}`)
-        $('#lastWeek').text(`₱${lastWeekProfit.toLocaleString()}`)
-        $('#totalRevenue').text(`₱${totalRevenue.toLocaleString()}`)
+        $('#todayProfit').text(`${formatPeso(todaysProfit)}`)
+        $('#lastWeek').text(`${formatPeso(lastWeekProfit)}`)
+        $('#totalRevenue').text(`${formatPeso(totalRevenue)}`)
     })
 
 
@@ -52,12 +48,9 @@ $(document).ready(() => {
         for (const dataDayIndex of dataDates) {
             if (last7Days.includes(dataDayIndex.date)) {
                 let amount = dataDayIndex.profit;
-                amount = amount.replace(/[^\d\.]/g, "");
-                amount = parseFloat(amount);
                 lastWeekProfit += amount;
             }
         }
-
         return lastWeekProfit;
     }
 
@@ -110,6 +103,15 @@ $(document).ready(() => {
         }
         let result = `${stringDate[2]}-${stringDate[1]}-${stringDate[0]}`;
         return result;
+    }
+
+    const formatPeso = (price) => {
+        return price.toLocaleString('en-ph', {
+            style: 'currency',
+            currency: 'PHP',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })
     }
 
 })

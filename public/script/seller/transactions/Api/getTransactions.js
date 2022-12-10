@@ -19,7 +19,7 @@ const getAllTransactionRecords = async (uuid) => {
                 orderID: record.data().orderID,
                 payment: record.data().payment,
                 status: record.data().status,
-                totalPrice: formatThousands(record.data().totalPrice / 100)
+                totalPrice: formatPeso(record.data().totalPrice)
             })
         });
 
@@ -42,7 +42,7 @@ const dataForAnalytics = async (uuid) => {
             if (record.data().status === 'Success') {
                 analyticsContainer.push({
                     date: record.data().date,
-                    totalPrice: formatThousands(record.data().totalPrice / 100)
+                    totalPrice: record.data().totalPrice
                 })
             }
         });
@@ -66,7 +66,7 @@ const dataForRecentTransactions = async (uuid) => {
 
         transactionCollection.forEach(record => recentTransContainer.push({
             date: record.data().date,
-            totalPrice: formatThousands(record.data().totalPrice / 100),
+            totalPrice: formatPeso(record.data().totalPrice),
             customerName: record.data().customer.name,
             status: record.data().status
         }));
@@ -84,7 +84,7 @@ const dataForRecentTransactions = async (uuid) => {
 
         Object.assign(stripeSubs, {
             subscriptionType: subType,
-            subscriptionPrice: priceType,
+            subscriptionPrice: formatPeso(priceType),
             subscriptionDate: formatSubDate
         })
 
@@ -95,10 +95,13 @@ const dataForRecentTransactions = async (uuid) => {
     }
 }
 
-const formatThousands = (price) => {
-    // let format = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // return Number(format)
-    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+const formatPeso = (price) => {
+    return price.toLocaleString('en-ph', {
+        style: 'currency',
+        currency: 'PHP',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })
 }
 
 

@@ -16,9 +16,15 @@ a {
 }
 
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: "Poppins", sans-serif;
 }
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -379,6 +385,7 @@ h1,h2,h3,h4,h5,h6 {
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
 }
+
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
@@ -812,6 +819,7 @@ section {
     min-height: 200px;
   }
 }
+
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
@@ -970,6 +978,7 @@ section {
     justify-content: flex-end;
   }
 }
+
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/
@@ -1099,6 +1108,7 @@ section {
     margin: 0 auto 30px auto;
   }
 }
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -1248,4 +1258,133 @@ section {
   #footer .credits {
     padding-top: 4px;
   }
+}
+
+.modal-content {
+  background-color: #e1e1e1;
+}
+
+.start-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.start-body img {
+  width: 30%;
+}
+
+.start-body .title {
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.start-body .alert {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  padding: 1px 10px;
+}
+
+.start-body .alert .alert-icon {
+  font-size: 25px;
+  padding-right: 10px;
+  margin-top: 5px;
+}
+
+
+.start-body form {
+  width: 70%;
+}
+
+.start-body form .subText {
+  font-size: 15px;
+  color: #777;
+  margin: 0;
+}
+
+.start-body form .form-email {
+  margin-bottom: 20px;
+}
+
+.start-body form .form-password {
+  position: relative;
+}
+
+.start-body form .form-password i {
+  position: absolute;
+  right: 20px;
+  bottom: 35px;
+}
+
+.start-body form .form-password .password-check {
+  margin: 5px 0 0 0;
+  font-size: 13px;
+}
+
+.start-body form .form-password .password-check.valid {
+  color: #1acf1a;
+}
+
+.start-body form .form-password .password-check.invalid {
+  color: red;
+}
+
+.start-body form input[type="text"],
+.start-body form input[type="email"],
+.start-body form input[type="password"] {
+  width: 100%;
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 10px 10px;
+  border: 1px solid #e1e1e1;
+  resize: none;
+  border-radius: 5px;
+}
+
+.start-body form input[type="text"]:focus,
+.start-body form input[type="password"]:focus {
+  box-shadow: 0 0 5px #485fed;
+  padding: 10px 10px;
+  border: 1px solid #485fed;
+}
+
+.start-body form .form-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem;
+}
+
+.start-body form .form-button button:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+.start-body form .form-button button {
+  border: none;
+  width: 95%;
+  height: 2.5rem;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+  color: #fff;
+  font-size: 15px;
+  margin-top: 20px;
+  border-radius: 5px;
+  transition: all 0.6s;
+  background-size: 200%;
+}
+
+.start-body form .form-button p {
+  margin: 10px;
+}
+
+.start-body form .form-button a {
+  font-size: 15px;
+  color: #485def;
+  font-weight: 600;
 }

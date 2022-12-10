@@ -57,11 +57,6 @@ $(document).ready(() => {
         return result;
     }
 
-    //? Convert 1800 -> '1,800'
-    const checkPriceIsThousands = (price) => {
-        return price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     const checkWeeklyRevenue = (data) => {
         const lastWeek = getLastWeek();
         let totalPrice = 0, weeklyRevenue;
@@ -69,14 +64,12 @@ $(document).ready(() => {
         for (const dateIndex of data) {
             const dateFormat = convertStringDateToNumDate(dateIndex.date);
             if (lastWeek.includes(dateFormat)) {
-                const priceFormat = dateIndex.price.replace(/\,/g, '');
-                const price = Number(priceFormat)
-                totalPrice += price;
+                totalPrice += dateIndex.price;
             }
         }
 
-        weeklyRevenue = checkPriceIsThousands(totalPrice);
-        weeklyRevenueLabel.innerText = `₱${weeklyRevenue}`;
+        weeklyRevenue = formatPeso(totalPrice);
+        weeklyRevenueLabel.innerText = `${weeklyRevenue}`;
     }
 
     const calculateRating = (data) => {
@@ -227,7 +220,7 @@ $(document).ready(() => {
         checkWeeklyRevenue(result.weeklyRevenue);
 
         // Total Revenue Widget
-        totalRevenueLabel.innerText = `₱${checkPriceIsThousands(result.totalRevenue)}`;
+        totalRevenueLabel.innerText = `${result.totalRevenue}`;
 
         // Items Sold Widget
         itemsSoldLabel.innerText = result.itemsSold.length;
@@ -264,5 +257,13 @@ $(document).ready(() => {
         liveSummaryChart(week);
     })
 
+    const formatPeso = (price) => {
+        return price.toLocaleString('en-ph', {
+            style: 'currency',
+            currency: 'PHP',
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        })
+    }
 
 })

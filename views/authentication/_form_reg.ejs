@@ -1,14 +1,22 @@
 <h2 class="title">Sign up</h2>
+<div class="alert alert-info" role="alert">
+    <div class="alert-icon">
+        <ion-icon name="alert-circle-outline"></ion-icon>
+    </div>
+    <div>Password must be at least <strong>8 characters long</strong> with a mix of capital and lowercase letters, numbers & symbols.</div>
+</div>
 <div class="input-field">
     <i><ion-icon name="mail"></ion-icon></i>
     <input type="text" placeholder="Email" name="email" required>
 </div>
 <div class="input-field">
     <i><ion-icon name="lock-closed"></ion-icon></i>
-    <input type="password" placeholder="Password" name="password" required>
+    <input type="password" id="regPassword" placeholder="Password" name="password" required>
 </div>
+<p class="password-check invalid" id="lblCheckPassword">Please enter a strong password.</p>
 <div class="input-field">
     <i><ion-icon name="lock-closed"></ion-icon></i>
-    <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
+    <input type="password" id="regConfirmPassword" placeholder="Confirm Password" name="confirmPassword" required>
 </div>
-<input type="submit" value="Sign up" class="btn solid">
+<p class="password-check invalid" id="lblMatchPassword">Password doesn't match.</p>
+<input type="submit" id="regSubmit" disabled value="Sign up" class="btn solid">

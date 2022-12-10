@@ -22,6 +22,33 @@
     transition: 1.8s ease-in-out;
 }
 
+.alert {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    margin: 10px 0;
+}
+
+.alert .alert-icon {
+    font-size: 25px;
+    padding-right: 10px;
+    margin-top: 5px;
+}
+
+.password-check {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.password-check.valid {
+    color: #1acf1a;
+}
+
+.password-check.invalid {
+    color: red;
+}
+
 .forms-container {
     position: absolute;
     width: 100%;
@@ -121,6 +148,15 @@ form.sign-up-form {
     transition: .5s;
 }
 
+.btn:disabled {
+    background: gray;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background: gray;
+}
+
 .btn:hover {
     background: #4d84e2;
 }
@@ -166,7 +202,7 @@ form.sign-up-form {
     height: 100%;
     top: 0;
     left: 0;
-    display: grid; 
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
 }
 
@@ -225,7 +261,8 @@ form.sign-up-form {
     transition: 1.1s 0.4s ease-in-out;
 }
 
-.right-panel .content, .right-panel img {
+.right-panel .content,
+.right-panel img {
     transform: translateX(800px);
 }
 
@@ -269,14 +306,16 @@ form.sign-up-form {
     opacity: 1;
 }
 
-@keyframes movingGradient{
-    0%{
+@keyframes movingGradient {
+    0% {
         background-position: 0% 50%;
     }
-    50%{
+
+    50% {
         background-position: 100% 50%;
     }
-    100%{
+
+    100% {
         background-position: 0% 50%;
     }
 }

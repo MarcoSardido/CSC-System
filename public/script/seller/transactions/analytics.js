@@ -7,7 +7,8 @@ $(document).ready(() => {
     const trimmedUID = uuid.trim();
 
     dataForAnalytics(trimmedUID).then(res => {
-        const weekData = [], monthData = [];
+        const dayData = [], weekData = [], monthData = [];
+        const day = get7Days();
         const week = getLast7Days();
         const month = getMonths();
         let addAmount = 0;
@@ -31,7 +32,12 @@ $(document).ready(() => {
         }
 
         for (const iterator of res) {
-            let formatPrice = iterator.totalPrice.replaceAll(',', '');
+            let formatPrice = iterator.totalPrice;
+
+            dayData.push({
+                x: convertStringDateToNumDate(iterator.date),
+                y: Number(formatPrice),
+            })
 
             weekData.push({
                 x: convertStringDateToNumDate(iterator.date),
@@ -43,6 +49,18 @@ $(document).ready(() => {
                 x: convertStringDateToNumDate(iterator.date),
                 y: Number(formatPrice)
             })
+        }
+
+        console.log(weekData)
+        console.log(week)
+
+        for (let dataDayIndex = 0; dataDayIndex < dayData.length; dataDayIndex++) {
+            for (let dayIndex = 0; dayIndex < day.length; dayIndex++) {
+
+                if (dayData[dataDayIndex].x === day[dayIndex].x) {
+                    day[dayIndex] = dayData[dataDayIndex];
+                }
+            }
         }
 
         for (let dataWeekIndex = 0; dataWeekIndex < weekData.length; dataWeekIndex++) {
@@ -83,9 +101,9 @@ $(document).ready(() => {
             }
         }
 
-        return { week, month };
-    }).then(({ week, month }) => {
-        checkChartOption(week, month);
+        return { day, week, month };
+    }).then(({ day, week, month }) => {
+        checkChartOption(day, week, month);
     })
 
     // Get last week days
@@ -97,6 +115,19 @@ $(document).ready(() => {
         if (mm < 10) { mm = '0' + mm }
         date = yyyy + '-' + mm + '-' + dd
         return date;
+    }
+
+    const get7Days = () => {
+        let result = [];
+        for (let i = 6; 0 <= i; i--) {
+            let d = new Date();
+            d.setDate(d.getDate() - i);
+            result.push({
+                x: formatDate(d),
+                y: 0
+            })
+        }
+        return result;
     }
 
     const getLast7Days = () => {
@@ -174,9 +205,80 @@ $(document).ready(() => {
     // Chart option
     const chartOption = document.getElementById('selectChartOption');
     const chartLabel = document.getElementById('lblChartOption');
-    const checkChartOption = (week, month) => {
+    const checkChartOption = (day, week, month) => {
 
         // Options
+        // Weekly Sales
+        const dailyData = {
+            datasets: [{
+                label: 'Transaction Chart',
+                data: day,
+                fill: true,
+                borderWidth: 3,
+                borderColor: 'rgb(72, 95, 237)',
+                backgroundColor: 'rgb(72, 95, 237, 0.5)',
+
+                pointBackgroundColor: 'rgb(72, 95, 237)',
+                pointBorderColor: 'rgb(255, 255, 255)',
+                pointBorderWidth: 1,
+                pointHitRadius: 3,
+
+                tension: 0.3,
+            }]
+        }
+        const dailyOptions = {
+            layout: {
+                padding: 20,
+            },
+            plugins: {
+                title: {
+                    display: false
+                },
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgb(72, 95, 237, 0.8)',
+                    displayColors: false,
+
+                    bodyFont: {
+                        size: 15,
+                    },
+                    callbacks: {
+                        label: function (item) {
+                            let value = item.raw.y;
+
+                            value = value.toLocaleString('en-ph', {
+                                style: 'currency',
+                                currency: 'PHP',
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })
+                            let label = `You've Earned ${value}`
+
+                            return label;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    type: 'time',
+                    time: {
+                        unit: 'day'
+                    },
+                    grid: {
+                        display: false
+                    }
+                },
+                y: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+
         // Weekly Sales
         const weeklyData = {
             datasets: [{
@@ -217,8 +319,13 @@ $(document).ready(() => {
                         label: function (item) {
                             let value = item.raw.y;
 
-                            value = value.toLocaleString();
-                            let label = `You've Earned ₱${value}`
+                            value = value.toLocaleString('en-ph', {
+                                style: 'currency',
+                                currency: 'PHP',
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })
+                            let label = `You've Earned ${value}`
 
                             return label;
                         }
@@ -283,8 +390,13 @@ $(document).ready(() => {
                         label: function (item) {
                             let value = item.raw.y;
 
-                            value = value.toLocaleString();
-                            let label = `You've Earned ₱${value}`
+                            value = value.toLocaleString('en-ph', {
+                                style: 'currency',
+                                currency: 'PHP',
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            })
+                            let label = `You've Earned ${value}`
 
                             return label;
                         }
@@ -310,13 +422,18 @@ $(document).ready(() => {
         }
 
         // Default Load
-        transChart.data = weeklyData;
-        transChart.options = weeklyOptions;
+        transChart.data = dailyData;
+        transChart.options = dailyOptions;
         transChart.update();
 
 
         chartOption.addEventListener('change', () => {
-            if (chartOption.value === 'weekly') {
+            if (chartOption.value === 'daily') {
+                chartLabel.innerText = 'Daily Sales';
+                transChart.data = dailyData;
+                transChart.options = dailyOptions;
+                transChart.update();
+            } else if (chartOption.value === 'weekly') {
                 chartLabel.innerText = 'Weekly Sales';
                 transChart.data = weeklyData;
                 transChart.options = weeklyOptions;
