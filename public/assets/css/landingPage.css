@@ -1388,3 +1388,312 @@ section {
   color: #485def;
   font-weight: 600;
 }
+
+
+
+
+
+.createLiveCont {
+  overflow-y: auto;
+  height: 500px;
+}
+
+.createLiveCont p {
+  margin: 0;
+}
+
+.createLiveCont .editCont .subText {
+  margin-bottom: 0;
+  font-size: 15px;
+}
+
+.createLiveCont .editCont .detailsCont {
+  padding: 0 20px;
+}
+
+.createLiveCont .editCont .detailsCont .storeInfo {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.createLiveCont .editCont .detailsCont .storeInfo .storeEvt {
+  margin-right: 50px;
+}
+
+.createLiveCont .editCont .detailsCont .storeInfo .storeDesc input[type="text"] {
+  width: 25vw;
+}
+
+
+.createLiveCont .editCont .detailsCont .storeInfo .storeEvt input[type="text"] {
+  width: 15vw;
+}
+
+.createLiveCont .editCont .detailsCont input[type="text"],
+.createLiveCont input[type="time"],
+.createLiveCont select {
+  margin-top: 3px;
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 10px 10px;
+  border: 1px solid #e1e1e1;
+  resize: none;
+  border-radius: 5px;
+}
+
+.createLiveCont input[type="time"],
+.createLiveCont select {
+  width: 11.5vw;
+}
+
+.createLiveCont .editCont .detailsCont input[type="text"]:focus,
+.createLiveCont input[type="time"]:focus,
+.createLiveCont select:focus {
+  box-shadow: 0 0 5px #485fed;
+  padding: 10px 10px;
+  border: 1px solid #485fed;
+}
+
+.createLiveCont .editCont .detailsCont .storeName .mainText {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.createLiveCont .editCont .imgCont {
+  display: flex;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
+.createLiveCont .editCont .imgCont .fileLogo,
+.createLiveCont .editCont .imgCont .fileBanner {
+  margin-top: 5px;
+}
+
+.createLiveCont .editCont .imgCont .storeLogo {
+  width: 20%;
+}
+
+.createLiveCont .editCont .imgCont .storeBanner {
+  width: 35%;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.createLiveCont .editCont .btnPrevCont {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.createLiveCont .editCont .btnPrevCont .previewButton {
+  width: 8vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.createLiveCont .prevCont {
+  height: 27vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+
+.createLiveCont .prevCont .prevDesc {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.createLiveCont .prevCont .prevDesc .mainLabel {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.createLiveCont .prevCont .prevDesc .labelDesc {
+  font-size: 15px;
+  color: #9d9c9b;
+}
+
+.createLiveCont .prevCont .preview.skeleton {
+  width: 100%;
+  height: 20vh;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .upperCont {
+  height: 10vh;
+  display: flex;
+  padding: 5px 0;
+}
+
+.createLiveCont .prevCont .preview.skeleton .upperCont .logo {
+  height: 60px;
+  width: 60px;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeNameCont .fixedLiveStatus {
+  background: none;
+  color: #777;
+  border: 2px solid #b7b7b7;
+  border-style: dashed;
+}
+
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeNameCont .storeName,
+.createLiveCont .prevCont .preview.skeleton .lowerCont .storeDescCont .storeDesc {
+  color: #777;
+}
+
+
+
+.createLiveCont .prevCont .preview {
+  width: 100%;
+  height: 20vh;
+  padding-top: 5px;
+  padding-left: 20px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.createLiveCont .prevCont .preview .upperCont {
+  height: 10vh;
+  display: flex;
+  padding: 5px 0;
+}
+
+.createLiveCont .prevCont .preview .upperCont .logo {
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+}
+
+.createLiveCont .prevCont .preview .upperCont .logo img {
+  width: 60px;
+  border-radius: 10px;
+}
+
+.createLiveCont .prevCont .preview .lowerCont {
+  padding-top: 10px;
+}
+
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont {
+  display: flex;
+  height: 30px;
+  color: #fff;
+}
+
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont .fixedLiveStatus {
+  margin-right: 10px;
+  background: red;
+  border-radius: 10px;
+  width: 50px;
+  height: 25px;
+  font-size: 15px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.createLiveCont .prevCont .preview .lowerCont .storeNameCont .storeName {
+  font-weight: 600;
+}
+
+.createLiveCont .prevCont .preview .lowerCont .storeDescCont {
+  height: 30px;
+}
+
+.createLiveCont .prevCont .preview .lowerCont .storeDescCont p.storeDesc {
+  margin-top: 5px;
+  font-weight: 300;
+  font-size: 12px;
+  color: #fff;
+}
+
+.createLiveCont .second-part .storeSched .alert {
+  display: flex;
+}
+
+.createLiveCont .second-part .storeSched .alert ion-icon {
+  font-size: 25px;
+  margin-right: 10px;
+}
+
+.createLiveCont .second-part .storeSched .sched {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.createLiveCont .second-part .storeSched .sched div:nth-child(2) {
+  margin: 0px 50px;
+}
+
+.createLiveCont .second-part .storeSched .sched p {
+  font-size: 13px;
+  color: #9d9c9b;
+}
+
+.createLiveCont .second-part .storeSched .sched .time {
+  margin: 0;
+  font-size: 30px;
+  color: black;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-footer .buttonCloseModal {
+  width: 8vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+  background: red;
+}
+
+.modal-footer .buttonCloseModal:hover {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-footer .button-controller button {
+  width: 10vw;
+  height: 2.5rem;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 5px 0px;
+  font-size: 15px;
+}
+
+.modal-footer .button-controller .disabled {
+  cursor: not-allowed;
+  background: #777;
+}
+
+.buttonCreate, .buttonBack {
+  background: linear-gradient(to left, #485fed, rgba(255, 44, 118, .25)), #485fed;
+}
+
+.buttonCreate:hover {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.filepond--item {
+  width: 100%;
+}

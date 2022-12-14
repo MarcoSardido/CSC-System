@@ -152,17 +152,13 @@ const signUp = (req, res) => {
 
 //* Function -> Add Session Cookie When Logging In 
 const sessionLogin = async (req, res) => {
-    const { uid, token, live } = req.query;
+    const { uid, token, path, room } = req.query;
     
     const uniqueID = generateId();
     try {
         //* COLLECTION: Sellers
         const sellerDocRef = doc(db, `Sellers/${uid}`);
         const sellerDocument = await getDoc(sellerDocRef)
-
-        //* COLLECTION: Accounts -> SUB-COLLECTION: Products
-        const productsSubColRef = collection(db, `Sellers/${uid}/Products`)
-        const productsCollection = await getDocs(productsSubColRef)
 
         //* COLLECTION: Accounts -> SUB-COLLECTION: Activity Logs
         const activityLogDocRef = doc(db, `Accounts/seller_${uid}/Activity Logs/log_${uniqueID}`);
@@ -183,14 +179,10 @@ const sessionLogin = async (req, res) => {
             const options = { maxAge: expiresIn, httpOnly: true, secure: true };
             res.cookie('session', sessionCookie, options);
 
-            if (live) {
-                if (productsCollection.empty) {
-                    res.redirect('/sellercenter/products')
-                } else {
-                    res.redirect('/sellercenter')
-                }
+            if (path === 'products') {
+                res.redirect('/sellercenter/products')
             } else {
-                res.redirect('/sellercenter')
+                res.redirect(`/sellercenter/live/room/${room}`)
             }
             
         }).catch((error) => {

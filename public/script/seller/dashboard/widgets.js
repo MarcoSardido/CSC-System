@@ -1,4 +1,5 @@
 import { getItemsToBeSold, getCustomerRate, getTransactions, getReport, getLiveSummary } from './Api/widgets.js';
+import { dataForAnalytics } from '../transactions/Api/getTransactions.js'
 
 $(document).ready(() => {
     const uuid = $('#uid').text();
@@ -202,7 +203,7 @@ $(document).ready(() => {
     const totalRevenueLabel = document.getElementById('lblTotalRevenue');
     const itemsSoldLabel = document.getElementById('lblItemsSold');
     const totalCustomersLabel = document.getElementById('lblTotalCustomers');
-    const customerRatingLabel = document.getElementById('lblCustomerRating');
+    const todaysSale = document.getElementById('lblTodaySale');
     const recentReportContainer = document.getElementById('reportContainer');
 
     // Items To Be Sold Widget
@@ -211,11 +212,14 @@ $(document).ready(() => {
     })
 
     // Customer Rating Widget
-    getCustomerRate(trimmedUID).then(result => {
-        calculateRating(result);
-    })
+    // getCustomerRate(trimmedUID).then(result => {
+    //     calculateRating(result);
+    // })
 
     getTransactions(trimmedUID).then(result => {
+        // Today's Sale Widget
+        todaysSale.innerText = `${formatPeso(result.todaySale)}`
+
         // Weekly Revenue Widget
         checkWeeklyRevenue(result.weeklyRevenue);
 

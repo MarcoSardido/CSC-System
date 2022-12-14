@@ -31,7 +31,6 @@ const getAllTransactionRecords = async (uuid) => {
 
 const dataForAnalytics = async (uuid) => {
     const analyticsContainer = [];
-    const panelsContainer = [];
 
     try {
         const collectionRef = collection(db, `Sellers/${uuid}/Transactions`);

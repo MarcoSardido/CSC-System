@@ -52,7 +52,8 @@ const getCustomerRate = async (uid) => {
 
 const getTransactions = async (uid) => {
     const customerArray = [], itemSoldArray = [], weeklyRevenueArray = [];
-    let totalRevenue = 0;
+    let totalRevenue = 0, todaysSale = 0;
+    const currentDate = stringDateFormat()
 
     try {
 
@@ -72,8 +73,14 @@ const getTransactions = async (uid) => {
             }
         })
 
-        //? Get total items sold & total revenue & weekly revenue
+
         transactionsCollection.forEach(itemSold => {
+            //? Get todays sale
+            if (itemSold.data().date === currentDate) {
+                todaysSale += itemSold.data().totalPrice
+            }
+
+            //? Get total items sold & total revenue & weekly revenue
             if (itemSold.data().status === 'Success') {
                 itemSoldArray.push(itemSold.data().transactionID);
                 weeklyRevenueArray.push({
@@ -84,7 +91,7 @@ const getTransactions = async (uid) => {
             }
         })
 
-        return { totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: formatPeso(totalRevenue) };
+        return { todaySale: todaysSale, totalCustomers: customerArray, itemsSold: itemSoldArray, weeklyRevenue: weeklyRevenueArray, totalRevenue: formatPeso(totalRevenue) };
 
     } catch (error) {
         console.error(`Firestore Error: @getTransactions -> ${error.message}`)
@@ -152,6 +159,19 @@ const formatPeso = (price) => {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     })
+}
+
+const stringDateFormat = () => {
+    let currentDate;
+    const date = new Date();
+    const formattedDate = date.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+    }).replace(/ /g, ' ');
+    currentDate = formattedDate.split(' ')
+    if (currentDate[0] < 10) {
+        currentDate[0] = `0${currentDate[0]}`;
+    }
+    return currentDate.join(' ');
 }
 
 
